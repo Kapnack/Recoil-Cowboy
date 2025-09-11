@@ -1,11 +1,10 @@
-using System;
 using System.Collections;
 using MouseTracker;
 using ScriptableObjects;
 using Systems;
 using Systems.CentralizeEventSystem;
+using Unity.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Characters.PlayerSRC
 {
@@ -38,15 +37,22 @@ namespace Characters.PlayerSRC
             ServiceProvider.TryGetService(out _eventSystem);
             ServiceProvider.TryGetService(out _mouseTracker);
             ServiceProvider.TryGetService(out _serviceProvider);
-
-            _serviceProvider?.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
         }
 
         private void OnEnable()
         {
             _eventSystem?.Get(PlayerEventKeys.Attack).AddListener(OnAttack);
+            
+            _serviceProvider?.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
+            _serviceProvider?.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
         }
 
+        private void OnDisable()
+        {
+            _serviceProvider?.Unregister(PlayerEventKeys.LivesChange);
+            _serviceProvider?.Unregister(PlayerEventKeys.BulletsChange);
+        }
+        
         private void OnAttack()
         {
             if (_currentBullets <= 0)
