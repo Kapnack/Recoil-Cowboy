@@ -2,13 +2,14 @@ using Characters.PlayerSRC;
 using ScriptableObjects;
 using Systems.TagClassGenerator;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.EnemySRC
 {
     public class Chicken : Enemy
     {
         private ChickenConfig _chickenConfig;
-        [SerializeField] private Vector3 raycastOrigin;
+        [SerializeField] private Vector3 _raycastOrigin;
 
         private Rigidbody _rb;
         private bool _alreadyRotated;
@@ -16,7 +17,7 @@ namespace Characters.EnemySRC
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
-            
+
             _chickenConfig = (ChickenConfig)_config;
         }
 
@@ -29,14 +30,14 @@ namespace Characters.EnemySRC
 
         private void Movement()
         {
-            raycastOrigin = transform.position + _chickenConfig.RaycastOffSet * transform.right;
+            _raycastOrigin = transform.position + _chickenConfig.RaycastOffSet * transform.right;
 
-            if (!Physics.Raycast(raycastOrigin, Vector3.down, _chickenConfig.RaycastDistance))
+            if (!Physics.Raycast(_raycastOrigin, Vector3.down, _chickenConfig.RaycastDistance))
             {
                 if (!_alreadyRotated)
                     Rotate();
             }
-            else if (Physics.Raycast(raycastOrigin, transform.right, _chickenConfig.RaycastDistance))
+            else if (Physics.Raycast(_raycastOrigin, transform.right, _chickenConfig.RaycastDistance))
             {
                 Rotate();
             }
@@ -89,21 +90,21 @@ namespace Characters.EnemySRC
                 }
             }
         }
-        
+
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, _chickenConfig.AreaOfSight);
 
             Gizmos.color = Color.yellow;
-            Gizmos.DrawRay(raycastOrigin, Vector3.down * _chickenConfig.RaycastDistance);
-            Gizmos.DrawRay(raycastOrigin, transform.right * _chickenConfig.RaycastDistance);
+            Gizmos.DrawRay(_raycastOrigin, Vector3.down * _chickenConfig.RaycastDistance);
+            Gizmos.DrawRay(_raycastOrigin, transform.right * _chickenConfig.RaycastDistance);
         }
 
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            if (_config == null) 
+            if (_config == null)
                 Debug.LogError($"_config is null in GameObject {gameObject.name}");
             else if (!(_config as ChickenConfig))
                 Debug.LogError($"_config is not ChickenConfig in GameObject {gameObject.name}");
