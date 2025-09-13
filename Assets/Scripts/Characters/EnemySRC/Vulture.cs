@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Characters.PlayerSRC;
+using Systems.TagClassGenerator;
 using UnityEngine;
 
 namespace Characters.EnemySRC
@@ -65,7 +66,7 @@ namespace Characters.EnemySRC
 
             foreach (var obj in objects)
             {
-                if (!obj.CompareTag("Player"))
+                if (!obj.CompareTag(Tags.Player))
                     continue;
 
                 if (obj.transform.TryGetComponent<IPlayerHealthSystem>(out var player))
