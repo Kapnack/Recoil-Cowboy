@@ -13,7 +13,12 @@ namespace Characters.PlayerSRC
     {
         [SerializeField] private PlayerConfig _config;
         [SerializeField] private int _currentHealth;
-        private bool _invincible;
+
+        public bool Invincible
+        {
+            get;
+            private set;
+        }
 
         private int _currentBullets;
         
@@ -76,7 +81,7 @@ namespace Characters.PlayerSRC
 
         public void ReceiveDamage()
         {
-            if (_invincible)
+            if (Invincible)
                 return;
 
             _livesChangeEvent?.Invoke(_currentHealth,  _currentBullets - 1, _config.MaxHealth);
@@ -90,11 +95,11 @@ namespace Characters.PlayerSRC
 
         private IEnumerator InvincibilityFramesCoroutine()
         {
-            _invincible = true;
+            Invincible = true;
 
             yield return new WaitForSeconds(_config.InvincibleTime);
 
-            _invincible = false;
+            Invincible = false;
         }
 
         public void InstantDead()
