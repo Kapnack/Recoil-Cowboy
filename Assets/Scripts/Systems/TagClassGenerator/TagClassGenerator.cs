@@ -28,8 +28,10 @@ namespace Systems.TagClassGenerator
             using (var writer = new StreamWriter(FilePath, false))
             {
                 var space = typeof(TagsClassGenerator);
-                
+
                 writer.WriteLine("// DO NOT MODIFY THIS FILE! It Auto-Generates.");
+                writer.WriteLine("// Any change made to this file will be deleted.");
+                writer.WriteLine("");
                 writer.WriteLine($"namespace {space.Namespace}");
                 writer.WriteLine("{");
                 writer.WriteLine("  public static class Tags");

@@ -1,4 +1,6 @@
 // DO NOT MODIFY THIS FILE! It Auto-Generates.
+// Any change made to this file will be deleted.
+
 namespace Systems.TagClassGenerator
 {
   public static class Tags
