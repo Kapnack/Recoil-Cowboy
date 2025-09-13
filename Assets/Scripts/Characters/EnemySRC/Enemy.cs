@@ -5,7 +5,7 @@ namespace Characters.EnemySRC
 {
     public abstract class Enemy : MonoBehaviour, IHealthSystem
     {
-        [SerializeField] private EnemyConfig _config;
+        [SerializeField] protected EnemyConfig _config;
 
         public void ReceiveDamage()
         {
