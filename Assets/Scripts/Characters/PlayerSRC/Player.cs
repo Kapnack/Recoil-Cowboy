@@ -16,8 +16,7 @@ namespace Characters.PlayerSRC
         private bool _invincible;
 
         private int _currentBullets;
-
-        private ICentralizeEventSystem _serviceProvider;
+        
         private ICentralizeEventSystem _eventSystem;
         private IMousePositionTracker _mouseTracker;
         
@@ -36,21 +35,20 @@ namespace Characters.PlayerSRC
 
             ServiceProvider.TryGetService(out _eventSystem);
             ServiceProvider.TryGetService(out _mouseTracker);
-            ServiceProvider.TryGetService(out _serviceProvider);
         }
 
         private void OnEnable()
         {
             _eventSystem?.Get(PlayerEventKeys.Attack).AddListener(OnAttack);
             
-            _serviceProvider?.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
-            _serviceProvider?.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
+            _eventSystem?.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
+            _eventSystem?.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
         }
 
         private void OnDisable()
         {
-            _serviceProvider?.Unregister(PlayerEventKeys.LivesChange);
-            _serviceProvider?.Unregister(PlayerEventKeys.BulletsChange);
+            _eventSystem?.Unregister(PlayerEventKeys.LivesChange);
+            _eventSystem?.Unregister(PlayerEventKeys.BulletsChange);
         }
         
         private void OnAttack()
