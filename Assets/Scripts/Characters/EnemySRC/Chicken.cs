@@ -2,14 +2,13 @@ using Characters.PlayerSRC;
 using ScriptableObjects;
 using Systems.TagClassGenerator;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Characters.EnemySRC
 {
     public class Chicken : Enemy
     {
         private ChickenConfig _chickenConfig;
-        [SerializeField] private Vector3 _raycastOrigin;
+        private Vector3 _raycastOrigin;
 
         private Rigidbody _rb;
         private bool _alreadyRotated;
