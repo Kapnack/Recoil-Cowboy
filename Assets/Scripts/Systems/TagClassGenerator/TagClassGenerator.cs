@@ -14,14 +14,14 @@ namespace Systems.TagClassGenerator
         {
             GenerateTagsClass();
         }
-        
+
         [MenuItem("Tools/GenerateTags.cs")]
         public static void GenerateTagsClass()
         {
             var directory = Path.GetDirectoryName(FilePath);
-            
-            if (!Directory.Exists(directory))
-                    Directory.CreateDirectory(directory);
+
+            if (directory != null && !Directory.Exists(directory))
+                Directory.CreateDirectory(directory);
 
             var tags = InternalEditorUtility.tags;
 
@@ -48,18 +48,19 @@ namespace Systems.TagClassGenerator
             }
 
             AssetDatabase.Refresh();
-            UnityEngine.Debug.Log($"Tags.cs was generated Successfully. There are now {tags.Length} Tags in {FilePath}");
+            UnityEngine.Debug.Log(
+                $"Tags.cs was generated Successfully. There are now {tags.Length} Tags in {FilePath}");
         }
 
         private static string MakeSafeName(string tag)
         {
             var safe = tag.Replace(" ", "_");
-            
+
             safe = safe.Replace("-", "_");
-            
+
             if (char.IsDigit(safe[0]))
                 safe = "_" + safe;
-            
+
             return safe;
         }
     }

@@ -10,6 +10,8 @@ namespace Characters
         protected virtual void Awake()
         {
             _rb = GetComponent<Rigidbody>();
+            
+            _rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
         }
     }
 }

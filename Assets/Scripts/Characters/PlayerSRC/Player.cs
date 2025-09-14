@@ -3,7 +3,6 @@ using MouseTracker;
 using ScriptableObjects;
 using Systems;
 using Systems.CentralizeEventSystem;
-using Unity.Collections;
 using UnityEngine;
 
 namespace Characters.PlayerSRC
@@ -14,12 +13,6 @@ namespace Characters.PlayerSRC
         [SerializeField] private PlayerConfig _config;
         [SerializeField] private int _currentHealth;
 
-        public bool Invincible
-        {
-            get;
-            private set;
-        }
-
         private int _currentBullets;
         
         private ICentralizeEventSystem _eventSystem;
@@ -29,21 +22,80 @@ namespace Characters.PlayerSRC
         private readonly ComplexGameEvent<int, int, int> _bulletsChangeEvent = new();
         private readonly SimpleEvent _dies = new();
 
+        public bool Invincible { get; private set; }
+        private int CurrentHealth
+        {
+            get => _currentHealth;
+
+            set
+            {
+                var newValue = Mathf.Clamp(value, 0, _config.MaxHealth);
+
+                _livesChangeEvent?.Invoke(_currentHealth, newValue, _config.MaxHealth);
+                _currentHealth = newValue;
+            }
+        }
+
+        private int CurrentBullets
+        {
+            get => _currentBullets;
+            set
+            {
+                var newValue = Mathf.Clamp(value, 0, _config.MaxBullets);
+
+                _bulletsChangeEvent?.Invoke(_currentBullets, newValue, _config.MaxBullets);
+                _currentBullets = newValue;
+            }
+        }
+
         protected override void Awake()
         {
             base.Awake();
-            
-            _currentHealth = _config.MaxHealth;
-            _currentBullets = _config.MaxBullets;
+
+            CurrentHealth = _config.MaxHealth;
+            CurrentBullets = _config.MaxBullets;
 
             ServiceProvider.TryGetService(out _eventSystem);
             ServiceProvider.TryGetService(out _mouseTracker);
         }
 
+        private IEnumerator Start()
+        {
+            var cam = Camera.main;
+
+            while (cam == null)
+            {
+                cam = Camera.main;
+                yield return null;
+            }
+
+            if (cam)
+            {
+                cam.transform.SetParent(transform);
+
+                cam.transform.localPosition = new Vector3(0.0f, 5.0f, -10.0f);
+                cam.transform.LookAt(transform);
+            }
+
+            while (!ServiceProvider.TryGetService(out _mouseTracker))
+                yield return null;
+
+            while (!ServiceProvider.TryGetService(out _eventSystem))
+                yield return null;
+
+            var attack = _eventSystem?.Get(PlayerEventKeys.Attack);
+
+            while (attack == null)
+            {
+                attack = _eventSystem?.Get(PlayerEventKeys.Attack);
+                yield return null;
+            }
+
+            attack.AddListener(OnAttack);
+        }
+
         private void OnEnable()
         {
-            _eventSystem?.Get(PlayerEventKeys.Attack).AddListener(OnAttack);
-            
             _eventSystem?.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
             _eventSystem?.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
         }
@@ -53,23 +105,21 @@ namespace Characters.PlayerSRC
             _eventSystem?.Unregister(PlayerEventKeys.LivesChange);
             _eventSystem?.Unregister(PlayerEventKeys.BulletsChange);
         }
-        
+
         private void OnAttack()
         {
-            if (_currentBullets <= 0)
+            if (CurrentBullets == 0)
                 return;
 
-            var dir = _mouseTracker.GetMouseDir();
+            var dir = _mouseTracker.GetMouseDir(transform);
 
             if (dir.sqrMagnitude < Mathf.Epsilon * Mathf.Epsilon)
                 return;
 
-            _rb.linearVelocity = Vector3.zero;
-            _rb.AddForce(-dir * _config.KnockBack, ForceMode.Impulse);
+            ApplyKnockBack(dir);
 
-            _bulletsChangeEvent?.Invoke(_currentBullets, _currentBullets - 1, _config.MaxBullets);
-            --_currentBullets;
-            
+            --CurrentBullets;
+
             if (Physics.Raycast(transform.position, dir, out var hit))
             {
                 if (hit.transform.gameObject.TryGetComponent<IHealthSystem>(out var healthSystem))
@@ -77,16 +127,21 @@ namespace Characters.PlayerSRC
             }
         }
 
+        private void ApplyKnockBack(Vector3 dir)
+        {
+            _rb.linearVelocity = Vector3.zero;
+            _rb.AddForce(dir * -_config.KnockBack, ForceMode.Impulse);
+        }
+
         public void ReceiveDamage()
         {
             if (Invincible)
                 return;
 
-            _livesChangeEvent?.Invoke(_currentHealth,  _currentBullets - 1, _config.MaxHealth);
-            --_currentHealth;
+            --CurrentHealth;
 
             StartCoroutine(InvincibilityFramesCoroutine());
-            
+
             if (_currentBullets <= 0)
                 _dies?.Invoke();
         }
@@ -102,7 +157,7 @@ namespace Characters.PlayerSRC
 
         public void InstantDead()
         {
-            _currentHealth = 0;
+            CurrentHealth = 0;
             _dies?.Invoke();
         }
     }

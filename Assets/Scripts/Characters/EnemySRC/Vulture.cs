@@ -1,25 +1,28 @@
 ﻿using System.Collections;
 using Characters.PlayerSRC;
+using ScriptableObjects;
 using Systems.TagClassGenerator;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.EnemySRC
 {
     public class Vulture : Enemy
     {
+        [SerializeField] private VultureConfig vultureConfig;
         private Vector3 _spawnPosition;
 
         private Transform _target;
-        
+
         private Coroutine _backToStartCoroutine;
         private Vector3 _currentVelocity;
-        
-        [SerializeField] private float smoothTime;
+
+        private float _smoothTime;
 
         protected override void Awake()
         {
             base.Awake();
-            
+
             _spawnPosition = transform.position;
         }
 
@@ -37,7 +40,7 @@ namespace Characters.EnemySRC
 
                 var direction = (_target.transform.position - transform.position).normalized;
 
-                _rb.AddForce(direction * (_config.MoveSpeed * Time.fixedDeltaTime), ForceMode.VelocityChange);
+                _rb.AddForce(direction * (vultureConfig.MoveSpeed * Time.fixedDeltaTime), ForceMode.VelocityChange);
             }
             else
             {
@@ -53,7 +56,7 @@ namespace Characters.EnemySRC
             while ((_spawnPosition - transform.position).sqrMagnitude > Mathf.Epsilon)
             {
                 transform.position =
-                    Vector3.SmoothDamp(transform.position, _spawnPosition, ref _currentVelocity, smoothTime);
+                    Vector3.SmoothDamp(transform.position, _spawnPosition, ref _currentVelocity, _smoothTime);
                 yield return null;
             }
 
@@ -62,7 +65,7 @@ namespace Characters.EnemySRC
 
         private Transform FindNearestTarget()
         {
-            var objects = Physics.OverlapSphere(transform.position, _config.AreaOfSight);
+            var objects = Physics.OverlapSphere(transform.position, vultureConfig.AreaOfSight);
 
             foreach (var obj in objects)
             {
@@ -75,7 +78,7 @@ namespace Characters.EnemySRC
                     {
                         var direction = (obj.transform.position - transform.position).normalized;
 
-                        if (Physics.Raycast(transform.position, direction, out var hit, _config.AreaOfSight))
+                        if (Physics.Raycast(transform.position, direction, out var hit, vultureConfig.AreaOfSight))
                         {
                             Debug.DrawLine(transform.position, hit.transform.position, Color.red);
 
@@ -91,8 +94,11 @@ namespace Characters.EnemySRC
 
         private void OnDrawGizmos()
         {
+            if (!vultureConfig)
+                return;
+
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, _config.AreaOfSight);
+            Gizmos.DrawWireSphere(transform.position, vultureConfig.AreaOfSight);
         }
 
         private void OnCollisionEnter(Collision collision)

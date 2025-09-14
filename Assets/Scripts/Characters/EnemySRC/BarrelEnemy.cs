@@ -7,18 +7,17 @@ namespace Characters.EnemySRC
 {
     public class BarrelEnemy : Enemy
     {
-        private BarrelEnemyConfig _barrelConfig;
+        [SerializeField] private BarrelEnemyConfig barrelConfig;
 
         [SerializeField] private GameObject bulletPrefab;
 
         public bool Hidden { get; private set; }
-
-        private GameObject bullets;
+        
         private float _coldDownTimer;
 
-        private void Awake()
+        protected override void Awake()
         {
-            _barrelConfig = (BarrelEnemyConfig)_config;
+            base.Awake();
         }
 
         private void FixedUpdate()
@@ -27,7 +26,7 @@ namespace Characters.EnemySRC
 
             if (Hidden)
                 return;
-            
+
             if (_coldDownTimer > Time.time)
                 return;
 
@@ -37,9 +36,9 @@ namespace Characters.EnemySRC
 
         private bool TargetInSight()
         {
-            var raycastHits = Physics.SphereCastAll(transform.position + transform.right * _barrelConfig.FireOffset,
-                _barrelConfig.AttackRadius,
-                transform.right, _barrelConfig.AttackRadius);
+            var raycastHits = Physics.SphereCastAll(transform.position + transform.right * barrelConfig.FireOffset,
+                barrelConfig.AttackRadius,
+                transform.right, barrelConfig.AttackRadius);
 
             foreach (var obj in raycastHits)
             {
@@ -48,8 +47,8 @@ namespace Characters.EnemySRC
 
                 var dir = (obj.transform.position - transform.position).normalized;
 
-                if (Physics.Raycast(transform.position + transform.right * _barrelConfig.FireOffset, dir,
-                        _barrelConfig.RaycastDistance))
+                if (Physics.Raycast(transform.position + transform.right * barrelConfig.FireOffset, dir,
+                        barrelConfig.RaycastDistance))
                 {
                     return true;
                 }
@@ -60,7 +59,7 @@ namespace Characters.EnemySRC
 
         private bool ShouldHide()
         {
-            var colliderHits = Physics.OverlapSphere(transform.position, _barrelConfig.AreaOfSight);
+            var colliderHits = Physics.OverlapSphere(transform.position, barrelConfig.AreaOfSight);
 
             Hidden = false;
 
@@ -80,35 +79,38 @@ namespace Characters.EnemySRC
 
         private void Shoot()
         {
-            var bulletGO = Instantiate(bulletPrefab, transform.position + transform.right * _barrelConfig.FireOffset,
+            var bulletGO = Instantiate(bulletPrefab, transform.position + transform.right * barrelConfig.FireOffset,
                 gameObject.transform.rotation);
 
             if (bulletGO.TryGetComponent<Bullet>(out var bullet))
-                bullet.Launch(this, transform.position + transform.right * _barrelConfig.FireOffset,
-                    _barrelConfig.FireForce);
+                bullet.Launch(this, transform.position + transform.right * barrelConfig.FireOffset,
+                    barrelConfig.FireForce);
 
-            _coldDownTimer = _barrelConfig.ColdDown + Time.time;
+            _coldDownTimer = barrelConfig.ColdDown + Time.time;
         }
 
         private void OnDrawGizmos()
         {
+            if (!barrelConfig)
+                return;
+
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, _barrelConfig.AreaOfSight);
+            Gizmos.DrawWireSphere(transform.position, barrelConfig.AreaOfSight);
 
             if (Hidden)
                 return;
 
             Gizmos.color = Color.cyan;
 
-            var origin = transform.position + transform.right * _barrelConfig.FireOffset;
+            var origin = transform.position + transform.right * barrelConfig.FireOffset;
             var direction = transform.right.normalized;
 
             // Start sphere
-            Gizmos.DrawWireSphere(origin, _barrelConfig.AttackRadius);
+            Gizmos.DrawWireSphere(origin, barrelConfig.AttackRadius);
 
             // End sphere
-            var end = origin + direction * _barrelConfig.RaycastDistance;
-            Gizmos.DrawWireSphere(end, _barrelConfig.AttackRadius);
+            var end = origin + direction * barrelConfig.RaycastDistance;
+            Gizmos.DrawWireSphere(end, barrelConfig.AttackRadius);
 
             // Direction line
             Gizmos.DrawLine(origin, end);

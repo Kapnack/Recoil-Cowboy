@@ -1,4 +1,5 @@
-﻿using Systems.CentralizeEventSystem;
+﻿using System.Collections;
+using Systems.CentralizeEventSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,14 +10,14 @@ namespace Systems
         private ICentralizeEventSystem _eventSystem;
 
         [SerializeField] private InputActionReference _attack;
-        
+
         private readonly SimpleEvent _attackEvent = new();
-        
-        private void Awake()
+
+        private IEnumerator Start()
         {
-            if (!ServiceProvider.TryGetService(out _eventSystem))
+            while (!ServiceProvider.TryGetService(out _eventSystem))
             {
-                enabled = false;
+                yield return null;
             }
 
             _eventSystem.Register(PlayerEventKeys.Attack, _attackEvent);
@@ -31,7 +32,7 @@ namespace Systems
         {
             _attack.action.started -= HandleAttack;
         }
-        
+
         private void HandleAttack(InputAction.CallbackContext _)
         {
             _attackEvent?.Invoke();

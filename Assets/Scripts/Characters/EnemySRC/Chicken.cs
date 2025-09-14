@@ -2,21 +2,20 @@ using Characters.PlayerSRC;
 using ScriptableObjects;
 using Systems.TagClassGenerator;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.EnemySRC
 {
     public class Chicken : Enemy
     {
-        private ChickenConfig _chickenConfig;
+        [SerializeField] private ChickenConfig chickenConfig;
         private Vector3 _raycastOrigin;
-        
+
         private bool _alreadyRotated;
 
         protected override void Awake()
         {
             base.Awake();
-            
-            _chickenConfig = (ChickenConfig)_config;
         }
 
         private void FixedUpdate()
@@ -28,23 +27,23 @@ namespace Characters.EnemySRC
 
         private void Movement()
         {
-            _raycastOrigin = transform.position + _chickenConfig.RaycastOffSet * transform.right;
+            _raycastOrigin = transform.position + chickenConfig.RaycastOffSet * transform.right;
 
-            if (!Physics.Raycast(_raycastOrigin, Vector3.down, _chickenConfig.RaycastDistance))
+            if (!Physics.Raycast(_raycastOrigin, Vector3.down, chickenConfig.RaycastDistance))
             {
                 if (!_alreadyRotated)
                     Rotate();
             }
-            else if (Physics.Raycast(_raycastOrigin, transform.right, _chickenConfig.RaycastDistance))
+            else if (Physics.Raycast(_raycastOrigin, transform.right, chickenConfig.RaycastDistance))
             {
                 Rotate();
             }
             else
             {
-                if (_rb.linearVelocity.sqrMagnitude < _chickenConfig.MaxVelocity * _chickenConfig.MaxVelocity)
-                    _rb.AddForce(transform.right * _chickenConfig.MaxVelocity, ForceMode.Force);
+                if (_rb.linearVelocity.sqrMagnitude < chickenConfig.MaxVelocity * chickenConfig.MaxVelocity)
+                    _rb.AddForce(transform.right * chickenConfig.MoveSpeed, ForceMode.Force);
                 else
-                    _rb.linearVelocity = transform.right * _chickenConfig.MaxVelocity;
+                    _rb.linearVelocity = transform.right * chickenConfig.MaxVelocity;
 
                 _alreadyRotated = false;
             }
@@ -63,7 +62,7 @@ namespace Characters.EnemySRC
 
         private void CheckForEnemies()
         {
-            var objects = Physics.OverlapSphere(transform.position, _chickenConfig.AreaOfSight);
+            var objects = Physics.OverlapSphere(transform.position, chickenConfig.AreaOfSight);
 
             foreach (var obj in objects)
             {
@@ -79,7 +78,7 @@ namespace Characters.EnemySRC
                     }
 
                     var direction = (obj.transform.position - transform.position).normalized;
-                    if (Physics.Raycast(transform.position, direction, out var hit, _chickenConfig.AreaOfSight))
+                    if (Physics.Raycast(transform.position, direction, out var hit, chickenConfig.AreaOfSight))
                     {
                         Debug.DrawLine(transform.position, hit.transform.position, Color.red);
                         healthSystem.ReceiveDamage();
@@ -91,20 +90,23 @@ namespace Characters.EnemySRC
 
         private void OnDrawGizmos()
         {
+            if (!chickenConfig)
+                return;
+
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, _chickenConfig.AreaOfSight);
+            Gizmos.DrawWireSphere(transform.position, chickenConfig.AreaOfSight);
 
             Gizmos.color = Color.yellow;
-            Gizmos.DrawRay(_raycastOrigin, Vector3.down * _chickenConfig.RaycastDistance);
-            Gizmos.DrawRay(_raycastOrigin, transform.right * _chickenConfig.RaycastDistance);
+            Gizmos.DrawRay(_raycastOrigin, Vector3.down * chickenConfig.RaycastDistance);
+            Gizmos.DrawRay(_raycastOrigin, transform.right * chickenConfig.RaycastDistance);
         }
 
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            if (_config == null)
+            if (chickenConfig == null)
                 Debug.LogError($"_config is null in GameObject {gameObject.name}");
-            else if (!(_config as ChickenConfig))
+            else if (!(chickenConfig as ChickenConfig))
                 Debug.LogError($"_config is not ChickenConfig in GameObject {gameObject.name}");
         }
 #endif
