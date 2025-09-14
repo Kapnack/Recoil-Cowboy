@@ -9,14 +9,13 @@ namespace Characters.EnemySRC
     {
         private ChickenConfig _chickenConfig;
         private Vector3 _raycastOrigin;
-
-        private Rigidbody _rb;
+        
         private bool _alreadyRotated;
 
-        private void Awake()
+        protected override void Awake()
         {
-            _rb = GetComponent<Rigidbody>();
-
+            base.Awake();
+            
             _chickenConfig = (ChickenConfig)_config;
         }
 

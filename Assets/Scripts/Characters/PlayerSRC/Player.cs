@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Characters.PlayerSRC
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class Player : MonoBehaviour, IPlayerHealthSystem
+    public class Player : Character, IPlayerHealthSystem
     {
         [SerializeField] private PlayerConfig _config;
         [SerializeField] private int _currentHealth;
@@ -24,19 +24,17 @@ namespace Characters.PlayerSRC
         
         private ICentralizeEventSystem _eventSystem;
         private IMousePositionTracker _mouseTracker;
-        
-        private Rigidbody _rb;
 
         private readonly ComplexGameEvent<int, int, int> _livesChangeEvent = new();
         private readonly ComplexGameEvent<int, int, int> _bulletsChangeEvent = new();
         private readonly SimpleEvent _dies = new();
-        
-        private void Awake()
+
+        protected override void Awake()
         {
+            base.Awake();
+            
             _currentHealth = _config.MaxHealth;
             _currentBullets = _config.MaxBullets;
-
-            _rb = GetComponent<Rigidbody>();
 
             ServiceProvider.TryGetService(out _eventSystem);
             ServiceProvider.TryGetService(out _mouseTracker);

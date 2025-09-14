@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Characters.EnemySRC
 {
-    public abstract class Enemy : MonoBehaviour, IHealthSystem
+    public abstract class Enemy : Character, IHealthSystem
     {
         [SerializeField] protected EnemyConfig _config;
 
-        public void ReceiveDamage()
+        public virtual void ReceiveDamage()
         {
             //TODO: Deactivate the Enemy to be reused by the Pool.
         }

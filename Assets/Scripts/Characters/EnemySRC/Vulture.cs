@@ -10,17 +10,17 @@ namespace Characters.EnemySRC
         private Vector3 _spawnPosition;
 
         private Transform _target;
-        private Rigidbody _rb;
         
         private Coroutine _backToStartCoroutine;
         private Vector3 _currentVelocity;
         
         [SerializeField] private float smoothTime;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+            
             _spawnPosition = transform.position;
-            _rb = GetComponent<Rigidbody>();
         }
 
         private void FixedUpdate()
