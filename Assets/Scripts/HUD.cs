@@ -27,9 +27,11 @@ public class HUD : MonoBehaviour
         _lives = livesCanvas.GetComponent<TMP_Text>();
         _livesFormat = _lives.text;
         _lives.text = string.Format(_livesFormat, 0, 0);
+
+        StartCoroutine(SetUpEvents());
     }
 
-    private IEnumerator Start()
+    private IEnumerator SetUpEvents()
     {
         ICentralizeEventSystem eventSystem;
 
@@ -48,7 +50,7 @@ public class HUD : MonoBehaviour
 
         complexGameEvent.AddListener(OnLivesChange);
     }
-
+    
     public void OnAmmoChange(int previous, int current, int max)
     {
         _ammo.text = string.Format(_ammoFormat, current, max);

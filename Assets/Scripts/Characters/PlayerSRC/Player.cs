@@ -15,7 +15,6 @@ namespace Characters.PlayerSRC
 
         private int _currentBullets;
 
-        private ICentralizeEventSystem _eventSystem;
         private IMousePositionTracker _mouseTracker;
 
         private readonly ComplexGameEvent<int, int, int> _livesChangeEvent = new();
@@ -55,6 +54,8 @@ namespace Characters.PlayerSRC
 
             CurrentHealth = _config.MaxHealth;
             CurrentBullets = _config.MaxBullets;
+            
+            StartCoroutine(SetUpEvents());
         }
 
         private IEnumerator Start()
@@ -77,22 +78,26 @@ namespace Characters.PlayerSRC
 
             while (!ServiceProvider.TryGetService(out _mouseTracker))
                 yield return null;
-
-            while (!ServiceProvider.TryGetService(out _eventSystem))
-                yield return null;
-
-            RegisterEvents();
             
-            SimpleEvent attack;
-            while (!_eventSystem.TryGet(PlayerEventKeys.Attack, out attack))
-                yield return null;
-    
-            attack.AddListener(OnAttack);
+            _bulletsChangeEvent.Invoke(CurrentBullets, CurrentBullets, _config.MaxBullets);
+            _livesChangeEvent.Invoke(CurrentHealth, CurrentHealth, _config.MaxBullets);
         }
 
-        private void OnEnable()
+        private IEnumerator SetUpEvents()
         {
-            RegisterEvents();
+            ICentralizeEventSystem eventSystem;
+            while (!ServiceProvider.TryGetService(out eventSystem))
+                yield return null;
+
+            eventSystem.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
+            eventSystem.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
+
+            SimpleEvent attack;
+            
+            while (!eventSystem.TryGet(PlayerEventKeys.Attack, out attack))
+                yield return null;
+
+            attack.AddListener(OnAttack);
         }
 
         private void OnDisable()
@@ -155,16 +160,13 @@ namespace Characters.PlayerSRC
             _dies?.Invoke();
         }
 
-        private void RegisterEvents()
-        {
-            _eventSystem?.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
-            _eventSystem?.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
-        }
-
         private void UnRegisterEvents()
         {
-            _eventSystem?.Unregister(PlayerEventKeys.LivesChange);
-            _eventSystem?.Unregister(PlayerEventKeys.BulletsChange);
+            if (!ServiceProvider.TryGetService<ICentralizeEventSystem>(out var eventSystem)) 
+                return;
+            
+            eventSystem?.Unregister(PlayerEventKeys.LivesChange);
+            eventSystem?.Unregister(PlayerEventKeys.BulletsChange);
         }
     }
 }
