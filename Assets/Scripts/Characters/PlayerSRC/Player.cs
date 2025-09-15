@@ -14,7 +14,7 @@ namespace Characters.PlayerSRC
         [SerializeField] private int _currentHealth;
 
         private int _currentBullets;
-        
+
         private ICentralizeEventSystem _eventSystem;
         private IMousePositionTracker _mouseTracker;
 
@@ -23,6 +23,7 @@ namespace Characters.PlayerSRC
         private readonly SimpleEvent _dies = new();
 
         public bool Invincible { get; private set; }
+
         private int CurrentHealth
         {
             get => _currentHealth;
@@ -54,9 +55,6 @@ namespace Characters.PlayerSRC
 
             CurrentHealth = _config.MaxHealth;
             CurrentBullets = _config.MaxBullets;
-
-            ServiceProvider.TryGetService(out _eventSystem);
-            ServiceProvider.TryGetService(out _mouseTracker);
         }
 
         private IEnumerator Start()
@@ -83,27 +81,23 @@ namespace Characters.PlayerSRC
             while (!ServiceProvider.TryGetService(out _eventSystem))
                 yield return null;
 
-            var attack = _eventSystem?.Get(PlayerEventKeys.Attack);
-
-            while (attack == null)
-            {
-                attack = _eventSystem?.Get(PlayerEventKeys.Attack);
+            RegisterEvents();
+            
+            SimpleEvent attack;
+            while (!_eventSystem.TryGet(PlayerEventKeys.Attack, out attack))
                 yield return null;
-            }
-
+    
             attack.AddListener(OnAttack);
         }
 
         private void OnEnable()
         {
-            _eventSystem?.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
-            _eventSystem?.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
+            RegisterEvents();
         }
 
         private void OnDisable()
         {
-            _eventSystem?.Unregister(PlayerEventKeys.LivesChange);
-            _eventSystem?.Unregister(PlayerEventKeys.BulletsChange);
+            UnRegisterEvents();
         }
 
         private void OnAttack()
@@ -159,6 +153,18 @@ namespace Characters.PlayerSRC
         {
             CurrentHealth = 0;
             _dies?.Invoke();
+        }
+
+        private void RegisterEvents()
+        {
+            _eventSystem?.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
+            _eventSystem?.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
+        }
+
+        private void UnRegisterEvents()
+        {
+            _eventSystem?.Unregister(PlayerEventKeys.LivesChange);
+            _eventSystem?.Unregister(PlayerEventKeys.BulletsChange);
         }
     }
 }
