@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MaxVelocity>k__BackingField: 100
   <MoveSpeed>k__BackingField: 20
-  <AreaOfSight>k__BackingField: 2
+  <AreaOfSight>k__BackingField: 1.5
   <RaycastOffSet>k__BackingField: 1
   <RaycastDistance>k__BackingField: 1
