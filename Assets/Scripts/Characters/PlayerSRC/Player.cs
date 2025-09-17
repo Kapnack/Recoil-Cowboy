@@ -11,7 +11,7 @@ namespace Characters.PlayerSRC
     public class Player : Character, IPlayerHealthSystem
     {
         [SerializeField] private PlayerConfig _config;
-        [SerializeField] private int _currentHealth;
+        [SerializeField] private int currentLives;
 
         private int _currentBullets;
 
@@ -23,16 +23,16 @@ namespace Characters.PlayerSRC
 
         public bool Invincible { get; private set; }
 
-        private int CurrentHealth
+        private int CurrentLives
         {
-            get => _currentHealth;
+            get => currentLives;
 
             set
             {
-                var newValue = Mathf.Clamp(value, 0, _config.MaxHealth);
+                var newValue = Mathf.Clamp(value, 0, _config.MaxLives);
 
-                _livesChangeEvent?.Invoke(_currentHealth, newValue, _config.MaxHealth);
-                _currentHealth = newValue;
+                _livesChangeEvent?.Invoke(currentLives, newValue, _config.MaxLives);
+                currentLives = newValue;
             }
         }
 
@@ -52,9 +52,9 @@ namespace Characters.PlayerSRC
         {
             base.Awake();
 
-            CurrentHealth = _config.MaxHealth;
+            CurrentLives = _config.MaxLives;
             CurrentBullets = _config.MaxBullets;
-            
+
             StartCoroutine(SetUpEvents());
         }
 
@@ -78,9 +78,14 @@ namespace Characters.PlayerSRC
 
             while (!ServiceProvider.TryGetService(out _mouseTracker))
                 yield return null;
-            
+
+            while (!_bulletsChangeEvent.HasInvocations())
+                yield return null;
             _bulletsChangeEvent.Invoke(CurrentBullets, CurrentBullets, _config.MaxBullets);
-            _livesChangeEvent.Invoke(CurrentHealth, CurrentHealth, _config.MaxBullets);
+
+            while (!_livesChangeEvent.HasInvocations())
+                yield return null;
+            _livesChangeEvent.Invoke(CurrentLives, CurrentLives, _config.MaxLives);
         }
 
         private IEnumerator SetUpEvents()
@@ -92,12 +97,17 @@ namespace Characters.PlayerSRC
             eventSystem.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
             eventSystem.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
 
-            SimpleEvent attack;
-            
-            while (!eventSystem.TryGet(PlayerEventKeys.Attack, out attack))
+            SimpleEvent simpleEvent;
+
+            while (!eventSystem.TryGet(PlayerEventKeys.Attack, out simpleEvent))
                 yield return null;
 
-            attack.AddListener(OnAttack);
+            simpleEvent.AddListener(OnAttack);
+
+            while (!eventSystem.TryGet(PlayerEventKeys.Reload, out simpleEvent))
+                yield return null;
+
+            simpleEvent.AddListener(AddAmmo);
         }
 
         private void OnDisable()
@@ -137,7 +147,7 @@ namespace Characters.PlayerSRC
             if (Invincible)
                 return;
 
-            --CurrentHealth;
+            --CurrentLives;
 
             StartCoroutine(InvincibilityFramesCoroutine());
 
@@ -156,17 +166,19 @@ namespace Characters.PlayerSRC
 
         public void InstantDead()
         {
-            CurrentHealth = 0;
+            CurrentLives = 0;
             _dies?.Invoke();
         }
 
         private void UnRegisterEvents()
         {
-            if (!ServiceProvider.TryGetService<ICentralizeEventSystem>(out var eventSystem)) 
+            if (!ServiceProvider.TryGetService<ICentralizeEventSystem>(out var eventSystem))
                 return;
-            
+
             eventSystem?.Unregister(PlayerEventKeys.LivesChange);
             eventSystem?.Unregister(PlayerEventKeys.BulletsChange);
         }
+
+        public void AddAmmo() => CurrentBullets++;
     }
 }

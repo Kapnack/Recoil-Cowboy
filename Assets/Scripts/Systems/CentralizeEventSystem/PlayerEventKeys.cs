@@ -6,5 +6,6 @@
         public const string LivesChange = "LIVES_CHANGE";
         public const string BulletsChange = "BULLETS_CHANGE";
         public const string Dies = "DIES";
+        public const string Reload =  "RELOAD";
     }
 }

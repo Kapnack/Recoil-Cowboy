@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fec14fc63447694e8ee5ba097918c04, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  <MaxHealth>k__BackingField: 3
+  <MaxLives>k__BackingField: 3
   <InvincibleTime>k__BackingField: 1
   <MaxBullets>k__BackingField: 3
   <KnockBack>k__BackingField: 30
