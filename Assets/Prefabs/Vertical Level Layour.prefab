@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 5723823670271415778}
   - component: {fileID: 6210363763159187235}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Vertical Level Layour
   m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

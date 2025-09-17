@@ -7,5 +7,6 @@
         public const string BulletsChange = "BULLETS_CHANGE";
         public const string Dies = "DIES";
         public const string Reload =  "RELOAD";
+        public const string LevelComplete =  "LEVEL_COMPLETE";
     }
 }
