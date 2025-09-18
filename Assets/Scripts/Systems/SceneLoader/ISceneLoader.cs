@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
 namespace Systems.SceneLoader
@@ -12,7 +13,7 @@ namespace Systems.SceneLoader
         /// </summary>
         /// <param name="sceneRef"></param>
         /// <param name="mode"></param>
-        public void LoadScene(SceneRef sceneRef, LoadSceneMode mode = LoadSceneMode.Additive);
+        public Task LoadSceneAsync(SceneRef sceneRef, LoadSceneMode mode = LoadSceneMode.Additive);
 
         /// <summary>
         /// Loads the Scenes and waits until they finish loading.
@@ -20,7 +21,7 @@ namespace Systems.SceneLoader
         /// </summary>
         /// <param name="sceneRef"></param>
         /// <param name="mode"></param>
-        public void LoadSceneAsync(SceneRef[] sceneRef, LoadSceneMode mode = LoadSceneMode.Additive);
+        public Task LoadSceneAsync(SceneRef[] sceneRef);
 
         /// <summary>
         /// Unloads all active scene saved in the list inside the class.

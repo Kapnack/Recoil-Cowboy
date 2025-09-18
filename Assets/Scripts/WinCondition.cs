@@ -1,8 +1,8 @@
+using System.Collections;
 using Systems;
 using Systems.CentralizeEventSystem;
 using Systems.TagClassGenerator;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class WinCondition : MonoBehaviour
 {
@@ -10,6 +10,22 @@ public class WinCondition : MonoBehaviour
     private float _timeUntilWin;
     private bool _isPlayerInside;
 
+    private readonly SimpleEvent _event = new();
+
+    private void Awake()
+    {
+        StartCoroutine(StartUpEvent());
+    }
+
+    private IEnumerator StartUpEvent()
+    {
+        ICentralizeEventSystem eventSystem;
+        while(!ServiceProvider.TryGetService(out eventSystem))
+            yield return null;
+        
+        eventSystem.Register(GameplayManagerKeys.WinCondition, _event);
+    }
+    
     private void OnCollisionEnter(Collision collision)
     {
         if (!collision.transform.CompareTag(Tags.Player))
@@ -27,13 +43,7 @@ public class WinCondition : MonoBehaviour
         if (Time.time < _timeUntilWin)
             return;
 
-        if (ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem))
-        {
-            if (eventSystem.TryGet(PlayerEventKeys.LevelComplete, out var simpleEvent))
-            {
-                simpleEvent.Invoke();
-            }
-        }
+        _event?.Invoke();
     }
 
     private void OnCollisionExit(Collision collision)

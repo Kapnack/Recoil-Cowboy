@@ -40,7 +40,7 @@ namespace Characters.PlayerSRC
             
             eventSystem.Register(PlayerEventKeys.Reload, _reloadEvent);
 
-            if (!ServiceProvider.TryGetService(out _mouseTracker))
+            while (!ServiceProvider.TryGetService(out _mouseTracker))
                 yield return null;
         }
 

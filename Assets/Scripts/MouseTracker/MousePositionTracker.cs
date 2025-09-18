@@ -16,10 +16,13 @@ namespace MouseTracker
 
         private void Awake()
         {
+            ServiceProvider.SetService<IMousePositionTracker>(this);
+        }
+
+        private void Start()
+        {
             _camera = Camera.main;
             _mouse = Mouse.current;
-
-            ServiceProvider.SetService<IMousePositionTracker>(this);
         }
 
         private void Update()

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -24,23 +25,16 @@ namespace Systems.SceneLoader
         }
 #endif
 
-        private IEnumerator LoadSceneCoroutine(SceneRef sceneRef, LoadSceneMode mode)
+        private async Task LoadSceneCoroutine(SceneRef sceneRef, LoadSceneMode mode)
         {
-            var asyncOp = SceneManager.LoadSceneAsync(sceneRef.Index, mode);
+            await SceneManager.LoadSceneAsync(sceneRef.Index, mode);
 
-            while (!asyncOp.isDone)
-                yield return null;
-        
             var loadedScene = SceneManager.GetSceneByBuildIndex(sceneRef.Index);
 
             if (loadedScene.IsValid() && loadedScene.isLoaded)
-            {
                 activeScenes.Add(loadedScene);
-            }
             else
-            {
-                Debug.LogWarning($"The Scene with name {sceneRef.Name} didn't load correctly.");
-            }
+                Debug.LogError($"The Scene with name {sceneRef.Name} didn't load correctly.");
         }
 
         /// <inheritdoc/>
@@ -53,14 +47,8 @@ namespace Systems.SceneLoader
         }
 
         /// <inheritdoc/>
-        public void LoadScene(SceneRef sceneRef, LoadSceneMode mode = LoadSceneMode.Additive)
+        public async Task LoadSceneAsync(SceneRef sceneRef, LoadSceneMode mode = LoadSceneMode.Additive)
         {
-            if (sceneRef == null)
-            {
-                Debug.LogWarning("No SceneRef assigned");
-                return;
-            }
-
             if (IsSceneLoaded(sceneRef))
             {
                 Debug.LogWarning($"Scene is already loaded.");
@@ -69,18 +57,18 @@ namespace Systems.SceneLoader
 
             if (sceneRef.Index < 0)
             {
-                Debug.LogWarning($"Not Valid SceneRef. Cause SceneIndex: {sceneRef.Index} is < 0");
+                Debug.LogError($"Not Valid SceneRef. Cause SceneIndex of {sceneRef.Name} is < 0");
                 return;
             }
 
-            StartCoroutine(LoadSceneCoroutine(sceneRef, mode));
+            await LoadSceneCoroutine(sceneRef, mode);
         }
 
         /// <inheritdoc/>
-        public void LoadSceneAsync(SceneRef[] sceneRef, LoadSceneMode mode = LoadSceneMode.Additive)
+        public async Task LoadSceneAsync(SceneRef[] sceneRef)
         {
             foreach (var t in sceneRef)
-                LoadScene(t, mode);
+                await LoadSceneAsync(t);
         }
 
         /// <inheritdoc/>
@@ -89,7 +77,7 @@ namespace Systems.SceneLoader
             for (var i = activeScenes.Count - 1; i >= 0; i--)
             {
                 var scene = activeScenes[i];
-            
+
                 StartCoroutine(UnLoadSceneCoroutine(scene));
                 activeScenes.RemoveAt(i);
             }
