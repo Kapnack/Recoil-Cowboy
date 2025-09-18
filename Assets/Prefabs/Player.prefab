@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3782566251563470380}
   - component: {fileID: 2334483814257555828}
   - component: {fileID: 6124646124298799790}
+  - component: {fileID: 1824895135744991875}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -152,4 +153,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config: {fileID: 11400000, guid: 27c841d7cab15a849bf7827b6b67af6b, type: 2}
-  _currentHealth: 0
+  currentLives: 0
+--- !u!114 &1824895135744991875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6461067511597030159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbcf093798b66c844a5d23834d8eefc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.1
+  amountOfFlickers: 3
