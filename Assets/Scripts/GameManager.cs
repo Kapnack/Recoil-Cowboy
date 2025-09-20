@@ -33,8 +33,10 @@ public class GameManager : MonoBehaviour
         {
             _mainCamera.transform.SetParent(null);
             SceneManager.MoveGameObjectToScene(_mainCamera.gameObject, gameObject.scene);
-            _sceneLoader.UnloadAll();
+
+            await _sceneLoader.UnloadAll();
             await _sceneLoader.LoadSceneAsync(mainMenuScene);
+
             FindAfterMatchMenuEvents();
         }
         catch (Exception e)
@@ -49,7 +51,8 @@ public class GameManager : MonoBehaviour
         {
             _mainCamera.transform.SetParent(null);
             SceneManager.MoveGameObjectToScene(_mainCamera.gameObject, gameObject.scene);
-            _sceneLoader.UnloadAll();
+
+            await _sceneLoader.UnloadAll();
             await _sceneLoader.LoadSceneAsync(levels[_currentLevel]);
 
             FindGameplayEvents();
@@ -66,9 +69,10 @@ public class GameManager : MonoBehaviour
         {
             _mainCamera.transform.SetParent(null);
             SceneManager.MoveGameObjectToScene(_mainCamera.gameObject, gameObject.scene);
-            _sceneLoader.UnloadAll();
+            
+            await _sceneLoader.UnloadAll();
             await _sceneLoader.LoadSceneAsync(winScene);
-
+            
             FindAfterMatchMenuEvents();
         }
         catch (Exception e)
@@ -83,7 +87,8 @@ public class GameManager : MonoBehaviour
         {
             _mainCamera.transform.SetParent(null);
             SceneManager.MoveGameObjectToScene(_mainCamera.gameObject, gameObject.scene);
-            _sceneLoader.UnloadAll();
+            
+            await _sceneLoader.UnloadAll();
             await _sceneLoader.LoadSceneAsync(gameOverScene);
 
             FindAfterMatchMenuEvents();

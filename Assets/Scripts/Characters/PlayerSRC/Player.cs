@@ -11,7 +11,10 @@ namespace Characters.PlayerSRC
     public class Player : Character, IPlayerHealthSystem
     {
         [SerializeField] private PlayerConfig _config;
-        [SerializeField] private int currentLives;
+
+        [ContextMenuItem("Instant Kill", nameof(InstantDead))]
+        private int _currentLives;
+        private bool _isDead;
 
         private int _currentBullets;
 
@@ -25,17 +28,20 @@ namespace Characters.PlayerSRC
 
         private int CurrentLives
         {
-            get => currentLives;
+            get => _currentLives;
 
             set
             {
                 var newValue = Mathf.Clamp(value, 0, _config.MaxLives);
 
-                _livesChangeEvent?.Invoke(currentLives, newValue, _config.MaxLives);
-                currentLives = newValue;
+                _livesChangeEvent?.Invoke(_currentLives, newValue, _config.MaxLives);
+                _currentLives = newValue;
 
-                if (newValue == 0)
+                if (newValue == 0 && !_isDead)
+                {
                     _dies?.Invoke();
+                    _isDead = true;
+                }
             }
         }
 
@@ -59,8 +65,6 @@ namespace Characters.PlayerSRC
             CurrentBullets = _config.MaxBullets;
 
             StartCoroutine(SetUpEvents());
-
-            ServiceProvider.TryGetService(out _mouseTracker);
         }
 
         private IEnumerator Start()
@@ -80,6 +84,9 @@ namespace Characters.PlayerSRC
                 cam.transform.localPosition = new Vector3(0.0f, 5.0f, -20.0f);
                 cam.transform.LookAt(transform);
             }
+
+            while (!ServiceProvider.TryGetService(out _mouseTracker))
+                yield return null;
 
             while (!_bulletsChangeEvent.HasInvocations())
                 yield return null;
@@ -113,6 +120,18 @@ namespace Characters.PlayerSRC
             UnRegisterEvents();
         }
 
+        private void UnRegisterEvents()
+        {
+            if (!ServiceProvider.TryGetService<ICentralizeEventSystem>(out var eventSystem))
+                return;
+
+            eventSystem?.Unregister(PlayerEventKeys.LivesChange);
+            eventSystem?.Unregister(PlayerEventKeys.BulletsChange);
+            eventSystem?.Unregister(PlayerEventKeys.Dies);
+
+            eventSystem?.Get(PlayerEventKeys.Attack).RemoveListener(OnAttack);
+        }
+        
         private void OnAttack()
         {
             if (CurrentBullets == 0)
@@ -148,9 +167,6 @@ namespace Characters.PlayerSRC
             --CurrentLives;
 
             StartCoroutine(InvincibilityFramesCoroutine());
-
-            if (_currentBullets <= 0)
-                _dies?.Invoke();
         }
 
         private IEnumerator InvincibilityFramesCoroutine()
@@ -162,23 +178,9 @@ namespace Characters.PlayerSRC
             Invincible = false;
         }
 
-        public void InstantDead()
-        {
-            CurrentLives = 0;
-            _dies?.Invoke();
-        }
+        public void InstantDead() => CurrentLives = 0;
 
-        private void UnRegisterEvents()
-        {
-            if (!ServiceProvider.TryGetService<ICentralizeEventSystem>(out var eventSystem))
-                return;
-
-            eventSystem?.Unregister(PlayerEventKeys.LivesChange);
-            eventSystem?.Unregister(PlayerEventKeys.BulletsChange);
-            eventSystem?.Unregister(PlayerEventKeys.Dies);
-            
-            eventSystem?.Get(PlayerEventKeys.Attack).RemoveListener(OnAttack);
-        }
+        public void AddAmmo() => CurrentBullets++;
 
         public void AddAmmo() => CurrentBullets++;
     }
