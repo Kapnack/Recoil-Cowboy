@@ -13,6 +13,14 @@ namespace Systems
                 Services[typeof(T)] = service;
         }
 
+        public static T GetService<T>() where T : class
+        {
+            if(Services.TryGetValue(typeof(T), out var serviceObject))
+               return serviceObject as T;
+               
+            throw new Exception($"Service of type {typeof(T)} could not be found.");
+        }
+        
         public static bool TryGetService<T>(out T service) where T : class
         {
             if (Services.TryGetValue(typeof(T), out var serviceObject) && serviceObject is T tService)
