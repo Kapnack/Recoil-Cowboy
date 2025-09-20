@@ -1,10 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Systems;
 using Systems.CentralizeEventSystem;
 using Systems.SceneLoader;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(SceneLoader))]
 public class GameManager : MonoBehaviour
@@ -18,26 +18,41 @@ public class GameManager : MonoBehaviour
 
     private int _currentLevel;
 
+    private Camera _mainCamera;
+
     private void Awake()
     {
+        _mainCamera = Camera.main;
         _sceneLoader = GetComponent<ISceneLoader>();
-        LoadCurrentLevel();
+        LoadMainMenu();
     }
 
-    private void LoadMainMenu()
+    private async void LoadMainMenu()
     {
-        _sceneLoader.UnloadAll();
-        _sceneLoader.LoadSceneAsync(mainMenuScene);
+        try
+        {
+            _mainCamera.transform.SetParent(null);
+            SceneManager.MoveGameObjectToScene(_mainCamera.gameObject, gameObject.scene);
+            _sceneLoader.UnloadAll();
+            await _sceneLoader.LoadSceneAsync(mainMenuScene);
+            FindAfterMatchMenuEvents();
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
     }
 
     private async void LoadCurrentLevel()
     {
         try
         {
+            _mainCamera.transform.SetParent(null);
+            SceneManager.MoveGameObjectToScene(_mainCamera.gameObject, gameObject.scene);
             _sceneLoader.UnloadAll();
             await _sceneLoader.LoadSceneAsync(levels[_currentLevel]);
 
-            FindGameplayConditions();
+            FindGameplayEvents();
         }
         catch (Exception e)
         {
@@ -45,27 +60,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void LoadWinScene()
-    {
-        _sceneLoader.UnloadAll();
-        _sceneLoader.LoadSceneAsync(winScene);
-    }
-
-    private void LoadGameOverMenu()
-    {
-        _sceneLoader.UnloadAll();
-        _sceneLoader.LoadSceneAsync(mainMenuScene);
-    }
-
-    private async void LoadNextLevel()
+    private async void LoadWinScene()
     {
         try
         {
+            _mainCamera.transform.SetParent(null);
+            SceneManager.MoveGameObjectToScene(_mainCamera.gameObject, gameObject.scene);
             _sceneLoader.UnloadAll();
-            await _sceneLoader.LoadSceneAsync(levels[_currentLevel + 1]);
-            ++_currentLevel;
+            await _sceneLoader.LoadSceneAsync(winScene);
 
-            FindGameplayConditions();
+            FindAfterMatchMenuEvents();
         }
         catch (Exception e)
         {
@@ -73,20 +77,49 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void FindGameplayConditions()
+    private async void LoadGameOverMenu()
     {
-        ICentralizeEventSystem eventSystem;
+        try
+        {
+            _mainCamera.transform.SetParent(null);
+            SceneManager.MoveGameObjectToScene(_mainCamera.gameObject, gameObject.scene);
+            _sceneLoader.UnloadAll();
+            await _sceneLoader.LoadSceneAsync(gameOverScene);
 
-        ServiceProvider.TryGetService(out eventSystem);
+            FindAfterMatchMenuEvents();
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
+    }
 
-        SimpleEvent simpleEvent;
-        
-        eventSystem.TryGet(GameplayManagerKeys.ChangeLevel, out simpleEvent);
+    private void LevelCleared() => ++_currentLevel;
+    
+    private void FindGameplayEvents()
+    {
+        ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
 
+        eventSystem.TryGet(GameplayManagerKeys.WinCondition, out var simpleEvent);
+
+        simpleEvent.AddListener(LevelCleared);
         simpleEvent.AddListener(LoadWinScene);
 
-        eventSystem.TryGet(GameplayManagerKeys.GameOverMenu, out simpleEvent);
+        eventSystem.TryGet(GameplayManagerKeys.LoseCondition, out simpleEvent);
 
         simpleEvent.AddListener(LoadGameOverMenu);
+    }
+
+    private void FindAfterMatchMenuEvents()
+    {
+        ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
+
+        eventSystem.TryGet(GameManagerKeys.ChangeToLevel, out var simpleEvent);
+
+        simpleEvent.AddListener(LoadCurrentLevel);
+
+        eventSystem.TryGet(GameManagerKeys.MainMenu, out simpleEvent);
+
+        simpleEvent.AddListener(LoadMainMenu);
     }
 }

@@ -30,18 +30,19 @@ namespace Characters.PlayerSRC
         private void Awake()
         {
             _target = gameObject.transform;
-        }
-
-        private IEnumerator Start()
-        {
-            ICentralizeEventSystem eventSystem;
-            while (!ServiceProvider.TryGetService(out eventSystem))
-                yield return null;
+            
+            ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
             
             eventSystem.Register(PlayerEventKeys.Reload, _reloadEvent);
 
-            while (!ServiceProvider.TryGetService(out _mouseTracker))
-                yield return null;
+            ServiceProvider.TryGetService(out _mouseTracker);
+        }
+
+        private void OnDestroy()
+        {
+            ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
+            
+            eventSystem.Unregister(PlayerEventKeys.Reload);
         }
 
         private void Update()

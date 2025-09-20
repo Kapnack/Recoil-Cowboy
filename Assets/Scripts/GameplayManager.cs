@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Characters.EnemySRC;
+using Characters.PlayerSRC;
 using Systems;
 using Systems.CentralizeEventSystem;
 using UnityEngine;
@@ -19,28 +20,36 @@ public class GameplayManager : MonoBehaviour
 
     private void SetUpEvents()
     {
-        ICentralizeEventSystem eventSystem;
+        if (ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem))
+        {
+            eventSystem.Register(GameplayManagerKeys.WinCondition, _winCondition);
+            eventSystem.Register(GameplayManagerKeys.LoseCondition, _loseCondition);
+        }
+    }
 
-        ServiceProvider.TryGetService(out eventSystem);
-        eventSystem.Register(GameplayManagerKeys.ChangeLevel, _winCondition);
-        eventSystem.Register(GameplayManagerKeys.GameOverMenu, _loseCondition);
+    private void OnDestroy()
+    {
+        if (ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem))
+        {
+            eventSystem.Unregister(GameplayManagerKeys.WinCondition);
+            eventSystem.Unregister(GameplayManagerKeys.LoseCondition);
+        }
     }
 
     private IEnumerator Start()
     {
-        ICentralizeEventSystem eventSystem;
-        ServiceProvider.TryGetService(out eventSystem);
+        ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
 
         SimpleEvent simpleEvent;
-        
-        while(!eventSystem.TryGet(GameplayManagerKeys.WinCondition, out simpleEvent))
+
+        while (!eventSystem.TryGet(PlayerEventKeys.Wins, out simpleEvent))
             yield return null;
         simpleEvent.AddListener(OnWinConditionMeet);
 
 
-        while(!eventSystem.TryGet(GameplayManagerKeys.LoseCondition, out simpleEvent))
+        while (!eventSystem.TryGet(PlayerEventKeys.Dies, out simpleEvent))
             yield return null;
-        
+
         simpleEvent.AddListener(OnLoseConditionMeet);
     }
 
@@ -53,13 +62,4 @@ public class GameplayManager : MonoBehaviour
     {
         _loseCondition?.Invoke();
     }
-}
-
-public static class GameplayManagerKeys
-{
-    public const string WinCondition = "WIN_CONDITION";
-    public const string LoseCondition = "LOSE_CONDITION";
-
-    public const string ChangeLevel = "CHANGE_LEVEL";
-    public const string GameOverMenu = "GAME_OVER_MENU";
 }

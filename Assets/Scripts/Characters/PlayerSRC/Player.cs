@@ -33,6 +33,9 @@ namespace Characters.PlayerSRC
 
                 _livesChangeEvent?.Invoke(currentLives, newValue, _config.MaxLives);
                 currentLives = newValue;
+
+                if (newValue == 0)
+                    _dies?.Invoke();
             }
         }
 
@@ -56,6 +59,8 @@ namespace Characters.PlayerSRC
             CurrentBullets = _config.MaxBullets;
 
             StartCoroutine(SetUpEvents());
+
+            ServiceProvider.TryGetService(out _mouseTracker);
         }
 
         private IEnumerator Start()
@@ -72,12 +77,9 @@ namespace Characters.PlayerSRC
             {
                 cam.transform.SetParent(transform);
 
-                cam.transform.localPosition = new Vector3(0.0f, 5.0f, -10.0f);
+                cam.transform.localPosition = new Vector3(0.0f, 5.0f, -20.0f);
                 cam.transform.LookAt(transform);
             }
-
-            while (!ServiceProvider.TryGetService(out _mouseTracker))
-                yield return null;
 
             while (!_bulletsChangeEvent.HasInvocations())
                 yield return null;
@@ -90,17 +92,13 @@ namespace Characters.PlayerSRC
 
         private IEnumerator SetUpEvents()
         {
-            ICentralizeEventSystem eventSystem;
-            while (!ServiceProvider.TryGetService(out eventSystem))
-                yield return null;
+            ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
 
             eventSystem.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
             eventSystem.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
+            eventSystem.Register(PlayerEventKeys.Dies, _dies);
 
-            SimpleEvent simpleEvent;
-
-            while (!eventSystem.TryGet(PlayerEventKeys.Attack, out simpleEvent))
-                yield return null;
+            eventSystem.TryGet(PlayerEventKeys.Attack, out var simpleEvent);
 
             simpleEvent.AddListener(OnAttack);
 
@@ -177,6 +175,9 @@ namespace Characters.PlayerSRC
 
             eventSystem?.Unregister(PlayerEventKeys.LivesChange);
             eventSystem?.Unregister(PlayerEventKeys.BulletsChange);
+            eventSystem?.Unregister(PlayerEventKeys.Dies);
+            
+            eventSystem?.Get(PlayerEventKeys.Attack).RemoveListener(OnAttack);
         }
 
         public void AddAmmo() => CurrentBullets++;

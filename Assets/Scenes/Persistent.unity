@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42838f0d7ee24a06a87c476598647edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attack: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  attack: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!4 &693977681
 Transform:
   m_ObjectHideFlags: 0
@@ -376,23 +376,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenuScene:
-    sceneAsset: {fileID: 0}
-    <Index>k__BackingField: 0
-    <Name>k__BackingField: 
+    sceneAsset: {fileID: 102900000, guid: 5a0b82cc1a7708e4ebdb0cbff766d59a, type: 3}
+    <Index>k__BackingField: 1
+    <Name>k__BackingField: MainMenu
   levels:
   - sceneAsset: {fileID: 102900000, guid: 3996ec38e3a0efb47a10f7622423425e, type: 3}
-    <Index>k__BackingField: 2
+    <Index>k__BackingField: 3
     <Name>k__BackingField: VerticalLevel
   - sceneAsset: {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
-    <Index>k__BackingField: 1
+    <Index>k__BackingField: 2
     <Name>k__BackingField: HorizontalLevel
   winScene:
     sceneAsset: {fileID: 102900000, guid: a49a3f1ff20734e429461b7e19d28c5e, type: 3}
-    <Index>k__BackingField: -1
+    <Index>k__BackingField: 4
     <Name>k__BackingField: WinMenu
   gameOverScene:
     sceneAsset: {fileID: 102900000, guid: 48b1f20207d71ab4d9f1c21b35119a78, type: 3}
-    <Index>k__BackingField: -1
+    <Index>k__BackingField: 5
     <Name>k__BackingField: GameOverMenu
 --- !u!114 &1094096141
 MonoBehaviour:

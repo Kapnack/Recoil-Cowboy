@@ -9,7 +9,7 @@ namespace Systems
     {
         private ICentralizeEventSystem _eventSystem;
 
-        [SerializeField] private InputActionReference _attack;
+        [SerializeField] private InputActionReference attack;
 
         private readonly SimpleEvent _attackEvent = new();
 
@@ -25,12 +25,12 @@ namespace Systems
 
         private void OnEnable()
         {
-            _attack.action.started += HandleAttack;
+            attack.action.started += HandleAttack;
         }
 
         private void OnDisable()
         {
-            _attack.action.started -= HandleAttack;
+            attack.action.started -= HandleAttack;
         }
 
         private void HandleAttack(InputAction.CallbackContext _)

@@ -1,41 +1,45 @@
-using System.Collections;
+using Characters.PlayerSRC;
 using Systems;
 using Systems.CentralizeEventSystem;
 using Systems.TagClassGenerator;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
 public class WinCondition : MonoBehaviour
 {
     [SerializeField] private float timeToWait = 2.0f;
     private float _timeUntilWin;
     private bool _isPlayerInside;
+    private bool _eventCalled;
 
     private readonly SimpleEvent _event = new();
 
     private void Awake()
     {
-        StartCoroutine(StartUpEvent());
+        var boxCollider = GetComponent<BoxCollider>();
+
+        boxCollider.isTrigger = true;
+
+        if (ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem))
+            eventSystem.Register(PlayerEventKeys.Wins, _event);
     }
 
-    private IEnumerator StartUpEvent()
+    private void OnDestroy()
     {
-        ICentralizeEventSystem eventSystem;
-        while(!ServiceProvider.TryGetService(out eventSystem))
-            yield return null;
-        
-        eventSystem.Register(GameplayManagerKeys.WinCondition, _event);
+        if (ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem))
+            eventSystem.Unregister(PlayerEventKeys.Wins);
     }
-    
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (!collision.transform.CompareTag(Tags.Player))
+        if (!other.transform.CompareTag(Tags.Player))
             return;
 
         _isPlayerInside = true;
         _timeUntilWin = Time.time + timeToWait;
     }
 
-    private void OnCollisionStay()
+    private void OnTriggerStay(Collider other)
     {
         if (!_isPlayerInside)
             return;
@@ -43,12 +47,16 @@ public class WinCondition : MonoBehaviour
         if (Time.time < _timeUntilWin)
             return;
 
-        _event?.Invoke();
+        if (!_eventCalled)
+        {
+            _event?.Invoke();
+            _eventCalled = true;
+        }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.transform.CompareTag(Tags.Player))
+        if (other.transform.CompareTag(Tags.Player))
             _isPlayerInside = false;
     }
 }
