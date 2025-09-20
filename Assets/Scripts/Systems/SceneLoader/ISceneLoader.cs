@@ -25,20 +25,20 @@ namespace Systems.SceneLoader
         /// <summary>
         /// Unloads all active scene saved in the list inside the class.
         /// </summary>
-        public void UnloadAll();
+        public Task UnloadAll();
 
         /// <summary>
         /// Unloads all active scene saved in the list inside the class.
         /// Except the one you declare as exceptions
         /// </summary>
         /// <param name="exception"></param>
-        public void UnloadAll(SceneRef exception = null);
+        public Task UnloadAll(SceneRef exception = null);
 
         /// <summary>
         /// Unloads all active scene saved in the list inside the class.
         /// Except the ones you declare as exceptions
         /// </summary>
         /// <param name="exeptions"></param>
-        public void UnloadAll(SceneRef[] exceptions = null);
+        public Task UnloadAll(SceneRef[] exceptions = null);
     }
 }

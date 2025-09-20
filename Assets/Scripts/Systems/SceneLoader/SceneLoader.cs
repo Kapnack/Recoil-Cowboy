@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +14,8 @@ namespace Systems.SceneLoader
         [SerializeField] private SceneRef exclude;
 #endif
 
-        private readonly List<Scene> activeScenes = new();
+        private readonly List<Scene> _activeScenes = new();
+        private readonly List<SceneRef> _loadingScenes = new();
 
 #if UNITY_EDITOR
         private IEnumerator Start()
@@ -24,56 +27,54 @@ namespace Systems.SceneLoader
         }
 #endif
 
-        private IEnumerator LoadSceneCoroutine(SceneRef sceneRef, LoadSceneMode mode)
+        private async Task StartLoading(SceneRef sceneRef, LoadSceneMode mode)
         {
-            var asyncOp = SceneManager.LoadSceneAsync(sceneRef.Index, mode);
-
-            while (!asyncOp.isDone)
-                yield return null;
-        
-            var loadedScene = SceneManager.GetSceneByBuildIndex(sceneRef.Index);
-
-            if (loadedScene.IsValid() && loadedScene.isLoaded)
+            try
             {
-                activeScenes.Add(loadedScene);
+                _loadingScenes.Add(sceneRef);
+
+                await SceneManager.LoadSceneAsync(sceneRef.Index, mode);
+
+                _loadingScenes.Remove(sceneRef);
+
+                var loadedScene = SceneManager.GetSceneByBuildIndex(sceneRef.Index);
+
+                if (loadedScene.IsValid() && loadedScene.isLoaded)
+                    _activeScenes.Add(loadedScene);
+                else
+                    throw new Exception($"The Scene with name {sceneRef.Name} didn't load correctly.");
             }
-            else
+            catch (Exception e)
             {
-                Debug.LogWarning($"The Scene with name {sceneRef.Name} didn't load correctly.");
+                if (_loadingScenes.Remove(sceneRef))
+                    Debug.LogError($"{sceneRef.Name} {{{sceneRef.Index}}}: is not on the loading list");
+
+                Debug.LogException(e);
             }
         }
 
         /// <inheritdoc/>
-        private static IEnumerator UnLoadSceneCoroutine(Scene activeScenes)
+        private async Task StartUnloading(Scene activeScenes)
         {
-            var asyncOp = SceneManager.UnloadSceneAsync(activeScenes);
-
-            while (asyncOp != null && !asyncOp.isDone)
-                yield return null;
+            await SceneManager.UnloadSceneAsync(activeScenes);
         }
 
         /// <inheritdoc/>
         public void LoadScene(SceneRef sceneRef, LoadSceneMode mode = LoadSceneMode.Additive)
         {
             if (sceneRef == null)
-            {
-                Debug.LogWarning("No SceneRef assigned");
-                return;
-            }
+                throw new Exception("No SceneRef assigned");
 
             if (IsSceneLoaded(sceneRef))
-            {
-                Debug.LogWarning($"Scene is already loaded.");
-                return;
-            }
+                throw new Exception($"Scene is already loaded.");
+
+            if (IsSceneLoading(sceneRef))
+                throw new Exception($"Scene is already loading.");
 
             if (sceneRef.Index < 0)
-            {
-                Debug.LogWarning($"Not Valid SceneRef. Cause SceneIndex: {sceneRef.Index} is < 0");
-                return;
-            }
+                throw new Exception($"Not Valid SceneRef. Cause SceneIndex: {sceneRef.Index} is < 0");
 
-            StartCoroutine(LoadSceneCoroutine(sceneRef, mode));
+            await StartLoading(sceneRef, mode);
         }
 
         /// <inheritdoc/>
@@ -84,52 +85,48 @@ namespace Systems.SceneLoader
         }
 
         /// <inheritdoc/>
-        public void UnloadAll()
+        public async Task UnloadAll()
         {
-            for (var i = activeScenes.Count - 1; i >= 0; i--)
+            for (var i = _activeScenes.Count - 1; i >= 0; i--)
             {
-                var scene = activeScenes[i];
-            
-                StartCoroutine(UnLoadSceneCoroutine(scene));
-                activeScenes.RemoveAt(i);
+                var scene = _activeScenes[i];
+
+                _activeScenes.RemoveAt(i);
+                await StartUnloading(scene);
             }
         }
 
         /// <inheritdoc/>
-        public void UnloadAll(SceneRef exception)
+        public async Task UnloadAll(SceneRef exception)
         {
-            for (var i = activeScenes.Count - 1; i >= 0; i--)
+            for (var i = _activeScenes.Count - 1; i >= 0; i--)
             {
-                if (activeScenes[i].buildIndex == exception.Index)
+                if (_activeScenes[i].buildIndex == exception.Index)
                     continue;
 
-                StartCoroutine(UnLoadSceneCoroutine(activeScenes[i]));
-                activeScenes.RemoveAt(i);
+                await StartUnloading(_activeScenes[i]);
+                _activeScenes.RemoveAt(i);
             }
         }
 
         /// <inheritdoc/>
-        public void UnloadAll(SceneRef[] exeptions)
+        public async Task UnloadAll(SceneRef[] exeptions)
         {
-            for (var i = activeScenes.Count - 1; i >= 0; i--)
+            for (var i = _activeScenes.Count - 1; i >= 0; i--)
             {
-                if (!IsSceneInRefArray(activeScenes[i].buildIndex, exeptions))
+                if (IsSceneInExceptionArray(_activeScenes[i].buildIndex, exeptions))
                     continue;
 
-                StartCoroutine(UnLoadSceneCoroutine(activeScenes[i]));
-                activeScenes.RemoveAt(i);
+                await StartUnloading(_activeScenes[i]);
+                _activeScenes.RemoveAt(i);
             }
         }
 
-        private bool IsSceneInRefArray(int index, SceneRef[] sceneRefs)
-        {
-            return sceneRefs.Any(t => index == t.Index);
-        }
+        private bool IsSceneInExceptionArray(int index, SceneRef[] sceneRefs) => sceneRefs.Any(t => index == t.Index);
 
-        public bool IsSceneLoaded(SceneRef sceneRef)
-        {
-            return activeScenes.Any(t => t.buildIndex == sceneRef.Index);
-        }
+        public bool IsSceneLoaded(SceneRef sceneRef) => _activeScenes.Any(t => t.buildIndex == sceneRef.Index);
+
+        private bool IsSceneLoading(SceneRef sceneRef) => _loadingScenes.Any(t => t.Index == sceneRef.Index);
 
 #if UNITY_EDITOR
         private void CheckAndAddActiveScenesInEditor()
@@ -138,12 +135,16 @@ namespace Systems.SceneLoader
             {
                 var scene = SceneManager.GetSceneAt(i);
 
-                if (scene.buildIndex > exclude.Index)
+                if (scene.buildIndex > exclude.Index && !IsSceneLoaded(scene) && !IsSceneLoading(scene))
                 {
-                    activeScenes.Add(scene);
+                    _activeScenes.Add(scene);
                 }
             }
         }
+
+        private bool IsSceneLoaded(Scene scene) => _activeScenes.Any(t => t.buildIndex == scene.buildIndex);
+        
+        private bool IsSceneLoading(Scene scene) => _loadingScenes.Any(t => t.Index == scene.buildIndex);
 #endif
     }
 }
