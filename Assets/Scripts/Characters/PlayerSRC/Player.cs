@@ -112,7 +112,7 @@ namespace Characters.PlayerSRC
             while (!eventSystem.TryGet(PlayerEventKeys.Reload, out simpleEvent))
                 yield return null;
 
-            simpleEvent.AddListener(AddAmmo);
+            simpleEvent.AddListener(AddBullet);
         }
 
         private void OnDisable()
@@ -180,8 +180,6 @@ namespace Characters.PlayerSRC
 
         public void InstantDead() => CurrentLives = 0;
 
-        public void AddAmmo() => CurrentBullets++;
-
-        public void AddAmmo() => CurrentBullets++;
+        private void AddBullet() => CurrentBullets++;
     }
 }
