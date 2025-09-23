@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4759285344221863295}
   - component: {fileID: 1215337006983922858}
   m_Layer: 0
-  m_Name: Horizontal Level Layout
+  m_Name: Horizontal_Level_Layout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
