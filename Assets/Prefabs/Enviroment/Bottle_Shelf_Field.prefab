@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1941153350485412982
 Transform:
@@ -47,7 +47,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2412077028694916781
 Transform:
@@ -85,7 +85,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &98433209453551240
 Transform:
@@ -121,7 +121,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5616752875351735945
 Transform:
@@ -159,7 +159,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5635203251168262441
 Transform:
@@ -231,6 +231,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_4 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 73a75d99bb51a4c42a8ed782b4fa8251, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -292,6 +296,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3d3861b2a42170c4cb0d553142b0b1b3, type: 3}
       propertyPath: m_Name
       value: Whisky_2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3d3861b2a42170c4cb0d553142b0b1b3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -355,6 +363,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 753805984594a87459bdbd8cdc813042, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -416,6 +428,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 73a75d99bb51a4c42a8ed782b4fa8251, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 73a75d99bb51a4c42a8ed782b4fa8251, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -479,6 +495,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 753805984594a87459bdbd8cdc813042, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -540,6 +560,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 73a75d99bb51a4c42a8ed782b4fa8251, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 73a75d99bb51a4c42a8ed782b4fa8251, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -603,6 +627,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 753805984594a87459bdbd8cdc813042, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -664,6 +692,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 73a75d99bb51a4c42a8ed782b4fa8251, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 73a75d99bb51a4c42a8ed782b4fa8251, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -727,6 +759,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_4 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 73a75d99bb51a4c42a8ed782b4fa8251, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -789,6 +825,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3d3861b2a42170c4cb0d553142b0b1b3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -847,9 +887,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8056817917324986991, guid: b1246ed92fd514b43a1ddf09b3bd5b2f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -7072167641717422946, guid: b1246ed92fd514b43a1ddf09b3bd5b2f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -6010028171448785905, guid: b1246ed92fd514b43a1ddf09b3bd5b2f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -4791061893230386206, guid: b1246ed92fd514b43a1ddf09b3bd5b2f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -2981451829997229230, guid: b1246ed92fd514b43a1ddf09b3bd5b2f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -540358131517578259, guid: b1246ed92fd514b43a1ddf09b3bd5b2f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -447174402076232346, guid: b1246ed92fd514b43a1ddf09b3bd5b2f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b1246ed92fd514b43a1ddf09b3bd5b2f, type: 3}
       propertyPath: m_Name
       value: Bottle_Shelf
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b1246ed92fd514b43a1ddf09b3bd5b2f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119259251115033563, guid: b1246ed92fd514b43a1ddf09b3bd5b2f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -913,6 +989,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 753805984594a87459bdbd8cdc813042, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -974,6 +1054,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 753805984594a87459bdbd8cdc813042, type: 3}
       propertyPath: m_Name
       value: Whisky_3 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 753805984594a87459bdbd8cdc813042, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1037,6 +1121,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_4 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 73a75d99bb51a4c42a8ed782b4fa8251, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1098,6 +1186,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3d3861b2a42170c4cb0d553142b0b1b3, type: 3}
       propertyPath: m_Name
       value: Whisky_2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3d3861b2a42170c4cb0d553142b0b1b3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1161,6 +1253,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 753805984594a87459bdbd8cdc813042, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1222,6 +1318,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3d3861b2a42170c4cb0d553142b0b1b3, type: 3}
       propertyPath: m_Name
       value: Whisky_2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3d3861b2a42170c4cb0d553142b0b1b3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1285,6 +1385,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 753805984594a87459bdbd8cdc813042, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1347,6 +1451,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_4
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 73a75d99bb51a4c42a8ed782b4fa8251, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1408,6 +1516,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3d3861b2a42170c4cb0d553142b0b1b3, type: 3}
       propertyPath: m_Name
       value: Whisky_2 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3d3861b2a42170c4cb0d553142b0b1b3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
