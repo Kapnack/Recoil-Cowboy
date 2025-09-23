@@ -24,7 +24,7 @@ namespace Systems
             }
 
             _eventSystem.Register(PlayerEventKeys.Attack, _attackEvent);
-            _eventSystem.Register(PlayerEventKeys.Reload, _reloadEvent);
+            _eventSystem.Register(PlayerEventKeys.ReloadOvertime, _reloadEvent);
         }
 
         private void OnEnable()
