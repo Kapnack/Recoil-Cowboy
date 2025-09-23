@@ -14,9 +14,12 @@ namespace Characters.PlayerSRC
 
         [ContextMenuItem("Instant Kill", nameof(InstantDead))]
         private int _currentLives;
+
         private bool _isDead;
 
         private int _currentBullets;
+
+        private Coroutine _reloadingCoroutine;
 
         private IMousePositionTracker _mouseTracker;
 
@@ -108,6 +111,11 @@ namespace Characters.PlayerSRC
             eventSystem.TryGet(PlayerEventKeys.Attack, out var simpleEvent);
 
             simpleEvent.AddListener(OnAttack);
+            simpleEvent.AddListener(CancelReloadOverTime);
+
+            eventSystem.TryGet(PlayerEventKeys.ReloadOvertime, out simpleEvent);
+
+            simpleEvent.AddListener(AddBulletsOverTime);
 
             while (!eventSystem.TryGet(PlayerEventKeys.Reload, out simpleEvent))
                 yield return null;
@@ -130,8 +138,10 @@ namespace Characters.PlayerSRC
             eventSystem?.Unregister(PlayerEventKeys.Dies);
 
             eventSystem?.Get(PlayerEventKeys.Attack).RemoveListener(OnAttack);
+
+            eventSystem?.Get(PlayerEventKeys.ReloadOvertime).RemoveListener(AddBulletsOverTime);
         }
-        
+
         private void OnAttack()
         {
             if (CurrentBullets == 0)
@@ -181,5 +191,28 @@ namespace Characters.PlayerSRC
         public void InstantDead() => CurrentLives = 0;
 
         private void AddBullet() => CurrentBullets++;
+
+        private void AddBulletsOverTime() => _reloadingCoroutine ??= StartCoroutine(ReloadingOverTime());
+
+        private IEnumerator ReloadingOverTime()
+        {
+            while (_currentBullets < _config.MaxBullets)
+            {
+                yield return new WaitForSeconds(1);
+
+                ++CurrentBullets;
+            }
+            
+            _reloadingCoroutine = null;
+        }
+
+        private void CancelReloadOverTime()
+        {
+            if (_reloadingCoroutine == null)
+                return;
+            
+            StopCoroutine(_reloadingCoroutine);
+            _reloadingCoroutine = null;
+        }
     }
 }
