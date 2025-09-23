@@ -19,6 +19,8 @@ namespace Characters.PlayerSRC
 
         private int _currentBullets;
 
+        private bool _instantReload;
+
         private Coroutine _reloadingCoroutine;
 
         private IMousePositionTracker _mouseTracker;
@@ -117,6 +119,10 @@ namespace Characters.PlayerSRC
 
             simpleEvent.AddListener(AddBulletsOverTime);
 
+            eventSystem.TryGet(PlayerEventKeys.InstantReload, out simpleEvent);
+
+            simpleEvent.AddListener(ChangeInstantReloadMode);
+
             while (!eventSystem.TryGet(PlayerEventKeys.Reload, out simpleEvent))
                 yield return null;
 
@@ -140,6 +146,7 @@ namespace Characters.PlayerSRC
             eventSystem?.Get(PlayerEventKeys.Attack).RemoveListener(OnAttack);
 
             eventSystem?.Get(PlayerEventKeys.ReloadOvertime).RemoveListener(AddBulletsOverTime);
+            eventSystem?.Get(PlayerEventKeys.InstantReload).RemoveListener(ChangeInstantReloadMode);
         }
 
         private void OnAttack()
@@ -190,7 +197,14 @@ namespace Characters.PlayerSRC
 
         public void InstantDead() => CurrentLives = 0;
 
-        private void AddBullet() => CurrentBullets++;
+        private void AddBullet()
+        {
+            if (_instantReload)
+                CurrentBullets = _config.MaxBullets;
+            else
+                ++CurrentBullets;
+        }
+
 
         private void AddBulletsOverTime() => _reloadingCoroutine ??= StartCoroutine(ReloadingOverTime());
 
@@ -202,7 +216,7 @@ namespace Characters.PlayerSRC
 
                 ++CurrentBullets;
             }
-            
+
             _reloadingCoroutine = null;
         }
 
@@ -210,9 +224,11 @@ namespace Characters.PlayerSRC
         {
             if (_reloadingCoroutine == null)
                 return;
-            
+
             StopCoroutine(_reloadingCoroutine);
             _reloadingCoroutine = null;
         }
+
+        private void ChangeInstantReloadMode() => _instantReload = !_instantReload;
     }
 }
