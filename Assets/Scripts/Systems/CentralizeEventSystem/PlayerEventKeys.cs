@@ -8,5 +8,6 @@
         public const string Dies = "DIES";
         public const string Wins = "WINS";
         public const string Reload =  "RELOAD";
+        public const string ReloadOvertime =  "RELOAD_OVERTIME";
     }
 }
