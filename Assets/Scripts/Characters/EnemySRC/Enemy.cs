@@ -8,6 +8,7 @@ namespace Characters.EnemySRC
         public virtual void ReceiveDamage()
         {
             //TODO: Deactivate the Enemy to be reused by the Pool.
+            Destroy(gameObject);
         }
     }
 }
