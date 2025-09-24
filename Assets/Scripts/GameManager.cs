@@ -18,6 +18,20 @@ public class GameManager : MonoBehaviour
 
     private int _currentLevel;
 
+    private int CurrentLevel
+    {
+        get => _currentLevel;
+        set
+        {
+            var newValue = value;
+
+            if (newValue > levels.Count - 1)
+                newValue = 0;
+
+            _currentLevel = newValue;
+        }
+    }
+
     private Camera _mainCamera;
 
     private void Awake()
@@ -53,7 +67,7 @@ public class GameManager : MonoBehaviour
             SceneManager.MoveGameObjectToScene(_mainCamera.gameObject, gameObject.scene);
 
             await _sceneLoader.UnloadAll();
-            await _sceneLoader.LoadSceneAsync(levels[_currentLevel]);
+            await _sceneLoader.LoadSceneAsync(levels[CurrentLevel]);
 
             FindGameplayEvents();
         }
@@ -69,10 +83,10 @@ public class GameManager : MonoBehaviour
         {
             _mainCamera.transform.SetParent(null);
             SceneManager.MoveGameObjectToScene(_mainCamera.gameObject, gameObject.scene);
-            
+
             await _sceneLoader.UnloadAll();
             await _sceneLoader.LoadSceneAsync(winScene);
-            
+
             FindAfterMatchMenuEvents();
         }
         catch (Exception e)
@@ -87,7 +101,7 @@ public class GameManager : MonoBehaviour
         {
             _mainCamera.transform.SetParent(null);
             SceneManager.MoveGameObjectToScene(_mainCamera.gameObject, gameObject.scene);
-            
+
             await _sceneLoader.UnloadAll();
             await _sceneLoader.LoadSceneAsync(gameOverScene);
 
@@ -99,8 +113,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void LevelCleared() => ++_currentLevel;
-    
+    private void LevelCleared() => ++CurrentLevel;
+
     private void FindGameplayEvents()
     {
         ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
