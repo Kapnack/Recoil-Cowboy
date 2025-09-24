@@ -26,15 +26,18 @@ namespace Menus
                 eventSystem.Unregister(GameManagerKeys.MainMenu);
             }
         }
-        
-        public void OnNextLevel()
-        {
-            _loadNextLevelEvent?.Invoke();
-        }
 
-        public void OnMainMenu()
+        public void OnNextLevel() => _loadNextLevelEvent?.Invoke();
+
+        public void OnMainMenu() => _loadMainMenu?.Invoke();
+
+        public void OnExitGame()
         {
-            _loadMainMenu?.Invoke();
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
         }
     }
 }
