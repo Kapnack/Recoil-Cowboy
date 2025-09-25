@@ -13,8 +13,6 @@ namespace Characters.PlayerSRC
     {
         [SerializeField] private PlayerConfig _config;
 
-        [SerializeField] private AnimationCurve knockbackCurve = AnimationCurve.Linear(0, 0, 1, 1);
-
         [ContextMenuItem("Instant Kill", nameof(InstantDead))]
         private int _currentLives;
 

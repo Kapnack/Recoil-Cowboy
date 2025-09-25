@@ -1,7 +1,6 @@
 using ScriptableObjects;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class VariableEditor : MonoBehaviour
@@ -14,10 +13,20 @@ public class VariableEditor : MonoBehaviour
     [SerializeField] private TMP_Text maxAmmo;
     private string _maxAmmoFormat;
     
-    [Header("Max Ammo")] 
+    [Header("Max Lives")] 
     [SerializeField] private Slider maxLivesSlider;
     [SerializeField] private TMP_Text maxLives;
     private string _maxLivesFormat;
+    
+    [Header("Knockback")] 
+    [SerializeField] private Slider knockbackSlider;
+    [SerializeField] private TMP_Text knockback;
+    private string _knockbackFormat;
+    
+    [Header("Knockback Distance Modifier")] 
+    [SerializeField] private Slider modifierSlider;
+    [SerializeField] private TMP_Text modifier;
+    private string _modifierFormat;
 
     private void Awake()
     {
@@ -25,11 +34,39 @@ public class VariableEditor : MonoBehaviour
         maxAmmo.text = string.Format(_maxAmmoFormat, playerConfig.MaxBullets);
         
         maxAmmoSlider.onValueChanged.AddListener(ModifyAmmo);
+        
         //--------------------------------------------------------------------------------
+        
         _maxLivesFormat = maxLives.text;
         maxLives.text = string.Format(_maxLivesFormat, playerConfig.MaxBullets);
         
         maxLivesSlider.onValueChanged.AddListener(ModifyLives);
+        
+        //--------------------------------------------------------------------------------
+        
+        _knockbackFormat = knockback.text;
+        knockback.text = string.Format(_knockbackFormat, playerConfig.KnockBack);
+        
+        knockbackSlider.onValueChanged.AddListener(ModifyKnockBack);
+        
+        //--------------------------------------------------------------------------------
+        
+        _modifierFormat = modifier.text;
+        modifier.text = string.Format(_modifierFormat, playerConfig.MaxDistance);
+        
+        modifierSlider.onValueChanged.AddListener(ModifyModifier);
+    }
+
+    private void ModifyModifier(float value)
+    {
+        playerConfig.MaxDistance = value;
+        modifier.text = string.Format(_modifierFormat, playerConfig.MaxDistance);
+    }
+
+    private void ModifyKnockBack(float value)
+    {
+       playerConfig.KnockBack = value;
+       knockback.text = string.Format(_knockbackFormat, playerConfig.KnockBack);
     }
 
     private void ModifyAmmo(float value)
