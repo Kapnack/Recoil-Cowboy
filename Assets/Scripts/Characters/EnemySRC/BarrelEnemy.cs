@@ -38,7 +38,7 @@ namespace Characters.EnemySRC
         {
             var raycastHits = Physics.SphereCastAll(transform.position + transform.right * barrelConfig.FireOffset,
                 barrelConfig.AttackRadius,
-                transform.right, barrelConfig.AttackRadius);
+                transform.right, barrelConfig.RaycastDistance);
 
             foreach (var obj in raycastHits)
             {
@@ -89,6 +89,12 @@ namespace Characters.EnemySRC
             _coldDownTimer = barrelConfig.ColdDown + Time.time;
         }
 
+        public override void ReceiveDamage()
+        {
+            if (!Hidden)
+                base.ReceiveDamage();
+        }
+        
         private void OnDrawGizmos()
         {
             if (!barrelConfig)
@@ -114,12 +120,6 @@ namespace Characters.EnemySRC
 
             // Direction line
             Gizmos.DrawLine(origin, end);
-        }
-
-        public override void ReceiveDamage()
-        {
-            if (!Hidden)
-                base.ReceiveDamage();
         }
     }
 }

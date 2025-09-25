@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using MouseTracker;
 using ScriptableObjects;
@@ -11,6 +12,8 @@ namespace Characters.PlayerSRC
     public class Player : Character, IPlayerHealthSystem
     {
         [SerializeField] private PlayerConfig _config;
+
+        [SerializeField] private AnimationCurve knockbackCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
         [ContextMenuItem("Instant Kill", nameof(InstantDead))]
         private int _currentLives;
@@ -155,11 +158,12 @@ namespace Characters.PlayerSRC
                 return;
 
             var dir = _mouseTracker.GetMouseDir(transform);
+            var mousePos = _mouseTracker.GetMouseWorldPos();
 
             if (dir.sqrMagnitude < Mathf.Epsilon * Mathf.Epsilon)
                 return;
 
-            ApplyKnockBack(dir);
+            ApplyKnockBack(dir, mousePos);
 
             --CurrentBullets;
 
@@ -170,10 +174,17 @@ namespace Characters.PlayerSRC
             }
         }
 
-        private void ApplyKnockBack(Vector3 dir)
+        private void ApplyKnockBack(Vector3 dir, Vector3 mousePos)
         {
             _rb.linearVelocity = Vector3.zero;
-            _rb.AddForce(dir * -_config.KnockBack, ForceMode.Impulse);
+
+            var distance = (mousePos - transform.position).magnitude;
+
+            distance = Mathf.Clamp01(distance / _config.MaxDistance);
+
+            distance = Mathf.Pow(distance, 0.5f);
+            
+            _rb.AddForce(dir * (-_config.KnockBack * distance), ForceMode.Impulse);
         }
 
         public void ReceiveDamage()
@@ -230,5 +241,11 @@ namespace Characters.PlayerSRC
         }
 
         private void ChangeInstantReloadMode() => _instantReload = !_instantReload;
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, _config.MaxDistance);
+        }
     }
 }

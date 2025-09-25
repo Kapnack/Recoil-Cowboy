@@ -6,5 +6,6 @@ namespace MouseTracker
     {
         public Vector3 GetMouseDir(Transform transform);
         public Vector2 GetMouseScreenPos();
+        public Vector3 GetMouseWorldPos();
     }
 }

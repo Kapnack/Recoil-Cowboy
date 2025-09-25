@@ -43,5 +43,6 @@ namespace MouseTracker
         }
 
         public Vector2 GetMouseScreenPos() => _mouseScreenPos;
+        public Vector3 GetMouseWorldPos() => _mouseWorldPos;
     }
 }
