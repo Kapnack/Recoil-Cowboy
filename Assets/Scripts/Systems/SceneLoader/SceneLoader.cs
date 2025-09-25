@@ -1,26 +1,46 @@
 using System;
-using System.Collections;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Systems.SceneLoader
 {
-    public class SceneLoader : MonoBehaviour, ISceneLoader
+    public class SceneLoader : MonoBehaviour, ISceneLoader, ILoadingData
     {
 #if UNITY_EDITOR
         [SerializeField] private SceneRef exclude;
 #endif
 
+        private struct SceneLoadingInfo : IEquatable<SceneLoadingInfo>
+        {
+            public SceneRef SceneRef;
+            public AsyncOperation Operation;
+
+            public bool Equals(SceneLoadingInfo other)
+            {
+                return Equals(SceneRef, other.SceneRef) && Equals(Operation, other.Operation);
+            }
+
+            public override bool Equals(object obj)
+            {
+                return obj is SceneLoadingInfo other && Equals(other);
+            }
+
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(SceneRef, Operation);
+            }
+        }
+
         private readonly List<Scene> _activeScenes = new();
-        private readonly List<SceneRef> _loadingScenes = new();
+        private readonly List<SceneLoadingInfo> _loadingScenes = new();
 
 #if UNITY_EDITOR
         private void Awake()
         {
+            ServiceProvider.SetService<ILoadingData>(this);
             CheckAndAddActiveScenesInEditor();
         }
 #endif
@@ -28,13 +48,16 @@ namespace Systems.SceneLoader
 
         private async Task StartLoading(SceneRef sceneRef, LoadSceneMode mode)
         {
+            var loadingInfo = new SceneLoadingInfo();
+
             try
             {
-                _loadingScenes.Add(sceneRef);
+                loadingInfo.SceneRef = sceneRef;
+                loadingInfo.Operation = SceneManager.LoadSceneAsync(sceneRef.Index, mode);
 
-                await SceneManager.LoadSceneAsync(sceneRef.Index, mode);
+                _loadingScenes.Add(loadingInfo);
 
-                _loadingScenes.Remove(sceneRef);
+                await loadingInfo.Operation;
 
                 var loadedScene = SceneManager.GetSceneByBuildIndex(sceneRef.Index);
 
@@ -45,14 +68,13 @@ namespace Systems.SceneLoader
             }
             catch (Exception e)
             {
-                if (_loadingScenes.Remove(sceneRef))
+                if (_loadingScenes.Remove(loadingInfo))
                     Debug.LogError($"{sceneRef.Name} {{{sceneRef.Index}}}: is not on the loading list");
 
                 Debug.LogException(e);
             }
         }
 
-        /// <inheritdoc/>
         private async Task StartUnloading(Scene activeScenes)
         {
             await SceneManager.UnloadSceneAsync(activeScenes);
@@ -62,16 +84,30 @@ namespace Systems.SceneLoader
         public async Task LoadSceneAsync(SceneRef sceneRef, LoadSceneMode mode = LoadSceneMode.Additive)
         {
             if (sceneRef == null)
-                throw new Exception("No SceneRef assigned");
-
-            if (IsSceneLoaded(sceneRef))
-                throw new Exception($"Scene: {sceneRef.Name} is already loaded.");
-
-            if (IsSceneLoading(sceneRef))
-                throw new Exception($"Scene: {sceneRef.Name} is already loading.");
+            {
+                Debug.LogWarning("No SceneRef assigned");
+                return;
+            }
 
             if (sceneRef.Index < 0)
-                throw new Exception($"Not Valid SceneRef. Cause SceneIndex: {sceneRef.Name} is < 0");
+            {
+                Debug.LogWarning($"Not Valid SceneRef. Cause SceneIndex: {sceneRef.Name} is < 0");
+                return;
+                
+            }
+
+            if (IsSceneLoaded(sceneRef))
+            {
+                Debug.LogWarning($"Scene: {sceneRef.Name} is already loaded.");
+                return;
+                
+            }
+
+            if (IsSceneLoading(sceneRef))
+            {
+                Debug.LogWarning($"Scene: {sceneRef.Name} is already loading.");
+                return;
+            }
 
             await StartLoading(sceneRef, mode);
         }
@@ -79,8 +115,21 @@ namespace Systems.SceneLoader
         /// <inheritdoc/>
         public async Task LoadSceneAsync(SceneRef[] sceneRef)
         {
+            List<Task> activeScenesTask = new();
+
             foreach (var t in sceneRef)
-                await LoadSceneAsync(t);
+                activeScenesTask.Add(LoadSceneAsync(t));
+
+            await Task.WhenAll(activeScenesTask);
+            
+            _loadingScenes.Clear();
+        }
+
+        public float GetCurrentLoadingProgress()
+        {
+            var progress = _loadingScenes.Sum(t => t.Operation.progress);
+
+            return _loadingScenes.Count > 0 ? progress / _loadingScenes.Count : -1f;
         }
 
         /// <inheritdoc/>
@@ -108,7 +157,6 @@ namespace Systems.SceneLoader
             }
         }
 
-        /// <inheritdoc/>
         public async Task UnloadAll(SceneRef[] exeptions)
         {
             for (var i = _activeScenes.Count - 1; i >= 0; i--)
@@ -125,7 +173,7 @@ namespace Systems.SceneLoader
 
         public bool IsSceneLoaded(SceneRef sceneRef) => _activeScenes.Any(t => t.buildIndex == sceneRef.Index);
 
-        private bool IsSceneLoading(SceneRef sceneRef) => _loadingScenes.Any(t => t.Index == sceneRef.Index);
+        private bool IsSceneLoading(SceneRef sceneRef) => _loadingScenes.Any(t => t.SceneRef.Index == sceneRef.Index);
 
 #if UNITY_EDITOR
         private void CheckAndAddActiveScenesInEditor()
@@ -142,8 +190,8 @@ namespace Systems.SceneLoader
         }
 
         private bool IsSceneLoaded(Scene scene) => _activeScenes.Any(t => t.buildIndex == scene.buildIndex);
-        
-        private bool IsSceneLoading(Scene scene) => _loadingScenes.Any(t => t.Index == scene.buildIndex);
+
+        private bool IsSceneLoading(Scene scene) => _loadingScenes.Any(t => t.SceneRef.Index == scene.buildIndex);
 #endif
     }
 }

@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Systems;
 using Systems.CentralizeEventSystem;
 using Systems.SceneLoader;
@@ -14,7 +16,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SceneRef winScene;
     [SerializeField] private SceneRef gameOverScene;
 
+    private SceneRef[] scenesToLoad = new SceneRef[2];
+
     private ISceneLoader _sceneLoader;
+
+    private SimpleEvent _loadingStarted = new();
+    private SimpleEvent _loadingEnded = new();
 
     private int _currentLevel;
 
@@ -38,36 +45,39 @@ public class GameManager : MonoBehaviour
     {
         _mainCamera = Camera.main;
         _sceneLoader = GetComponent<ISceneLoader>();
+
+        StartCoroutine(SetUpEvents());
+    }
+
+    private IEnumerator SetUpEvents()
+    {
+        ICentralizeEventSystem eventSystem;
+        while (!ServiceProvider.TryGetService(out eventSystem))
+            yield return null;
+
+        eventSystem.Register(GameManagerKeys.LoadingStarted, _loadingStarted);
+        eventSystem.Register(GameManagerKeys.LoadingEnded, _loadingEnded);
+
+        while (!_loadingStarted.HasInvocations())
+            yield return null;
+
         LoadMainMenu();
     }
 
     private async void LoadMainMenu()
     {
-        try
-        {
-            _mainCamera.transform.SetParent(null);
-            SceneManager.MoveGameObjectToScene(_mainCamera.gameObject, gameObject.scene);
-
-            await _sceneLoader.UnloadAll();
-            await _sceneLoader.LoadSceneAsync(mainMenuScene);
-
-            FindAfterMatchMenuEvents();
-        }
-        catch (Exception e)
-        {
-            Debug.LogException(e);
-        }
+        scenesToLoad[0] = mainMenuScene;
+        await TryLoadScenes(scenesToLoad);
+        
+        FindAfterMatchMenuEvents();
     }
 
     private async void LoadCurrentLevel()
     {
         try
         {
-            _mainCamera.transform.SetParent(null);
-            SceneManager.MoveGameObjectToScene(_mainCamera.gameObject, gameObject.scene);
-
-            await _sceneLoader.UnloadAll();
-            await _sceneLoader.LoadSceneAsync(levels[CurrentLevel]);
+            scenesToLoad[0] = levels[CurrentLevel];
+            await TryLoadScenes(scenesToLoad);
 
             FindGameplayEvents();
         }
@@ -81,12 +91,9 @@ public class GameManager : MonoBehaviour
     {
         try
         {
-            _mainCamera.transform.SetParent(null);
-            SceneManager.MoveGameObjectToScene(_mainCamera.gameObject, gameObject.scene);
-
-            await _sceneLoader.UnloadAll();
-            await _sceneLoader.LoadSceneAsync(winScene);
-
+            scenesToLoad[0] = winScene;
+            await TryLoadScenes(scenesToLoad);
+        
             FindAfterMatchMenuEvents();
         }
         catch (Exception e)
@@ -99,18 +106,35 @@ public class GameManager : MonoBehaviour
     {
         try
         {
-            _mainCamera.transform.SetParent(null);
-            SceneManager.MoveGameObjectToScene(_mainCamera.gameObject, gameObject.scene);
-
-            await _sceneLoader.UnloadAll();
-            await _sceneLoader.LoadSceneAsync(gameOverScene);
-
+            scenesToLoad[0] = gameOverScene;
+            await TryLoadScenes(scenesToLoad);
+        
             FindAfterMatchMenuEvents();
         }
         catch (Exception e)
         {
             Debug.LogException(e);
         }
+    }
+
+    private async Task TryLoadScenes(SceneRef[] sceneRefs)
+    {
+        _loadingStarted.Invoke();
+        
+        try
+        {
+            _mainCamera.transform.SetParent(null);
+            SceneManager.MoveGameObjectToScene(_mainCamera.gameObject, gameObject.scene);
+
+            await _sceneLoader.UnloadAll();
+            await _sceneLoader.LoadSceneAsync(sceneRefs);
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
+        
+        _loadingEnded.Invoke();
     }
 
     private void LevelCleared() => ++CurrentLevel;
