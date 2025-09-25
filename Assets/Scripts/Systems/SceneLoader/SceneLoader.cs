@@ -19,11 +19,8 @@ namespace Systems.SceneLoader
         private readonly List<SceneRef> _loadingScenes = new();
 
 #if UNITY_EDITOR
-        private IEnumerator Start()
+        private void Awake()
         {
-            if (SceneManager.sceneCount == 0)
-                yield return null;
-
             CheckAndAddActiveScenesInEditor();
         }
 #endif
