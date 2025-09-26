@@ -13,6 +13,8 @@ namespace Characters.EnemySRC
 
         private bool _alreadyRotated;
 
+        private float _jumpTimer;
+
         protected override void Awake()
         {
             base.Awake();
@@ -46,6 +48,12 @@ namespace Characters.EnemySRC
                     _rb.linearVelocity = transform.right * chickenConfig.MaxVelocity;
 
                 _alreadyRotated = false;
+            }
+
+            if (_jumpTimer < Time.time)
+            {
+                _rb.AddForce(Vector3.up * chickenConfig.JumpForce, ForceMode.Impulse);
+                _jumpTimer = Time.time + Random.Range(chickenConfig.JumpMinTimer, chickenConfig.JumpMaxTimer);
             }
         }
 

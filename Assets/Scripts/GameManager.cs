@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
 
     private ISceneLoader _sceneLoader;
 
+    private readonly SimpleEvent _loadingStarted = new();
+    private readonly SimpleEvent _loadingEnded = new();
+
     private int _currentLevel;
 
     private int CurrentLevel
