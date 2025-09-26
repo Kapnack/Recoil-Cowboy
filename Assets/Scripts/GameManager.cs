@@ -20,8 +20,8 @@ public class GameManager : MonoBehaviour
 
     private ISceneLoader _sceneLoader;
 
-    private SimpleEvent _loadingStarted = new();
-    private SimpleEvent _loadingEnded = new();
+    private readonly SimpleEvent _loadingStarted = new();
+    private readonly SimpleEvent _loadingEnded = new();
 
     private int _currentLevel;
 
