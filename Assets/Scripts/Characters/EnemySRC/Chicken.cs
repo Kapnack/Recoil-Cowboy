@@ -18,6 +18,7 @@ namespace Characters.EnemySRC
         protected override void Awake()
         {
             base.Awake();
+            SetJumpTimer();
         }
 
         private void FixedUpdate()
@@ -53,13 +54,15 @@ namespace Characters.EnemySRC
             if (_jumpTimer < Time.time)
             {
                 _rb.AddForce(Vector3.up * chickenConfig.JumpForce, ForceMode.Impulse);
-                _jumpTimer = Time.time + Random.Range(chickenConfig.JumpMinTimer, chickenConfig.JumpMaxTimer);
+                SetJumpTimer();
             }
         }
 
+        private void SetJumpTimer() => _jumpTimer = Time.time + Random.Range(chickenConfig.JumpMinTimer, chickenConfig.JumpMaxTimer);
+
         private void Rotate()
         {
-            _rb.linearVelocity = Vector3.zero;
+            _rb.linearVelocity = new Vector3(0.0f, _rb.linearVelocity.y, 0.0f);
 
             var currentRotation = transform.eulerAngles;
             currentRotation.y += 180.0f;
