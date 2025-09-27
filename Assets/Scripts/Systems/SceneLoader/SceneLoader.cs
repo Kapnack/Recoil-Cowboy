@@ -36,14 +36,14 @@ namespace Systems.SceneLoader
 
         private readonly List<Scene> _activeScenes = new();
         private readonly List<SceneLoadingInfo> _loadingScenes = new();
-
-#if UNITY_EDITOR
+        
         private void Awake()
         {
             ServiceProvider.SetService<ILoadingData>(this);
+#if UNITY_EDITOR
             CheckAndAddActiveScenesInEditor();
-        }
 #endif
+        }
 
 
         private async Task StartLoading(SceneRef sceneRef, LoadSceneMode mode)
