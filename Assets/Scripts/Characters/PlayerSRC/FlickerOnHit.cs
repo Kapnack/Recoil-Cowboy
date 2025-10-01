@@ -18,7 +18,7 @@ namespace Characters.PlayerSRC
 
         private void Start()
         {
-            _mat = GetComponent<Renderer>().material;
+            _mat = GetComponentInChildren<Renderer>().material;
             _originalColor = _mat.color;
 
             ServiceProvider.TryGetService<ICentralizeEventSystem>(out var eventSystem);
