@@ -8,10 +8,18 @@ namespace Characters.EnemySRC
     {
         private Character _owner;
         private Rigidbody _rb;
+        [SerializeField] private float secondsToExist = 5.0f;
+        private float _timeToDestroy = 0.0f;
 
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
+        }
+
+        private void Update()
+        {
+            if (Time.time > _timeToDestroy)
+                Destroy(gameObject);
         }
 
         public void Launch(Character owner, Vector3 spawnPosition, float speed)
@@ -20,11 +28,13 @@ namespace Characters.EnemySRC
             transform.position = spawnPosition;
 
             _rb.AddForce(transform.right * speed, ForceMode.Impulse);
+
+            _timeToDestroy = Time.time + secondsToExist;
         }
 
         private void OnCollisionEnter(Collision other)
         {
-            if (other.gameObject == _owner.gameObject)
+            if (_owner && other.gameObject == _owner.gameObject)
                 return;
 
             if (other.transform.TryGetComponent<IHealthSystem>(out var healthSystem))
