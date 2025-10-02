@@ -733,9 +733,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42838f0d7ee24a06a87c476598647edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  reload: {fileID: -6858186683866208725, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  activeInstantReload: {fileID: -2515804382306447574, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  gameplayActionMap: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  paused: {fileID: 1328202175435209442, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!4 &693977681
 Transform:
   m_ObjectHideFlags: 0

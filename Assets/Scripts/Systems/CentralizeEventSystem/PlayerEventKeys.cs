@@ -2,6 +2,7 @@
 {
     public abstract class PlayerEventKeys
     {
+        public const string Paused = "PAUSED";
         public const string Attack = "ATTACK";
         public const string LivesChange = "LIVES_CHANGE";
         public const string BulletsChange = "BULLETS_CHANGE";
