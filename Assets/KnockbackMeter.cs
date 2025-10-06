@@ -17,6 +17,9 @@ public class KnockbackMeter : MonoBehaviour
 
     [SerializeField] private Transform source;
 
+    [Header("Image")]
+    [SerializeField] private Image fillArea;
+    
     [Header("Settings")] [SerializeField] private PlayerConfig playerConfig;
 
     [Header("Options")] [SerializeField] [Range(0f, 100f)]
@@ -25,8 +28,8 @@ public class KnockbackMeter : MonoBehaviour
     private float _currentFill;
     private Vector3 _distance;
     private Color _targetColor;
+    private float _mapped;
 
-    [SerializeField] private Image fillArea;
 
     private void Awake()
     {
@@ -49,11 +52,11 @@ public class KnockbackMeter : MonoBehaviour
 
     private void Update()
     {
-        var distance = source.position - _mouseTracker.GetMouseWorldPos();
+        _distance = source.position - _mouseTracker.GetMouseWorldPos();
 
-        var mapped = Mathf.InverseLerp(0.0f, playerConfig.MaxDistance * playerConfig.MaxDistance, distance.sqrMagnitude);
-
-        _currentFill = smoothSpeed > 0f ? Mathf.Lerp(_currentFill, mapped, Time.deltaTime * smoothSpeed) : mapped;
+        _mapped = Mathf.InverseLerp(0.0f, playerConfig.MaxDistance * playerConfig.MaxDistance, _distance.sqrMagnitude);
+        
+        _currentFill = smoothSpeed > 0f ? Mathf.Lerp(_currentFill, _mapped, Time.deltaTime * smoothSpeed) : _mapped;
 
         if(Mathf.Approximately(_currentFill, 1.0f))
             _currentFill = 1.0f;
