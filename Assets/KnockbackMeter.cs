@@ -9,8 +9,7 @@ public class KnockbackMeter : MonoBehaviour
 {
     private Slider _slider;
 
-    [SerializeField]
-    private TMP_Text percentText;
+    [SerializeField] private TMP_Text percentText;
 
     private string _textFormat;
 
@@ -18,8 +17,7 @@ public class KnockbackMeter : MonoBehaviour
 
     [SerializeField] private Transform source;
 
-    [Header("Settings")] [SerializeField]
-    private PlayerConfig playerConfig;
+    [Header("Settings")] [SerializeField] private PlayerConfig playerConfig;
 
     [Header("Options")] [SerializeField] [Range(0f, 100f)]
     private float smoothSpeed = 10f;
@@ -53,10 +51,13 @@ public class KnockbackMeter : MonoBehaviour
     {
         var distance = source.position - _mouseTracker.GetMouseWorldPos();
 
-        var mapped = Mathf.InverseLerp(0.0f, playerConfig.MaxDistance, distance.magnitude);
+        var mapped = Mathf.InverseLerp(0.0f, playerConfig.MaxDistance * playerConfig.MaxDistance, distance.sqrMagnitude);
 
         _currentFill = smoothSpeed > 0f ? Mathf.Lerp(_currentFill, mapped, Time.deltaTime * smoothSpeed) : mapped;
 
+        if(Mathf.Approximately(_currentFill, 1.0f))
+            _currentFill = 1.0f;
+        
         _slider.value = Mathf.Clamp01(_currentFill);
 
         percentText.text = string.Format(_textFormat, (int)(_currentFill * 100.0f));
