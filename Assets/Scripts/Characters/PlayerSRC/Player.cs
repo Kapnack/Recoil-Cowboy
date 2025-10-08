@@ -136,17 +136,16 @@ namespace Characters.PlayerSRC
 
         private void UnRegisterEvents()
         {
-            if (!ServiceProvider.TryGetService<ICentralizeEventSystem>(out var eventSystem))
-                return;
+            var eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
 
-            eventSystem?.Unregister(PlayerEventKeys.LivesChange);
-            eventSystem?.Unregister(PlayerEventKeys.BulletsChange);
-            eventSystem?.Unregister(PlayerEventKeys.Dies);
+            eventSystem.Unregister(PlayerEventKeys.LivesChange);
+            eventSystem.Unregister(PlayerEventKeys.BulletsChange);
+            eventSystem.Unregister(PlayerEventKeys.Dies);
 
-            eventSystem?.Get(PlayerEventKeys.Attack).RemoveListener(OnAttack);
+            eventSystem.Get(PlayerEventKeys.Attack).RemoveListener(OnAttack);
 
-            eventSystem?.Get(PlayerEventKeys.ReloadOvertime).RemoveListener(AddBulletsOverTime);
-            eventSystem?.Get(PlayerEventKeys.InstantReload).RemoveListener(ChangeInstantReloadMode);
+            eventSystem.Get(PlayerEventKeys.ReloadOvertime).RemoveListener(AddBulletsOverTime);
+            eventSystem.Get(PlayerEventKeys.InstantReload).RemoveListener(ChangeInstantReloadMode);
         }
 
         private void OnAttack()

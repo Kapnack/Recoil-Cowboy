@@ -16,10 +16,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SceneRef winScene;
     [SerializeField] private SceneRef gameOverScene;
 
-    private SceneRef[] scenesToLoad = new SceneRef[2];
+    private Camera _mainCamera;
+    
+    private readonly SceneRef[] _scenesToLoad = new SceneRef[2];
 
     private ISceneLoader _sceneLoader;
 
+    private IInputReader _inputReader;
+    
     private readonly SimpleEvent _loadingStarted = new();
     private readonly SimpleEvent _loadingEnded = new();
 
@@ -39,7 +43,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private Camera _mainCamera;
 
     private void Awake()
     {
@@ -58,26 +61,40 @@ public class GameManager : MonoBehaviour
         eventSystem.Register(GameManagerKeys.LoadingStarted, _loadingStarted);
         eventSystem.Register(GameManagerKeys.LoadingEnded, _loadingEnded);
 
+        while (!ServiceProvider.TryGetService(out _inputReader))
+            yield return null;
+        
         while (!_loadingStarted.HasInvocations())
             yield return null;
-
+        
         LoadMainMenu();
     }
 
     private async void LoadMainMenu()
     {
-        scenesToLoad[0] = mainMenuScene;
-        await TryLoadScenes(scenesToLoad);
+        try
+        {
+            _inputReader.DeactivatePlayerMap();
         
-        FindAfterMatchMenuEvents();
+            _scenesToLoad[0] = mainMenuScene;
+            await TryLoadScenes(_scenesToLoad);
+        
+            FindAfterMatchMenuEvents();
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
     }
 
     private async void LoadCurrentLevel()
     {
         try
         {
-            scenesToLoad[0] = levels[CurrentLevel];
-            await TryLoadScenes(scenesToLoad);
+            _inputReader.ActivePlayerMap();
+            
+            _scenesToLoad[0] = levels[CurrentLevel];
+            await TryLoadScenes(_scenesToLoad);
 
             FindGameplayEvents();
         }
@@ -91,8 +108,10 @@ public class GameManager : MonoBehaviour
     {
         try
         {
-            scenesToLoad[0] = winScene;
-            await TryLoadScenes(scenesToLoad);
+            _inputReader.DeactivatePlayerMap();
+            
+            _scenesToLoad[0] = winScene;
+            await TryLoadScenes(_scenesToLoad);
         
             FindAfterMatchMenuEvents();
         }
@@ -106,8 +125,10 @@ public class GameManager : MonoBehaviour
     {
         try
         {
-            scenesToLoad[0] = gameOverScene;
-            await TryLoadScenes(scenesToLoad);
+            _inputReader.DeactivatePlayerMap();
+            
+            _scenesToLoad[0] = gameOverScene;
+            await TryLoadScenes(_scenesToLoad);
         
             FindAfterMatchMenuEvents();
         }
@@ -148,25 +169,17 @@ public class GameManager : MonoBehaviour
         simpleEvent.AddListener(LevelCleared);
         simpleEvent.AddListener(LoadWinScene);
 
-        eventSystem.TryGet(GameplayManagerKeys.LoseCondition, out simpleEvent);
-
-        simpleEvent.AddListener(LoadGameOverMenu);
+        eventSystem.Get(GameplayManagerKeys.LoseCondition).AddListener(LoadGameOverMenu);
         
-        eventSystem.TryGet(GameManagerKeys.MainMenu, out simpleEvent);
-
-        simpleEvent.AddListener(LoadMainMenu);
+        eventSystem.Get(GameManagerKeys.MainMenu).AddListener(LoadMainMenu);
     }
 
     private void FindAfterMatchMenuEvents()
     {
         ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
 
-        eventSystem.TryGet(GameManagerKeys.ChangeToLevel, out var simpleEvent);
+        eventSystem.Get(GameManagerKeys.ChangeToLevel).AddListener(LoadCurrentLevel);
 
-        simpleEvent.AddListener(LoadCurrentLevel);
-
-        eventSystem.TryGet(GameManagerKeys.MainMenu, out simpleEvent);
-
-        simpleEvent.AddListener(LoadMainMenu);
+        eventSystem.Get(GameManagerKeys.MainMenu).AddListener(LoadMainMenu);
     }
 }
