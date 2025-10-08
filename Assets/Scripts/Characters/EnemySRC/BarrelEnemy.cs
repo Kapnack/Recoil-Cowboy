@@ -1,7 +1,6 @@
 using ScriptableObjects;
 using Systems.TagClassGenerator;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Characters.EnemySRC
 {
@@ -11,14 +10,9 @@ namespace Characters.EnemySRC
 
         [SerializeField] private GameObject bulletPrefab;
 
-        public bool Hidden { get; private set; }
+        private bool Hidden { get; set; }
         
         private float _coldDownTimer;
-
-        protected override void Awake()
-        {
-            base.Awake();
-        }
 
         private void FixedUpdate()
         {
