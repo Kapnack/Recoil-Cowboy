@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 namespace Systems
 {
-    public class InputReader : MonoBehaviour
+    public class InputReader : MonoBehaviour, IInputReader
     {
         private ICentralizeEventSystem _eventSystem;
 
@@ -26,18 +26,17 @@ namespace Systems
 
         private void Awake()
         {
+            ServiceProvider.SetService<IInputReader>(this);
+            
             _gameplayActionMap = gameplayActionMap.FindActionMap("Player");
             _attack = _gameplayActionMap.FindAction("Attack");
             _reload = _gameplayActionMap.FindAction("Reload");
             _activeInstantReload = _gameplayActionMap.FindAction("ChangeInstantReload");
         }
 
-        private IEnumerator Start()
+        private void Start()
         {
-            while (!ServiceProvider.TryGetService(out _eventSystem))
-            {
-                yield return null;
-            }
+            _eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
 
             _eventSystem.Register(PlayerEventKeys.Attack, _attackEvent);
             _eventSystem.Register(PlayerEventKeys.ReloadOvertime, _reloadEvent);
@@ -62,15 +61,7 @@ namespace Systems
             paused.action.started -= HandlePause;
         }
 
-        private void HandlePause(InputAction.CallbackContext _)
-        {
-            _paused?.Invoke();
-            
-            if (_gameplayActionMap.enabled)
-                _gameplayActionMap.Disable();
-            else
-                _gameplayActionMap.Enable();
-        }
+        public void HandlePause(InputAction.CallbackContext _) => _paused?.Invoke();
 
         #region PlayerActionsEvents
 
@@ -81,5 +72,16 @@ namespace Systems
         private void HandleInstantReload(InputAction.CallbackContext _) => _instantReloadEvent?.Invoke();
 
         #endregion
+
+        public void ActivePlayerMap() => _gameplayActionMap.Enable();
+        public void DeactivatePlayerMap() => _gameplayActionMap.Disable();
+
+        public void SwitchPlayerMapState()
+        {
+            if (_gameplayActionMap.enabled)
+                _gameplayActionMap.Disable();
+            else
+                _gameplayActionMap.Enable();
+        }
     }
 }

@@ -30,9 +30,9 @@ namespace Characters.PlayerSRC
         private void Awake()
         {
             _target = gameObject.transform;
-            
+
             ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
-            
+
             eventSystem.Register(PlayerEventKeys.Reload, _reloadEvent);
 
             ServiceProvider.TryGetService(out _mouseTracker);
@@ -40,9 +40,7 @@ namespace Characters.PlayerSRC
 
         private void OnDestroy()
         {
-            ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
-            
-            eventSystem.Unregister(PlayerEventKeys.Reload);
+            ServiceProvider.GetService<ICentralizeEventSystem>().Unregister(PlayerEventKeys.Reload);
         }
 
         private void Update()
