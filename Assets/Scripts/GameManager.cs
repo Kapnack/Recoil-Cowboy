@@ -151,6 +151,10 @@ public class GameManager : MonoBehaviour
         eventSystem.TryGet(GameplayManagerKeys.LoseCondition, out simpleEvent);
 
         simpleEvent.AddListener(LoadGameOverMenu);
+        
+        eventSystem.TryGet(GameManagerKeys.MainMenu, out simpleEvent);
+
+        simpleEvent.AddListener(LoadMainMenu);
     }
 
     private void FindAfterMatchMenuEvents()
