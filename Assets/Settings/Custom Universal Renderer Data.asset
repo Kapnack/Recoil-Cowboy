@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: RenderObjects
-    Event: 450
+    Event: 500
     filterSettings:
       RenderQueueType: 0
       LayerMask:
@@ -137,3 +137,17 @@ MonoBehaviour:
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
       cameraFieldOfView: 60
+--- !u!114 &4541060222271390062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84f134f13dfc38646954e4a2d649b464, type: 3}
+  m_Name: OldFilmFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  oldFilmMaterial: {fileID: 2100000, guid: b9c1b790b98df814cbe5429febd11904, type: 2}
