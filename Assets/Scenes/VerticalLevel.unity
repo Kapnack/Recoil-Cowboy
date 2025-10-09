@@ -1290,7 +1290,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1215250026}
-  - component: {fileID: 1215250025}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -1298,31 +1297,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1215250025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1215250024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dafc64d65b4d334bb7ffa2bb586399f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InitializationSettings: {fileID: 11400000, guid: 19e351c83fcb6e24fbfa34e36d7f85b3, type: 2}
-  basePath: 
-  language: 
-  defaultPoolSize: 0
-  lowerPoolSize: 0
-  streamingPoolSize: 0
-  memoryCutoffThreshold: 0
-  monitorPoolSize: 0
-  monitorQueuePoolSize: 0
-  callbackManagerBufferSize: 0
-  spatialAudioPoolSize: 0
-  maxSoundPropagationDepth: 0
-  engineLogging: 0
 --- !u!4 &1215250026
 Transform:
   m_ObjectHideFlags: 0
@@ -2330,10 +2304,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8678536619395914815, guid: 96360ea91f9550445b773e7e91fd637b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8742219458200432881, guid: 96360ea91f9550445b773e7e91fd637b, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8935286858338482515, guid: 96360ea91f9550445b773e7e91fd637b, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8935286858338482515, guid: 96360ea91f9550445b773e7e91fd637b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3140527905956529133, guid: 126713639a8d7144b876b98776212eb4, type: 3}
+    - target: {fileID: 8935286858338482515, guid: 96360ea91f9550445b773e7e91fd637b, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ed9a369f9dd1e9a498064b1a76a518f9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2447,6 +2437,10 @@ PrefabInstance:
     - target: {fileID: 4888670232066249049, guid: df1fa361390013b4ca35059a46adab2e, type: 3}
       propertyPath: m_Name
       value: Chicken
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888670232066249049, guid: df1fa361390013b4ca35059a46adab2e, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

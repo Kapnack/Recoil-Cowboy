@@ -15,7 +15,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: RenderObjects
-    Event: 400
+    Event: 300
     filterSettings:
       RenderQueueType: 0
       LayerMask:
@@ -69,7 +69,8 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: -47990644642326219}
   - {fileID: 1055274706712985726}
-  m_RendererFeatureMap: 35598d51c38055ff7e001532c116a50e
+  - {fileID: 5928196427434620234}
+  m_RendererFeatureMap: 35598d51c38055ff7e001532c116a50e4af5fae73d2f4552
   m_UseNativeRenderPass: 0
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -110,7 +111,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: RenderObjects
-    Event: 500
+    Event: 300
     filterSettings:
       RenderQueueType: 0
       LayerMask:
@@ -127,9 +128,9 @@ MonoBehaviour:
     enableWrite: 1
     stencilSettings:
       overrideStencilState: 0
-      stencilReference: 0
+      stencilReference: 1
       stencilCompareFunction: 8
-      passOperation: 0
+      passOperation: 1
       failOperation: 0
       zFailOperation: 0
     cameraSettings:
@@ -151,3 +152,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   oldFilmMaterial: {fileID: 2100000, guid: b9c1b790b98df814cbe5429febd11904, type: 2}
+--- !u!114 &5928196427434620234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00045f12942b46c698459096c89274e, type: 3}
+  m_Name: FullScreenPassRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  injectionPoint: 600
+  fetchColorBuffer: 1
+  requirements: 0
+  passMaterial: {fileID: 2100000, guid: 012cc2bb9d6a8574e8cfdd9cfe7f23d8, type: 2}
+  passIndex: 0
+  bindDepthStencilAttachment: 0
+  m_Version: 1

@@ -43,7 +43,7 @@ Material:
     - _Scale: 1
     - _Thickness: 0.05
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &5692362427944626500
