@@ -13,9 +13,9 @@ public class LevelProgressMeter : MonoBehaviour
 
     private string _textFormat;
 
-    private IMousePositionTracker _mouseTracker;
-
     [SerializeField] private Transform source;
+    [SerializeField] private Transform startPoint;
+    [SerializeField] private Transform endPoint;
 
     [Header("Image")]
     [SerializeField] private Image fillArea;
@@ -41,25 +41,23 @@ public class LevelProgressMeter : MonoBehaviour
 
         _slider = GetComponent<Slider>();
 
+        if (!_slider || !source || fillArea == null || !startPoint || !endPoint)
+        {
+            enabled = false;
+            return;
+        }
+        
         _slider.minValue = 0;
         _slider.maxValue = 1;
-
-        _mouseTracker = ServiceProvider.GetService<IMousePositionTracker>();
-
-        if (!_slider || !source || fillArea == null || _mouseTracker == null)
-            enabled = false;
     }
 
     private void Update()
     {
-        _distance = source.position - _mouseTracker.GetMouseWorldPos();
+        _distance = source.position - endPoint.position;
 
-        _mapped = Mathf.InverseLerp(0.0f, playerConfig.MaxDistance * playerConfig.MaxDistance, _distance.sqrMagnitude);
+        _mapped = Mathf.InverseLerp(startPoint.position.y, endPoint.position.y, _distance.y);
         
         _currentFill = smoothSpeed > 0f ? Mathf.Lerp(_currentFill, _mapped, Time.deltaTime * smoothSpeed) : _mapped;
-
-        if(Mathf.Approximately(_currentFill, 1.0f))
-            _currentFill = 1.0f;
         
         _slider.value = Mathf.Clamp01(_currentFill);
 
