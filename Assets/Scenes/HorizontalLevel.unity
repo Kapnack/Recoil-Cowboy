@@ -789,6 +789,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6927a23e07f2e154db54ecd0788058a3, type: 3}
+--- !u!1 &1386703453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1386703454}
+  m_Layer: 0
+  m_Name: StartPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1386703454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386703453}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -46.1, y: 11, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1428682708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1006,6 +1037,22 @@ PrefabInstance:
     - target: {fileID: 7925886301779638033, guid: 67241a523e1d7f14f8030fd6311c08cc, type: 3}
       propertyPath: m_Name
       value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 8205360090341469600, guid: 67241a523e1d7f14f8030fd6311c08cc, type: 3}
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 79414957296187965}
+    - target: {fileID: 8205360090341469600, guid: 67241a523e1d7f14f8030fd6311c08cc, type: 3}
+      propertyPath: endPoint
+      value: 
+      objectReference: {fileID: 1953560506}
+    - target: {fileID: 8205360090341469600, guid: 67241a523e1d7f14f8030fd6311c08cc, type: 3}
+      propertyPath: startPoint
+      value: 
+      objectReference: {fileID: 1386703454}
+    - target: {fileID: 8205360090341469600, guid: 67241a523e1d7f14f8030fd6311c08cc, type: 3}
+      propertyPath: horizontalLevel
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1309,7 +1356,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 683da5c17386b394b816f4edc4d77e7a, type: 3}
---- !u!1 &1968457892
+--- !u!1 &1953560505
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1317,50 +1364,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1968457894}
-  - component: {fileID: 1968457893}
+  - component: {fileID: 1953560506}
   m_Layer: 0
-  m_Name: WwiseGlobal
+  m_Name: EndPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1968457893
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1968457892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dafc64d65b4d334bb7ffa2bb586399f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InitializationSettings: {fileID: 11400000, guid: 19e351c83fcb6e24fbfa34e36d7f85b3, type: 2}
-  basePath: 
-  language: 
-  defaultPoolSize: 0
-  lowerPoolSize: 0
-  streamingPoolSize: 0
-  memoryCutoffThreshold: 0
-  monitorPoolSize: 0
-  monitorQueuePoolSize: 0
-  callbackManagerBufferSize: 0
-  spatialAudioPoolSize: 0
-  maxSoundPropagationDepth: 0
-  engineLogging: 0
---- !u!4 &1968457894
+--- !u!4 &1953560506
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1968457892}
+  m_GameObject: {fileID: 1953560505}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 149.82, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1568,4 +1589,5 @@ SceneRoots:
   - {fileID: 391155087}
   - {fileID: 766761112}
   - {fileID: 1902612994}
-  - {fileID: 1968457894}
+  - {fileID: 1386703454}
+  - {fileID: 1953560506}
