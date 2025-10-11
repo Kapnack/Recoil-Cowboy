@@ -27,6 +27,7 @@ namespace Characters.PlayerSRC
 
         private readonly ComplexGameEvent<int, int, int> _livesChangeEvent = new();
         private readonly ComplexGameEvent<int, int, int> _bulletsChangeEvent = new();
+        private readonly SimpleEvent _oneLiveRemains = new();
         private readonly SimpleEvent _dies = new();
 
         public bool Invincible { get; private set; }
@@ -42,10 +43,16 @@ namespace Characters.PlayerSRC
                 _livesChangeEvent?.Invoke(_currentLives, newValue, _config.MaxLives);
                 _currentLives = newValue;
 
-                if (newValue == 0 && !_isDead)
+                switch (newValue)
                 {
-                    _dies?.Invoke();
-                    _isDead = true;
+                    case 1:
+                        _oneLiveRemains?.Invoke();
+                        break;
+                    
+                    case 0 when !_isDead:
+                        _dies?.Invoke();
+                        _isDead = true;
+                        break;
                 }
             }
         }
@@ -108,6 +115,7 @@ namespace Characters.PlayerSRC
 
             eventSystem.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
             eventSystem.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
+            eventSystem.Register(PlayerEventKeys.OnOneLive, _oneLiveRemains);
             eventSystem.Register(PlayerEventKeys.Dies, _dies);
 
             eventSystem.TryGet(PlayerEventKeys.Attack, out var simpleEvent);
@@ -140,6 +148,7 @@ namespace Characters.PlayerSRC
 
             eventSystem.Unregister(PlayerEventKeys.LivesChange);
             eventSystem.Unregister(PlayerEventKeys.BulletsChange);
+            eventSystem.Unregister(PlayerEventKeys.OnOneLive);
             eventSystem.Unregister(PlayerEventKeys.Dies);
 
             eventSystem.Get(PlayerEventKeys.Attack).RemoveListener(OnAttack);
