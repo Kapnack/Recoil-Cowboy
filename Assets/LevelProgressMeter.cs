@@ -17,19 +17,14 @@ public class LevelProgressMeter : MonoBehaviour
     [SerializeField] private Transform startPoint;
     [SerializeField] private Transform endPoint;
 
-    [Header("Image")]
-    [SerializeField] private Image fillArea;
-    
-    [Header("Settings")] [SerializeField] private PlayerConfig playerConfig;
+    [Header("Image")] [SerializeField] private Image fillArea;
 
-    [Header("Options")] [SerializeField] [Range(0f, 100f)]
-    private float smoothSpeed = 10f;
+    [Header("Options")] [SerializeField] private bool horizontalLevel;
+    [SerializeField] [Range(0f, 20f)] private float smoothSpeed = 10f;
 
     private float _currentFill;
-    private Vector3 _distance;
     private Color _targetColor;
     private float _mapped;
-
 
     private void Awake()
     {
@@ -46,19 +41,22 @@ public class LevelProgressMeter : MonoBehaviour
             enabled = false;
             return;
         }
-        
+
         _slider.minValue = 0;
         _slider.maxValue = 1;
     }
 
     private void Update()
     {
-        _distance = source.position - endPoint.position;
+        if (horizontalLevel)
+            _mapped = Mathf.InverseLerp(startPoint.position.x, endPoint.position.x, source.position.x);
+        else
+            _mapped = Mathf.InverseLerp(startPoint.position.y, endPoint.position.y, source.position.y);
 
-        _mapped = Mathf.InverseLerp(startPoint.position.y, endPoint.position.y, _distance.y);
-        
-        _currentFill = smoothSpeed > 0f ? Mathf.Lerp(_currentFill, _mapped, Time.deltaTime * smoothSpeed) : _mapped;
-        
+        _currentFill = smoothSpeed > 0f
+            ? Mathf.MoveTowards(_currentFill, _mapped, Time.deltaTime * smoothSpeed)
+            : _mapped;
+
         _slider.value = Mathf.Clamp01(_currentFill);
 
         percentText.text = string.Format(_textFormat, (int)(_currentFill * 100.0f));
