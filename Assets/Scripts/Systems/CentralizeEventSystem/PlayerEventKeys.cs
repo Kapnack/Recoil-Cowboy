@@ -11,5 +11,6 @@
         public const string Reload = "RELOAD";
         public const string ReloadOvertime = "RELOAD_OVERTIME";
         public const string InstantReload = "INSTANT_RELOAD";
+        public const string OnOneLive = "ON_ONE_LIVE";
     }
 }
