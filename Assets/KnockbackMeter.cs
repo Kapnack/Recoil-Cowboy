@@ -2,7 +2,6 @@ using MouseTracker;
 using ScriptableObjects;
 using Systems;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class KnockbackMeter : MonoBehaviour
@@ -13,11 +12,7 @@ public class KnockbackMeter : MonoBehaviour
     private IMousePositionTracker _mouseTracker;
 
     [Header("Settings")] [SerializeField] private PlayerConfig playerConfig;
-
-    [Header("Options")] [SerializeField] [Range(0f, 100f)]
-    private float smoothSpeed = 10f;
-
-    private float _currentFill;
+    
     private Vector3 _distance;
     private Color _originalColor;
     [SerializeField] private Color secondaryColor;
