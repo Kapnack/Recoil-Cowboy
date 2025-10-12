@@ -36,6 +36,6 @@ public class KnockbackMeter : MonoBehaviour
 
         _mapped = Mathf.InverseLerp(0.0f, playerConfig.MaxDistance * playerConfig.MaxDistance, _distance.sqrMagnitude);
 
-        _sightImage.color = Color.Lerp(secondaryColor, _originalColor, _mapped);
+        _sightImage.color = Color.Lerp(_originalColor, secondaryColor, _mapped);
     }
 }
