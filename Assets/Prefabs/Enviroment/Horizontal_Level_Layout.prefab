@@ -772,6 +772,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4365672512000280029}
     m_Modifications:
+    - target: {fileID: 602703366751196543, guid: 99d300e4dc4b87b4c8ed7cb11b478521, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3245530771478528864, guid: 99d300e4dc4b87b4c8ed7cb11b478521, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3644756351490682419, guid: 99d300e4dc4b87b4c8ed7cb11b478521, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4373195596229781161, guid: 99d300e4dc4b87b4c8ed7cb11b478521, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.0039052595
@@ -824,9 +836,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6142004335810912158, guid: 99d300e4dc4b87b4c8ed7cb11b478521, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6778581335757847642, guid: 99d300e4dc4b87b4c8ed7cb11b478521, type: 3}
       propertyPath: m_Name
       value: Cartel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778581335757847642, guid: 99d300e4dc4b87b4c8ed7cb11b478521, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7567207664201706912, guid: 99d300e4dc4b87b4c8ed7cb11b478521, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078752783068039244, guid: 99d300e4dc4b87b4c8ed7cb11b478521, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
