@@ -41,7 +41,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Intensity: 0
+    - _FlickerIntencity: 1
+    - _Intensity: 1
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
