@@ -7,7 +7,7 @@ public class ShaderManager : MonoBehaviour, IShaderManager, IShaderSettings
     [SerializeField] private Material material;
 
     private const string IntensityVariable = "_Intensity";
-    private const string FlickerIntensityVariable = "_FlickerIntensity";
+    private const string FlickerIntensityVariable = "_FlickerIntencity";
     
     private void Awake()
     {
@@ -47,13 +47,7 @@ public class ShaderManager : MonoBehaviour, IShaderManager, IShaderSettings
     public void StartOnTransition() => StartCoroutine(OnTransition());
 
     public void StartOffTransition() => StartCoroutine(OffTransition());
-    public void SetFlickerActive(bool active)
-    {
-        material.SetFloat(IntensityVariable, active ? 1 : 0);
-    }
-}
-
-public interface IShaderSettings
-{
-    public void SetFlickerActive(bool active);
+    
+    public void SetFlickerActive(bool active) => material.SetFloat(FlickerIntensityVariable, active ? 1f : 0f);
+    public float GetFlickerValue() => material.GetFloat(FlickerIntensityVariable);
 }
