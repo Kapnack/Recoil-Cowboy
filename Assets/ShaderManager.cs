@@ -2,27 +2,29 @@ using System.Collections;
 using Systems;
 using UnityEngine;
 
-public class ShaderManager : MonoBehaviour, IShaderManager
+public class ShaderManager : MonoBehaviour, IShaderManager, IShaderSettings
 {
     [SerializeField] private Material material;
 
-    private const string Variable = "_Intensity";
+    private const string IntensityVariable = "_Intensity";
+    private const string FlickerIntensityVariable = "_FlickerIntensity";
     
     private void Awake()
     {
         ServiceProvider.SetService<IShaderManager>(this);
+        ServiceProvider.SetService<IShaderSettings>(this);
         
-        material.SetFloat(Variable, 0);
+        material.SetFloat(IntensityVariable, 0);
     }
 
     private IEnumerator OnTransition()
     {
-        var intensity = material.GetFloat(Variable);
+        var intensity = material.GetFloat(IntensityVariable);
 
         while (intensity < 1)
         {
             intensity += Time.deltaTime;
-            material.SetFloat(Variable, intensity);
+            material.SetFloat(IntensityVariable, intensity);
             yield return null;
         }
         
@@ -31,12 +33,12 @@ public class ShaderManager : MonoBehaviour, IShaderManager
 
     private IEnumerator OffTransition()
     {
-        var intensity = material.GetFloat(Variable);
+        var intensity = material.GetFloat(IntensityVariable);
 
         while (intensity > 0)
         {
             intensity -= Time.deltaTime;
-            material.SetFloat(Variable, intensity);
+            material.SetFloat(IntensityVariable, intensity);
             yield return null;
         }
         intensity = Mathf.Clamp(intensity, 0, 1);
@@ -45,4 +47,13 @@ public class ShaderManager : MonoBehaviour, IShaderManager
     public void StartOnTransition() => StartCoroutine(OnTransition());
 
     public void StartOffTransition() => StartCoroutine(OffTransition());
+    public void SetFlickerActive(bool active)
+    {
+        material.SetFloat(IntensityVariable, active ? 1 : 0);
+    }
+}
+
+public interface IShaderSettings
+{
+    public void SetFlickerActive(bool active);
 }
