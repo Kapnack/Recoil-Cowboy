@@ -15,6 +15,8 @@ namespace Characters.EnemySRC
 
         private float _jumpTimer;
 
+        private RaycastHit _hit;
+
         protected override void Awake()
         {
             base.Awake();
@@ -32,13 +34,19 @@ namespace Characters.EnemySRC
         {
             _raycastOrigin = transform.position + chickenConfig.RaycastOffSet * transform.right;
 
-            if (!Physics.Raycast(_raycastOrigin, Vector3.down, chickenConfig.RaycastDistance))
+            if (!Physics.Raycast(_raycastOrigin, Vector3.down, out _hit, chickenConfig.RaycastDistance))
             {
+                if (_hit.collider && _hit.collider.CompareTag(Tags.Player))
+                    return;
+
                 if (!_alreadyRotated)
                     Rotate();
             }
-            else if (Physics.Raycast(_raycastOrigin, transform.right, chickenConfig.RaycastDistance))
+            else if (Physics.Raycast(_raycastOrigin, transform.right, out _hit, chickenConfig.RaycastDistance))
             {
+                if (_hit.collider && _hit.collider.CompareTag(Tags.Player))
+                    return;
+
                 Rotate();
             }
             else
@@ -58,7 +66,8 @@ namespace Characters.EnemySRC
             }
         }
 
-        private void SetJumpTimer() => _jumpTimer = Time.time + Random.Range(chickenConfig.JumpMinTimer, chickenConfig.JumpMaxTimer);
+        private void SetJumpTimer() =>
+            _jumpTimer = Time.time + Random.Range(chickenConfig.JumpMinTimer, chickenConfig.JumpMaxTimer);
 
         private void Rotate()
         {
