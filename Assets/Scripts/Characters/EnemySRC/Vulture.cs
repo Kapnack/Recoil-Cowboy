@@ -15,6 +15,10 @@ namespace Characters.EnemySRC
 
         private Coroutine _backToStartCoroutine;
         private Vector3 _currentVelocity;
+        private Vector3 _raycastOrigin;
+        private RaycastHit _hit;
+        private bool _alreadyRotated;
+        private bool _wentToStartingPos;
 
         protected override void Awake()
         {
@@ -29,6 +33,8 @@ namespace Characters.EnemySRC
 
             if (_target)
             {
+                _wentToStartingPos = false;
+
                 if (_backToStartCoroutine != null)
                 {
                     StopCoroutine(_backToStartCoroutine);
@@ -41,8 +47,44 @@ namespace Characters.EnemySRC
             }
             else
             {
-                _backToStartCoroutine ??= StartCoroutine(BackToStartingPos());
+                if (!_wentToStartingPos)
+                    _backToStartCoroutine ??= StartCoroutine(BackToStartingPos());
+                else
+                    Movement();
             }
+        }
+
+        private void Movement()
+        {
+            _raycastOrigin = transform.position + 1 * transform.right;
+
+            if (Physics.Raycast(_raycastOrigin, transform.right, out _hit, 1))
+            {
+                if (_hit.collider && _hit.collider.CompareTag(Tags.Player))
+                    return;
+
+                Rotate();
+            }
+            else
+            {
+                if (_rb.linearVelocity.sqrMagnitude < config.MaxVelocity * config.MaxVelocity)
+                    _rb.AddForce(transform.right * config.MoveSpeed, ForceMode.Force);
+                else
+                    _rb.linearVelocity = transform.right * config.MaxVelocity;
+
+                _alreadyRotated = false;
+            }
+        }
+
+        private void Rotate()
+        {
+            _rb.linearVelocity = new Vector3(0.0f, _rb.linearVelocity.y, 0.0f);
+
+            var currentRotation = transform.eulerAngles;
+            currentRotation.y += 180.0f;
+            transform.rotation = Quaternion.Euler(currentRotation);
+
+            _alreadyRotated = true;
         }
 
         private IEnumerator BackToStartingPos()
@@ -50,7 +92,7 @@ namespace Characters.EnemySRC
             _rb.linearVelocity = Vector3.zero;
             _currentVelocity = Vector3.zero;
 
-            while ((_spawnPosition - transform.position).sqrMagnitude > Mathf.Epsilon)
+            while ((_spawnPosition - transform.position).sqrMagnitude > 0.1f * 0.1f)
             {
                 transform.position =
                     Vector3.SmoothDamp(transform.position, _spawnPosition, ref _currentVelocity, config.SmoothBackTime);
@@ -58,6 +100,8 @@ namespace Characters.EnemySRC
             }
 
             _backToStartCoroutine = null;
+
+            _wentToStartingPos = true;
         }
 
         private Transform FindNearestTarget()
