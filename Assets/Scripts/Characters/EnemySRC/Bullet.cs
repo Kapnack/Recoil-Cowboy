@@ -32,12 +32,12 @@ namespace Characters.EnemySRC
             _timeToDestroy = Time.time + secondsToExist;
         }
 
-        private void OnCollisionEnter(Collision other)
+        private void OnCollisionEnter(Collision collision)
         {
-            if (_owner && other.gameObject == _owner.gameObject)
+            if (_owner && collision.gameObject == _owner.gameObject)
                 return;
 
-            if (other.transform.TryGetComponent<IHealthSystem>(out var healthSystem))
+            if (collision.transform.TryGetComponent<IHealthSystem>(out var healthSystem))
             {
                 healthSystem.ReceiveDamage();
             }
