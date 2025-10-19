@@ -147,5 +147,7 @@ namespace Characters.EnemySRC
             if (collision.transform.TryGetComponent<IHealthSystem>(out var healthSystem))
                 healthSystem.ReceiveDamage();
         }
+        
+        private void OnCollisionStay(Collision collision) => OnCollisionEnter(collision);
     }
 }
