@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{C82ADD13-201B-420E-97F7-BA5F423FCB55}" SchemaVersion="123">
 	<SoundcasterSessions>
-		<WorkUnit Name="Default Work Unit" ID="{C82ADD13-201B-420E-97F7-BA5F423FCB55}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{C82ADD13-201B-420E-97F7-BA5F423FCB55}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundcasterSession Name="Cowboy SC session" ID="{729931CA-5603-48FB-A2D7-AFBF029A8EB8}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="sfx_Gunshot" ID="{41A10BEF-C7BE-48AB-B0B3-0FCC689CC47A}" WorkUnitID="{692BFA2D-F024-43EF-8E6D-D89B446EDBF9}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true">
+						<RTPCValue>
+							<GameParameterRef Name="BulletCount" ID="{B5324104-6BA1-488E-B220-3C53A343FD57}"/>
+							<Value>0.4</Value>
+						</RTPCValue>
+					</RTPCValueList>
+					<CurrentStateList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true"/>
+				</SoundcasterSession>
+			</ChildrenList>
+		</WorkUnit>
 	</SoundcasterSessions>
 </WwiseDocument>

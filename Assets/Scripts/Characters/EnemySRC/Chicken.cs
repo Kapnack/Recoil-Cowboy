@@ -122,7 +122,11 @@ namespace Characters.EnemySRC
             Gizmos.DrawRay(_raycastOrigin, Vector3.down * config.RaycastDistance);
             Gizmos.DrawRay(_raycastOrigin, transform.right * config.RaycastDistance);
         }
-
+        public override void ReceiveDamage()
+        {
+            base.ReceiveDamage();
+            AkUnitySoundEngine.PostEvent("sfx_ChickenExp", gameObject);
+        }
 #if UNITY_EDITOR
         private void OnValidate()
         {

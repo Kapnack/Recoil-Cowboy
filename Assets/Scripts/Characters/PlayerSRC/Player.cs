@@ -159,6 +159,8 @@ namespace Characters.PlayerSRC
 
         private void OnAttack()
         {
+            AkUnitySoundEngine.SetRTPCValue("BulletCount", CurrentBullets);
+            AkUnitySoundEngine.PostEvent("sfx_Gunshot", gameObject);
             if (CurrentBullets == 0)
                 return;
 
@@ -177,6 +179,7 @@ namespace Characters.PlayerSRC
                 if (hit.transform.gameObject.TryGetComponent<IHealthSystem>(out var healthSystem))
                     healthSystem.ReceiveDamage();
             }
+            
         }
 
         private void ApplyKnockBack(Vector3 dir, Vector3 mousePos)
@@ -189,7 +192,10 @@ namespace Characters.PlayerSRC
 
             distance = Mathf.Pow(distance, 0.5f);
             
-            Rb.AddForce(dir * (-_config.KnockBack * distance), ForceMode.Impulse);
+            _rb.AddForce(dir * (-_config.KnockBack * distance), ForceMode.Impulse);
+
+            if (dir.y < -0.5f)
+            AkUnitySoundEngine.PostEvent("sfx_Jump", gameObject);
         }
 
         public void ReceiveDamage()
