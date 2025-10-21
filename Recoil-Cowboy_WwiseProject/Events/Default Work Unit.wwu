@@ -1,6 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{692BFA2D-F024-43EF-8E6D-D89B446EDBF9}" SchemaVersion="123">
 	<Events>
-		<WorkUnit Name="Default Work Unit" ID="{692BFA2D-F024-43EF-8E6D-D89B446EDBF9}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{692BFA2D-F024-43EF-8E6D-D89B446EDBF9}" PersistMode="Standalone">
+			<ChildrenList>
+				<Folder Name="SFX Ingame" ID="{B222D7C3-3112-4B8C-8FAB-C77C9CFE8FB9}" ShortID="735086989">
+					<ChildrenList>
+						<Event Name="sfx_Gunshot" ID="{41A10BEF-C7BE-48AB-B0B3-0FCC689CC47A}">
+							<ChildrenList>
+								<Action Name="" ID="{7F3D430C-9630-43AF-A8DC-857D625E6DF3}" ShortID="885793592">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="sfx_Gunshot" ID="{4AE8E3D6-5B2F-4D71-811D-B80A372098D1}" WorkUnitID="{6E4D69CC-4E53-42BA-8685-AC6AEFBE7DE3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="sfx_ChickenExp" ID="{84666FEF-F101-44A6-95F5-A4EEE5908218}">
+							<ChildrenList>
+								<Action Name="" ID="{66C8177C-1164-4358-AB56-777C2FA24FE5}" ShortID="1057519598">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="sfx_ChickenExp" ID="{7CC1C583-20E8-447A-A9A8-156E2C7389A3}" WorkUnitID="{6E4D69CC-4E53-42BA-8685-AC6AEFBE7DE3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="sfx_WoodRattle" ID="{74535D5E-59CA-4FE2-BF7C-EC262D7EF95A}">
+							<ChildrenList>
+								<Action Name="" ID="{A2A2DF55-CE19-4C6B-9D50-257CCF86CC89}" ShortID="40142631">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="sfx_WoodRattle" ID="{444AC445-6A50-4A58-BA35-41A789080044}" WorkUnitID="{6E4D69CC-4E53-42BA-8685-AC6AEFBE7DE3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="sfx_Jump" ID="{72F0261D-4398-45AF-8EA2-B027328BA33E}">
+							<ChildrenList>
+								<Action Name="" ID="{0D5F1980-22BB-480B-8722-233B2BAE1C85}" ShortID="760234177">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="sfx_Jump" ID="{BB3B7D51-9643-47E0-A1E0-3F2E77B42898}" WorkUnitID="{6E4D69CC-4E53-42BA-8685-AC6AEFBE7DE3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Music Ingame" ID="{5175D348-9712-4ACE-AEE2-F413DD5E5DF2}" ShortID="263339747">
+					<ChildrenList>
+						<Event Name="Ingame_Game_Play" ID="{5B9EA179-D335-4403-B29A-5E743D7AA9E2}">
+							<ChildrenList>
+								<Action Name="" ID="{27101114-C7F6-4C6C-9207-130751FE549C}" ShortID="43996845">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="GameMusic" ID="{38A37634-6859-47FB-8736-1166AF8E4699}" WorkUnitID="{ACA90B2C-2519-4DB8-8D75-45EB13463C6E}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Ingame_Game_Menu" ID="{98ABD6DA-B706-4F00-A11C-6C65DF673691}">
+							<ChildrenList>
+								<Action Name="" ID="{A90B58E7-BD8D-4AD7-9B87-DC5209D4D9A0}" ShortID="704731452">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="GameMusic" ID="{38A37634-6859-47FB-8736-1166AF8E4699}" WorkUnitID="{ACA90B2C-2519-4DB8-8D75-45EB13463C6E}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
 	</Events>
 </WwiseDocument>

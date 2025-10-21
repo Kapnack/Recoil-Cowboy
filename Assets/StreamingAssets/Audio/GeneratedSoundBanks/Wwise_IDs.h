@@ -11,6 +11,28 @@
 
 namespace AK
 {
+    namespace EVENTS
+    {
+        static const AkUniqueID INGAME_GAME_MENU = 384443871U;
+        static const AkUniqueID INGAME_GAME_PLAY = 731291996U;
+        static const AkUniqueID SFX_CHICKENEXP = 912458799U;
+        static const AkUniqueID SFX_GUNSHOT = 1669100521U;
+        static const AkUniqueID SFX_JUMP = 3695098761U;
+        static const AkUniqueID SFX_WOODRATTLE = 1747625388U;
+    } // namespace EVENTS
+
+    namespace GAME_PARAMETERS
+    {
+        static const AkUniqueID BULLETCOUNT = 3344879290U;
+    } // namespace GAME_PARAMETERS
+
+    namespace BANKS
+    {
+        static const AkUniqueID INIT = 1355168291U;
+        static const AkUniqueID SBGAME = 993800960U;
+        static const AkUniqueID SBMENU = 2549670199U;
+    } // namespace BANKS
+
     namespace BUSSES
     {
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
