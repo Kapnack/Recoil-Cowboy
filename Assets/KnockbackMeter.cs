@@ -34,7 +34,7 @@ public class KnockbackMeter : MonoBehaviour
     {
         _distance = source.position - _mouseTracker.GetMouseWorldPos();
 
-        _mapped = Mathf.InverseLerp(0.0f, playerConfig.MaxDistance * playerConfig.MaxDistance, _distance.sqrMagnitude);
+        _mapped = Mathf.InverseLerp(0.0f, playerConfig.AreaOfSight * playerConfig.AreaOfSight, _distance.sqrMagnitude);
 
         _sightImage.color = Color.Lerp(_originalColor, secondaryColor, _mapped);
     }
