@@ -22,13 +22,13 @@ namespace Characters.EnemySRC
                 Destroy(gameObject);
         }
 
-        public void Launch(Character owner, Vector3 spawnPosition, float speed)
+        public void Launch(Character owner, Vector3 spawnPosition, Vector3 dir, float speed)
         {
             _owner = owner;
             transform.position = spawnPosition;
 
-            _rb.AddForce(transform.right * speed, ForceMode.Impulse);
-
+            _rb.AddForce(dir * speed, ForceMode.Impulse);
+            
             _timeToDestroy = Time.time + secondsToExist;
         }
 
