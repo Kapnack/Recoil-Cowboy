@@ -192,7 +192,7 @@ namespace Characters.PlayerSRC
 
             distance = Mathf.Pow(distance, 0.5f);
             
-            _rb.AddForce(dir * (-_config.KnockBack * distance), ForceMode.Impulse);
+            Rb.AddForce(dir * (-_config.KnockBack * distance), ForceMode.Impulse);
 
             if (dir.y < -0.5f)
             AkUnitySoundEngine.PostEvent("sfx_Jump", gameObject);

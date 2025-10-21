@@ -18,9 +18,9 @@ namespace Characters.Areas
             var origin = transform.position + transform.right * config.RaycastOffSet;
             _points.Add(origin);
 
-            for (int i = 0; i <= resolution; i++)
+            for (int i = 0; i <= Resolution; i++)
             {
-                var angle = Mathf.Lerp(-config.AttackRadius, config.AttackRadius, i / (float)resolution);
+                var angle = Mathf.Lerp(-config.AttackRadius, config.AttackRadius, i / (float)Resolution);
             
                 var dir = Quaternion.Euler(0, 0, angle) * transform.right;
             

@@ -14,11 +14,11 @@ namespace Characters.Areas
         {
             var points = new List<Vector3>();
 
-            LineRenderer.positionCount = resolution;
+            LineRenderer.positionCount = Resolution;
 
-            for (int i = 0; i < resolution; i++)
+            for (int i = 0; i < Resolution; i++)
             {
-                var currentRadian = (float)i / resolution * 2 * Mathf.PI;
+                var currentRadian = (float)i / Resolution * 2 * Mathf.PI;
 
                 var xScaled = Mathf.Cos(currentRadian);
                 var yScaled = Mathf.Sin(currentRadian);

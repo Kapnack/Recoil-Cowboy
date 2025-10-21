@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Systems;
 using Systems.CentralizeEventSystem;
 using UnityEngine;
@@ -13,19 +14,29 @@ namespace Characters.PlayerSRC
         [SerializeField] private float flashDuration = 0.1f;
         [SerializeField] private int amountOfFlickers = 3;
 
-        private Material _mat;
-        private Color _originalColor;
+        [FormerlySerializedAs("mat")] [SerializeField]
+        private List<Material> materials;
+
+        private readonly List<Color> _originalColors = new();
 
         private void Start()
         {
-            _mat = GetComponentInChildren<Renderer>().material;
-            _originalColor = _mat.color;
+            foreach (var material in materials)
+                _originalColors.Add(material.color);
 
             ServiceProvider.TryGetService<ICentralizeEventSystem>(out var eventSystem);
 
             eventSystem.Get<int, int, int>(PlayerEventKeys.LivesChange).AddListener(Flash);
         }
 
+        private void OnDestroy()
+        {
+            for (var i = 0; i < materials.Count; i++)
+            {
+                materials[i].color = _originalColors[i];
+            }
+        }
+        
         private void Flash(int previous, int current, int max)
         {
             if (current == previous)
@@ -38,9 +49,18 @@ namespace Characters.PlayerSRC
         {
             for (var i = 0; i < amountOfFlickers; i++)
             {
-                _mat.color = color;
+                foreach (var t in materials)
+                {
+                    t.color = color;
+                }
+
                 yield return new WaitForSeconds(flashDuration);
-                _mat.color = _originalColor;
+
+                for (var j = 0; j < materials.Count; j++)
+                {
+                    materials[j].color = _originalColors[j];
+                }
+
                 yield return new WaitForSeconds(flashDuration);
             }
         }

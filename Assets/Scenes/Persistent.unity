@@ -829,20 +829,17 @@ MonoBehaviour:
     sceneAsset: {fileID: 102900000, guid: 5a0b82cc1a7708e4ebdb0cbff766d59a, type: 3}
     <Index>k__BackingField: 1
     <Name>k__BackingField: MainMenu
-  levels:
-  - sceneAsset: {fileID: 102900000, guid: 3996ec38e3a0efb47a10f7622423425e, type: 3}
-    <Index>k__BackingField: 3
-    <Name>k__BackingField: VerticalLevel
-  - sceneAsset: {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
+  gameplay:
+    sceneAsset: {fileID: 102900000, guid: 3996ec38e3a0efb47a10f7622423425e, type: 3}
     <Index>k__BackingField: 2
-    <Name>k__BackingField: HorizontalLevel
+    <Name>k__BackingField: VerticalLevel
   winScene:
     sceneAsset: {fileID: 102900000, guid: a49a3f1ff20734e429461b7e19d28c5e, type: 3}
-    <Index>k__BackingField: 4
+    <Index>k__BackingField: 3
     <Name>k__BackingField: WinMenu
   gameOverScene:
     sceneAsset: {fileID: 102900000, guid: 48b1f20207d71ab4d9f1c21b35119a78, type: 3}
-    <Index>k__BackingField: 5
+    <Index>k__BackingField: 4
     <Name>k__BackingField: GameOverMenu
 --- !u!114 &1094096141
 MonoBehaviour:
