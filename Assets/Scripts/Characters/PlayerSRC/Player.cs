@@ -181,15 +181,15 @@ namespace Characters.PlayerSRC
 
         private void ApplyKnockBack(Vector3 dir, Vector3 mousePos)
         {
-            _rb.linearVelocity = Vector3.zero;
+            Rb.linearVelocity = Vector3.zero;
 
             var distance = (mousePos - transform.position).magnitude;
 
-            distance = Mathf.Clamp01(distance / _config.MaxDistance);
+            distance = Mathf.Clamp01(distance / _config.AreaOfSight);
 
             distance = Mathf.Pow(distance, 0.5f);
             
-            _rb.AddForce(dir * (-_config.KnockBack * distance), ForceMode.Impulse);
+            Rb.AddForce(dir * (-_config.KnockBack * distance), ForceMode.Impulse);
         }
 
         public void ReceiveDamage()
@@ -250,7 +250,7 @@ namespace Characters.PlayerSRC
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, _config.MaxDistance);
+            Gizmos.DrawWireSphere(transform.position, _config.AreaOfSight);
         }
     }
 }

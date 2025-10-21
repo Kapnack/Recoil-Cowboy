@@ -17,7 +17,6 @@ namespace Characters.EnemySRC
         private Vector3 _currentVelocity;
         private Vector3 _raycastOrigin;
         private RaycastHit _hit;
-        private bool _alreadyRotated;
         private bool _wentToStartingPos;
 
         protected override void Awake()
@@ -43,7 +42,7 @@ namespace Characters.EnemySRC
 
                 var direction = (_target.transform.position - transform.position).normalized;
 
-                _rb.AddForce(direction * (config.MoveSpeed * Time.fixedDeltaTime), ForceMode.VelocityChange);
+                Rb.AddForce(direction * (config.MoveSpeed * Time.fixedDeltaTime), ForceMode.VelocityChange);
             }
             else
             {
@@ -53,7 +52,7 @@ namespace Characters.EnemySRC
                     Movement();
             }
         }
-
+        
         private void Movement()
         {
             _raycastOrigin = transform.position + 1 * transform.right;
@@ -67,29 +66,25 @@ namespace Characters.EnemySRC
             }
             else
             {
-                if (_rb.linearVelocity.sqrMagnitude < config.MaxVelocity * config.MaxVelocity)
-                    _rb.AddForce(transform.right * config.MoveSpeed, ForceMode.Force);
+                if (Rb.linearVelocity.sqrMagnitude < config.MaxVelocity * config.MaxVelocity)
+                    Rb.AddForce(transform.right * config.MoveSpeed, ForceMode.Force);
                 else
-                    _rb.linearVelocity = transform.right * config.MaxVelocity;
-
-                _alreadyRotated = false;
+                    Rb.linearVelocity = transform.right * config.MaxVelocity;
             }
         }
 
         private void Rotate()
         {
-            _rb.linearVelocity = new Vector3(0.0f, _rb.linearVelocity.y, 0.0f);
+            Rb.linearVelocity = new Vector3(0.0f, Rb.linearVelocity.y, 0.0f);
 
             var currentRotation = transform.eulerAngles;
             currentRotation.y += 180.0f;
             transform.rotation = Quaternion.Euler(currentRotation);
-
-            _alreadyRotated = true;
         }
 
         private IEnumerator BackToStartingPos()
         {
-            _rb.linearVelocity = Vector3.zero;
+            Rb.linearVelocity = Vector3.zero;
             _currentVelocity = Vector3.zero;
 
             while ((_spawnPosition - transform.position).sqrMagnitude > 0.1f * 0.1f)

@@ -6,12 +6,11 @@ namespace ScriptableObjects
 {
     [Serializable]
     [CreateAssetMenu(fileName = "PlayerConfig", menuName = "ScriptableObjects/PlayerConfig")]
-    public class PlayerConfig : ScriptableObject
+    public class PlayerConfig : CharacterConfig
     {
         [field: SerializeField] public int MaxLives { get; set; }
         [field: SerializeField] public float InvincibleTime { get; set; }
         [field: SerializeField] public int MaxBullets { get; set; }
-        [field: SerializeField] public float MaxDistance { get; set; }
         [field: SerializeField] public float KnockBack { get; set; }
     }
 }
