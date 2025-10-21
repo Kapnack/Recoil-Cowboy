@@ -1,3 +1,4 @@
+using System;
 using ScriptableObjects;
 using Systems.TagClassGenerator;
 using UnityEngine;
@@ -16,6 +17,11 @@ namespace Characters.EnemySRC
 
         private float _coldDownTimer;
 
+        protected override void Awake()
+        {
+            base.Awake();
+        }
+        
         private void FixedUpdate()
         {
             Hidden = ShouldHide();
@@ -64,7 +70,7 @@ namespace Characters.EnemySRC
 
         private bool ShouldHide()
         {
-            var colliderHits = Physics.OverlapSphere(transform.position, config.HideDistance);
+            var colliderHits = Physics.OverlapSphere(transform.position, config.AreaOfSight);
 
             foreach (var hit in colliderHits)
             {
@@ -104,7 +110,7 @@ namespace Characters.EnemySRC
                 return;
 
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, config.HideDistance);
+            Gizmos.DrawWireSphere(transform.position, config.AreaOfSight);
         }
     }
 }
