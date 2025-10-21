@@ -4,30 +4,22 @@ using Systems;
 using Systems.CentralizeEventSystem;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable]
 public class HUD : MonoBehaviour
 {
-    [SerializeField] private GameObject ammoCanvas;
-    [SerializeField] private GameObject livesCanvas;
+    [SerializeField] private Image livesFill;
+    [SerializeField] private Image ammoFill;
+    [SerializeField] private Image ammoBase;
 
-    private TMP_Text _ammo;
-    private string _ammoFormat;
+    private float _ammoImageWidth;
 
-    private TMP_Text _lives;
-    private string _livesFormat;
-
+    private bool _firstReload = true;
 
     private void Awake()
     {
-        _ammo = ammoCanvas.GetComponent<TMP_Text>();
-        _ammoFormat = _ammo.text;
-        _ammo.text = string.Format(_ammoFormat, 0, 0);
-
-        _lives = livesCanvas.GetComponent<TMP_Text>();
-        _livesFormat = _lives.text;
-        _lives.text = string.Format(_livesFormat, 0, 0);
-
+        _ammoImageWidth = ammoBase.rectTransform.sizeDelta.x;
         StartCoroutine(SetUpEvents());
     }
 
@@ -44,20 +36,35 @@ public class HUD : MonoBehaviour
             yield return null;
 
         complexGameEvent.AddListener(OnAmmoChange);
-        
+
         while (!eventSystem.TryGet(PlayerEventKeys.LivesChange, out complexGameEvent))
             yield return null;
 
         complexGameEvent.AddListener(OnLivesChange);
     }
-    
+
     public void OnAmmoChange(int previous, int current, int max)
     {
-        _ammo.text = string.Format(_ammoFormat, current, max);
+        if (_firstReload)
+        {
+            ammoBase.rectTransform.sizeDelta = new Vector2
+            (
+                _ammoImageWidth * current,
+                ammoFill.rectTransform.sizeDelta.y
+            );
+
+            _firstReload = false;
+        }
+
+        ammoFill.rectTransform.sizeDelta = new Vector2
+        (
+            _ammoImageWidth * current,
+            ammoFill.rectTransform.sizeDelta.y
+        );
     }
 
     public void OnLivesChange(int previous, int current, int max)
     {
-        _lives.text = string.Format(_livesFormat, current, max);
+        livesFill.fillAmount = (float)current / max;
     }
 }
