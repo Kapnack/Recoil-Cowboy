@@ -43,9 +43,6 @@
 								<Reference Name="PlaylistRoot">
 									<Custom>
 										<MusicPlaylistItem Name="" ID="{90E88F56-446F-4694-954D-2C8926FC9071}" ShortID="388450197">
-											<PropertyList>
-												<Property Name="LoopCount" Type="int16" Value="0"/>
-											</PropertyList>
 											<ChildrenList>
 												<MusicPlaylistItem Name="" ID="{4E148EF4-9AB6-4741-ABD4-2B033A3A55E4}" ShortID="978756550">
 													<PropertyList>
@@ -70,6 +67,10 @@
 											</PropertyList>
 											<ChildrenList>
 												<MusicTransition Name="Transition" ID="{1C4D7000-CB9A-4397-AFCA-943B722D3BAC}">
+													<PropertyList>
+														<Property Name="PlayDestinationPreEntry" Type="bool" Value="False"/>
+														<Property Name="PlaySourcePostExit" Type="bool" Value="False"/>
+													</PropertyList>
 													<TransitionInfo/>
 												</MusicTransition>
 											</ChildrenList>
