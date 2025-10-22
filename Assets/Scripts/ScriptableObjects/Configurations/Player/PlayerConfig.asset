@@ -15,5 +15,5 @@ MonoBehaviour:
   <AreaOfSight>k__BackingField: 10
   <MaxLives>k__BackingField: 3
   <InvincibleTime>k__BackingField: 1
-  <MaxBullets>k__BackingField: 100
+  <MaxBullets>k__BackingField: 3
   <KnockBack>k__BackingField: 25

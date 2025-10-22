@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1320f497c87445a6afb0305f1bcf3c7d, type: 3}
   m_Name: BarrelEnemyConfig
   m_EditorClassIdentifier: 
-  <AreaOfSight>k__BackingField: 5
-  <AttackDistance>k__BackingField: 17.42
+  <AreaOfSight>k__BackingField: 3
+  <AttackDistance>k__BackingField: 10
   <AttackRadius>k__BackingField: 41.47
   <FireOffset>k__BackingField: 0.4
   <FireForce>k__BackingField: 45
-  <ColdDown>k__BackingField: 0.5
+  <ColdDown>k__BackingField: 0.8
   <RaycastOffSet>k__BackingField: 1
