@@ -39,7 +39,7 @@ public class GameplayManager : MonoBehaviour
             eventSystem.Unregister(GameplayManagerKeys.LoseCondition);
         }
         
-        _shaderManager.StartOffTransition();
+        _shaderManager?.StartOffTransition();
     }
 
     private IEnumerator Start()
@@ -75,6 +75,6 @@ public class GameplayManager : MonoBehaviour
 
     private void OnPlayerOneLive()
     {
-        _shaderManager.StartOnTransition();
+        _shaderManager?.StartOnTransition();
     }
 }

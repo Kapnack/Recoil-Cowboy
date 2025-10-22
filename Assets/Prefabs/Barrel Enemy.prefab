@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4415199804259382029}
   - component: {fileID: 3550326503966287365}
   - component: {fileID: 5543580374879749042}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Barrel Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 788f26f9a96a494db31207ac091e6e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resolution: 30
+  desireColor: {r: 0, g: 1, b: 1, a: 1}
   config: {fileID: 11400000, guid: 07cc67f5dab2f354bb0ed4fd81e4a9b0, type: 2}
 --- !u!1 &2467527564535483513
 GameObject:
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 6496576619547635662}
   - component: {fileID: 8479332790381699179}
   - component: {fileID: 3288452859153562668}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: BarrelFOV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be5b83cca0958744bb21d0f288c8f2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resolution: 30
+  desireColor: {r: 1, g: 1, b: 0, a: 1}
   config: {fileID: 11400000, guid: 07cc67f5dab2f354bb0ed4fd81e4a9b0, type: 2}
 --- !u!1001 &8094176401683760218
 PrefabInstance:
@@ -385,11 +385,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 769465469398836518, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1065823079188871224, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1270044099565071002, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -437,19 +437,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1939867049301405728, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2115716902527049284, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5698424365965158037, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8556278155734375525, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

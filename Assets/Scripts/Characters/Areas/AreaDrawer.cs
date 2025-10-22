@@ -20,16 +20,26 @@ namespace Characters.Areas
             LineRenderer = GetComponent<LineRenderer>();
             LineRenderer.useWorldSpace = true;
             LineRenderer.loop = true;
-            LineRenderer.startWidth = 0.5f;
-            LineRenderer.endWidth = 0.5f;
+            LineRenderer.startWidth = 0.1f;
+            LineRenderer.endWidth = 0.1f;
             LineRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             
-            LineRenderer.material = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
-            LineRenderer.material.SetColor("_BaseColor", desireColor);
+            var material = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
+            material.SetFloat("_Surface", 1f);
+            material.SetFloat("_Blend", 0f);
+            material.SetOverrideTag("RenderType", "Transparent");
+            material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
             
-            LineRenderer.startColor = desireColor;
-            LineRenderer.endColor = desireColor;
+            var transparentColor = desireColor;
+            transparentColor.a = 0.1f;
+
+            material.SetColor("_BaseColor", transparentColor);
+
+            LineRenderer.material = material;
+            LineRenderer.startColor = transparentColor;
+            LineRenderer.endColor = transparentColor;
         }
+
 
         private void LateUpdate() => SetArea();
         

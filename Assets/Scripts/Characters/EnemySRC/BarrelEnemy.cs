@@ -20,8 +20,9 @@ namespace Characters.EnemySRC
         protected override void Awake()
         {
             base.Awake();
+            Rb.isKinematic = true;
         }
-        
+
         private void FixedUpdate()
         {
             Hidden = ShouldHide();
@@ -74,12 +75,15 @@ namespace Characters.EnemySRC
 
             foreach (var hit in colliderHits)
             {
-                if (hit.gameObject == gameObject)
+                if (hit.gameObject == gameObject || !hit.CompareTag(Tags.Player))
                     continue;
 
-                if (hit.TryGetComponent<IHealthSystem>(out _))
+                var dir = (hit.transform.position - transform.position).normalized;
+                
+                if (Physics.Raycast(transform.position, dir, out var hitInfo, config.AreaOfSight))
                 {
-                    return true;
+                    if (hitInfo.collider.CompareTag(Tags.Player))
+                        return true;
                 }
             }
 

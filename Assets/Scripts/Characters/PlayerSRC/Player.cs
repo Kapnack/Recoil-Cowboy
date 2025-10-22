@@ -19,8 +19,6 @@ namespace Characters.PlayerSRC
 
         private int _currentBullets;
 
-        private bool _instantReload;
-
         private Coroutine _reloadingCoroutine;
 
         private IMousePositionTracker _mouseTracker;
@@ -48,7 +46,7 @@ namespace Characters.PlayerSRC
                     case 1:
                         _oneLiveRemains?.Invoke();
                         break;
-                    
+
                     case 0 when !_isDead:
                         _dies?.Invoke();
                         _isDead = true;
@@ -127,10 +125,6 @@ namespace Characters.PlayerSRC
 
             simpleEvent.AddListener(AddBulletsOverTime);
 
-            eventSystem.TryGet(PlayerEventKeys.InstantReload, out simpleEvent);
-
-            simpleEvent.AddListener(ChangeInstantReloadMode);
-
             while (!eventSystem.TryGet(PlayerEventKeys.Reload, out simpleEvent))
                 yield return null;
 
@@ -154,13 +148,13 @@ namespace Characters.PlayerSRC
             eventSystem.Get(PlayerEventKeys.Attack).RemoveListener(OnAttack);
 
             eventSystem.Get(PlayerEventKeys.ReloadOvertime).RemoveListener(AddBulletsOverTime);
-            eventSystem.Get(PlayerEventKeys.InstantReload).RemoveListener(ChangeInstantReloadMode);
         }
 
         private void OnAttack()
         {
             AkUnitySoundEngine.SetRTPCValue("BulletCount", CurrentBullets);
             AkUnitySoundEngine.PostEvent("sfx_Gunshot", gameObject);
+
             if (CurrentBullets == 0)
                 return;
 
@@ -177,9 +171,11 @@ namespace Characters.PlayerSRC
             if (Physics.Raycast(transform.position, dir, out var hit))
             {
                 if (hit.transform.gameObject.TryGetComponent<IHealthSystem>(out var healthSystem))
+                {
                     healthSystem.ReceiveDamage();
+                    AddBullet();
+                }
             }
-            
         }
 
         private void ApplyKnockBack(Vector3 dir, Vector3 mousePos)
@@ -191,11 +187,11 @@ namespace Characters.PlayerSRC
             distance = Mathf.Clamp01(distance / _config.AreaOfSight);
 
             distance = Mathf.Pow(distance, 0.5f);
-            
+
             Rb.AddForce(dir * (-_config.KnockBack * distance), ForceMode.Impulse);
 
             if (dir.y < -0.5f)
-            AkUnitySoundEngine.PostEvent("sfx_Jump", gameObject);
+                AkUnitySoundEngine.PostEvent("sfx_Jump", gameObject);
         }
 
         public void ReceiveDamage()
@@ -219,14 +215,7 @@ namespace Characters.PlayerSRC
 
         public void InstantDead() => CurrentLives = 0;
 
-        private void AddBullet()
-        {
-            if (_instantReload)
-                CurrentBullets = _config.MaxBullets;
-            else
-                ++CurrentBullets;
-        }
-
+        private void AddBullet() => ++CurrentBullets;
 
         private void AddBulletsOverTime() => _reloadingCoroutine ??= StartCoroutine(ReloadingOverTime());
 
@@ -250,8 +239,6 @@ namespace Characters.PlayerSRC
             StopCoroutine(_reloadingCoroutine);
             _reloadingCoroutine = null;
         }
-
-        private void ChangeInstantReloadMode() => _instantReload = !_instantReload;
 
         private void OnDrawGizmos()
         {
