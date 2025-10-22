@@ -91,18 +91,19 @@ namespace Characters.EnemySRC
                 if (!obj.CompareTag(Tags.Player))
                     continue;
 
-                if (obj.transform.TryGetComponent<IHealthSystem>(out var healthSystem))
-                {
-                    if (healthSystem is IPlayerHealthSystem playerHealthSystem)
-                    {
-                        if (playerHealthSystem.Invincible)
-                            return;
-                    }
+                var dir = (obj.transform.position - transform.position).normalized;
 
-                    var direction = (obj.transform.position - transform.position).normalized;
-                    if (Physics.Raycast(transform.position, direction, out var hit, config.AreaOfSight))
+                if (Physics.Raycast(transform.position, dir, out _hit, config.AreaOfSight))
+                {
+                    if (!_hit.collider.CompareTag(Tags.Player))
+                        return;
+
+                    if (obj.transform.TryGetComponent<IHealthSystem>(out var healthSystem))
                     {
-                        Debug.DrawLine(transform.position, hit.transform.position, Color.red);
+                        if (healthSystem is IPlayerHealthSystem playerHealthSystem)
+                            if (playerHealthSystem.Invincible)
+                                return;
+                        
                         healthSystem.ReceiveDamage();
                         ReceiveDamage();
                     }
@@ -122,6 +123,7 @@ namespace Characters.EnemySRC
             Gizmos.DrawRay(_raycastOrigin, Vector3.down * config.RaycastDistance);
             Gizmos.DrawRay(_raycastOrigin, transform.right * config.RaycastDistance);
         }
+
         public override void ReceiveDamage()
         {
             base.ReceiveDamage();
