@@ -24,12 +24,21 @@ namespace Characters.Areas
             LineRenderer.endWidth = 0.1f;
             LineRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             
-            var material = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
+            LineRenderer.alignment = LineAlignment.TransformZ;
+            LineRenderer.generateLightingData = false;
+            LineRenderer.textureMode = LineTextureMode.Stretch;
+            
+            var material = new Material(Shader.Find("Sprites/Default"));
             material.SetFloat("_Surface", 1f);
-            material.SetFloat("_Blend", 0f);
             material.SetOverrideTag("RenderType", "Transparent");
             material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+            material.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
+            material.SetFloat("_Blend", 0f);
             
+            material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            material.SetInt("_ZWrite", 0);
+
             var transparentColor = desireColor;
             transparentColor.a = 0.1f;
 
@@ -39,7 +48,6 @@ namespace Characters.Areas
             LineRenderer.startColor = transparentColor;
             LineRenderer.endColor = transparentColor;
         }
-
 
         private void LateUpdate() => SetArea();
         
