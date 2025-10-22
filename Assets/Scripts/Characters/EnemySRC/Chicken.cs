@@ -1,19 +1,23 @@
+using System;
 using Characters.PlayerSRC;
 using ScriptableObjects;
 using Systems.TagClassGenerator;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace Characters.EnemySRC
 {
     public class Chicken : Enemy
     {
-        [SerializeField] private ChickenConfig chickenConfig;
+        [SerializeField] private ChickenConfig config;
         private Vector3 _raycastOrigin;
 
         private bool _alreadyRotated;
 
         private float _jumpTimer;
+
+        private RaycastHit _hit;
 
         protected override void Awake()
         {
@@ -30,39 +34,46 @@ namespace Characters.EnemySRC
 
         private void Movement()
         {
-            _raycastOrigin = transform.position + chickenConfig.RaycastOffSet * transform.right;
+            _raycastOrigin = transform.position + config.RaycastOffSet * transform.right;
 
-            if (!Physics.Raycast(_raycastOrigin, Vector3.down, chickenConfig.RaycastDistance))
+            if (!Physics.Raycast(_raycastOrigin, Vector3.down, out _hit, config.RaycastDistance))
             {
+                if (_hit.collider && _hit.collider.CompareTag(Tags.Player))
+                    return;
+
                 if (!_alreadyRotated)
                     Rotate();
             }
-            else if (Physics.Raycast(_raycastOrigin, transform.right, chickenConfig.RaycastDistance))
+            else if (Physics.Raycast(_raycastOrigin, transform.right, out _hit, config.RaycastDistance))
             {
+                if (_hit.collider && _hit.collider.CompareTag(Tags.Player))
+                    return;
+
                 Rotate();
             }
             else
             {
-                if (_rb.linearVelocity.sqrMagnitude < chickenConfig.MaxVelocity * chickenConfig.MaxVelocity)
-                    _rb.AddForce(transform.right * chickenConfig.MoveSpeed, ForceMode.Force);
+                if (Rb.linearVelocity.sqrMagnitude < config.MaxVelocity * config.MaxVelocity)
+                    Rb.AddForce(transform.right * config.MoveSpeed, ForceMode.Force);
                 else
-                    _rb.linearVelocity = transform.right * chickenConfig.MaxVelocity;
+                    Rb.linearVelocity = transform.right * config.MaxVelocity;
 
                 _alreadyRotated = false;
             }
 
             if (_jumpTimer < Time.time)
             {
-                _rb.AddForce(Vector3.up * chickenConfig.JumpForce, ForceMode.Impulse);
+                Rb.AddForce(Vector3.up * config.JumpForce, ForceMode.Impulse);
                 SetJumpTimer();
             }
         }
 
-        private void SetJumpTimer() => _jumpTimer = Time.time + Random.Range(chickenConfig.JumpMinTimer, chickenConfig.JumpMaxTimer);
+        private void SetJumpTimer() =>
+            _jumpTimer = Time.time + Random.Range(config.JumpMinTimer, config.JumpMaxTimer);
 
         private void Rotate()
         {
-            _rb.linearVelocity = new Vector3(0.0f, _rb.linearVelocity.y, 0.0f);
+            Rb.linearVelocity = new Vector3(0.0f, Rb.linearVelocity.y, 0.0f);
 
             var currentRotation = transform.eulerAngles;
             currentRotation.y += 180.0f;
@@ -73,25 +84,26 @@ namespace Characters.EnemySRC
 
         private void CheckForEnemies()
         {
-            var objects = Physics.OverlapSphere(transform.position, chickenConfig.AreaOfSight);
+            var objects = Physics.OverlapSphere(transform.position, config.AreaOfSight);
 
             foreach (var obj in objects)
             {
                 if (!obj.CompareTag(Tags.Player))
                     continue;
 
-                if (obj.transform.TryGetComponent<IHealthSystem>(out var healthSystem))
-                {
-                    if (healthSystem is IPlayerHealthSystem playerHealthSystem)
-                    {
-                        if (playerHealthSystem.Invincible)
-                            return;
-                    }
+                var dir = (obj.transform.position - transform.position).normalized;
 
-                    var direction = (obj.transform.position - transform.position).normalized;
-                    if (Physics.Raycast(transform.position, direction, out var hit, chickenConfig.AreaOfSight))
+                if (Physics.Raycast(transform.position, dir, out _hit, config.AreaOfSight))
+                {
+                    if (!_hit.collider.CompareTag(Tags.Player))
+                        return;
+
+                    if (obj.transform.TryGetComponent<IHealthSystem>(out var healthSystem))
                     {
-                        Debug.DrawLine(transform.position, hit.transform.position, Color.red);
+                        if (healthSystem is IPlayerHealthSystem playerHealthSystem)
+                            if (playerHealthSystem.Invincible)
+                                return;
+                        
                         healthSystem.ReceiveDamage();
                         ReceiveDamage();
                     }
@@ -101,23 +113,28 @@ namespace Characters.EnemySRC
 
         private void OnDrawGizmos()
         {
-            if (!chickenConfig)
+            if (!config)
                 return;
 
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, chickenConfig.AreaOfSight);
+            Gizmos.DrawWireSphere(transform.position, config.AreaOfSight);
 
             Gizmos.color = Color.yellow;
-            Gizmos.DrawRay(_raycastOrigin, Vector3.down * chickenConfig.RaycastDistance);
-            Gizmos.DrawRay(_raycastOrigin, transform.right * chickenConfig.RaycastDistance);
+            Gizmos.DrawRay(_raycastOrigin, Vector3.down * config.RaycastDistance);
+            Gizmos.DrawRay(_raycastOrigin, transform.right * config.RaycastDistance);
         }
 
+        public override void ReceiveDamage()
+        {
+            base.ReceiveDamage();
+            AkUnitySoundEngine.PostEvent("sfx_ChickenExp", gameObject);
+        }
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            if (chickenConfig == null)
+            if (config == null)
                 Debug.LogError($"_config is null in GameObject {gameObject.name}");
-            else if (!(chickenConfig as ChickenConfig))
+            else if (!config)
                 Debug.LogError($"_config is not ChickenConfig in GameObject {gameObject.name}");
         }
 #endif

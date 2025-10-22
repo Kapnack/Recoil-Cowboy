@@ -22,22 +22,22 @@ namespace Characters.EnemySRC
                 Destroy(gameObject);
         }
 
-        public void Launch(Character owner, Vector3 spawnPosition, float speed)
+        public void Launch(Character owner, Vector3 spawnPosition, Vector3 dir, float speed)
         {
             _owner = owner;
             transform.position = spawnPosition;
 
-            _rb.AddForce(transform.right * speed, ForceMode.Impulse);
-
+            _rb.AddForce(dir * speed, ForceMode.Impulse);
+            
             _timeToDestroy = Time.time + secondsToExist;
         }
 
-        private void OnCollisionEnter(Collision other)
+        private void OnCollisionEnter(Collision collision)
         {
-            if (_owner && other.gameObject == _owner.gameObject)
+            if (_owner && collision.gameObject == _owner.gameObject)
                 return;
 
-            if (other.transform.TryGetComponent<IHealthSystem>(out var healthSystem))
+            if (collision.transform.TryGetComponent<IHealthSystem>(out var healthSystem))
             {
                 healthSystem.ReceiveDamage();
             }

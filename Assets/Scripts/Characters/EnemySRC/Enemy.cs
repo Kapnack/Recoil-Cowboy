@@ -1,6 +1,3 @@
-using ScriptableObjects;
-using UnityEngine;
-
 namespace Characters.EnemySRC
 {
     public abstract class Enemy : Character, IHealthSystem

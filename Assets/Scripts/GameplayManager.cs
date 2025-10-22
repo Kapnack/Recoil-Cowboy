@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class GameplayManager : MonoBehaviour
 {
+    private IShaderManager _shaderManager;
+
     private List<Enemy> _enemies;
 
     private readonly SimpleEvent _winCondition = new();
@@ -16,6 +18,8 @@ public class GameplayManager : MonoBehaviour
     private void Awake()
     {
         SetUpEvents();
+
+        _shaderManager = ServiceProvider.GetService<IShaderManager>();
     }
 
     private void SetUpEvents()
@@ -34,6 +38,8 @@ public class GameplayManager : MonoBehaviour
             eventSystem.Unregister(GameplayManagerKeys.WinCondition);
             eventSystem.Unregister(GameplayManagerKeys.LoseCondition);
         }
+        
+        _shaderManager?.StartOffTransition();
     }
 
     private IEnumerator Start()
@@ -46,6 +52,10 @@ public class GameplayManager : MonoBehaviour
             yield return null;
         simpleEvent.AddListener(OnWinConditionMeet);
 
+        while (!eventSystem.TryGet(PlayerEventKeys.OnOneLive, out simpleEvent))
+            yield return null;
+
+        simpleEvent.AddListener(OnPlayerOneLive);
 
         while (!eventSystem.TryGet(PlayerEventKeys.Dies, out simpleEvent))
             yield return null;
@@ -61,5 +71,10 @@ public class GameplayManager : MonoBehaviour
     private void OnLoseConditionMeet()
     {
         _loseCondition?.Invoke();
+    }
+
+    private void OnPlayerOneLive()
+    {
+        _shaderManager?.StartOnTransition();
     }
 }

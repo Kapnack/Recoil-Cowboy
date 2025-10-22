@@ -6,13 +6,10 @@ namespace Characters.EnemySRC
     {
         private void OnCollisionEnter(Collision collision)
         {
-            OnCollisionStay(collision);
-        }
-
-        private void OnCollisionStay(Collision collision)
-        {
             if (collision.transform.TryGetComponent<IHealthSystem>(out var healthSystem))
                 healthSystem.ReceiveDamage();
         }
+
+        private void OnCollisionStay(Collision collision) => OnCollisionEnter(collision);
     }
 }

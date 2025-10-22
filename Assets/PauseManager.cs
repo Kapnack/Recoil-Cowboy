@@ -2,21 +2,25 @@ using Systems;
 using Systems.CentralizeEventSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 public class PauseManager : MonoBehaviour
 {
     private ICentralizeEventSystem _eventSystem;
-    private SimpleEvent _loadMainMenu = new();
+    private readonly SimpleEvent _loadMainMenu = new();
 
     [SerializeField] private GameObject panel;
+    [SerializeField] private GameObject settingsMenu;
     private bool _paused = false;
 
     private IInputReader _inputReader;
 
+    private GameObject _menuGo;
+
     private void Awake()
     {
         _inputReader = ServiceProvider.GetService<IInputReader>();
-        
+
         panel.gameObject.SetActive(_paused);
 
         _eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
@@ -39,7 +43,14 @@ public class PauseManager : MonoBehaviour
         panel.gameObject.SetActive(_paused);
         _inputReader.SwitchPlayerMapState();
         Time.timeScale = _paused ? 0.0f : 1.0f;
+
+        if (_menuGo)
+            Destroy(_menuGo);
     }
+
+    public void Continue() => PauseHandler();
+
+    public void Settings() => _menuGo = Instantiate(settingsMenu);
 
     public void GoToMainMenu() => _loadMainMenu?.Invoke();
 

@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{C8DE2B24-578C-46A2-A6DE-3C7B9F231A87}" SchemaVersion="123">
 	<GameParameters>
-		<WorkUnit Name="Default Work Unit" ID="{C8DE2B24-578C-46A2-A6DE-3C7B9F231A87}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{C8DE2B24-578C-46A2-A6DE-3C7B9F231A87}" PersistMode="Standalone">
+			<ChildrenList>
+				<GameParameter Name="BulletCount" ID="{B5324104-6BA1-488E-B220-3C53A343FD57}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="0"/>
+						<Property Name="Max" Type="Real64" Value="6"/>
+					</PropertyList>
+				</GameParameter>
+			</ChildrenList>
+		</WorkUnit>
 	</GameParameters>
 </WwiseDocument>

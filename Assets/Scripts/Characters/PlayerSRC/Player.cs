@@ -19,14 +19,13 @@ namespace Characters.PlayerSRC
 
         private int _currentBullets;
 
-        private bool _instantReload;
-
         private Coroutine _reloadingCoroutine;
 
         private IMousePositionTracker _mouseTracker;
 
         private readonly ComplexGameEvent<int, int, int> _livesChangeEvent = new();
         private readonly ComplexGameEvent<int, int, int> _bulletsChangeEvent = new();
+        private readonly SimpleEvent _oneLiveRemains = new();
         private readonly SimpleEvent _dies = new();
 
         public bool Invincible { get; private set; }
@@ -42,10 +41,16 @@ namespace Characters.PlayerSRC
                 _livesChangeEvent?.Invoke(_currentLives, newValue, _config.MaxLives);
                 _currentLives = newValue;
 
-                if (newValue == 0 && !_isDead)
+                switch (newValue)
                 {
-                    _dies?.Invoke();
-                    _isDead = true;
+                    case 1:
+                        _oneLiveRemains?.Invoke();
+                        break;
+
+                    case 0 when !_isDead:
+                        _dies?.Invoke();
+                        _isDead = true;
+                        break;
                 }
             }
         }
@@ -108,6 +113,7 @@ namespace Characters.PlayerSRC
 
             eventSystem.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
             eventSystem.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
+            eventSystem.Register(PlayerEventKeys.OnOneLive, _oneLiveRemains);
             eventSystem.Register(PlayerEventKeys.Dies, _dies);
 
             eventSystem.TryGet(PlayerEventKeys.Attack, out var simpleEvent);
@@ -118,10 +124,6 @@ namespace Characters.PlayerSRC
             eventSystem.TryGet(PlayerEventKeys.ReloadOvertime, out simpleEvent);
 
             simpleEvent.AddListener(AddBulletsOverTime);
-
-            eventSystem.TryGet(PlayerEventKeys.InstantReload, out simpleEvent);
-
-            simpleEvent.AddListener(ChangeInstantReloadMode);
 
             while (!eventSystem.TryGet(PlayerEventKeys.Reload, out simpleEvent))
                 yield return null;
@@ -140,16 +142,19 @@ namespace Characters.PlayerSRC
 
             eventSystem.Unregister(PlayerEventKeys.LivesChange);
             eventSystem.Unregister(PlayerEventKeys.BulletsChange);
+            eventSystem.Unregister(PlayerEventKeys.OnOneLive);
             eventSystem.Unregister(PlayerEventKeys.Dies);
 
             eventSystem.Get(PlayerEventKeys.Attack).RemoveListener(OnAttack);
 
             eventSystem.Get(PlayerEventKeys.ReloadOvertime).RemoveListener(AddBulletsOverTime);
-            eventSystem.Get(PlayerEventKeys.InstantReload).RemoveListener(ChangeInstantReloadMode);
         }
 
         private void OnAttack()
         {
+            AkUnitySoundEngine.SetRTPCValue("BulletCount", CurrentBullets);
+            AkUnitySoundEngine.PostEvent("sfx_Gunshot", gameObject);
+
             if (CurrentBullets == 0)
                 return;
 
@@ -166,21 +171,27 @@ namespace Characters.PlayerSRC
             if (Physics.Raycast(transform.position, dir, out var hit))
             {
                 if (hit.transform.gameObject.TryGetComponent<IHealthSystem>(out var healthSystem))
+                {
                     healthSystem.ReceiveDamage();
+                    AddBullet();
+                }
             }
         }
 
         private void ApplyKnockBack(Vector3 dir, Vector3 mousePos)
         {
-            _rb.linearVelocity = Vector3.zero;
+            Rb.linearVelocity = Vector3.zero;
 
             var distance = (mousePos - transform.position).magnitude;
 
-            distance = Mathf.Clamp01(distance / _config.MaxDistance);
+            distance = Mathf.Clamp01(distance / _config.AreaOfSight);
 
             distance = Mathf.Pow(distance, 0.5f);
-            
-            _rb.AddForce(dir * (-_config.KnockBack * distance), ForceMode.Impulse);
+
+            Rb.AddForce(dir * (-_config.KnockBack * distance), ForceMode.Impulse);
+
+            if (dir.y < -0.5f)
+                AkUnitySoundEngine.PostEvent("sfx_Jump", gameObject);
         }
 
         public void ReceiveDamage()
@@ -204,14 +215,7 @@ namespace Characters.PlayerSRC
 
         public void InstantDead() => CurrentLives = 0;
 
-        private void AddBullet()
-        {
-            if (_instantReload)
-                CurrentBullets = _config.MaxBullets;
-            else
-                ++CurrentBullets;
-        }
-
+        private void AddBullet() => ++CurrentBullets;
 
         private void AddBulletsOverTime() => _reloadingCoroutine ??= StartCoroutine(ReloadingOverTime());
 
@@ -236,12 +240,10 @@ namespace Characters.PlayerSRC
             _reloadingCoroutine = null;
         }
 
-        private void ChangeInstantReloadMode() => _instantReload = !_instantReload;
-
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, _config.MaxDistance);
+            Gizmos.DrawWireSphere(transform.position, _config.AreaOfSight);
         }
     }
 }

@@ -40,7 +40,6 @@ namespace Systems
 
             _eventSystem.Register(PlayerEventKeys.Attack, _attackEvent);
             _eventSystem.Register(PlayerEventKeys.ReloadOvertime, _reloadEvent);
-            _eventSystem.Register(PlayerEventKeys.InstantReload, _instantReloadEvent);
             _eventSystem.Register(PlayerEventKeys.Paused, _paused);
         }
 
@@ -61,7 +60,7 @@ namespace Systems
             paused.action.started -= HandlePause;
         }
 
-        public void HandlePause(InputAction.CallbackContext _) => _paused?.Invoke();
+        private void HandlePause(InputAction.CallbackContext _) => _paused?.Invoke();
 
         #region PlayerActionsEvents
 

@@ -1,3 +1,4 @@
+using System;
 using ScriptableObjects;
 using Systems.TagClassGenerator;
 using UnityEngine;
@@ -6,13 +7,21 @@ namespace Characters.EnemySRC
 {
     public class BarrelEnemy : Enemy
     {
-        [SerializeField] private BarrelEnemyConfig barrelConfig;
+        [SerializeField] private BarrelEnemyConfig config;
 
         [SerializeField] private GameObject bulletPrefab;
 
+        private Vector3 _targetDir;
+
         private bool Hidden { get; set; }
-        
+
         private float _coldDownTimer;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            Rb.isKinematic = true;
+        }
 
         private void FixedUpdate()
         {
@@ -30,41 +39,51 @@ namespace Characters.EnemySRC
 
         private bool TargetInSight()
         {
-            var raycastHits = Physics.SphereCastAll(transform.position + transform.right * barrelConfig.FireOffset,
-                barrelConfig.AttackRadius,
-                transform.right, barrelConfig.RaycastDistance);
+            var origin = transform.position + transform.right * config.RaycastOffSet;
 
-            foreach (var obj in raycastHits)
+            var raycastHits = Physics.OverlapSphere(origin, config.AttackDistance);
+
+            foreach (var t in raycastHits)
             {
-                if (!obj.collider.CompareTag(Tags.Player))
+                if (!t.CompareTag(Tags.Player))
                     continue;
 
-                var dir = (obj.transform.position - transform.position).normalized;
+                var target = t.transform;
+                _targetDir = (target.position - origin).normalized;
 
-                if (Physics.Raycast(transform.position + transform.right * barrelConfig.FireOffset, dir,
-                        barrelConfig.RaycastDistance))
+                var angle = Vector3.Angle(transform.right, _targetDir);
+
+                if (angle > -config.AttackRadius && angle < config.AttackRadius)
                 {
-                    return true;
+                    var targetDistance = Vector3.Distance(origin, target.position);
+
+                    if (!Physics.Raycast(origin, _targetDir, out var hit, targetDistance))
+                        return false;
+
+                    if (hit.collider.CompareTag(Tags.Player))
+                        return true;
                 }
             }
 
             return false;
         }
 
+
         private bool ShouldHide()
         {
-            var colliderHits = Physics.OverlapSphere(transform.position, barrelConfig.AreaOfSight);
-
-            Hidden = false;
+            var colliderHits = Physics.OverlapSphere(transform.position, config.AreaOfSight);
 
             foreach (var hit in colliderHits)
             {
-                if (hit.gameObject == this.gameObject)
+                if (hit.gameObject == gameObject || !hit.CompareTag(Tags.Player))
                     continue;
 
-                if (hit.TryGetComponent<IHealthSystem>(out var healthSystem))
+                var dir = (hit.transform.position - transform.position).normalized;
+                
+                if (Physics.Raycast(transform.position, dir, out var hitInfo, config.AreaOfSight))
                 {
-                    return true;
+                    if (hitInfo.collider.CompareTag(Tags.Player))
+                        return true;
                 }
             }
 
@@ -73,14 +92,14 @@ namespace Characters.EnemySRC
 
         private void Shoot()
         {
-            var bulletGO = Instantiate(bulletPrefab, transform.position + transform.right * barrelConfig.FireOffset,
+            var bulletGO = Instantiate(bulletPrefab, transform.position + transform.right * config.FireOffset,
                 gameObject.transform.rotation);
 
             if (bulletGO.TryGetComponent<Bullet>(out var bullet))
-                bullet.Launch(this, transform.position + transform.right * barrelConfig.FireOffset,
-                    barrelConfig.FireForce);
+                bullet.Launch(this, transform.position + transform.right * config.FireOffset,
+                    _targetDir, config.FireForce);
 
-            _coldDownTimer = barrelConfig.ColdDown + Time.time;
+            _coldDownTimer = config.ColdDown + Time.time;
         }
 
         public override void ReceiveDamage()
@@ -88,32 +107,14 @@ namespace Characters.EnemySRC
             if (!Hidden)
                 base.ReceiveDamage();
         }
-        
+
         private void OnDrawGizmos()
         {
-            if (!barrelConfig)
+            if (!config)
                 return;
 
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, barrelConfig.AreaOfSight);
-
-            if (Hidden)
-                return;
-
-            Gizmos.color = Color.cyan;
-
-            var origin = transform.position + transform.right * barrelConfig.FireOffset;
-            var direction = transform.right.normalized;
-
-            // Start sphere
-            Gizmos.DrawWireSphere(origin, barrelConfig.AttackRadius);
-
-            // End sphere
-            var end = origin + direction * barrelConfig.RaycastDistance;
-            Gizmos.DrawWireSphere(end, barrelConfig.AttackRadius);
-
-            // Direction line
-            Gizmos.DrawLine(origin, end);
+            Gizmos.DrawWireSphere(transform.position, config.AreaOfSight);
         }
     }
 }

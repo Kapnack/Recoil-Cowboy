@@ -12,37 +12,20 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private SceneRef mainMenuScene;
-    [SerializeField] private List<SceneRef> levels = new();
+    [SerializeField] private SceneRef gameplay;
     [SerializeField] private SceneRef winScene;
     [SerializeField] private SceneRef gameOverScene;
 
     private Camera _mainCamera;
-    
-    private readonly SceneRef[] _scenesToLoad = new SceneRef[2];
+
+    private readonly SceneRef[] _scenesToLoad = new SceneRef[1];
 
     private ISceneLoader _sceneLoader;
 
     private IInputReader _inputReader;
-    
+
     private readonly SimpleEvent _loadingStarted = new();
     private readonly SimpleEvent _loadingEnded = new();
-
-    private int _currentLevel;
-
-    private int CurrentLevel
-    {
-        get => _currentLevel;
-        set
-        {
-            var newValue = value;
-
-            if (newValue > levels.Count - 1)
-                newValue = 0;
-
-            _currentLevel = newValue;
-        }
-    }
-
 
     private void Awake()
     {
@@ -63,10 +46,10 @@ public class GameManager : MonoBehaviour
 
         while (!ServiceProvider.TryGetService(out _inputReader))
             yield return null;
-        
+
         while (!_loadingStarted.HasInvocations())
             yield return null;
-        
+
         LoadMainMenu();
     }
 
@@ -75,10 +58,10 @@ public class GameManager : MonoBehaviour
         try
         {
             _inputReader.DeactivatePlayerMap();
-        
+
             _scenesToLoad[0] = mainMenuScene;
             await TryLoadScenes(_scenesToLoad);
-        
+
             FindAfterMatchMenuEvents();
         }
         catch (Exception e)
@@ -87,16 +70,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private async void LoadCurrentLevel()
+    private async void LoadGameplay()
     {
         try
         {
             _inputReader.ActivePlayerMap();
-            
-            _scenesToLoad[0] = levels[CurrentLevel];
+
+            _scenesToLoad[0] = gameplay;
             await TryLoadScenes(_scenesToLoad);
 
-            FindGameplayEvents();
+            StartCoroutine(FindGameplayEvents());
         }
         catch (Exception e)
         {
@@ -109,10 +92,10 @@ public class GameManager : MonoBehaviour
         try
         {
             _inputReader.DeactivatePlayerMap();
-            
+
             _scenesToLoad[0] = winScene;
             await TryLoadScenes(_scenesToLoad);
-        
+
             FindAfterMatchMenuEvents();
         }
         catch (Exception e)
@@ -126,10 +109,10 @@ public class GameManager : MonoBehaviour
         try
         {
             _inputReader.DeactivatePlayerMap();
-            
+
             _scenesToLoad[0] = gameOverScene;
             await TryLoadScenes(_scenesToLoad);
-        
+
             FindAfterMatchMenuEvents();
         }
         catch (Exception e)
@@ -141,7 +124,7 @@ public class GameManager : MonoBehaviour
     private async Task TryLoadScenes(SceneRef[] sceneRefs)
     {
         _loadingStarted.Invoke();
-        
+
         try
         {
             _mainCamera.transform.SetParent(null);
@@ -154,23 +137,25 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogException(e);
         }
-        
+
         _loadingEnded.Invoke();
     }
 
-    private void LevelCleared() => ++CurrentLevel;
-
-    private void FindGameplayEvents()
+    private IEnumerator FindGameplayEvents()
     {
+        //Change the function into a IEnumerator. To wait for the events
+
         ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
 
-        eventSystem.TryGet(GameplayManagerKeys.WinCondition, out var simpleEvent);
+        SimpleEvent simpleEvent;
 
-        simpleEvent.AddListener(LevelCleared);
+        while (!eventSystem.TryGet(GameplayManagerKeys.WinCondition, out simpleEvent))
+            yield return null;
+
         simpleEvent.AddListener(LoadWinScene);
 
         eventSystem.Get(GameplayManagerKeys.LoseCondition).AddListener(LoadGameOverMenu);
-        
+
         eventSystem.Get(GameManagerKeys.MainMenu).AddListener(LoadMainMenu);
     }
 
@@ -178,7 +163,7 @@ public class GameManager : MonoBehaviour
     {
         ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
 
-        eventSystem.Get(GameManagerKeys.ChangeToLevel).AddListener(LoadCurrentLevel);
+        eventSystem.Get(GameManagerKeys.ChangeToLevel).AddListener(LoadGameplay);
 
         eventSystem.Get(GameManagerKeys.MainMenu).AddListener(LoadMainMenu);
     }

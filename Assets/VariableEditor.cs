@@ -52,15 +52,15 @@ public class VariableEditor : MonoBehaviour
         //--------------------------------------------------------------------------------
         
         _modifierFormat = modifier.text;
-        modifier.text = string.Format(_modifierFormat, playerConfig.MaxDistance);
+        modifier.text = string.Format(_modifierFormat, playerConfig.AreaOfSight);
         
         modifierSlider.onValueChanged.AddListener(ModifyModifier);
     }
 
     private void ModifyModifier(float value)
     {
-        playerConfig.MaxDistance = value;
-        modifier.text = string.Format(_modifierFormat, playerConfig.MaxDistance);
+        playerConfig.AreaOfSight = value;
+        modifier.text = string.Format(_modifierFormat, playerConfig.AreaOfSight);
     }
 
     private void ModifyKnockBack(float value)
