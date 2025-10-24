@@ -200,7 +200,6 @@
 																<MusicClip Name="mx_01_drumbeat_bpm135" ID="{07439866-FE16-4B38-8703-BD8EA2E87A35}">
 																	<PropertyList>
 																		<Property Name="EndTrimOffset" Type="Real64" Value="25600"/>
-																		<Property Name="FadeInMode" Type="int16" Value="0"/>
 																		<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																	</PropertyList>
 																	<AudioSourceRef Name="mx_01_drumbeat_bpm135" ID="{20CBC2EC-6A44-4C42-9C1E-9CFD6DA97FFF}"/>
