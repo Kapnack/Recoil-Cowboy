@@ -1,11 +1,14 @@
+using System;
+
 namespace Characters.EnemySRC
 {
     public abstract class Enemy : Character, IHealthSystem
     {
+        protected abstract void SetUp();
+
         public virtual void ReceiveDamage()
         {
-            //TODO: Deactivate the Enemy to be reused by the Pool.
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

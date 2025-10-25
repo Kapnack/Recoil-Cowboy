@@ -25,7 +25,18 @@ namespace Characters.EnemySRC
 
             _spawnPosition = transform.position;
         }
+        
+        private void OnEnable() =>   _spawnPosition = transform.position;
 
+        protected override void SetUp()
+        {
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity))
+            {
+                transform.position = new Vector3(0, hit.point.y, 0);
+            }
+        }
+        
+        
         private void FixedUpdate()
         {
             _target = FindNearestTarget();
@@ -40,7 +51,7 @@ namespace Characters.EnemySRC
                     _backToStartCoroutine = null;
                 }
 
-                var direction = (_target.transform.position - transform.position).normalized;
+                Vector3 direction = (_target.transform.position - transform.position).normalized;
 
                 Rb.AddForce(direction * (config.MoveSpeed * Time.fixedDeltaTime), ForceMode.VelocityChange);
             }
@@ -77,7 +88,7 @@ namespace Characters.EnemySRC
         {
             Rb.linearVelocity = new Vector3(0.0f, Rb.linearVelocity.y, 0.0f);
 
-            var currentRotation = transform.eulerAngles;
+            Vector3 currentRotation = transform.eulerAngles;
             currentRotation.y += 180.0f;
             transform.rotation = Quaternion.Euler(currentRotation);
         }
@@ -101,20 +112,20 @@ namespace Characters.EnemySRC
 
         private Transform FindNearestTarget()
         {
-            var objects = Physics.OverlapSphere(transform.position, config.AreaOfSight);
+            Collider[] objects = Physics.OverlapSphere(transform.position, config.AreaOfSight);
 
-            foreach (var obj in objects)
+            foreach (Collider obj in objects)
             {
                 if (!obj.CompareTag(Tags.Player))
                     continue;
 
-                if (obj.transform.TryGetComponent<IPlayerHealthSystem>(out var player))
+                if (obj.transform.TryGetComponent(out IPlayerHealthSystem player))
                 {
                     if (!player.Invincible)
                     {
-                        var direction = (obj.transform.position - transform.position).normalized;
+                        Vector3 direction = (obj.transform.position - transform.position).normalized;
 
-                        if (Physics.Raycast(transform.position, direction, out var hit, config.AreaOfSight))
+                        if (Physics.Raycast(transform.position, direction, out RaycastHit hit, config.AreaOfSight))
                         {
                             Debug.DrawLine(transform.position, hit.transform.position, Color.red);
 
@@ -139,7 +150,7 @@ namespace Characters.EnemySRC
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.transform.TryGetComponent<IHealthSystem>(out var healthSystem))
+            if (collision.transform.TryGetComponent(out IHealthSystem healthSystem))
                 healthSystem.ReceiveDamage();
         }
         

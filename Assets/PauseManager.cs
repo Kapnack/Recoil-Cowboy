@@ -11,7 +11,7 @@ public class PauseManager : MonoBehaviour
 
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject settingsMenu;
-    private bool _paused = false;
+    private bool _paused;
 
     private IInputReader _inputReader;
 

@@ -79,7 +79,7 @@ namespace Characters.PlayerSRC
 
         private IEnumerator Start()
         {
-            var cam = Camera.main;
+            Camera cam = Camera.main;
 
             while (cam == null)
             {
@@ -138,7 +138,7 @@ namespace Characters.PlayerSRC
 
         private void UnRegisterEvents()
         {
-            var eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
+            ICentralizeEventSystem eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
 
             eventSystem.Unregister(PlayerEventKeys.LivesChange);
             eventSystem.Unregister(PlayerEventKeys.BulletsChange);
@@ -158,8 +158,8 @@ namespace Characters.PlayerSRC
             if (CurrentBullets == 0)
                 return;
 
-            var dir = _mouseTracker.GetMouseDir(transform);
-            var mousePos = _mouseTracker.GetMouseWorldPos();
+            Vector3 dir = _mouseTracker.GetMouseDir(transform);
+            Vector3 mousePos = _mouseTracker.GetMouseWorldPos();
 
             if (dir.sqrMagnitude < Mathf.Epsilon * Mathf.Epsilon)
                 return;
@@ -182,7 +182,7 @@ namespace Characters.PlayerSRC
         {
             Rb.linearVelocity = Vector3.zero;
 
-            var distance = (mousePos - transform.position).magnitude;
+            float distance = (mousePos - transform.position).magnitude;
 
             distance = Mathf.Clamp01(distance / _config.AreaOfSight);
 

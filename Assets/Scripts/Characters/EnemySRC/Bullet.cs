@@ -9,7 +9,7 @@ namespace Characters.EnemySRC
         private Character _owner;
         private Rigidbody _rb;
         [SerializeField] private float secondsToExist = 5.0f;
-        private float _timeToDestroy = 0.0f;
+        private float _timeToDestroy;
 
         private void Awake()
         {

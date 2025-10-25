@@ -1,8 +1,7 @@
-﻿using System.Collections;
+﻿using InputSystem;
 using Systems.CentralizeEventSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace Systems
 {
@@ -10,14 +9,7 @@ namespace Systems
     {
         private ICentralizeEventSystem _eventSystem;
 
-        [SerializeField] private InputActionAsset gameplayActionMap;
-
-        private InputActionMap _gameplayActionMap;
-
-        private InputAction _attack;
-        private InputAction _reload;
-        private InputAction _activeInstantReload;
-        [SerializeField] private InputActionReference paused;
+        private CustomInputSytem _inputSystem;
 
         private readonly SimpleEvent _attackEvent = new();
         private readonly SimpleEvent _reloadEvent = new();
@@ -26,16 +18,15 @@ namespace Systems
 
         private void Awake()
         {
-            ServiceProvider.SetService<IInputReader>(this);
+            _inputSystem = new CustomInputSytem();
             
-            _gameplayActionMap = gameplayActionMap.FindActionMap("Player");
-            _attack = _gameplayActionMap.FindAction("Attack");
-            _reload = _gameplayActionMap.FindAction("Reload");
-            _activeInstantReload = _gameplayActionMap.FindAction("ChangeInstantReload");
+            ServiceProvider.SetService<IInputReader>(this);
         }
 
         private void Start()
         {
+            _inputSystem.UI.Enable();
+            
             _eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
 
             _eventSystem.Register(PlayerEventKeys.Attack, _attackEvent);
@@ -45,19 +36,19 @@ namespace Systems
 
         private void OnEnable()
         {
-            _attack.started += HandleAttack;
-            _reload.started += HandleReload;
-            _activeInstantReload.started += HandleInstantReload;
-            paused.action.started += HandlePause;
+            _inputSystem.Player.Attack.started += HandleAttack;
+            _inputSystem.Player.Reload.started += HandleReload;
+            _inputSystem.Player.ChangeInstantReload.started += HandleInstantReload;
+            _inputSystem.UI.Pause.started += HandlePause;
         }
 
 
         private void OnDisable()
         {
-            _attack.started -= HandleAttack;
-            _reload.started -= HandleReload;
-            _activeInstantReload.started -= HandleInstantReload;
-            paused.action.started -= HandlePause;
+            _inputSystem.Player.Attack.started -= HandleAttack;
+            _inputSystem.Player.Reload.started -= HandleReload;
+            _inputSystem.Player.ChangeInstantReload.started -= HandleInstantReload;
+            _inputSystem.UI.Pause.started -= HandlePause;
         }
 
         private void HandlePause(InputAction.CallbackContext _) => _paused?.Invoke();
@@ -72,15 +63,15 @@ namespace Systems
 
         #endregion
 
-        public void ActivePlayerMap() => _gameplayActionMap.Enable();
-        public void DeactivatePlayerMap() => _gameplayActionMap.Disable();
+        public void ActivePlayerMap() => _inputSystem.Player.Enable();
+        public void DeactivatePlayerMap() => _inputSystem.Player.Disable();
 
         public void SwitchPlayerMapState()
         {
-            if (_gameplayActionMap.enabled)
-                _gameplayActionMap.Disable();
+            if (_inputSystem.Player.enabled)
+                _inputSystem.Player.Disable();
             else
-                _gameplayActionMap.Enable();
+                _inputSystem.Player.Enable();
         }
     }
 }

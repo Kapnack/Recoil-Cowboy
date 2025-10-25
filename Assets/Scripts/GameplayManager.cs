@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Characters.EnemySRC;
 using Characters.PlayerSRC;
+using Shaders;
 using Systems;
 using Systems.CentralizeEventSystem;
 using UnityEngine;
@@ -31,6 +32,8 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
+    private void OnDisable() => _shaderManager?.StartOffTransition();
+    
     private void OnDestroy()
     {
         if (ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem))
@@ -38,8 +41,6 @@ public class GameplayManager : MonoBehaviour
             eventSystem.Unregister(GameplayManagerKeys.WinCondition);
             eventSystem.Unregister(GameplayManagerKeys.LoseCondition);
         }
-        
-        _shaderManager?.StartOffTransition();
     }
 
     private IEnumerator Start()

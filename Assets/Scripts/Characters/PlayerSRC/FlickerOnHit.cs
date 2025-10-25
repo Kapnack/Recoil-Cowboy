@@ -21,7 +21,7 @@ namespace Characters.PlayerSRC
 
         private void Start()
         {
-            foreach (var material in materials)
+            foreach (Material material in materials)
                 _originalColors.Add(material.color);
 
             ServiceProvider.TryGetService<ICentralizeEventSystem>(out var eventSystem);
@@ -47,9 +47,9 @@ namespace Characters.PlayerSRC
 
         private IEnumerator FlashRoutine(Color color)
         {
-            for (var i = 0; i < amountOfFlickers; i++)
+            for (int i = 0; i < amountOfFlickers; i++)
             {
-                foreach (var t in materials)
+                foreach (Material t in materials)
                 {
                     t.color = color;
                 }

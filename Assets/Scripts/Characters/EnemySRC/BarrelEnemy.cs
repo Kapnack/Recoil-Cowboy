@@ -23,6 +23,16 @@ namespace Characters.EnemySRC
             Rb.isKinematic = true;
         }
 
+        private void OnEnable() => SetUp();
+        
+        protected override void SetUp()
+        {
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity))
+            {
+                transform.position = hit.collider.gameObject.transform.position + transform.localScale;
+            }
+        }
+        
         private void FixedUpdate()
         {
             Hidden = ShouldHide();
@@ -39,25 +49,25 @@ namespace Characters.EnemySRC
 
         private bool TargetInSight()
         {
-            var origin = transform.position + transform.right * config.RaycastOffSet;
+            Vector3 origin = transform.position + transform.right * config.RaycastOffSet;
 
-            var raycastHits = Physics.OverlapSphere(origin, config.AttackDistance);
+            Collider[] raycastHits = Physics.OverlapSphere(origin, config.AttackDistance);
 
-            foreach (var t in raycastHits)
+            foreach (Collider t in raycastHits)
             {
                 if (!t.CompareTag(Tags.Player))
                     continue;
 
-                var target = t.transform;
+                Transform target = t.transform;
                 _targetDir = (target.position - origin).normalized;
 
-                var angle = Vector3.Angle(transform.right, _targetDir);
+                float angle = Vector3.Angle(transform.right, _targetDir);
 
                 if (angle > -config.AttackRadius && angle < config.AttackRadius)
                 {
-                    var targetDistance = Vector3.Distance(origin, target.position);
+                    float targetDistance = Vector3.Distance(origin, target.position);
 
-                    if (!Physics.Raycast(origin, _targetDir, out var hit, targetDistance))
+                    if (!Physics.Raycast(origin, _targetDir, out RaycastHit hit, targetDistance))
                         return false;
 
                     if (hit.collider.CompareTag(Tags.Player))
