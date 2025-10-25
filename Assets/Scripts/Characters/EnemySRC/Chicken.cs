@@ -21,7 +21,7 @@ namespace Characters.EnemySRC
 
         private void OnEnable() => SetUp();
         
-        protected override void SetUp() => SetJumpTimer();
+        public override void SetUp() => SetJumpTimer();
         
         private void FixedUpdate()
         {

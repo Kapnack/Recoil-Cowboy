@@ -1,27 +1,29 @@
 using System.Collections.Generic;
+using Characters.EnemySRC;
 using Systems;
 using Systems.Pool;
 using UnityEngine;
 
-public class EnemyPool : MonoBehaviour, IEnemyPool
+public class EnemyPool : MonoBehaviour, IEnemyPool<IEnemy>
 {
-    private IPool _pool;
+    private Pool<IEnemy> _pool;
     [SerializeField] private List<GameObject> enemies;
 
     private void Awake()
     {
-        _pool = new Pool(enemies, transform);
+        _pool = new Pool<IEnemy>(enemies, transform);
         _pool.InitializeRandom(1);
         
-        ServiceProvider.SetService<IEnemyPool>(this, true);
+        ServiceProvider.SetService<IEnemyPool<IEnemy>>(this, true);
     }
 
-    public GameObject Get() => _pool.GetRandom();
-    public void Return(GameObject enemy) => _pool.Return(enemy);
+    public PoolData<IEnemy> Get() => _pool.Get();
+
+    public void Return(PoolData<IEnemy> enemy) => _pool.Return(enemy);
 }
 
-public interface IEnemyPool
+public interface IEnemyPool<T>
 {
-    public GameObject Get();
-    void Return(GameObject enemy);
+    public PoolData<T> Get();
+    void Return(PoolData<IEnemy> enemy);
 }

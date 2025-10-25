@@ -2,9 +2,9 @@ using System;
 
 namespace Characters.EnemySRC
 {
-    public abstract class Enemy : Character, IHealthSystem
+    public abstract class Enemy : Character, IHealthSystem, IEnemy
     {
-        protected abstract void SetUp();
+        public abstract void SetUp();
 
         public virtual void ReceiveDamage()
         {

@@ -25,7 +25,7 @@ namespace Characters.EnemySRC
 
         private void OnEnable() => SetUp();
         
-        protected override void SetUp()
+        public override void SetUp()
         {
             if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity))
             {

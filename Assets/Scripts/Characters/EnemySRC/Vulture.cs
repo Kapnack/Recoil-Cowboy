@@ -28,7 +28,7 @@ namespace Characters.EnemySRC
         
         private void OnEnable() =>   _spawnPosition = transform.position;
 
-        protected override void SetUp()
+        public override void SetUp()
         {
             if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity))
             {

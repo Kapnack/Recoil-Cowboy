@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Characters.EnemySRC;
 using Systems;
+using Systems.Pool;
 using Systems.TagClassGenerator;
 using UnityEngine;
 
@@ -11,9 +13,9 @@ namespace Chunks
     {
         [SerializeField] private Transform chunkLimitTop;
         [SerializeField] private List<GameObject> spawnPoints;
-        private readonly List<GameObject> _spawnedEnemies = new();
+        private readonly List<PoolData<IEnemy>> _spawnedEnemies = new();
 
-        private IEnemyPool _enemyPool;
+        private IEnemyPool<IEnemy> _enemyPool;
         
         public Transform ChunkLimitTop => chunkLimitTop;
 
@@ -21,7 +23,7 @@ namespace Chunks
         
         private void Awake()
         {
-            _enemyPool = ServiceProvider.GetService<IEnemyPool>();
+            _enemyPool = ServiceProvider.GetService<IEnemyPool<IEnemy>>();
             
             BoxCollider boxCollider = GetComponent<BoxCollider>();
 
@@ -32,9 +34,10 @@ namespace Chunks
         {
             foreach (GameObject spawnPoint in spawnPoints)
             {
-                GameObject enemy = _enemyPool.Get();
+                PoolData<IEnemy> enemy = _enemyPool.Get();
                 
-                enemy.transform.position = spawnPoint.transform.position;
+                enemy.Obj.transform.position = spawnPoint.transform.position;
+                enemy.Component.SetUp();
                 
                 _spawnedEnemies.Add(enemy);
             }
@@ -42,7 +45,7 @@ namespace Chunks
 
         private void OnDisable()
         {
-            foreach (GameObject enemy in _spawnedEnemies)
+            foreach (PoolData<IEnemy> enemy in _spawnedEnemies)
             {
                 _enemyPool.Return(enemy);
             }

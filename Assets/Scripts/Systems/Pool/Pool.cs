@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Systems.Pool
 {
-    public class Pool : IPool
+    public class Pool<T> : IPool<PoolData<T>>
     {
         private readonly List<GameObject> _prefabs;
-        private readonly Queue<GameObject> _objects = new();
+        private readonly Queue<PoolData<T>> _objects = new();
 
         private readonly Transform _folder;
 
@@ -25,10 +24,7 @@ namespace Systems.Pool
             {
                 int index = Random.Range(offset, _prefabs.Count);
 
-                GameObject instance = Object.Instantiate(_prefabs[index], _folder);
-                instance.SetActive(false);
-
-                _objects.Enqueue(instance);
+                AddedGameObject(_prefabs[index]);
             }
         }
 
@@ -36,93 +32,56 @@ namespace Systems.Pool
         {
             for (int i = offset; i < _prefabs.Count; i++)
             {
-                GameObject instance = Object.Instantiate(_prefabs[i], _folder);
-                instance.SetActive(false);
-
-                _objects.Enqueue(instance);
+                AddedGameObject(_prefabs[i]);
             }
         }
 
-        public GameObject GetRandom(int offset = 0)
+        public PoolData<T> Get(int offset = 0)
         {
-            int index = Random.Range(offset, _prefabs.Count);
-
-            GameObject obj;
-
             if (_objects.Count == 0)
-            {
-                AddedGameObject(_prefabs[index]);
-                obj = _objects.Dequeue();
-                obj.SetActive(true);
-                obj.transform.SetParent(null);
-                return obj;
-            }
+                AddedGameObject(_prefabs[Random.Range(offset, _prefabs.Count)]);
 
-            obj = _objects.Dequeue();
-
-            if (!obj)
-            {
-                InitializeRandom(offset, 1);
-                obj = _objects.Dequeue();
-            }
-
-            obj.SetActive(true);
-            obj.transform.SetParent(null);
+            PoolData<T> obj = Release();
 
             return obj;
         }
 
-        public GameObject GetObject(GameObject prefab, int offset = 0)
+        private PoolData<T> Release()
         {
-            GameObject obj;
+            PoolData<T> data = _objects.Dequeue();
+            data.Obj.SetActive(true);
+            data.Obj.transform.SetParent(null);
 
-            if (_objects.Count == 0)
-            {
-                AddedGameObject(prefab);
-                obj = _objects.Dequeue();
-                obj.SetActive(true);
-                obj.transform.SetParent(null);
-                return obj;
-            }
-
-            obj = _objects.Dequeue();
-
-            if (!obj)
-            {
-                InitializeRandom(offset, 1);
-                obj = _objects.Dequeue();
-            }
-
-            obj.SetActive(true);
-            obj.transform.SetParent(null);
-            
-            return obj;
+            return data;
         }
 
-        public void Return(GameObject obj)
+        public void Return(PoolData<T> data)
         {
-            if (!obj)
+            if (!data.Obj)
                 return;
 
-            obj.SetActive(false);
-            obj.transform.SetParent(_folder);
-            
-            _objects.Enqueue(obj);
+            data.Obj.SetActive(false);
+            data.Obj.transform.SetParent(_folder);
+
+            _objects.Enqueue(data);
         }
 
         public void Clear()
         {
-            foreach (GameObject obj in _objects)
-                Object.Destroy(obj);
+            foreach (PoolData<T> data in _objects)
+                Object.Destroy(data.Obj);
 
             _objects.Clear();
         }
 
         private void AddedGameObject(GameObject prefab)
         {
-            GameObject go = Object.Instantiate(prefab, _folder);
-            go.SetActive(false);
-            _objects.Enqueue(go);
+            GameObject obj = Object.Instantiate(prefab, _folder);
+            obj.SetActive(false);
+
+            PoolData<T> poolData = new(obj);
+
+            _objects.Enqueue(poolData);
         }
     }
 }
