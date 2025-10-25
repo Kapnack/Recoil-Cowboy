@@ -19,12 +19,10 @@ namespace Characters.EnemySRC
 
         private RaycastHit _hit;
 
-        protected override void Awake()
-        {
-            base.Awake();
-            SetJumpTimer();
-        }
-
+        private void OnEnable() => SetUp();
+        
+        protected override void SetUp() => SetJumpTimer();
+        
         private void FixedUpdate()
         {
             Movement();
@@ -75,7 +73,7 @@ namespace Characters.EnemySRC
         {
             Rb.linearVelocity = new Vector3(0.0f, Rb.linearVelocity.y, 0.0f);
 
-            var currentRotation = transform.eulerAngles;
+            Vector3 currentRotation = transform.eulerAngles;
             currentRotation.y += 180.0f;
             transform.rotation = Quaternion.Euler(currentRotation);
 
@@ -84,14 +82,14 @@ namespace Characters.EnemySRC
 
         private void CheckForEnemies()
         {
-            var objects = Physics.OverlapSphere(transform.position, config.AreaOfSight);
+            Collider[] objects = Physics.OverlapSphere(transform.position, config.AreaOfSight);
 
-            foreach (var obj in objects)
+            foreach (Collider obj in objects)
             {
                 if (!obj.CompareTag(Tags.Player))
                     continue;
 
-                var dir = (obj.transform.position - transform.position).normalized;
+                Vector3 dir = (obj.transform.position - transform.position).normalized;
 
                 if (Physics.Raycast(transform.position, dir, out _hit, config.AreaOfSight))
                 {
