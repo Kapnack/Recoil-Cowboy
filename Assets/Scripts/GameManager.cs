@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(SceneLoader))]
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IStatsManager
 {
     [SerializeField] private SceneRef mainMenuScene;
     [SerializeField] private SceneRef gameplay;
@@ -27,11 +27,17 @@ public class GameManager : MonoBehaviour
     private readonly SimpleEvent _loadingStarted = new();
     private readonly SimpleEvent _loadingEnded = new();
 
+    public int LastMatchPoints { get; private set; }
+    public int RecordPoints { get; private set; }
+    public bool NewRecord { get; private set; }
+
     private void Awake()
     {
         _mainCamera = Camera.main;
         _sceneLoader = GetComponent<ISceneLoader>();
 
+        ServiceProvider.SetService<IStatsManager>(this);
+        
         StartCoroutine(SetUpEvents());
     }
 
@@ -87,27 +93,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private async void LoadWinScene()
+    private async void LoadGameOverMenu(int points)
     {
         try
         {
-            _inputReader.DeactivatePlayerMap();
-
-            _scenesToLoad[0] = winScene;
-            await TryLoadScenes(_scenesToLoad);
-
-            FindAfterMatchMenuEvents();
-        }
-        catch (Exception e)
-        {
-            Debug.LogException(e);
-        }
-    }
-
-    private async void LoadGameOverMenu()
-    {
-        try
-        {
+            SetNewStats(points);
+            
             _inputReader.DeactivatePlayerMap();
 
             _scenesToLoad[0] = gameOverScene;
@@ -119,6 +110,17 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogException(e);
         }
+    }
+
+    private void SetNewStats(int points)
+    {
+        LastMatchPoints = points;
+
+        if (RecordPoints > points)
+            return;
+        
+        NewRecord = true;
+        RecordPoints = points;
     }
 
     private async Task TryLoadScenes(SceneRef[] sceneRefs)
@@ -145,7 +147,7 @@ public class GameManager : MonoBehaviour
     {
         ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
 
-        eventSystem.Get(GameplayManagerKeys.LoseCondition).AddListener(LoadGameOverMenu);
+        eventSystem.Get<int>(GameplayManagerKeys.LoseCondition).AddListener(LoadGameOverMenu);
 
         eventSystem.Get(GameManagerKeys.MainMenu).AddListener(LoadMainMenu);
     }
@@ -158,4 +160,11 @@ public class GameManager : MonoBehaviour
 
         eventSystem.Get(GameManagerKeys.MainMenu).AddListener(LoadMainMenu);
     }
+}
+
+public interface IStatsManager
+{
+    public int LastMatchPoints { get; }
+    public int RecordPoints { get; }
+    public bool NewRecord { get; }
 }

@@ -31,7 +31,7 @@ namespace Characters.PlayerSRC
         private readonly DoubleParamEvent<int, int> _pointsChangeEvent = new();
         private readonly ComplexGameEvent<int, int, int> _bulletsChangeEvent = new();
         private readonly SimpleEvent _oneLiveRemains = new();
-        private readonly SimpleEvent _dies = new();
+        private readonly SingleParamEvent<int> _dies = new();
 
         public bool Invincible { get; private set; }
 
@@ -53,7 +53,7 @@ namespace Characters.PlayerSRC
                         break;
 
                     case 0 when !_isDead:
-                        _dies?.Invoke();
+                        _dies?.Invoke(Points);
                         _isDead = true;
                         break;
                 }
@@ -85,7 +85,7 @@ namespace Characters.PlayerSRC
         protected override void Awake()
         {
             base.Awake();
-
+            
             CurrentLives = _config.MaxLives;
             CurrentBullets = _config.MaxBullets;
 

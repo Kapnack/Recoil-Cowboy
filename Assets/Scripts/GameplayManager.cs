@@ -13,7 +13,7 @@ public class GameplayManager : MonoBehaviour
 
     private List<Enemy> _enemies;
     
-    private readonly SimpleEvent _loseCondition = new();
+    private readonly SingleParamEvent<int> _loseCondition = new();
 
     private void Awake()
     {
@@ -60,15 +60,16 @@ public class GameplayManager : MonoBehaviour
 
         simpleEvent.AddListener(OnPlayerOneLive);
 
-        while (!eventSystem.TryGet(PlayerEventKeys.Dies, out simpleEvent))
+        SingleParamEvent<int> singleParamEvent;
+        while (!eventSystem.TryGet<int>(PlayerEventKeys.Dies, out  singleParamEvent))
             yield return null;
 
-        simpleEvent.AddListener(OnLoseConditionMeet);
+        singleParamEvent.AddListener(OnLoseConditionMeet);
     }
 
-    private void OnLoseConditionMeet()
+    private void OnLoseConditionMeet(int points)
     {
-        _loseCondition?.Invoke();
+        _loseCondition?.Invoke(points);
     }
 
     private void OnPlayerOneLive()
