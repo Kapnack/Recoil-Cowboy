@@ -47,6 +47,8 @@ public class HUD : MonoBehaviour
             yield return null;
 
         doubleParamEvent.AddListener(OnPointsChange);
+
+        OnPointsChange(0,0);
         
         while (!eventSystem.TryGet(PlayerEventKeys.BulletsChange, out complexGameEvent))
             yield return null;
