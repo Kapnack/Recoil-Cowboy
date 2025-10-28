@@ -37,7 +37,7 @@ namespace Characters.EnemySRC
             if (_owner && collision.gameObject == _owner.gameObject)
                 return;
 
-            if (collision.transform.TryGetComponent<IHealthSystem>(out var healthSystem))
+            if (collision.transform.TryGetComponent(out IHealthSystem healthSystem))
             {
                 healthSystem.ReceiveDamage();
             }

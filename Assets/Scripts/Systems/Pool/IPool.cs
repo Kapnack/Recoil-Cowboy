@@ -11,7 +11,7 @@ namespace Systems.Pool
         public void Clear();
     }
 
-    public struct PoolData<T>
+    public class PoolData<T>
     {
         public PoolData(GameObject obj)
         {
@@ -21,5 +21,10 @@ namespace Systems.Pool
 
         public GameObject Obj;
         public T Component;
+        
+        public static implicit operator bool(PoolData<T> data)
+        {
+            return data != null;
+        }
     }
 }

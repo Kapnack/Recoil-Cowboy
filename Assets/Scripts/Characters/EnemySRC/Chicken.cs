@@ -20,8 +20,13 @@ namespace Characters.EnemySRC
         private RaycastHit _hit;
 
         private void OnEnable() => SetUp();
-        
-        public override void SetUp() => SetJumpTimer();
+
+        public override void SetUp(Action action = null)
+        {
+            base.SetUp(action);
+            SetJumpTimer();
+            Rb.linearVelocity = Vector3.zero;
+        }
         
         private void FixedUpdate()
         {
@@ -101,7 +106,7 @@ namespace Characters.EnemySRC
                         if (healthSystem is IPlayerHealthSystem playerHealthSystem)
                             if (playerHealthSystem.Invincible)
                                 return;
-                        
+
                         healthSystem.ReceiveDamage();
                         ReceiveDamage();
                     }
@@ -122,9 +127,9 @@ namespace Characters.EnemySRC
             Gizmos.DrawRay(_raycastOrigin, transform.right * config.RaycastDistance);
         }
 
-        public override void ReceiveDamage()
+        public override void ReceiveDamage(Action action = null)
         {
-            base.ReceiveDamage();
+            base.ReceiveDamage(action);
             AkUnitySoundEngine.PostEvent("sfx_ChickenExp", gameObject);
         }
 #if UNITY_EDITOR

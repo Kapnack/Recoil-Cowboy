@@ -11,20 +11,20 @@ namespace Menus
 
         private void Awake()
         {
-            if (ServiceProvider.TryGetService<ICentralizeEventSystem>(out var eventSystem))
-            {
-                eventSystem.Register(GameManagerKeys.ChangeToLevel, _loadNextLevelEvent);
-                eventSystem.Register(GameManagerKeys.MainMenu, _loadMainMenu);
-            }
+            if (!ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem)) 
+                return;
+            
+            eventSystem.Register(GameManagerKeys.ChangeToLevel, _loadNextLevelEvent);
+            eventSystem.Register(GameManagerKeys.MainMenu, _loadMainMenu);
         }
 
         private void OnDestroy()
         {
-            if (ServiceProvider.TryGetService<ICentralizeEventSystem>(out var eventSystem))
-            {
-                eventSystem.Unregister(GameManagerKeys.ChangeToLevel);
-                eventSystem.Unregister(GameManagerKeys.MainMenu);
-            }
+            if (!ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem)) 
+                return;
+            
+            eventSystem.Unregister(GameManagerKeys.ChangeToLevel);
+            eventSystem.Unregister(GameManagerKeys.MainMenu);
         }
 
         public void OnNextLevel() => _loadNextLevelEvent?.Invoke();

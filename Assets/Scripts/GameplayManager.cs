@@ -1,19 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using Characters.EnemySRC;
-using Characters.PlayerSRC;
 using Shaders;
 using Systems;
 using Systems.CentralizeEventSystem;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameplayManager : MonoBehaviour
 {
     private IShaderManager _shaderManager;
 
     private List<Enemy> _enemies;
-
-    private readonly SimpleEvent _winCondition = new();
+    
     private readonly SimpleEvent _loseCondition = new();
 
     private void Awake()
@@ -21,24 +20,31 @@ public class GameplayManager : MonoBehaviour
         SetUpEvents();
 
         _shaderManager = ServiceProvider.GetService<IShaderManager>();
+        
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
     }
-
+    
     private void SetUpEvents()
     {
         if (ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem))
         {
-            eventSystem.Register(GameplayManagerKeys.WinCondition, _winCondition);
             eventSystem.Register(GameplayManagerKeys.LoseCondition, _loseCondition);
         }
     }
 
-    private void OnDisable() => _shaderManager?.StartOffTransition();
-    
+    private void OnDisable()
+    {
+        _shaderManager?.StartOffTransition();
+        
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     private void OnDestroy()
     {
         if (ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem))
         {
-            eventSystem.Unregister(GameplayManagerKeys.WinCondition);
             eventSystem.Unregister(GameplayManagerKeys.LoseCondition);
         }
     }
@@ -49,10 +55,6 @@ public class GameplayManager : MonoBehaviour
 
         SimpleEvent simpleEvent;
 
-        while (!eventSystem.TryGet(PlayerEventKeys.Wins, out simpleEvent))
-            yield return null;
-        simpleEvent.AddListener(OnWinConditionMeet);
-
         while (!eventSystem.TryGet(PlayerEventKeys.OnOneLive, out simpleEvent))
             yield return null;
 
@@ -62,11 +64,6 @@ public class GameplayManager : MonoBehaviour
             yield return null;
 
         simpleEvent.AddListener(OnLoseConditionMeet);
-    }
-
-    private void OnWinConditionMeet()
-    {
-        _winCondition?.Invoke();
     }
 
     private void OnLoseConditionMeet()

@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
             _scenesToLoad[0] = gameplay;
             await TryLoadScenes(_scenesToLoad);
 
-            StartCoroutine(FindGameplayEvents());
+            FindGameplayEvents();
         }
         catch (Exception e)
         {
@@ -141,18 +141,9 @@ public class GameManager : MonoBehaviour
         _loadingEnded.Invoke();
     }
 
-    private IEnumerator FindGameplayEvents()
+    private void FindGameplayEvents()
     {
-        //Change the function into a IEnumerator. To wait for the events
-
         ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
-
-        SimpleEvent simpleEvent;
-
-        while (!eventSystem.TryGet(GameplayManagerKeys.WinCondition, out simpleEvent))
-            yield return null;
-
-        simpleEvent.AddListener(LoadWinScene);
 
         eventSystem.Get(GameplayManagerKeys.LoseCondition).AddListener(LoadGameOverMenu);
 

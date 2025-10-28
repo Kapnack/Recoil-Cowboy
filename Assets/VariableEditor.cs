@@ -33,13 +33,15 @@ public class VariableEditor : MonoBehaviour
         _maxAmmoFormat = maxAmmo.text;
         maxAmmo.text = string.Format(_maxAmmoFormat, playerConfig.MaxBullets);
         
+        maxAmmoSlider.value = playerConfig.MaxBullets;
         maxAmmoSlider.onValueChanged.AddListener(ModifyAmmo);
         
         //--------------------------------------------------------------------------------
         
         _maxLivesFormat = maxLives.text;
-        maxLives.text = string.Format(_maxLivesFormat, playerConfig.MaxBullets);
+        maxLives.text = string.Format(_maxLivesFormat, playerConfig.MaxLives);
         
+        maxLivesSlider.value = playerConfig.MaxLives;
         maxLivesSlider.onValueChanged.AddListener(ModifyLives);
         
         //--------------------------------------------------------------------------------
@@ -47,6 +49,7 @@ public class VariableEditor : MonoBehaviour
         _knockbackFormat = knockback.text;
         knockback.text = string.Format(_knockbackFormat, playerConfig.KnockBack);
         
+        knockbackSlider.value = playerConfig.KnockBack;
         knockbackSlider.onValueChanged.AddListener(ModifyKnockBack);
         
         //--------------------------------------------------------------------------------
@@ -54,6 +57,7 @@ public class VariableEditor : MonoBehaviour
         _modifierFormat = modifier.text;
         modifier.text = string.Format(_modifierFormat, playerConfig.AreaOfSight);
         
+        modifierSlider.value = playerConfig.AreaOfSight;
         modifierSlider.onValueChanged.AddListener(ModifyModifier);
     }
 

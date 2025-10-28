@@ -4,19 +4,20 @@ using System.IO;
 using UnityEditor;
 using UnityEditorInternal;
 
-namespace Systems.TagClassGenerator
+
+namespace Systems.LayerClassGenerator
 {
     [InitializeOnLoad]
-    public static class TagsClassGenerator
+    public class LayersGenerator
     {
-        private const string FilePath = "Assets/Scripts/Systems/TagClassGenerator/Tags.cs";
+        private const string FilePath = "Assets/Scripts/Systems/LayerClassGenerator/Layers.cs";
 
-        static TagsClassGenerator()
+        static LayersGenerator()
         {
             GenerateTagsClass();
         }
 
-        [MenuItem("Tools/GenerateTags.cs")]
+        [MenuItem("Tools/GenerateLayers.cs")]
         public static void GenerateTagsClass()
         {
             string directory = Path.GetDirectoryName(FilePath);
@@ -24,24 +25,24 @@ namespace Systems.TagClassGenerator
             if (directory != null && !Directory.Exists(directory))
                 Directory.CreateDirectory(directory);
 
-            string[] tags = InternalEditorUtility.tags;
+            string[] layers = InternalEditorUtility.layers;
 
             using (StreamWriter writer = new(FilePath, false))
             {
-                Type space = typeof(TagsClassGenerator);
+                Type space = typeof(LayersGenerator);
 
                 writer.WriteLine("// DO NOT MODIFY THIS FILE! It Auto-Generates.");
                 writer.WriteLine("// Any change made to this file will be deleted.");
                 writer.WriteLine("");
                 writer.WriteLine($"namespace {space.Namespace}");
                 writer.WriteLine("{");
-                writer.WriteLine("  public static class Tags");
+                writer.WriteLine("  public static class Layers");
                 writer.WriteLine("  {");
 
-                foreach (string tag in tags)
+                foreach (string layer in layers)
                 {
-                    string safeName = MakeSafeName(tag);
-                    writer.WriteLine($"    public const string {safeName} = \"{tag}\";");
+                    string safeName = MakeSafeName(layer);
+                    writer.WriteLine($"    public const string {safeName} = \"{layer}\";");
                 }
 
                 writer.WriteLine("  }");
@@ -50,12 +51,12 @@ namespace Systems.TagClassGenerator
 
             AssetDatabase.Refresh();
             UnityEngine.Debug.Log(
-                $"Tags.cs was generated Successfully. There are now {tags.Length} Tags in {FilePath}");
+                $"Layers.cs was generated Successfully. There are now {layers.Length} Tags in {FilePath}");
         }
 
-        private static string MakeSafeName(string tag)
+        private static string MakeSafeName(string layer)
         {
-            string safe = tag.Replace(" ", "_");
+            string safe = layer.Replace(" ", "_");
 
             safe = safe.Replace("-", "_");
 

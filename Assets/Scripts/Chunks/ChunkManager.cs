@@ -23,7 +23,7 @@ namespace Chunks
 
         private void Init()
         {
-            PoolData<Chunk> go = new(Instantiate(chunkPrefabs[0]));
+            PoolData<Chunk> go = new(Instantiate(chunkPrefabs[0], transform));
 
             go.Obj.transform.position = Vector3.zero;
 
@@ -89,6 +89,7 @@ namespace Chunks
         private void DestroyBase()
         {
             Destroy(_activeChunks[0].Obj.gameObject);
+            _activeChunks[0] = null;
         }
     }
 }

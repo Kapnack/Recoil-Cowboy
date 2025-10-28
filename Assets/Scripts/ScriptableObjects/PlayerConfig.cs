@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ScriptableObjects
 {
@@ -12,5 +11,6 @@ namespace ScriptableObjects
         [field: SerializeField] public float InvincibleTime { get; set; }
         [field: SerializeField] public int MaxBullets { get; set; }
         [field: SerializeField] public float KnockBack { get; set; }
+        [field: SerializeField] public int PointsPerKill { get; set; }
     }
 }

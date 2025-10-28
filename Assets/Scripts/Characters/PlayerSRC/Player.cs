@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Characters.EnemySRC;
 using MouseTracker;
 using ScriptableObjects;
 using Systems;
@@ -15,6 +17,8 @@ namespace Characters.PlayerSRC
         [ContextMenuItem("Instant Kill", nameof(InstantDead))]
         private int _currentLives;
 
+        private int _points;
+        
         private bool _isDead;
 
         private int _currentBullets;
@@ -24,6 +28,7 @@ namespace Characters.PlayerSRC
         private IMousePositionTracker _mouseTracker;
 
         private readonly ComplexGameEvent<int, int, int> _livesChangeEvent = new();
+        private readonly DoubleParamEvent<int, int> _pointsChangeEvent = new();
         private readonly ComplexGameEvent<int, int, int> _bulletsChangeEvent = new();
         private readonly SimpleEvent _oneLiveRemains = new();
         private readonly SimpleEvent _dies = new();
@@ -36,7 +41,7 @@ namespace Characters.PlayerSRC
 
             set
             {
-                var newValue = Mathf.Clamp(value, 0, _config.MaxLives);
+                int newValue = Mathf.Clamp(value, 0, _config.MaxLives);
 
                 _livesChangeEvent?.Invoke(_currentLives, newValue, _config.MaxLives);
                 _currentLives = newValue;
@@ -55,12 +60,22 @@ namespace Characters.PlayerSRC
             }
         }
 
+        private int Points
+        {
+            get => _points;
+            set
+            {
+                _pointsChangeEvent?.Invoke(_points, value);
+                _points = value;
+            }
+        }
+        
         private int CurrentBullets
         {
             get => _currentBullets;
             set
             {
-                var newValue = Mathf.Clamp(value, 0, _config.MaxBullets);
+                int newValue = Mathf.Clamp(value, 0, _config.MaxBullets);
 
                 _bulletsChangeEvent?.Invoke(_currentBullets, newValue, _config.MaxBullets);
                 _currentBullets = newValue;
@@ -81,7 +96,7 @@ namespace Characters.PlayerSRC
         {
             Camera cam = Camera.main;
 
-            while (cam == null)
+            while (!cam)
             {
                 cam = Camera.main;
                 yield return null;
@@ -112,11 +127,12 @@ namespace Characters.PlayerSRC
             ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
 
             eventSystem.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
+            eventSystem.Register(PlayerEventKeys.PointsChange, _pointsChangeEvent);
             eventSystem.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
             eventSystem.Register(PlayerEventKeys.OnOneLive, _oneLiveRemains);
             eventSystem.Register(PlayerEventKeys.Dies, _dies);
 
-            eventSystem.TryGet(PlayerEventKeys.Attack, out var simpleEvent);
+            eventSystem.TryGet(PlayerEventKeys.Attack, out SimpleEvent simpleEvent);
 
             simpleEvent.AddListener(OnAttack);
             simpleEvent.AddListener(CancelReloadOverTime);
@@ -141,6 +157,7 @@ namespace Characters.PlayerSRC
             ICentralizeEventSystem eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
 
             eventSystem.Unregister(PlayerEventKeys.LivesChange);
+            eventSystem.Unregister(PlayerEventKeys.PointsChange);
             eventSystem.Unregister(PlayerEventKeys.BulletsChange);
             eventSystem.Unregister(PlayerEventKeys.OnOneLive);
             eventSystem.Unregister(PlayerEventKeys.Dies);
@@ -168,16 +185,23 @@ namespace Characters.PlayerSRC
 
             --CurrentBullets;
 
-            if (Physics.Raycast(transform.position, dir, out var hit))
+            if (Physics.Raycast(transform.position, dir, out RaycastHit hit))
             {
-                if (hit.transform.gameObject.TryGetComponent<IHealthSystem>(out var healthSystem))
+                if (hit.transform.gameObject.TryGetComponent(out IEnemyHealthSystem healthSystem))
                 {
-                    healthSystem.ReceiveDamage();
-                    AddBullet();
+                    healthSystem.ReceiveDamage(OnConfirmKill);
                 }
             }
         }
 
+        private void OnConfirmKill()
+        {
+            AddBullet();
+            AddPoints();
+        }
+
+        private void AddPoints() => Points += _config.PointsPerKill;
+        
         private void ApplyKnockBack(Vector3 dir, Vector3 mousePos)
         {
             Rb.linearVelocity = Vector3.zero;
@@ -194,13 +218,13 @@ namespace Characters.PlayerSRC
                 AkUnitySoundEngine.PostEvent("sfx_Jump", gameObject);
         }
 
-        public void ReceiveDamage()
+        public void ReceiveDamage(Action action = null)
         {
             if (Invincible)
                 return;
 
             --CurrentLives;
-
+            
             StartCoroutine(InvincibilityFramesCoroutine());
         }
 

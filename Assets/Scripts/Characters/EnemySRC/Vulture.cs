@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Characters.PlayerSRC;
 using ScriptableObjects;
 using Systems.TagClassGenerator;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Characters.EnemySRC
@@ -19,23 +21,11 @@ namespace Characters.EnemySRC
         private RaycastHit _hit;
         private bool _wentToStartingPos;
 
-        protected override void Awake()
+        public override void SetUp(Action action = null)
         {
-            base.Awake();
-
+            base.SetUp(action);
             _spawnPosition = transform.position;
         }
-        
-        private void OnEnable() =>   _spawnPosition = transform.position;
-
-        public override void SetUp()
-        {
-            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity))
-            {
-                transform.position = new Vector3(0, hit.point.y, 0);
-            }
-        }
-        
         
         private void FixedUpdate()
         {
@@ -63,7 +53,7 @@ namespace Characters.EnemySRC
                     Movement();
             }
         }
-        
+
         private void Movement()
         {
             _raycastOrigin = transform.position + 1 * transform.right;
@@ -153,7 +143,7 @@ namespace Characters.EnemySRC
             if (collision.transform.TryGetComponent(out IHealthSystem healthSystem))
                 healthSystem.ReceiveDamage();
         }
-        
+
         private void OnCollisionStay(Collision collision) => OnCollisionEnter(collision);
     }
 }

@@ -1,14 +1,25 @@
 using System;
+using UnityEngine;
 
 namespace Characters.EnemySRC
 {
-    public abstract class Enemy : Character, IHealthSystem, IEnemy
+    public abstract class Enemy : Character, IEnemyHealthSystem, IEnemy
     {
-        public abstract void SetUp();
+        protected static readonly LayerMask LayerMask = 64;
+        protected event Action _killed;
 
-        public virtual void ReceiveDamage()
+        public virtual void SetUp(Action action = null)
         {
-            gameObject.SetActive(false);
+            _killed = null;
+
+            if (action != null)
+                _killed = action;
+        }
+
+        public virtual void ReceiveDamage(Action action = null)
+        {
+            action?.Invoke();
+            _killed?.Invoke();
         }
     }
 }

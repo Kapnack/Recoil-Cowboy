@@ -114,7 +114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8505487070025332566}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Assets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 241725243573888508}
-  m_Layer: 0
+  - component: {fileID: 4762237241637831039}
+  m_Layer: 6
   m_Name: '#1'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,6 +179,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5910604921134422211}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4762237241637831039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805887218251070671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8077012a1d94b49a765542ab23f12e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnerType: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &2277702135082563895
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,7 +207,7 @@ GameObject:
   - component: {fileID: 8221508207176307282}
   - component: {fileID: 7561116950109942204}
   - component: {fileID: 829275338085457894}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCube3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +315,7 @@ GameObject:
   - component: {fileID: 2551892858582389713}
   - component: {fileID: 2180902399933271566}
   - component: {fileID: 8602431477916736191}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCube4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -403,7 +420,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8836999041807295191}
-  m_Layer: 0
+  - component: {fileID: 1630892216182969106}
+  m_Layer: 6
   m_Name: '#1 (3)'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,6 +443,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5910604921134422211}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1630892216182969106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2408213808305422383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8077012a1d94b49a765542ab23f12e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnerType: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &3631889290269014717
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,7 +468,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2379922910298175085}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Table_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,7 +501,7 @@ GameObject:
   - component: {fileID: 5587032446305033122}
   - component: {fileID: 6373367888407548676}
   - component: {fileID: 3992211688866031844}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bar_Furniture8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -551,7 +585,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1554535892065920222}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Table_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -585,7 +619,7 @@ GameObject:
   - component: {fileID: 1202386799636639260}
   - component: {fileID: 6053803711171440687}
   - component: {fileID: 5616328027423225401}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCube5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -692,7 +726,7 @@ GameObject:
   - component: {fileID: 2460554326411934519}
   - component: {fileID: 2160515923327494362}
   - component: {fileID: 144389141385684636}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bar_Furniture9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -779,7 +813,7 @@ GameObject:
   - component: {fileID: 43846892267207702}
   - component: {fileID: 5402647086546553019}
   - component: {fileID: 5087188326120911325}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCube6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -884,7 +918,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5910604921134422211}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spawners
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -919,7 +953,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4326179106837529793}
-  m_Layer: 0
+  - component: {fileID: 8476065765856936277}
+  m_Layer: 6
   m_Name: '#1 (2)'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -941,6 +976,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5910604921134422211}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8476065765856936277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7014421225459695673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8077012a1d94b49a765542ab23f12e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnerType: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &7380944712671552794
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,7 +1003,7 @@ GameObject:
   - component: {fileID: 4941321135759793766}
   - component: {fileID: 2304844354320595050}
   - component: {fileID: 6184436306534324351}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCube2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1036,7 +1087,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8475831917094103029}
-  m_Layer: 0
+  - component: {fileID: 6608176262201438165}
+  m_Layer: 6
   m_Name: '#1 (1)'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1058,6 +1110,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5910604921134422211}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6608176262201438165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7780278133484233609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8077012a1d94b49a765542ab23f12e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnerType: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &8719599561818934808
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,7 +1138,7 @@ GameObject:
   - component: {fileID: 617895363162457547}
   - component: {fileID: 7988439807436988276}
   - component: {fileID: 3961303228613950917}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCube1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

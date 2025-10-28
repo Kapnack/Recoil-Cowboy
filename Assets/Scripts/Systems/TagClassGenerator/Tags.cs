@@ -14,5 +14,6 @@ namespace Systems.TagClassGenerator
     public const string GameController = "GameController";
     public const string Environment = "Environment";
     public const string Obstacle = "Obstacle";
+    public const string Enemy = "Enemy";
   }
 }

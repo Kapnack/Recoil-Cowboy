@@ -10,7 +10,9 @@ namespace Characters.EnemySRC
         [SerializeField] private BarrelEnemyConfig config;
 
         [SerializeField] private GameObject bulletPrefab;
-
+        
+        private BoxCollider _collider;
+        
         private Vector3 _targetDir;
 
         private bool Hidden { get; set; }
@@ -21,18 +23,19 @@ namespace Characters.EnemySRC
         {
             base.Awake();
             Rb.isKinematic = true;
+            _collider =  GetComponent<BoxCollider>();
         }
 
-        private void OnEnable() => SetUp();
-        
-        public override void SetUp()
+        public override void SetUp(Action action = null)
         {
-            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity))
+            base.SetUp(action);
+            
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity, LayerMask))
             {
-                transform.position = hit.collider.gameObject.transform.position + transform.localScale;
+                transform.position = new Vector3(transform.position.x, hit.point.y + _collider.size.y * 0.5f, 0);
             }
         }
-        
+
         private void FixedUpdate()
         {
             Hidden = ShouldHide();
@@ -81,16 +84,16 @@ namespace Characters.EnemySRC
 
         private bool ShouldHide()
         {
-            var colliderHits = Physics.OverlapSphere(transform.position, config.AreaOfSight);
+            Collider[] colliderHits = Physics.OverlapSphere(transform.position, config.AreaOfSight);
 
-            foreach (var hit in colliderHits)
+            foreach (Collider hit in colliderHits)
             {
                 if (hit.gameObject == gameObject || !hit.CompareTag(Tags.Player))
                     continue;
 
-                var dir = (hit.transform.position - transform.position).normalized;
-                
-                if (Physics.Raycast(transform.position, dir, out var hitInfo, config.AreaOfSight))
+                Vector3 dir = (hit.transform.position - transform.position).normalized;
+
+                if (Physics.Raycast(transform.position, dir, out RaycastHit hitInfo, config.AreaOfSight))
                 {
                     if (hitInfo.collider.CompareTag(Tags.Player))
                         return true;
@@ -102,20 +105,20 @@ namespace Characters.EnemySRC
 
         private void Shoot()
         {
-            var bulletGO = Instantiate(bulletPrefab, transform.position + transform.right * config.FireOffset,
+            GameObject bulletGO = Instantiate(bulletPrefab, transform.position + transform.right * config.FireOffset,
                 gameObject.transform.rotation);
 
-            if (bulletGO.TryGetComponent<Bullet>(out var bullet))
+            if (bulletGO.TryGetComponent(out Bullet bullet))
                 bullet.Launch(this, transform.position + transform.right * config.FireOffset,
                     _targetDir, config.FireForce);
 
             _coldDownTimer = config.ColdDown + Time.time;
         }
 
-        public override void ReceiveDamage()
+        public override void ReceiveDamage(Action action = null)
         {
             if (!Hidden)
-                base.ReceiveDamage();
+                base.ReceiveDamage(action);
         }
 
         private void OnDrawGizmos()

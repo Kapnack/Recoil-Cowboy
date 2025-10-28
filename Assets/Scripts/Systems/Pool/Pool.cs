@@ -49,15 +49,19 @@ namespace Systems.Pool
         private PoolData<T> Release()
         {
             PoolData<T> data = _objects.Dequeue();
-            data.Obj.SetActive(true);
-            data.Obj.transform.SetParent(null);
+            
+            if (data)
+            {
+                data.Obj.SetActive(true);
+                data.Obj.transform.SetParent(null);
+            }
 
             return data;
         }
 
         public void Return(PoolData<T> data)
         {
-            if (!data.Obj)
+            if (!data)
                 return;
 
             data.Obj.SetActive(false);

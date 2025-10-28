@@ -1,7 +1,9 @@
-﻿namespace Characters.EnemySRC
+﻿using System;
+
+namespace Characters.EnemySRC
 {
     public interface IEnemy
     {
-        public void SetUp();
+        public void SetUp(Action action = null);
     }
 }
