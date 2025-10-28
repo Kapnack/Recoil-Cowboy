@@ -1,5 +1,7 @@
 using Systems;
 using Systems.CentralizeEventSystem;
+using Systems.SceneLoader;
+using TMPro;
 using UnityEngine;
 
 namespace Menus
@@ -8,7 +10,12 @@ namespace Menus
     {
         private readonly SimpleEvent _loadNextLevelEvent = new();
         private readonly SimpleEvent _loadMainMenu = new();
-
+        
+        private IStatsManager _statsManager;
+        
+        [SerializeField] private TMP_Text pointsText;
+        private string _pointsTextFormat;
+        
         private void Awake()
         {
             if (!ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem)) 
@@ -16,6 +23,11 @@ namespace Menus
             
             eventSystem.Register(GameManagerKeys.ChangeToLevel, _loadNextLevelEvent);
             eventSystem.Register(GameManagerKeys.MainMenu, _loadMainMenu);
+            
+            _statsManager = ServiceProvider.GetService<IStatsManager>();
+            
+            _pointsTextFormat =  pointsText.text;
+            pointsText.text = string.Format(_pointsTextFormat, _statsManager.LastMatchPoints, _statsManager.RecordPoints);
         }
 
         private void OnDestroy()
@@ -30,14 +42,5 @@ namespace Menus
         public void OnNextLevel() => _loadNextLevelEvent?.Invoke();
 
         public void OnMainMenu() => _loadMainMenu?.Invoke();
-
-        public void OnExitGame()
-        {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
-        }
     }
 }
