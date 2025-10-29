@@ -21,6 +21,23 @@ namespace AK
         static const AkUniqueID SFX_WOODRATTLE = 1747625388U;
     } // namespace EVENTS
 
+    namespace STATES
+    {
+        namespace GAMESTATE
+        {
+            static const AkUniqueID GROUP = 4091656514U;
+
+            namespace STATE
+            {
+                static const AkUniqueID GAME = 702482391U;
+                static const AkUniqueID MENU = 2607556080U;
+                static const AkUniqueID NONE = 748895195U;
+                static const AkUniqueID WIN = 979765101U;
+            } // namespace STATE
+        } // namespace GAMESTATE
+
+    } // namespace STATES
+
     namespace GAME_PARAMETERS
     {
         static const AkUniqueID BULLETCOUNT = 3344879290U;
