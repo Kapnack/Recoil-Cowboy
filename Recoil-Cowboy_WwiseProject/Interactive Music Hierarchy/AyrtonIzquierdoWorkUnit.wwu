@@ -6,6 +6,11 @@
 				<MusicSwitchContainer Name="GameMusic" ID="{38A37634-6859-47FB-8736-1166AF8E4699}" ShortID="416476251">
 					<PropertyList>
 						<Property Name="Tempo" Type="Real64" Value="150"/>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>-17</Value>
+							</ValueList>
+						</Property>
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -1051,7 +1056,7 @@
 																				<MusicClip Name="mx_EG_lick_win(anacrusa-4to beat)_bpm135" ID="{07A5928F-D909-4451-8450-21B56491CC46}">
 																					<PropertyList>
 																						<Property Name="BeginTrimOffset" Type="Real64" Value="161.879496442157"/>
-																						<Property Name="EndTrimOffset" Type="Real64" Value="8444.64583333333"/>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="7559.82904695175"/>
 																						<Property Name="FadeInMode" Type="int16" Value="0"/>
 																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																						<Property Name="PlayAt" Type="Real64" Value="-161.879496442157"/>
@@ -1070,7 +1075,7 @@
 																										<Flags>5</Flags>
 																									</Point>
 																									<Point>
-																										<XPos>8.44464583333333</XPos>
+																										<XPos>7.55983</XPos>
 																										<YPos>0</YPos>
 																										<Flags>37</Flags>
 																									</Point>
@@ -1089,7 +1094,7 @@
 																										<Flags>5</Flags>
 																									</Point>
 																									<Point>
-																										<XPos>8.44464583333333</XPos>
+																										<XPos>7.55983</XPos>
 																										<YPos>0</YPos>
 																										<Flags>37</Flags>
 																									</Point>
@@ -1108,7 +1113,7 @@
 																										<Flags>5</Flags>
 																									</Point>
 																									<Point>
-																										<XPos>8.44464583333333</XPos>
+																										<XPos>7.55983</XPos>
 																										<YPos>0</YPos>
 																										<Flags>37</Flags>
 																									</Point>
