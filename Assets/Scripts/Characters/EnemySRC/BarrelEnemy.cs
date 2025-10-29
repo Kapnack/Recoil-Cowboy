@@ -2,6 +2,7 @@ using System;
 using ScriptableObjects;
 using Systems.TagClassGenerator;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Characters.EnemySRC
 {
@@ -108,6 +109,8 @@ namespace Characters.EnemySRC
             GameObject bulletGO = Instantiate(bulletPrefab, transform.position + transform.right * config.FireOffset,
                 gameObject.transform.rotation);
 
+            SceneManager.MoveGameObjectToScene(bulletGO, gameObject.scene);
+            
             if (bulletGO.TryGetComponent(out Bullet bullet))
                 bullet.Launch(this, transform.position + transform.right * config.FireOffset,
                     _targetDir, config.FireForce);
