@@ -15,6 +15,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private Image ammoBase;
 
     private string _pointsTextFormat;
+    private string _distanceTextFormat;
 
     private float _ammoImageWidth;
 

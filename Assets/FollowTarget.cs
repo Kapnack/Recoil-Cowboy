@@ -8,7 +8,7 @@ public class FollowTarget : MonoBehaviour, IFollowTarget
 
     [SerializeField] private float offsetY = 10f;
     [SerializeField] private float offsetZ = -20f;
-    [SerializeField] private float smoothSpeed = 5f;
+    [SerializeField] private float lookDownDistance = -10f;
 
     private Transform Target
     {
@@ -50,7 +50,7 @@ public class FollowTarget : MonoBehaviour, IFollowTarget
 
         transform.position = desiredPos;
 
-        if (_target.position.y > currentPos.y - offsetY || _target.position.y < transform.position.y && _target.position.y > transform.position.y - 10)
+        if (_target.position.y > currentPos.y - offsetY || _target.position.y < transform.position.y && _target.position.y > transform.position.y + lookDownDistance)
             transform.LookAt(_target);
     }
 }

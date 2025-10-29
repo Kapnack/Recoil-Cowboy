@@ -664,6 +664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   livesFill: {fileID: 7305725094390020503}
   pointsText: {fileID: 2184085895946417616}
+  distanceText: {fileID: 0}
   ammoFill: {fileID: 5968796655944581631}
   ammoBase: {fileID: 1461059056122096662}
 --- !u!114 &913081396992376731

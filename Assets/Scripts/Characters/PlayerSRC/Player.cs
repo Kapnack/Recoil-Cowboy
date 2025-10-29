@@ -21,7 +21,8 @@ namespace Characters.PlayerSRC
 
         private Vector3 _initialPos;
 
-        private int _points;
+        private int _killKillPoints;
+        private int _distancePoints;
 
         private bool _isDead;
         private bool _canDied;
@@ -60,20 +61,18 @@ namespace Characters.PlayerSRC
                         break;
 
                     case 0 when !_isDead:
-                        _dies?.Invoke(Points);
-                        _isDead = true;
+                        OnDead();
                         break;
                 }
             }
         }
 
-        private int Points
+        private int KillPoints
         {
-            get => _points;
+            get => _killKillPoints;
             set
             {
-                _pointsChangeEvent?.Invoke(_points, value);
-                _points = value;
+                _killKillPoints = value;
             }
         }
 
@@ -154,6 +153,11 @@ namespace Characters.PlayerSRC
 
         private void Update()
         {
+            _distancePoints = (int)Mathf.Abs(Vector3.Distance(new Vector3(0, _initialPos.y, 0),
+                new Vector3(0, transform.position.y, 0) * (config.PointsPerKill * 0.5f)));
+            
+            _pointsChangeEvent?.Invoke(0, KillPoints + _distancePoints);
+
             if (_isDead || !_canDied)
                 return;
 
@@ -167,15 +171,11 @@ namespace Characters.PlayerSRC
             if (isVisible)
                 return;
 
-            _dies.Invoke(Points);
-            _isDead = true;
+            OnDead();
         }
 
-        private void OnDisable()
-        {
-            UnRegisterEvents();
-        }
-
+        private void OnDisable() => UnRegisterEvents();
+        
         private void UnRegisterEvents()
         {
             ICentralizeEventSystem eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
@@ -224,7 +224,7 @@ namespace Characters.PlayerSRC
             AddPoints();
         }
 
-        private void AddPoints() => Points += config.PointsPerKill;
+        private void AddPoints() => KillPoints += config.PointsPerKill;
 
         private void ApplyKnockBack(Vector3 dir, Vector3 mousePos)
         {
@@ -261,6 +261,12 @@ namespace Characters.PlayerSRC
             Invincible = false;
         }
 
+        private void OnDead()
+        {
+            _dies.Invoke(KillPoints + _distancePoints);
+            _isDead = true;
+        }
+        
         public void InstantDead() => CurrentLives = 0;
 
         private void AddBullet() => ++CurrentBullets;
