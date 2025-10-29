@@ -9,7 +9,7 @@ namespace Characters.EnemySRC
         private Character _owner;
         private Rigidbody _rb;
         [SerializeField] private float secondsToExist = 5.0f;
-        private float _timeToDestroy = 0.0f;
+        private float _timeToDestroy;
 
         private void Awake()
         {
@@ -37,7 +37,7 @@ namespace Characters.EnemySRC
             if (_owner && collision.gameObject == _owner.gameObject)
                 return;
 
-            if (collision.transform.TryGetComponent<IHealthSystem>(out var healthSystem))
+            if (collision.transform.TryGetComponent(out IHealthSystem healthSystem))
             {
                 healthSystem.ReceiveDamage();
             }

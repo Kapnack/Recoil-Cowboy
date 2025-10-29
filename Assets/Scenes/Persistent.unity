@@ -129,7 +129,6 @@ GameObject:
   m_Component:
   - component: {fileID: 123284938}
   - component: {fileID: 123284937}
-  - component: {fileID: 123284939}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -177,31 +176,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &123284939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 123284936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ed59c177406995469fbc2bcff0edc46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerList: f7e1664c
-  useOtherObject: 0
-  data:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
-  decodeBank: 0
-  overrideLoadSetting: 0
-  loadAsynchronous: 0
-  saveDecodedBank: 0
-  unloadTriggerList: 958ca0ea
-  bankNameInternal: 
-  valueGuidInternal: 
 --- !u!1 &156173802
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,6 +189,7 @@ GameObject:
   - component: {fileID: 156173803}
   - component: {fileID: 156173808}
   - component: {fileID: 156173807}
+  - component: {fileID: 156173809}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -372,6 +347,21 @@ MonoBehaviour:
   scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
+--- !u!114 &156173809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156173802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 784422aaa735ffd4a876f216a8134382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offsetY: 8
+  offsetZ: -20
+  lookDownDistance: -11
 --- !u!1 &384259005
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +388,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 384259005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0807c971b7339d746a02b2989af738eb, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d20b858fe3906442992bfc5773df1c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 012cc2bb9d6a8574e8cfdd9cfe7f23d8, type: 2}
@@ -778,8 +768,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42838f0d7ee24a06a87c476598647edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameplayActionMap: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  paused: {fileID: 1328202175435209442, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!4 &693977681
 Transform:
   m_ObjectHideFlags: 0

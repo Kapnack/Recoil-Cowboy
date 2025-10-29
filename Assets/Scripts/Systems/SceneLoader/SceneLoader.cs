@@ -48,7 +48,7 @@ namespace Systems.SceneLoader
 
         private async Task StartLoading(SceneRef sceneRef, LoadSceneMode mode)
         {
-            var loadingInfo = new SceneLoadingInfo();
+            SceneLoadingInfo loadingInfo = new();
 
             try
             {
@@ -59,7 +59,7 @@ namespace Systems.SceneLoader
 
                 await loadingInfo.Operation;
 
-                var loadedScene = SceneManager.GetSceneByBuildIndex(sceneRef.Index);
+                Scene loadedScene = SceneManager.GetSceneByBuildIndex(sceneRef.Index);
 
                 if (loadedScene.IsValid() && loadedScene.isLoaded)
                     _activeScenes.Add(loadedScene);
@@ -117,7 +117,7 @@ namespace Systems.SceneLoader
         {
             List<Task> activeScenesTask = new();
 
-            foreach (var t in sceneRef)
+            foreach (SceneRef t in sceneRef)
                 activeScenesTask.Add(LoadSceneAsync(t));
 
             await Task.WhenAll(activeScenesTask);
@@ -127,7 +127,7 @@ namespace Systems.SceneLoader
 
         public float GetCurrentLoadingProgress()
         {
-            var progress = _loadingScenes.Sum(t => t.Operation.progress);
+            float progress = _loadingScenes.Sum(t => t.Operation.progress);
 
             return _loadingScenes.Count > 0 ? progress / _loadingScenes.Count : -1f;
         }
@@ -135,9 +135,9 @@ namespace Systems.SceneLoader
         /// <inheritdoc/>
         public async Task UnloadAll()
         {
-            for (var i = _activeScenes.Count - 1; i >= 0; i--)
+            for (int i = _activeScenes.Count - 1; i >= 0; i--)
             {
-                var scene = _activeScenes[i];
+                Scene scene = _activeScenes[i];
 
                 _activeScenes.RemoveAt(i);
                 await StartUnloading(scene);
@@ -147,7 +147,7 @@ namespace Systems.SceneLoader
         /// <inheritdoc/>
         public async Task UnloadAll(SceneRef exception)
         {
-            for (var i = _activeScenes.Count - 1; i >= 0; i--)
+            for (int i = _activeScenes.Count - 1; i >= 0; i--)
             {
                 if (_activeScenes[i].buildIndex == exception.Index)
                     continue;
@@ -159,7 +159,7 @@ namespace Systems.SceneLoader
 
         public async Task UnloadAll(SceneRef[] exeptions)
         {
-            for (var i = _activeScenes.Count - 1; i >= 0; i--)
+            for (int i = _activeScenes.Count - 1; i >= 0; i--)
             {
                 if (IsSceneInExceptionArray(_activeScenes[i].buildIndex, exeptions))
                     continue;
@@ -169,7 +169,7 @@ namespace Systems.SceneLoader
             }
         }
 
-        private bool IsSceneInExceptionArray(int index, SceneRef[] sceneRefs) => sceneRefs.Any(t => index == t.Index);
+        private static bool IsSceneInExceptionArray(int index, SceneRef[] sceneRefs) => sceneRefs.Any(t => index == t.Index);
 
         public bool IsSceneLoaded(SceneRef sceneRef) => _activeScenes.Any(t => t.buildIndex == sceneRef.Index);
 
@@ -178,9 +178,9 @@ namespace Systems.SceneLoader
 #if UNITY_EDITOR
         private void CheckAndAddActiveScenesInEditor()
         {
-            for (var i = 0; i < SceneManager.sceneCount; i++)
+            for (int i = 0; i < SceneManager.sceneCount; i++)
             {
-                var scene = SceneManager.GetSceneAt(i);
+                Scene scene = SceneManager.GetSceneAt(i);
 
                 if (scene.buildIndex > exclude.Index && !IsSceneLoaded(scene) && !IsSceneLoading(scene))
                 {

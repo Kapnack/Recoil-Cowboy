@@ -1,4 +1,5 @@
 ﻿#if UNITY_EDITOR
+using System;
 using System.IO;
 using UnityEditor;
 using UnityEditorInternal;
@@ -18,16 +19,16 @@ namespace Systems.TagClassGenerator
         [MenuItem("Tools/GenerateTags.cs")]
         public static void GenerateTagsClass()
         {
-            var directory = Path.GetDirectoryName(FilePath);
+            string directory = Path.GetDirectoryName(FilePath);
 
             if (directory != null && !Directory.Exists(directory))
                 Directory.CreateDirectory(directory);
 
-            var tags = InternalEditorUtility.tags;
+            string[] tags = InternalEditorUtility.tags;
 
-            using (var writer = new StreamWriter(FilePath, false))
+            using (StreamWriter writer = new(FilePath, false))
             {
-                var space = typeof(TagsClassGenerator);
+                Type space = typeof(TagsClassGenerator);
 
                 writer.WriteLine("// DO NOT MODIFY THIS FILE! It Auto-Generates.");
                 writer.WriteLine("// Any change made to this file will be deleted.");
@@ -37,9 +38,9 @@ namespace Systems.TagClassGenerator
                 writer.WriteLine("  public static class Tags");
                 writer.WriteLine("  {");
 
-                foreach (var tag in tags)
+                foreach (string tag in tags)
                 {
-                    var safeName = MakeSafeName(tag);
+                    string safeName = MakeSafeName(tag);
                     writer.WriteLine($"    public const string {safeName} = \"{tag}\";");
                 }
 
@@ -54,7 +55,7 @@ namespace Systems.TagClassGenerator
 
         private static string MakeSafeName(string tag)
         {
-            var safe = tag.Replace(" ", "_");
+            string safe = tag.Replace(" ", "_");
 
             safe = safe.Replace("-", "_");
 

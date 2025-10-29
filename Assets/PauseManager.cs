@@ -11,7 +11,7 @@ public class PauseManager : MonoBehaviour
 
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject settingsMenu;
-    private bool _paused = false;
+    private bool _paused;
 
     private IInputReader _inputReader;
 
@@ -29,6 +29,8 @@ public class PauseManager : MonoBehaviour
 
         _eventSystem.Get(PlayerEventKeys.Paused).AddListener(PauseHandler);
     }
+    
+    private void OnEnable() => Cursor.visible = true;
 
     private void OnDestroy()
     {
@@ -48,9 +50,17 @@ public class PauseManager : MonoBehaviour
             Destroy(_menuGo);
     }
 
-    public void Continue() => PauseHandler();
+    public void Continue()
+    {
+        Cursor.visible = false;
+        PauseHandler();
+    }
 
-    public void Settings() => _menuGo = Instantiate(settingsMenu);
+    public void Settings()
+    {
+        _menuGo = Instantiate(settingsMenu);
+        Cursor.visible = true;
+    }
 
     public void GoToMainMenu() => _loadMainMenu?.Invoke();
 

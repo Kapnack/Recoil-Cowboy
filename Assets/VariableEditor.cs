@@ -27,19 +27,26 @@ public class VariableEditor : MonoBehaviour
     [SerializeField] private Slider modifierSlider;
     [SerializeField] private TMP_Text modifier;
     private string _modifierFormat;
+    
+    [Header("Knockback Distance Modifier")] 
+    [SerializeField] private Slider pointsPerKillSlider;
+    [SerializeField] private TMP_Text pointsPerKillText;
+    private string _pointsPerKillFormat;
 
     private void Awake()
     {
         _maxAmmoFormat = maxAmmo.text;
         maxAmmo.text = string.Format(_maxAmmoFormat, playerConfig.MaxBullets);
         
+        maxAmmoSlider.value = playerConfig.MaxBullets;
         maxAmmoSlider.onValueChanged.AddListener(ModifyAmmo);
         
         //--------------------------------------------------------------------------------
         
         _maxLivesFormat = maxLives.text;
-        maxLives.text = string.Format(_maxLivesFormat, playerConfig.MaxBullets);
+        maxLives.text = string.Format(_maxLivesFormat, playerConfig.MaxLives);
         
+        maxLivesSlider.value = playerConfig.MaxLives;
         maxLivesSlider.onValueChanged.AddListener(ModifyLives);
         
         //--------------------------------------------------------------------------------
@@ -47,6 +54,7 @@ public class VariableEditor : MonoBehaviour
         _knockbackFormat = knockback.text;
         knockback.text = string.Format(_knockbackFormat, playerConfig.KnockBack);
         
+        knockbackSlider.value = playerConfig.KnockBack;
         knockbackSlider.onValueChanged.AddListener(ModifyKnockBack);
         
         //--------------------------------------------------------------------------------
@@ -54,7 +62,16 @@ public class VariableEditor : MonoBehaviour
         _modifierFormat = modifier.text;
         modifier.text = string.Format(_modifierFormat, playerConfig.AreaOfSight);
         
+        modifierSlider.value = playerConfig.AreaOfSight;
         modifierSlider.onValueChanged.AddListener(ModifyModifier);
+        
+        //--------------------------------------------------------------------------------
+        
+        _pointsPerKillFormat = pointsPerKillText.text;
+        pointsPerKillText.text = string.Format(_pointsPerKillFormat, playerConfig.PointsPerKill);
+        
+        pointsPerKillSlider.value = playerConfig.PointsPerKill;
+        pointsPerKillSlider.onValueChanged.AddListener(ModifyPoints);
     }
 
     private void ModifyModifier(float value)
@@ -81,4 +98,9 @@ public class VariableEditor : MonoBehaviour
         maxLives.text = string.Format(_maxLivesFormat, playerConfig.MaxLives);
     }
     
+    private void ModifyPoints(float value)
+    {
+        playerConfig.PointsPerKill = (int)value;
+        pointsPerKillText.text = string.Format(_pointsPerKillFormat, playerConfig.PointsPerKill);
+    }
 }

@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Characters.PlayerSRC;
 using ScriptableObjects;
 using Systems.TagClassGenerator;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Characters.EnemySRC
@@ -19,13 +21,12 @@ namespace Characters.EnemySRC
         private RaycastHit _hit;
         private bool _wentToStartingPos;
 
-        protected override void Awake()
+        public override void SetUp(Action action = null)
         {
-            base.Awake();
-
+            base.SetUp(action);
             _spawnPosition = transform.position;
         }
-
+        
         private void FixedUpdate()
         {
             _target = FindNearestTarget();
@@ -40,7 +41,7 @@ namespace Characters.EnemySRC
                     _backToStartCoroutine = null;
                 }
 
-                var direction = (_target.transform.position - transform.position).normalized;
+                Vector3 direction = (_target.transform.position - transform.position).normalized;
 
                 Rb.AddForce(direction * (config.MoveSpeed * Time.fixedDeltaTime), ForceMode.VelocityChange);
             }
@@ -52,7 +53,7 @@ namespace Characters.EnemySRC
                     Movement();
             }
         }
-        
+
         private void Movement()
         {
             _raycastOrigin = transform.position + 1 * transform.right;
@@ -77,7 +78,7 @@ namespace Characters.EnemySRC
         {
             Rb.linearVelocity = new Vector3(0.0f, Rb.linearVelocity.y, 0.0f);
 
-            var currentRotation = transform.eulerAngles;
+            Vector3 currentRotation = transform.eulerAngles;
             currentRotation.y += 180.0f;
             transform.rotation = Quaternion.Euler(currentRotation);
         }
@@ -101,20 +102,20 @@ namespace Characters.EnemySRC
 
         private Transform FindNearestTarget()
         {
-            var objects = Physics.OverlapSphere(transform.position, config.AreaOfSight);
+            Collider[] objects = Physics.OverlapSphere(transform.position, config.AreaOfSight);
 
-            foreach (var obj in objects)
+            foreach (Collider obj in objects)
             {
                 if (!obj.CompareTag(Tags.Player))
                     continue;
 
-                if (obj.transform.TryGetComponent<IPlayerHealthSystem>(out var player))
+                if (obj.transform.TryGetComponent(out IPlayerHealthSystem player))
                 {
                     if (!player.Invincible)
                     {
-                        var direction = (obj.transform.position - transform.position).normalized;
+                        Vector3 direction = (obj.transform.position - transform.position).normalized;
 
-                        if (Physics.Raycast(transform.position, direction, out var hit, config.AreaOfSight))
+                        if (Physics.Raycast(transform.position, direction, out RaycastHit hit, config.AreaOfSight))
                         {
                             Debug.DrawLine(transform.position, hit.transform.position, Color.red);
 
@@ -139,10 +140,10 @@ namespace Characters.EnemySRC
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.transform.TryGetComponent<IHealthSystem>(out var healthSystem))
+            if (collision.transform.TryGetComponent(out IHealthSystem healthSystem))
                 healthSystem.ReceiveDamage();
         }
-        
+
         private void OnCollisionStay(Collision collision) => OnCollisionEnter(collision);
     }
 }

@@ -1,11 +1,25 @@
+using System;
+using UnityEngine;
+
 namespace Characters.EnemySRC
 {
-    public abstract class Enemy : Character, IHealthSystem
+    public abstract class Enemy : Character, IEnemyHealthSystem, IEnemy
     {
-        public virtual void ReceiveDamage()
+        protected static readonly LayerMask LayerMask = 64;
+        protected event Action _killed;
+
+        public virtual void SetUp(Action action = null)
         {
-            //TODO: Deactivate the Enemy to be reused by the Pool.
-            Destroy(gameObject);
+            _killed = null;
+
+            if (action != null)
+                _killed = action;
+        }
+
+        public virtual void ReceiveDamage(Action action = null)
+        {
+            action?.Invoke();
+            _killed?.Invoke();
         }
     }
 }

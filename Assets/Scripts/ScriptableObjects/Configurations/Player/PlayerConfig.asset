@@ -17,3 +17,4 @@ MonoBehaviour:
   <InvincibleTime>k__BackingField: 1
   <MaxBullets>k__BackingField: 3
   <KnockBack>k__BackingField: 25
+  <PointsPerKill>k__BackingField: 100

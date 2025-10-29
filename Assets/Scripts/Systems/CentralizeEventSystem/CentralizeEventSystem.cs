@@ -38,12 +38,12 @@ namespace Systems.CentralizeEventSystem
 
         public SingleParamEvent<T> Get<T>(string key)
         {
-            return events.TryGetValue(key, out var e) ? e as SingleParamEvent<T> : null;
+            return events.TryGetValue(key, out IGameEvent e) ? e as SingleParamEvent<T> : null;
         }
 
         public bool TryGet<T>(string key, out SingleParamEvent<T> gameEvent)
         {
-            if (!events.TryGetValue(key, out var e))
+            if (!events.TryGetValue(key, out IGameEvent e))
             {
                 gameEvent = null;
                 return false;
@@ -54,14 +54,32 @@ namespace Systems.CentralizeEventSystem
             return gameEvent != null;
         }
 
+        public DoubleParamEvent<T1, T2> Get<T1, T2>(string key)
+        {
+            return events.TryGetValue(key, out IGameEvent e) ? e as DoubleParamEvent<T1, T2> : null;
+        }
+
+        public bool TryGet<T1, T2>(string key, out DoubleParamEvent<T1, T2> gameEvent)
+        {
+            if (!events.TryGetValue(key, out IGameEvent e))
+            {
+                gameEvent = null;
+                return false;
+            }
+
+            gameEvent = e as DoubleParamEvent<T1, T2>;
+
+            return gameEvent != null;
+        }
+
         public ComplexGameEvent<T1, T2, T3> Get<T1, T2, T3>(string key)
         {
-            return events.TryGetValue(key, out var e) ? e as ComplexGameEvent<T1, T2, T3> : null;
+            return events.TryGetValue(key, out IGameEvent e) ? e as ComplexGameEvent<T1, T2, T3> : null;
         }
 
         public bool TryGet<T1, T2, T3>(string key, out ComplexGameEvent<T1, T2, T3> gameEvent)
         {
-            if (!events.TryGetValue(key, out var e))
+            if (!events.TryGetValue(key, out IGameEvent e))
             {
                 gameEvent = null;
                 return false;
