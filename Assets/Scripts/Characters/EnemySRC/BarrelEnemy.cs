@@ -1,5 +1,6 @@
 using System;
 using ScriptableObjects;
+using Systems.LayerClassGenerator;
 using Systems.TagClassGenerator;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,11 +9,36 @@ namespace Characters.EnemySRC
 {
     public class BarrelEnemy : Enemy
     {
+        private enum BarrelState
+        {
+            Idle,
+            Attacking,
+            Hide
+        }
+        
         [SerializeField] private BarrelEnemyConfig config;
 
         [SerializeField] private GameObject bulletPrefab;
         
         private BoxCollider _collider;
+        
+        private BarrelState _state;
+
+        private BarrelState State
+        {
+            get => _state;
+            
+            set
+            {
+                if(_state == value) 
+                    return;
+                
+                _state = value;
+                _animate.ChangeAnimation((int)value);
+            }
+        }
+        
+        private IAnimate _animate;
         
         private Vector3 _targetDir;
 
@@ -23,6 +49,7 @@ namespace Characters.EnemySRC
         protected override void Awake()
         {
             base.Awake();
+            _animate = GetComponentInChildren<IAnimate>();
             Rb.isKinematic = true;
             _collider =  GetComponent<BoxCollider>();
         }
@@ -31,7 +58,7 @@ namespace Characters.EnemySRC
         {
             base.SetUp(action);
             
-            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity, LayerMask))
+            if (Physics.BoxCast(transform.position, _collider.size * 0.5f, Vector3.down, out RaycastHit hit, Quaternion.identity, Mathf.Infinity, LayerMask.GetMask(Layers.Environment)))
             {
                 transform.position = new Vector3(transform.position.x, hit.point.y + _collider.size.y * 0.5f, 0);
             }
@@ -42,13 +69,23 @@ namespace Characters.EnemySRC
             Hidden = ShouldHide();
 
             if (Hidden)
+            {
+                State = BarrelState.Hide;
                 return;
+            }
 
             if (_coldDownTimer > Time.time)
                 return;
 
             if (TargetInSight())
+            {
+                State = BarrelState.Attacking;
                 Shoot();
+            }
+            else
+            {
+                State = BarrelState.Idle;
+            }
         }
 
         private bool TargetInSight()

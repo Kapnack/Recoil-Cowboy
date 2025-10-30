@@ -5,7 +5,6 @@ namespace Characters.EnemySRC
 {
     public abstract class Enemy : Character, IEnemyHealthSystem, IEnemy
     {
-        protected static readonly LayerMask LayerMask = 64;
         protected event Action _killed;
 
         public virtual void SetUp(Action action = null)

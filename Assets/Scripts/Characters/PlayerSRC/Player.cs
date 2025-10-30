@@ -82,7 +82,7 @@ namespace Characters.PlayerSRC
             set
             {
                 int newValue = Mathf.Clamp(value, 0, config.MaxBullets);
-
+                
                 _bulletsChangeEvent?.Invoke(_currentBullets, newValue, config.MaxBullets);
                 _currentBullets = newValue;
             }
