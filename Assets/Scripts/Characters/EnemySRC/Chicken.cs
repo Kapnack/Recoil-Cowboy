@@ -113,7 +113,13 @@ namespace Characters.EnemySRC
                 }
             }
         }
-
+        public override void ReceiveDamage(Action action = null)
+        {
+            AkUnitySoundEngine.PostEvent("sfx_ChickenExp", gameObject);
+            base.ReceiveDamage(action);
+        }
+        
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             if (!config)
@@ -127,12 +133,7 @@ namespace Characters.EnemySRC
             Gizmos.DrawRay(_raycastOrigin, transform.right * config.RaycastDistance);
         }
 
-        public override void ReceiveDamage(Action action = null)
-        {
-            base.ReceiveDamage(action);
-            AkUnitySoundEngine.PostEvent("sfx_ChickenExp", gameObject);
-        }
-#if UNITY_EDITOR
+        
         private void OnValidate()
         {
             if (config == null)
