@@ -49,7 +49,7 @@ namespace Systems.Pool
         private PoolData<T> Release()
         {
             PoolData<T> data = _objects.Dequeue();
-            
+
             if (data)
             {
                 data.Obj.SetActive(true);
@@ -64,6 +64,11 @@ namespace Systems.Pool
             if (!data)
                 return;
 
+            if (data.Component.Equals(null)|| !data.Obj)
+                return;
+
+            
+            
             data.Obj.SetActive(false);
             data.Obj.transform.SetParent(_folder);
 
@@ -86,6 +91,11 @@ namespace Systems.Pool
             PoolData<T> poolData = new(obj);
 
             _objects.Enqueue(poolData);
+        }
+
+        private void SetComponent()
+        {
+            
         }
     }
 }
