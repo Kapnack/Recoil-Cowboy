@@ -57,7 +57,7 @@ namespace Characters.PlayerSRC
             }
 
 
-            var delta = Mathf.DeltaAngle(_prevAngle, _angle);
+            float delta = Mathf.DeltaAngle(_prevAngle, _angle);
             _prevAngle = _angle;
 
             _accumulatedDeg += delta;
