@@ -11,6 +11,18 @@
 
 namespace AK
 {
+    namespace EVENTS
+    {
+        static const AkUniqueID SFX_CROW_DEATH = 1670669159U;
+        static const AkUniqueID SFX_CROW_FLIGHT = 2003757705U;
+    } // namespace EVENTS
+
+    namespace BANKS
+    {
+        static const AkUniqueID INIT = 1355168291U;
+        static const AkUniqueID LUCAFALCHINISOUNDBANK = 1696121673U;
+    } // namespace BANKS
+
     namespace BUSSES
     {
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;

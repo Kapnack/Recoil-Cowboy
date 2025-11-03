@@ -1,6 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{57894BDC-7469-46E1-A470-D5175E26FD5F}" SchemaVersion="123">
 	<AudioObjects>
-		<WorkUnit Name="LucaFalchiniWorkUnit" ID="{57894BDC-7469-46E1-A470-D5175E26FD5F}" PersistMode="Standalone"/>
+		<WorkUnit Name="LucaFalchiniWorkUnit" ID="{57894BDC-7469-46E1-A470-D5175E26FD5F}" PersistMode="Standalone">
+			<ChildrenList>
+				<RandomSequenceContainer Name="sfx_crow_flight_audios" ID="{F87475E9-5B01-4E35-8CE1-5044F7E32A5A}" ShortID="778386474">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9BCBDDF6-6CF1-48D2-9C07-EF75B3E7072B}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{88916E4C-6FF4-41C5-BD2A-97D71CE0FCAC}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="sfx_crow_flight-001" ID="{AAD10AED-5519-4204-B58A-CD0464BB1C5E}" ShortID="476650220">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9BCBDDF6-6CF1-48D2-9C07-EF75B3E7072B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{88916E4C-6FF4-41C5-BD2A-97D71CE0FCAC}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="sfx_crow_flight-001" ID="{BC536E0E-CA0B-4930-B5CB-D9060B9C8F01}">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.0238530881477125"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.126356899377072"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimBegin" Type="Real64" Value="0.0438381079471472"/>
+										<Property Name="TrimEnd" Type="Real64" Value="0.492534048890016"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>sfx_crow_flight-001.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="261896707"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="sfx_crow_flight-001" ID="{BC536E0E-CA0B-4930-B5CB-D9060B9C8F01}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="sfx_crow_flight-002" ID="{B7F2AB87-20A0-4117-BCC4-612E4C610F44}" ShortID="363005605">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9BCBDDF6-6CF1-48D2-9C07-EF75B3E7072B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{88916E4C-6FF4-41C5-BD2A-97D71CE0FCAC}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="sfx_crow_flight-002" ID="{E450B5E1-6549-49FD-B4B1-838DE6D84F0C}">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.0378551246180679"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.135196873635957"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimBegin" Type="Real64" Value="0.0297433121999105"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>sfx_crow_flight-002.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="763115218"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="sfx_crow_flight-002" ID="{E450B5E1-6549-49FD-B4B1-838DE6D84F0C}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="sfx_crow_flight-003" ID="{AE40F207-4DA3-4F18-B2A0-F14B2A575E7E}" ShortID="676671601">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9BCBDDF6-6CF1-48D2-9C07-EF75B3E7072B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{88916E4C-6FF4-41C5-BD2A-97D71CE0FCAC}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="sfx_crow_flight-003" ID="{2ED27B86-B25A-4B08-B93B-A79EB5824F8C}">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.0736075000329452"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.105153571475636"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimBegin" Type="Real64" Value="0.0119174047672387"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>sfx_crow_flight-003.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="899704471"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="sfx_crow_flight-003" ID="{2ED27B86-B25A-4B08-B93B-A79EB5824F8C}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</RandomSequenceContainer>
+				<RandomSequenceContainer Name="sfx_crow_death_audios" ID="{2D4A1E80-D0D3-4C8F-A46D-8C9F5E6D01FE}" ShortID="946098882">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9BCBDDF6-6CF1-48D2-9C07-EF75B3E7072B}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{88916E4C-6FF4-41C5-BD2A-97D71CE0FCAC}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="sfx_crow_death-004" ID="{3F819870-DD4F-42A5-93FB-16AC3D5F22D4}" ShortID="355494024">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9BCBDDF6-6CF1-48D2-9C07-EF75B3E7072B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{88916E4C-6FF4-41C5-BD2A-97D71CE0FCAC}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="sfx_crow_death-004" ID="{E29FCAD8-6E01-4578-91BD-55BF5278B69F}">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.149866002978701"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.767313935250947"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimBegin" Type="Real64" Value="0.0479571209531842"/>
+										<Property Name="TrimEnd" Type="Real64" Value="2.42483199469307"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>sfx_crow_death-004.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="537839447"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="sfx_crow_death-004" ID="{E29FCAD8-6E01-4578-91BD-55BF5278B69F}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</RandomSequenceContainer>
+			</ChildrenList>
+		</WorkUnit>
 	</AudioObjects>
 </WwiseDocument>

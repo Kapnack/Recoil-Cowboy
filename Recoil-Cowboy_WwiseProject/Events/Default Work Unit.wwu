@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{692BFA2D-F024-43EF-8E6D-D89B446EDBF9}" SchemaVersion="123">
 	<Events>
-		<WorkUnit Name="Default Work Unit" ID="{692BFA2D-F024-43EF-8E6D-D89B446EDBF9}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{692BFA2D-F024-43EF-8E6D-D89B446EDBF9}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="sfx_crow_flight" ID="{85648FB8-9B79-419D-915B-1188815AEC97}">
+					<ChildrenList>
+						<Action Name="" ID="{2BE84BCB-F898-4D81-9E14-0C285E0B817B}" ShortID="71989135">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="sfx_crow_flight_audios" ID="{F87475E9-5B01-4E35-8CE1-5044F7E32A5A}" WorkUnitID="{57894BDC-7469-46E1-A470-D5175E26FD5F}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="sfx_crow_death" ID="{25AD0673-EA0E-49D1-9664-75E1FB9C8411}">
+					<ChildrenList>
+						<Action Name="" ID="{642454F3-C111-416F-B804-1828A43746B2}" ShortID="432471056">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="sfx_crow_death_audios" ID="{2D4A1E80-D0D3-4C8F-A46D-8C9F5E6D01FE}" WorkUnitID="{57894BDC-7469-46E1-A470-D5175E26FD5F}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
 	</Events>
 </WwiseDocument>
