@@ -19,6 +19,7 @@ namespace Characters.PlayerSRC
         [ContextMenuItem("Instant Kill", nameof(InstantDead))]
         private int _currentLives;
 
+        [SerializeField] private Transform gunPos;
         private Vector3 _initialPos;
 
         private int _killKillPoints;
@@ -35,6 +36,8 @@ namespace Characters.PlayerSRC
 
         private IMousePositionTracker _mouseTracker;
 
+        private ICharacterSpin _spin;
+        
         private readonly ComplexGameEvent<int, int, int> _livesChangeEvent = new();
         private readonly DoubleParamEvent<int, int> _pointsChangeEvent = new();
         private readonly ComplexGameEvent<int, int, int> _bulletsChangeEvent = new();
@@ -94,6 +97,8 @@ namespace Characters.PlayerSRC
 
             _camera = Camera.main;
 
+            _spin = GetComponentInChildren<ICharacterSpin>();
+            
             CurrentLives = config.MaxLives;
             CurrentBullets = config.MaxBullets;
 
@@ -113,7 +118,7 @@ namespace Characters.PlayerSRC
             _initialPos = transform.position;
 
             ServiceProvider.GetService<IFollowTarget>().SetTarget(transform);
-
+            
             while (!ServiceProvider.TryGetService(out _mouseTracker))
                 yield return null;
 
@@ -202,6 +207,8 @@ namespace Characters.PlayerSRC
             Vector3 dir = _mouseTracker.GetMouseDir(transform);
             Vector3 mousePos = _mouseTracker.GetMouseWorldPos();
 
+            _spin.SetSpin(dir);
+            
             if (dir.sqrMagnitude < Mathf.Epsilon * Mathf.Epsilon)
                 return;
 
@@ -217,7 +224,7 @@ namespace Characters.PlayerSRC
                 }
             }
         }
-
+        
         private void OnConfirmKill()
         {
             AddBullet();
@@ -294,10 +301,12 @@ namespace Characters.PlayerSRC
             _reloadingCoroutine = null;
         }
 
+        #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, config.AreaOfSight);
         }
+        #endif
     }
 }
