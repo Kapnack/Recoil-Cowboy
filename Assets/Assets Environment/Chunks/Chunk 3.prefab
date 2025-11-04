@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4868810062032438954}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Assets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,8 +24,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 142433725892561585}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 31.6, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 31.6, z: -3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -54,7 +54,7 @@ Transform:
   - {fileID: 6854451875983905101}
   - {fileID: 7260676548077804988}
   m_Father: {fileID: 8909004394454240362}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &460892368197694354
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,7 +64,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6701173065499634447}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pivot Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ Transform:
   m_GameObject: {fileID: 460892368197694354}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.3500042, z: 0}
+  m_LocalPosition: {x: 0, y: 3.3500042, z: -3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 2309125562084349666}
   - component: {fileID: 2075026286294418609}
   - component: {fileID: 3139016755783121997}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wallpaper2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5719454975733262269}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wallside2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2391991766297330880}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor_type3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7718166837789878024}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wallside1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7709789320603041574}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wainscoting_set 3 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,8 +339,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5820287286945622204}
-  - component: {fileID: 3495328008197539321}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor_type5 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,27 +369,6 @@ Transform:
   - {fileID: 7969270185173333520}
   m_Father: {fileID: 4868810062032438954}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3495328008197539321
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1031575243063619160}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 9, y: 0.5, z: 1}
-  m_Center: {x: 0, y: 0, z: -3.5}
 --- !u!1 &1212090477019531535
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,8 +378,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6854451875983905101}
-  - component: {fileID: 2779395447183887804}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor_type4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -428,27 +405,6 @@ Transform:
   - {fileID: 9220163822049460573}
   m_Father: {fileID: 4868810062032438954}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2779395447183887804
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1212090477019531535}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6, y: 0.5, z: 1}
-  m_Center: {x: 3.6, y: 0, z: -3.5}
 --- !u!1 &1366945139995349526
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,7 +417,7 @@ GameObject:
   - component: {fileID: 3782440533646870299}
   - component: {fileID: 5172149417067713981}
   - component: {fileID: 169856689998666701}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wallpaper2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -558,6 +514,54 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &4053993431572445053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5357067090898701684}
+  - component: {fileID: 8364745789982725355}
+  m_Layer: 0
+  m_Name: Spawn (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5357067090898701684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4053993431572445053}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -9.61, y: -4.96, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4963546760883808988}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8364745789982725355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4053993431572445053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8077012a1d94b49a765542ab23f12e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnerType: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &4473321752466807325
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,7 +571,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4890235933350710732}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wainscoting_set 2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -601,6 +605,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8909004394454240362}
+  - component: {fileID: 852048746012503514}
+  - component: {fileID: 6366860907415211916}
   m_Layer: 0
   m_Name: Chunk 3
   m_TagString: Untagged
@@ -622,8 +628,97 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4868810062032438954}
+  - {fileID: 4963546760883808988}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &852048746012503514
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4604953289087148541}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 33, y: 1, z: 1}
+  m_Center: {x: 0, y: 35, z: 0}
+--- !u!114 &6366860907415211916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4604953289087148541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81060aed40cac4b439ff50de1e832f67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chunkLimitTop: {fileID: 6701173065499634447}
+  spawnPoints:
+  - {fileID: 5178419916952787234}
+  - {fileID: 4053993431572445053}
+  - {fileID: 6002069805928158572}
+  - {fileID: 6474594862038433643}
+  - {fileID: 4606736606277869573}
+--- !u!1 &4606736606277869573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1194474317904710973}
+  - component: {fileID: 2154003689726070183}
+  m_Layer: 0
+  m_Name: Spawn (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1194474317904710973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4606736606277869573}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.76, y: -26.74, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4963546760883808988}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2154003689726070183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4606736606277869573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8077012a1d94b49a765542ab23f12e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnerType: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &4964151438778102525
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,8 +728,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1862337633198353476}
-  - component: {fileID: 6369180919791683432}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor_type3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -666,27 +760,150 @@ Transform:
   - {fileID: 6334927476267068954}
   m_Father: {fileID: 4868810062032438954}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6369180919791683432
-BoxCollider:
+--- !u!1 &5178419916952787234
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4964151438778102525}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8617943401640827787}
+  - component: {fileID: 8700850775256728975}
+  m_Layer: 0
+  m_Name: Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8617943401640827787
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5178419916952787234}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 11.56, y: -2.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4963546760883808988}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8700850775256728975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5178419916952787234}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 12, y: 0.5, z: 1}
-  m_Center: {x: -1.45, y: 0, z: -3.5}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8077012a1d94b49a765542ab23f12e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnerType: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!1 &6002069805928158572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7126259822000509258}
+  - component: {fileID: 5614368742313867984}
+  m_Layer: 0
+  m_Name: Spawn (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7126259822000509258
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6002069805928158572}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.4, y: -16.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4963546760883808988}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5614368742313867984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6002069805928158572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8077012a1d94b49a765542ab23f12e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnerType: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!1 &6474594862038433643
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 665676513605096494}
+  - component: {fileID: 2575693966207243924}
+  m_Layer: 0
+  m_Name: Spawn (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &665676513605096494
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6474594862038433643}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 9.8, y: -26.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4963546760883808988}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2575693966207243924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6474594862038433643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8077012a1d94b49a765542ab23f12e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnerType: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &6785513985068699762
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,7 +913,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8507483716189713344}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wainscoting_set 3 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -727,8 +944,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7260676548077804988}
-  - component: {fileID: 6589844775245502413}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor_type4 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -755,27 +971,6 @@ Transform:
   - {fileID: 1250635844971516349}
   m_Father: {fileID: 4868810062032438954}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6589844775245502413
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7165268277473582252}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6, y: 0.5, z: 1}
-  m_Center: {x: -0.8, y: 0, z: -3.5}
 --- !u!1 &7372730157886961116
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,7 +983,7 @@ GameObject:
   - component: {fileID: 6508919968271031610}
   - component: {fileID: 6008423953535930660}
   - component: {fileID: 790512367383785127}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wallpaper1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -894,8 +1089,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1063901755682222983}
-  - component: {fileID: 3380752998551486611}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor_type5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -925,27 +1119,6 @@ Transform:
   - {fileID: 6267068735786722193}
   m_Father: {fileID: 4868810062032438954}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3380752998551486611
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7743672465881799379}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 9, y: 0.5, z: 1}
-  m_Center: {x: 0, y: 0, z: -3.5}
 --- !u!1 &8336193266269868432
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,7 +1128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7207940509681841837}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Objects_group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1120,6 +1293,42 @@ Transform:
   - {fileID: 1507580275542235176}
   m_Father: {fileID: 4868810062032438954}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8550463623413872564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4963546760883808988}
+  m_Layer: 0
+  m_Name: Spawners
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4963546760883808988
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8550463623413872564}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 35, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8617943401640827787}
+  - {fileID: 5357067090898701684}
+  - {fileID: 7126259822000509258}
+  - {fileID: 665676513605096494}
+  - {fileID: 1194474317904710973}
+  m_Father: {fileID: 8909004394454240362}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &79991488584714307
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1128,6 +1337,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7207940509681841837}
     m_Modifications:
+    - target: {fileID: 769465469398836518, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065823079188871224, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1270044099565071002, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 26.052
@@ -1172,6 +1389,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barrel (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1939867049301405728, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2115716902527049284, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5698424365965158037, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8556278155734375525, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1193,6 +1426,10 @@ PrefabInstance:
     - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_Name
       value: Whisky_2 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1312,16 +1549,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor7
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4950246976355686754}
   m_SourcePrefab: {fileID: 100100000, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
 --- !u!4 &395297387126770085 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
   m_PrefabInstance: {fileID: 213597298178502222}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1024481287406392095 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
+  m_PrefabInstance: {fileID: 213597298178502222}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &4950246976355686754
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024481287406392095}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.8830113, y: 0.468, z: 13.941505}
+  m_Center: {x: 0, y: 0, z: 0.029247284}
 --- !u!1001 &246692528033481516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1390,16 +1660,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor13
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4772459725728233051}
   m_SourcePrefab: {fileID: 100100000, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
 --- !u!4 &353203754101679303 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
   m_PrefabInstance: {fileID: 246692528033481516}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1129563883080580733 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
+  m_PrefabInstance: {fileID: 246692528033481516}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &4772459725728233051
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129563883080580733}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: -0.029247165, y: 0, z: -0.029247284}
 --- !u!1001 &266519639096000613
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1411,6 +1714,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1514,6 +1821,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Paint5
       objectReference: {fileID: 0}
+    - target: {fileID: 7628786334859701468, guid: a9b07cff38bc0fd45a517cf774eb59ec, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8919012599846945881, guid: a9b07cff38bc0fd45a517cf774eb59ec, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1539,6 +1850,10 @@ PrefabInstance:
     - target: {fileID: 3600864176496051257, guid: ae84a65dc1f6202479d91cf199cf7868, type: 3}
       propertyPath: m_Name
       value: Table_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3600864176496051257, guid: ae84a65dc1f6202479d91cf199cf7868, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4229731413396184707, guid: ae84a65dc1f6202479d91cf199cf7868, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1579,6 +1894,14 @@ PrefabInstance:
     - target: {fileID: 4229731413396184707, guid: ae84a65dc1f6202479d91cf199cf7868, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6754572553770051601, guid: ae84a65dc1f6202479d91cf199cf7868, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103987346350430443, guid: ae84a65dc1f6202479d91cf199cf7868, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1658,16 +1981,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor10
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0f6da77d062515848b529a6fce031448, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f6da77d062515848b529a6fce031448, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2551632474524960152}
   m_SourcePrefab: {fileID: 100100000, guid: 0f6da77d062515848b529a6fce031448, type: 3}
 --- !u!4 &195646526241151424 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0f6da77d062515848b529a6fce031448, type: 3}
   m_PrefabInstance: {fileID: 377644894511562283}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &719665365312127866 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f6da77d062515848b529a6fce031448, type: 3}
+  m_PrefabInstance: {fileID: 377644894511562283}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2551632474524960152
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719665365312127866}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: 0.029247165, y: 0, z: 0.029247284}
 --- !u!1001 &395834409083028023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1736,16 +2092,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor12
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2111395908809573011}
   m_SourcePrefab: {fileID: 100100000, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
 --- !u!4 &213059176744101340 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
   m_PrefabInstance: {fileID: 395834409083028023}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &702315929254002534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
+  m_PrefabInstance: {fileID: 395834409083028023}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2111395908809573011
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702315929254002534}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: 0.029247165, y: 0, z: -0.029247284}
 --- !u!1001 &521973793797619636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1797,6 +2186,10 @@ PrefabInstance:
     - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
       propertyPath: m_Name
       value: Stool (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1860,6 +2253,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Long_Bench_2
       objectReference: {fileID: 0}
+    - target: {fileID: 8813909350546714164, guid: 4b9f9f86dd9c4854b9e1056f3371d4ef, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1921,6 +2318,10 @@ PrefabInstance:
     - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
       propertyPath: m_Name
       value: Whisky_3 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2000,6 +2401,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wallside
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 84d2941ba70d47449aebf776933c2aec, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2062,6 +2467,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barstool
       objectReference: {fileID: 0}
+    - target: {fileID: 5501497395571137836, guid: 85c18105d0a27f64eac49c075ec26ba6, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2083,6 +2492,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2186,6 +2599,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Window (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2088112184593028568, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739272421673430293, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404531992821392859, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2211,6 +2636,10 @@ PrefabInstance:
     - target: {fileID: 6720389200901639550, guid: a897a8f3349897a4491403f95550cfea, type: 3}
       propertyPath: m_Name
       value: Paint4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6720389200901639550, guid: a897a8f3349897a4491403f95550cfea, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7088009827251766561, guid: a897a8f3349897a4491403f95550cfea, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2330,11 +2759,44 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor10
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0f6da77d062515848b529a6fce031448, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f6da77d062515848b529a6fce031448, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6949791597346909939}
   m_SourcePrefab: {fileID: 100100000, guid: 0f6da77d062515848b529a6fce031448, type: 3}
+--- !u!1 &465884972529960958 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f6da77d062515848b529a6fce031448, type: 3}
+  m_PrefabInstance: {fileID: 771890405239847599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &6949791597346909939
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465884972529960958}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: 0.029247165, y: 0, z: 0.029247284}
 --- !u!4 &953909103789808964 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0f6da77d062515848b529a6fce031448, type: 3}
@@ -2351,6 +2813,10 @@ PrefabInstance:
     - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_Name
       value: Whisky_2 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2454,6 +2920,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2472,6 +2942,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7207940509681841837}
     m_Modifications:
+    - target: {fileID: 769465469398836518, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065823079188871224, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1270044099565071002, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.36
@@ -2515,6 +2993,22 @@ PrefabInstance:
     - target: {fileID: 1939867049301405728, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
       propertyPath: m_Name
       value: Barrel (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939867049301405728, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2115716902527049284, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5698424365965158037, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8556278155734375525, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2578,6 +3072,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8064417372508522766, guid: 8e40f4c48dc66c447b3790fa53be8e5b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2640,6 +3138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Paint3
       objectReference: {fileID: 0}
+    - target: {fileID: 7983932366209247065, guid: a8f931f429aa1ab4386b92c7f4aed5ce, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2661,6 +3163,10 @@ PrefabInstance:
     - target: {fileID: 3600864176496051257, guid: ae84a65dc1f6202479d91cf199cf7868, type: 3}
       propertyPath: m_Name
       value: Table_2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3600864176496051257, guid: ae84a65dc1f6202479d91cf199cf7868, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4229731413396184707, guid: ae84a65dc1f6202479d91cf199cf7868, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2701,6 +3207,14 @@ PrefabInstance:
     - target: {fileID: 4229731413396184707, guid: ae84a65dc1f6202479d91cf199cf7868, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6754572553770051601, guid: ae84a65dc1f6202479d91cf199cf7868, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103987346350430443, guid: ae84a65dc1f6202479d91cf199cf7868, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2764,6 +3278,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Long_Bench_2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8813909350546714164, guid: 4b9f9f86dd9c4854b9e1056f3371d4ef, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2825,6 +3343,10 @@ PrefabInstance:
     - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
       propertyPath: m_Name
       value: Whisky_3 (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2888,6 +3410,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Paint2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4532414361991162848, guid: b820772107e7cd84ea5a86f23aa198c1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6394108204811491626, guid: b820772107e7cd84ea5a86f23aa198c1, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -2913,6 +3439,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3032,16 +3562,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor13
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7274838571325307582}
   m_SourcePrefab: {fileID: 100100000, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
 --- !u!4 &1420191789548143866 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
   m_PrefabInstance: {fileID: 1458939320416920337}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1800973953871765056 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
+  m_PrefabInstance: {fileID: 1458939320416920337}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7274838571325307582
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800973953871765056}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: -0.029247165, y: 0, z: -0.029247284}
 --- !u!1001 &1567132410990866781
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3094,6 +3657,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3115,6 +3682,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3234,6 +3805,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wainscoting
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 341beb8475d9f064e9eff6ca1ea9c850, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3296,6 +3871,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Long_Bench_1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2235033889905551489, guid: 9b566a17216c4b540b0e1fb7ebfdf5c1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3314,9 +3893,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7207940509681841837}
     m_Modifications:
+    - target: {fileID: 203230703597569708, guid: b579c39699920b34e9c2a566dcf83df5, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5875749132572632735, guid: b579c39699920b34e9c2a566dcf83df5, type: 3}
       propertyPath: m_Name
       value: Table_1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5875749132572632735, guid: b579c39699920b34e9c2a566dcf83df5, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6539519235989535781, guid: b579c39699920b34e9c2a566dcf83df5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3380,6 +3967,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_4 (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.863
@@ -3438,6 +4029,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7207940509681841837}
     m_Modifications:
+    - target: {fileID: 1516588709497774793, guid: 0741cc87bdba134449472ae665505d90, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017137510825640042, guid: 0741cc87bdba134449472ae665505d90, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7458682194461282646, guid: 0741cc87bdba134449472ae665505d90, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.190753
@@ -3481,6 +4080,14 @@ PrefabInstance:
     - target: {fileID: 7838901478375099372, guid: 0741cc87bdba134449472ae665505d90, type: 3}
       propertyPath: m_Name
       value: Bar_Furniture (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838901478375099372, guid: 0741cc87bdba134449472ae665505d90, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7982046817114153098, guid: 0741cc87bdba134449472ae665505d90, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3560,11 +4167,44 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor13
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4120691146354965489}
   m_SourcePrefab: {fileID: 100100000, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
+--- !u!1 &1635421235678949597 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
+  m_PrefabInstance: {fileID: 1905945283339685260}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &4120691146354965489
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635421235678949597}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: -0.029247165, y: 0, z: -0.029247284}
 --- !u!4 &2160037177733835367 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
@@ -3581,6 +4221,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3643,6 +4287,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3762,6 +4410,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wainscoting4 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 795253d57a8a9d3409a8fd57299268cc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3823,6 +4475,10 @@ PrefabInstance:
     - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
       propertyPath: m_Name
       value: Whisky_3 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3902,11 +4558,44 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor9
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3423368267622322529}
   m_SourcePrefab: {fileID: 100100000, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
+--- !u!1 &1660313550211662653 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
+  m_PrefabInstance: {fileID: 2002966800826859116}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &3423368267622322529
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660313550211662653}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.8830113, y: 0.468, z: 13.883011}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &2035995144805816711 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
@@ -3923,6 +4612,10 @@ PrefabInstance:
     - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_Name
       value: Whisky_2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4026,6 +4719,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Window
       objectReference: {fileID: 0}
+    - target: {fileID: 2088112184593028568, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739272421673430293, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404531992821392859, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4047,6 +4752,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4150,6 +4859,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4211,6 +4924,10 @@ PrefabInstance:
     - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
       propertyPath: m_Name
       value: Stool (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4290,16 +5007,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor10
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0f6da77d062515848b529a6fce031448, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f6da77d062515848b529a6fce031448, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4453106277983362795}
   m_SourcePrefab: {fileID: 100100000, guid: 0f6da77d062515848b529a6fce031448, type: 3}
 --- !u!4 &2655303587290300863 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0f6da77d062515848b529a6fce031448, type: 3}
   m_PrefabInstance: {fileID: 2545433147797874260}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3427899194297424645 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f6da77d062515848b529a6fce031448, type: 3}
+  m_PrefabInstance: {fileID: 2545433147797874260}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &4453106277983362795
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3427899194297424645}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: 0.029247165, y: 0, z: 0.029247284}
 --- !u!1001 &2553352134703157970
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4311,6 +5061,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4374,6 +5128,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_2 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5300016
@@ -4436,6 +5194,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_2 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.2340002
@@ -4497,6 +5259,10 @@ PrefabInstance:
     - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_Name
       value: Whisky_2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4600,6 +5366,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_1 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8064417372508522766, guid: 8e40f4c48dc66c447b3790fa53be8e5b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4621,6 +5391,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4683,6 +5457,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4786,6 +5564,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4847,6 +5629,10 @@ PrefabInstance:
     - target: {fileID: 8064417372508522766, guid: 8e40f4c48dc66c447b3790fa53be8e5b, type: 3}
       propertyPath: m_Name
       value: Whisky_1 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064417372508522766, guid: 8e40f4c48dc66c447b3790fa53be8e5b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4910,6 +5696,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stool (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4931,6 +5721,10 @@ PrefabInstance:
     - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_Name
       value: Whisky_2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4993,6 +5787,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5096,6 +5894,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stool (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5117,6 +5919,10 @@ PrefabInstance:
     - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_Name
       value: Whisky_2 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5236,6 +6042,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wainscoting3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 094327660a9486a46bdf2bddf5ed3b14, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5257,6 +6067,10 @@ PrefabInstance:
     - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_Name
       value: Whisky_2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5319,6 +6133,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5422,6 +6240,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5500,16 +6322,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor12
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2962440633152209543}
   m_SourcePrefab: {fileID: 100100000, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
 --- !u!4 &3968258331089930488 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
   m_PrefabInstance: {fileID: 3501738445144125203}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4348723802246074946 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
+  m_PrefabInstance: {fileID: 3501738445144125203}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2962440633152209543
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4348723802246074946}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: 0.029247165, y: 0, z: -0.029247284}
 --- !u!1001 &3520574146213405921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5562,6 +6417,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Window
       objectReference: {fileID: 0}
+    - target: {fileID: 2088112184593028568, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739272421673430293, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404531992821392859, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7404531992821392859, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -5584,9 +6451,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7207940509681841837}
     m_Modifications:
+    - target: {fileID: 203230703597569708, guid: b579c39699920b34e9c2a566dcf83df5, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5875749132572632735, guid: b579c39699920b34e9c2a566dcf83df5, type: 3}
       propertyPath: m_Name
       value: Table_1.5 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5875749132572632735, guid: b579c39699920b34e9c2a566dcf83df5, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6539519235989535781, guid: b579c39699920b34e9c2a566dcf83df5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5706,6 +6581,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wainscoting4 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 795253d57a8a9d3409a8fd57299268cc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5784,16 +6663,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor13
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 718986017215650011}
   m_SourcePrefab: {fileID: 100100000, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
 --- !u!4 &3733696498053728190 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
   m_PrefabInstance: {fileID: 3772459938557829205}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4078873138684534020 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
+  m_PrefabInstance: {fileID: 3772459938557829205}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &718986017215650011
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4078873138684534020}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: -0.029247165, y: 0, z: -0.029247284}
 --- !u!1001 &3807475881714148160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5846,6 +6758,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bar_Furniture_Half (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 696099827467477618, guid: 753f99882a741184d91fb86f81bd259e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 839280367924775188, guid: 753f99882a741184d91fb86f81bd259e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971747877609089524, guid: 753f99882a741184d91fb86f81bd259e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100943439556135767, guid: 753f99882a741184d91fb86f81bd259e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5867,6 +6795,10 @@ PrefabInstance:
     - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_Name
       value: Whisky_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5970,6 +6902,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barstool (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5501497395571137836, guid: 85c18105d0a27f64eac49c075ec26ba6, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6048,16 +6984,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor7
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8804813405776587861}
   m_SourcePrefab: {fileID: 100100000, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
 --- !u!4 &3663877147536330070 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
   m_PrefabInstance: {fileID: 3842148447191722685}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4148770140196132844 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
+  m_PrefabInstance: {fileID: 3842148447191722685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8804813405776587861
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4148770140196132844}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.8830113, y: 0.468, z: 13.941505}
+  m_Center: {x: 0, y: 0, z: 0.029247284}
 --- !u!1001 &3843612950872414372
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6109,6 +7078,10 @@ PrefabInstance:
     - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
       propertyPath: m_Name
       value: Whisky_3 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6188,16 +7161,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor11
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 403544342059591612}
   m_SourcePrefab: {fileID: 100100000, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
 --- !u!4 &3605811332857286361 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
   m_PrefabInstance: {fileID: 3855313488313592114}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4125784209660384355 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
+  m_PrefabInstance: {fileID: 3855313488313592114}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &403544342059591612
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4125784209660384355}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: -0.029247165, y: 0, z: 0.029247284}
 --- !u!1001 &3879477534385486814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6249,6 +7255,10 @@ PrefabInstance:
     - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
       propertyPath: m_Name
       value: Whisky_3 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6328,6 +7338,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wainscoting4
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 795253d57a8a9d3409a8fd57299268cc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6389,6 +7403,10 @@ PrefabInstance:
     - target: {fileID: 2235033889905551489, guid: 9b566a17216c4b540b0e1fb7ebfdf5c1, type: 3}
       propertyPath: m_Name
       value: Long_Bench_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2235033889905551489, guid: 9b566a17216c4b540b0e1fb7ebfdf5c1, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6452,6 +7470,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_1 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8064417372508522766, guid: 8e40f4c48dc66c447b3790fa53be8e5b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6514,6 +7536,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stool (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6535,6 +7561,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (09)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6654,11 +7684,44 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor9
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8780282247907806724}
   m_SourcePrefab: {fileID: 100100000, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
+--- !u!1 &3762377731638041010 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
+  m_PrefabInstance: {fileID: 4104977515144881379}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8780282247907806724
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3762377731638041010}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.8830113, y: 0.468, z: 13.883011}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &4574942747014742792 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
@@ -6675,6 +7738,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6738,6 +7805,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Paint4 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6720389200901639550, guid: a897a8f3349897a4491403f95550cfea, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7088009827251766561, guid: a897a8f3349897a4491403f95550cfea, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16.3
@@ -6799,6 +7870,10 @@ PrefabInstance:
     - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_Name
       value: Whisky_2 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6902,6 +7977,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6964,6 +8043,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8064417372508522766, guid: 8e40f4c48dc66c447b3790fa53be8e5b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6985,6 +8068,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7092,6 +8179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wainscoting6
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b72be05199a5349478ca8f0791ac6648, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7154,6 +8245,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stool (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7175,6 +8270,10 @@ PrefabInstance:
     - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_Name
       value: Whisky_2 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7278,6 +8377,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7299,6 +8402,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7402,6 +8509,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stool (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7463,6 +8574,10 @@ PrefabInstance:
     - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
       propertyPath: m_Name
       value: Whisky_3 (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7526,6 +8641,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7547,6 +8666,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7666,16 +8789,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor12
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8113856933996487154}
   m_SourcePrefab: {fileID: 100100000, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
 --- !u!4 &5105847535349614169 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
   m_PrefabInstance: {fileID: 4706582897567211954}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5589052781754391779 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
+  m_PrefabInstance: {fileID: 4706582897567211954}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8113856933996487154
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5589052781754391779}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: 0.029247165, y: 0, z: -0.029247284}
 --- !u!1001 &4741732456006958288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7728,6 +8884,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_1
       objectReference: {fileID: 0}
+    - target: {fileID: 8064417372508522766, guid: 8e40f4c48dc66c447b3790fa53be8e5b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7746,6 +8906,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7207940509681841837}
     m_Modifications:
+    - target: {fileID: 769465469398836518, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065823079188871224, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1270044099565071002, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.25
@@ -7789,6 +8957,22 @@ PrefabInstance:
     - target: {fileID: 1939867049301405728, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
       propertyPath: m_Name
       value: Barrel
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939867049301405728, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2115716902527049284, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5698424365965158037, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8556278155734375525, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7868,6 +9052,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wainscoting4 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 795253d57a8a9d3409a8fd57299268cc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7893,6 +9081,10 @@ PrefabInstance:
     - target: {fileID: 6720389200901639550, guid: a897a8f3349897a4491403f95550cfea, type: 3}
       propertyPath: m_Name
       value: Paint4 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6720389200901639550, guid: a897a8f3349897a4491403f95550cfea, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7088009827251766561, guid: a897a8f3349897a4491403f95550cfea, type: 3}
       propertyPath: m_LocalScale.x
@@ -7968,6 +9160,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_2 (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.01
@@ -8030,6 +9226,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_4 (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.541
@@ -8091,6 +9291,10 @@ PrefabInstance:
     - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_Name
       value: Whisky_2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8194,6 +9398,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barstool (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5501497395571137836, guid: 85c18105d0a27f64eac49c075ec26ba6, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8215,6 +9423,10 @@ PrefabInstance:
     - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_Name
       value: Whisky_2 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8277,6 +9489,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8380,6 +9596,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8401,6 +9621,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8520,11 +9744,44 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor10
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0f6da77d062515848b529a6fce031448, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f6da77d062515848b529a6fce031448, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1981371251384582909}
   m_SourcePrefab: {fileID: 100100000, guid: 0f6da77d062515848b529a6fce031448, type: 3}
+--- !u!1 &4999571271052238925 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f6da77d062515848b529a6fce031448, type: 3}
+  m_PrefabInstance: {fileID: 5306192834135334172}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1981371251384582909
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4999571271052238925}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: 0.029247165, y: 0, z: 0.029247284}
 --- !u!4 &5632273849327385335 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0f6da77d062515848b529a6fce031448, type: 3}
@@ -8598,11 +9855,44 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor13
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7387785542010293172}
   m_SourcePrefab: {fileID: 100100000, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
+--- !u!1 &5080793929186865215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
+  m_PrefabInstance: {fileID: 5351387934214442350}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7387785542010293172
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5080793929186865215}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: -0.029247165, y: 0, z: -0.029247284}
 --- !u!4 &5605094242966088325 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 20ea7217968d569439444271f7a61e6c, type: 3}
@@ -8659,6 +9949,10 @@ PrefabInstance:
     - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
       propertyPath: m_Name
       value: Stool (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8721,6 +10015,10 @@ PrefabInstance:
     - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
       propertyPath: m_Name
       value: Stool (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8800,11 +10098,44 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor10
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0f6da77d062515848b529a6fce031448, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f6da77d062515848b529a6fce031448, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4073905189945132234}
   m_SourcePrefab: {fileID: 100100000, guid: 0f6da77d062515848b529a6fce031448, type: 3}
+--- !u!1 &4729810850819266335 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f6da77d062515848b529a6fce031448, type: 3}
+  m_PrefabInstance: {fileID: 5576230640318409294}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &4073905189945132234
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4729810850819266335}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: 0.029247165, y: 0, z: 0.029247284}
 --- !u!4 &5397697487902248357 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0f6da77d062515848b529a6fce031448, type: 3}
@@ -8861,6 +10192,10 @@ PrefabInstance:
     - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
       propertyPath: m_Name
       value: Whisky_3 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8924,6 +10259,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Window
       objectReference: {fileID: 0}
+    - target: {fileID: 2088112184593028568, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739272421673430293, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404531992821392859, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8986,6 +10333,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Paint2
       objectReference: {fileID: 0}
+    - target: {fileID: 4532414361991162848, guid: b820772107e7cd84ea5a86f23aa198c1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6394108204811491626, guid: b820772107e7cd84ea5a86f23aa198c1, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -9011,6 +10362,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9070,6 +10425,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7207940509681841837}
     m_Modifications:
+    - target: {fileID: 1516588709497774793, guid: 0741cc87bdba134449472ae665505d90, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017137510825640042, guid: 0741cc87bdba134449472ae665505d90, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7458682194461282646, guid: 0741cc87bdba134449472ae665505d90, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.939283
@@ -9114,6 +10477,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bar_Furniture (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7838901478375099372, guid: 0741cc87bdba134449472ae665505d90, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7982046817114153098, guid: 0741cc87bdba134449472ae665505d90, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9135,6 +10506,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9238,6 +10613,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bar_Table
       objectReference: {fileID: 0}
+    - target: {fileID: 9169590380070930434, guid: 7b685ea2afff6264faa64acf8f54459e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9299,6 +10678,10 @@ PrefabInstance:
     - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
       propertyPath: m_Name
       value: Stool (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9378,16 +10761,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor7 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1824228236520297965}
   m_SourcePrefab: {fileID: 100100000, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
 --- !u!4 &6306525030107568220 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
   m_PrefabInstance: {fileID: 5769109355351162807}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6687449301949055718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
+  m_PrefabInstance: {fileID: 5769109355351162807}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1824228236520297965
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6687449301949055718}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.8830113, y: 0.468, z: 13.941505}
+  m_Center: {x: 0, y: 0, z: 0.029247284}
 --- !u!1001 &5791795716984654321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9456,6 +10872,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wainscoting2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fed4fda2f2c7cc647afd6049ae93b161, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9477,6 +10897,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9580,6 +11004,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stool (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9657,6 +11085,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 094327660a9486a46bdf2bddf5ed3b14, type: 3}
       propertyPath: m_Name
       value: Wainscoting3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 094327660a9486a46bdf2bddf5ed3b14, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9736,16 +11168,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor11
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1679040804426666050}
   m_SourcePrefab: {fileID: 100100000, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
 --- !u!4 &6213018829305646764 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
   m_PrefabInstance: {fileID: 5887236915772451143}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6733658907516064790 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
+  m_PrefabInstance: {fileID: 5887236915772451143}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1679040804426666050
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6733658907516064790}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: -0.029247165, y: 0, z: 0.029247284}
 --- !u!1001 &5917668506791051286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9814,16 +11279,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor11
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9125842456370869745}
   m_SourcePrefab: {fileID: 100100000, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
 --- !u!4 &6166959896709392381 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
   m_PrefabInstance: {fileID: 5917668506791051286}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6836079365445467463 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
+  m_PrefabInstance: {fileID: 5917668506791051286}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &9125842456370869745
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6836079365445467463}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: -0.029247165, y: 0, z: 0.029247284}
 --- !u!1001 &5928037856075416885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9835,6 +11333,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9898,6 +11400,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_4 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.289999
@@ -9959,6 +11465,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10022,6 +11532,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_4 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.586998
@@ -10083,6 +11597,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (08)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10186,6 +11704,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3
       objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10207,6 +11729,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10326,16 +11852,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor12
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2437458847690423593}
   m_SourcePrefab: {fileID: 100100000, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
 --- !u!4 &5980458692139744166 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
   m_PrefabInstance: {fileID: 6157654359243988045}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6464085837676192028 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
+  m_PrefabInstance: {fileID: 6157654359243988045}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2437458847690423593
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6464085837676192028}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: 0.029247165, y: 0, z: -0.029247284}
 --- !u!1001 &6230208150856259260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10404,16 +11963,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor9
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 587541266579932030}
   m_SourcePrefab: {fileID: 100100000, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
 --- !u!4 &5907768543897366871 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
   m_PrefabInstance: {fileID: 6230208150856259260}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6536777617998801901 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
+  m_PrefabInstance: {fileID: 6230208150856259260}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &587541266579932030
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6536777617998801901}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.8830113, y: 0.468, z: 13.883011}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6345922526530115429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10465,6 +12057,18 @@ PrefabInstance:
     - target: {fileID: 2088112184593028568, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
       propertyPath: m_Name
       value: Window (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2088112184593028568, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739272421673430293, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404531992821392859, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10528,6 +12132,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10549,6 +12157,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10652,6 +12264,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10714,6 +12330,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stool (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10735,6 +12355,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10838,6 +12462,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Window (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2088112184593028568, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739272421673430293, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404531992821392859, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10859,6 +12495,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10918,6 +12558,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7207940509681841837}
     m_Modifications:
+    - target: {fileID: 1516588709497774793, guid: 0741cc87bdba134449472ae665505d90, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017137510825640042, guid: 0741cc87bdba134449472ae665505d90, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7458682194461282646, guid: 0741cc87bdba134449472ae665505d90, type: 3}
       propertyPath: m_LocalPosition.x
       value: 21.090752
@@ -10961,6 +12609,14 @@ PrefabInstance:
     - target: {fileID: 7838901478375099372, guid: 0741cc87bdba134449472ae665505d90, type: 3}
       propertyPath: m_Name
       value: Bar_Furniture
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838901478375099372, guid: 0741cc87bdba134449472ae665505d90, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7982046817114153098, guid: 0741cc87bdba134449472ae665505d90, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11024,6 +12680,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stool (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11045,6 +12705,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11164,6 +12828,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wainscoting4 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 795253d57a8a9d3409a8fd57299268cc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11225,6 +12893,10 @@ PrefabInstance:
     - target: {fileID: 8064417372508522766, guid: 8e40f4c48dc66c447b3790fa53be8e5b, type: 3}
       propertyPath: m_Name
       value: Whisky_1 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064417372508522766, guid: 8e40f4c48dc66c447b3790fa53be8e5b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11288,6 +12960,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11349,6 +13025,10 @@ PrefabInstance:
     - target: {fileID: 8064417372508522766, guid: 8e40f4c48dc66c447b3790fa53be8e5b, type: 3}
       propertyPath: m_Name
       value: Whisky_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064417372508522766, guid: 8e40f4c48dc66c447b3790fa53be8e5b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11428,16 +13108,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor11
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4062093297188514450}
   m_SourcePrefab: {fileID: 100100000, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
 --- !u!4 &7385142138106449287 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
   m_PrefabInstance: {fileID: 7059377950506347116}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7869647865711875901 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
+  m_PrefabInstance: {fileID: 7059377950506347116}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &4062093297188514450
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7869647865711875901}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: -0.029247165, y: 0, z: 0.029247284}
 --- !u!1001 &7171629324939419309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11490,6 +13203,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stool (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11511,6 +13228,10 @@ PrefabInstance:
     - target: {fileID: 3600864176496051257, guid: ae84a65dc1f6202479d91cf199cf7868, type: 3}
       propertyPath: m_Name
       value: Table_2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3600864176496051257, guid: ae84a65dc1f6202479d91cf199cf7868, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4229731413396184707, guid: ae84a65dc1f6202479d91cf199cf7868, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11551,6 +13272,14 @@ PrefabInstance:
     - target: {fileID: 4229731413396184707, guid: ae84a65dc1f6202479d91cf199cf7868, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6754572553770051601, guid: ae84a65dc1f6202479d91cf199cf7868, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103987346350430443, guid: ae84a65dc1f6202479d91cf199cf7868, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11614,6 +13343,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Window (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2088112184593028568, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739272421673430293, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404531992821392859, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11676,6 +13417,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stool (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11697,6 +13442,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11800,6 +13549,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stool (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11821,6 +13574,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11940,6 +13697,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wainscoting3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 094327660a9486a46bdf2bddf5ed3b14, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11961,6 +13722,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12080,11 +13845,44 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor7
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5544771870109131157}
   m_SourcePrefab: {fileID: 100100000, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
+--- !u!1 &7289288923036718324 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
+  m_PrefabInstance: {fileID: 7631816269905668517}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &5544771870109131157
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7289288923036718324}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.8830113, y: 0.468, z: 13.941505}
+  m_Center: {x: 0, y: 0, z: 0.029247284}
 --- !u!4 &7954220106353692238 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4b5102aaf085c1f4d98ef0d5f51c245f, type: 3}
@@ -12101,6 +13899,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12204,6 +14006,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Window (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2088112184593028568, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739272421673430293, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404531992821392859, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12266,6 +14080,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12287,6 +14105,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12394,6 +14216,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wainscoting6
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b72be05199a5349478ca8f0791ac6648, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12456,6 +14282,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12477,6 +14307,10 @@ PrefabInstance:
     - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_Name
       value: Whisky_2 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12580,6 +14414,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12641,6 +14479,10 @@ PrefabInstance:
     - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
       propertyPath: m_Name
       value: Stool
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12704,6 +14546,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8064417372508522766, guid: 8e40f4c48dc66c447b3790fa53be8e5b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12766,6 +14612,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Window (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2088112184593028568, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739272421673430293, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404531992821392859, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12784,6 +14642,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7207940509681841837}
     m_Modifications:
+    - target: {fileID: 769465469398836518, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065823079188871224, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1270044099565071002, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24.310001
@@ -12827,6 +14693,22 @@ PrefabInstance:
     - target: {fileID: 1939867049301405728, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
       propertyPath: m_Name
       value: Barrel (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939867049301405728, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2115716902527049284, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5698424365965158037, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8556278155734375525, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12906,16 +14788,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor11
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2954829529335054280}
   m_SourcePrefab: {fileID: 100100000, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
 --- !u!4 &8572561247509040699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
   m_PrefabInstance: {fileID: 8177800750805756368}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9060129356340139137 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 61a479fda8d72b842ab9cb5d392b75b2, type: 3}
+  m_PrefabInstance: {fileID: 8177800750805756368}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2954829529335054280
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9060129356340139137}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: -0.029247165, y: 0, z: 0.029247284}
 --- !u!1001 &8204445544634888568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12968,6 +14883,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stool (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12989,6 +14908,10 @@ PrefabInstance:
     - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_Name
       value: Whisky_2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13051,6 +14974,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13170,16 +15097,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor12
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1481363320325219594}
   m_SourcePrefab: {fileID: 100100000, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
 --- !u!4 &8178542612906363596 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
   m_PrefabInstance: {fileID: 8505817905677511975}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8848400639372136566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 77f2c2331088aeb4cb55994af19f1d3e, type: 3}
+  m_PrefabInstance: {fileID: 8505817905677511975}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1481363320325219594
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8848400639372136566}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9415054, y: 0.468, z: 13.941505}
+  m_Center: {x: 0.029247165, y: 0, z: -0.029247284}
 --- !u!1001 &8637145373570356002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13191,6 +15151,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13294,6 +15258,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3
       objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13355,6 +15323,10 @@ PrefabInstance:
     - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
       propertyPath: m_Name
       value: Stool (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059000729787542824, guid: 88b8d6dc52f69a644a9365df051a4187, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13434,6 +15406,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wainscoting
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 341beb8475d9f064e9eff6ca1ea9c850, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13455,6 +15431,10 @@ PrefabInstance:
     - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_Name
       value: Whisky_2 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13518,6 +15498,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_2
       objectReference: {fileID: 0}
+    - target: {fileID: 2580640625753613586, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2926097676674809768, guid: b19c5ba2e52fb0c46aee2469d292a864, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.665998
@@ -13576,6 +15560,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7207940509681841837}
     m_Modifications:
+    - target: {fileID: 769465469398836518, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065823079188871224, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1270044099565071002, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 16.511
@@ -13619,6 +15611,22 @@ PrefabInstance:
     - target: {fileID: 1939867049301405728, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
       propertyPath: m_Name
       value: Barrel (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939867049301405728, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2115716902527049284, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5698424365965158037, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8556278155734375525, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13682,6 +15690,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Long_Bench_1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2235033889905551489, guid: 9b566a17216c4b540b0e1fb7ebfdf5c1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13744,6 +15756,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whisky_3 (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 8725810204239996020, guid: 9c60ff73a34cfb54f95c20c4eb088c21, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13765,6 +15781,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13884,11 +15904,44 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor9 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8270571551914025316}
   m_SourcePrefab: {fileID: 100100000, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
+--- !u!1 &8135080560843685067 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
+  m_PrefabInstance: {fileID: 8945544667626783130}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8270571551914025316
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8135080560843685067}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.8830113, y: 0.468, z: 13.883011}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &8912144308563715697 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 626e9e3f37f3cba449ffd0c1fa156d08, type: 3}
@@ -13902,6 +15955,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7207940509681841837}
     m_Modifications:
+    - target: {fileID: 769465469398836518, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065823079188871224, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1270044099565071002, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.19
@@ -13945,6 +16006,22 @@ PrefabInstance:
     - target: {fileID: 1939867049301405728, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
       propertyPath: m_Name
       value: Barrel (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939867049301405728, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2115716902527049284, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5698424365965158037, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8556278155734375525, guid: a18c75f05c482844bbb8253b46a182f0, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14007,6 +16084,10 @@ PrefabInstance:
     - target: {fileID: 8854343687723497138, guid: cd4ef1f0630346d44b4cdb945718d657, type: 3}
       propertyPath: m_Name
       value: Paint1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854343687723497138, guid: cd4ef1f0630346d44b4cdb945718d657, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14086,6 +16167,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wainscoting4
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 795253d57a8a9d3409a8fd57299268cc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14107,6 +16192,10 @@ PrefabInstance:
     - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_Name
       value: Whisky_4 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626854747550844674, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3404623277927259576, guid: 168cdaf9bc2b53d438b6de74a38a498b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14210,6 +16299,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Window (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2088112184593028568, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739272421673430293, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404531992821392859, guid: a5459f2c93c14154e82a0e416b1bfd70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14287,6 +16388,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 84d2941ba70d47449aebf776933c2aec, type: 3}
       propertyPath: m_Name
       value: Wallside
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 84d2941ba70d47449aebf776933c2aec, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
