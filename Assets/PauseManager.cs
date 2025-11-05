@@ -40,7 +40,7 @@ public class PauseManager : MonoBehaviour
         if (_eventSystem == null)
             return;
 
-        _eventSystem.Register(GameManagerKeys.MainMenu, _loadMainMenu);
+        _eventSystem.Unregister(GameManagerKeys.MainMenu);
         _eventSystem.Get(PlayerEventKeys.Paused).RemoveListener(PauseHandler);
 
         Time.timeScale = 1.0f;
