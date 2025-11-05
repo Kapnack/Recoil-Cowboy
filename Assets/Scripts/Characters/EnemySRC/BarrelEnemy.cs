@@ -51,12 +51,19 @@ namespace Characters.EnemySRC
         {
             base.SetUp(action);
 
-            if (Physics.BoxCast(
-                    new Vector3(transform.position.x, transform.position.y + _collider.size.y * 0.5f,
-                        0), _collider.size * 0.5f, Vector3.down, out RaycastHit hit,
-                    Quaternion.identity, Mathf.Infinity, LayerMask.GetMask(Layers.Environment)))
+            Vector3 worldSize = Vector3.Scale(_collider.size, transform.lossyScale);
+            Vector3 origin = transform.position;
+            ;
+            
+            if (Physics.BoxCast(origin, worldSize * 0.5f, Vector3.down, out RaycastHit hit,
+                    transform.rotation, Mathf.Infinity, LayerMask.GetMask(Layers.Environment), QueryTriggerInteraction.Ignore))
             {
-                transform.position = new Vector3(hit.point.x, hit.point.y + _collider.size.y * 0.5f, 0);
+                Debug.Log($"Raycast hit {hit.collider.name} at {hit.point.y}");
+                transform.position = new Vector3(transform.position.x, hit.point.y + worldSize.y * 0.5f, transform.position.z);
+            }
+            else
+            {
+                Debug.Log($"{nameof(gameObject)} did not detect any platform");
             }
         }
 

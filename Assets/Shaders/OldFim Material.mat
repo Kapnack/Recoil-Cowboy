@@ -42,7 +42,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _FlickerIntencity: 0
-    - _Intensity: 0
+    - _Intensity: -0.0059806625
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1

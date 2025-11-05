@@ -36,7 +36,7 @@ namespace Systems.Pool
             }
         }
 
-        public void InitializeAll(int offset = 0)
+        public void InitializeAll(int repeat = 0, int offset = 0)
         {
             for (int i = offset; i < _prefabs.Count; i++)
             {

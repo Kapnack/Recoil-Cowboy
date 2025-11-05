@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using Characters.EnemySRC;
 using MouseTracker;
+using Particle;
 using ScriptableObjects;
 using Systems;
 using Systems.CentralizeEventSystem;
+using Systems.Pool;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -37,7 +39,9 @@ namespace Characters.PlayerSRC
         private IMousePositionTracker _mouseTracker;
 
         private ICharacterSpin _spin;
-        
+
+        private ParticlePool _particlePool;
+
         private readonly ComplexGameEvent<int, int, int> _livesChangeEvent = new();
         private readonly DoubleParamEvent<int, int> _pointsChangeEvent = new();
         private readonly ComplexGameEvent<int, int, int> _bulletsChangeEvent = new();
@@ -74,10 +78,7 @@ namespace Characters.PlayerSRC
         private int KillPoints
         {
             get => _killKillPoints;
-            set
-            {
-                _killKillPoints = value;
-            }
+            set { _killKillPoints = value; }
         }
 
         private int CurrentBullets
@@ -86,7 +87,7 @@ namespace Characters.PlayerSRC
             set
             {
                 int newValue = Mathf.Clamp(value, 0, config.MaxBullets);
-                
+
                 _bulletsChangeEvent?.Invoke(_currentBullets, newValue, config.MaxBullets);
                 _currentBullets = newValue;
             }
@@ -99,7 +100,9 @@ namespace Characters.PlayerSRC
             _camera = Camera.main;
 
             _spin = GetComponentInChildren<ICharacterSpin>();
-            
+
+            _particlePool = GetComponentInChildren<ParticlePool>();
+
             CurrentLives = config.MaxLives;
             CurrentBullets = config.MaxBullets;
 
@@ -119,7 +122,7 @@ namespace Characters.PlayerSRC
             _initialPos = transform.position;
 
             ServiceProvider.GetService<IFollowTarget>().SetTarget(transform);
-            
+
             while (!ServiceProvider.TryGetService(out _mouseTracker))
                 yield return null;
 
@@ -136,6 +139,9 @@ namespace Characters.PlayerSRC
         {
             ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
 
+            if (eventSystem == null) 
+                yield break;
+            
             eventSystem.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
             eventSystem.Register(PlayerEventKeys.PointsChange, _pointsChangeEvent);
             eventSystem.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
@@ -162,7 +168,7 @@ namespace Characters.PlayerSRC
         {
             _distancePoints = (int)Mathf.Abs(Vector3.Distance(new Vector3(0, _initialPos.y, 0),
                 new Vector3(0, transform.position.y, 0) * (config.PointsPerKill * 0.5f)));
-            
+
             _pointsChangeEvent?.Invoke(0, KillPoints + _distancePoints);
 
             if (_isDead || !_canDied)
@@ -182,7 +188,7 @@ namespace Characters.PlayerSRC
         }
 
         private void OnDisable() => UnRegisterEvents();
-        
+
         private void UnRegisterEvents()
         {
             ICentralizeEventSystem eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
@@ -211,7 +217,7 @@ namespace Characters.PlayerSRC
             Vector3 mousePos = _mouseTracker.GetMouseWorldPos();
 
             _spin.SetSpin(dir);
-            
+
             if (dir.sqrMagnitude < Mathf.Epsilon * Mathf.Epsilon)
                 return;
 
@@ -219,15 +225,22 @@ namespace Characters.PlayerSRC
 
             --CurrentBullets;
 
-            if (Physics.Raycast(transform.position, dir, out RaycastHit hit))
+            if (Physics.Raycast(transform.position, dir, out RaycastHit hit, Mathf.Infinity, Physics.AllLayers,
+                    QueryTriggerInteraction.Ignore))
             {
+                PoolData<ParticleController> particle = _particlePool.Get();
+
+                particle.Obj.transform.position = hit.point;
+                particle.Obj.transform.rotation = Quaternion.LookRotation(transform.position - hit.point);
+                particle.Component.SetUp(() => _particlePool.Return(particle));
+
                 if (hit.transform.gameObject.TryGetComponent(out IEnemyHealthSystem healthSystem))
                 {
                     healthSystem.ReceiveDamage(OnConfirmKill);
                 }
             }
         }
-        
+
         private void OnConfirmKill()
         {
             AddBullet();
@@ -277,7 +290,7 @@ namespace Characters.PlayerSRC
             _dies.Invoke(KillPoints + _distancePoints);
             _isDead = true;
         }
-        
+
         public void InstantDead() => CurrentLives = 0;
 
         private void AddBullet() => ++CurrentBullets;
@@ -305,12 +318,12 @@ namespace Characters.PlayerSRC
             _reloadingCoroutine = null;
         }
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, config.AreaOfSight);
         }
-        #endif
+#endif
     }
 }

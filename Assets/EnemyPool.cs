@@ -19,11 +19,11 @@ public class EnemyPool : MonoBehaviour, IObjectPool<IEnemy>
 
     public PoolData<IEnemy> Get() => _pool.Get();
 
-    public void Return(PoolData<IEnemy> enemy) => _pool.Return(enemy);
+    public void Return(PoolData<IEnemy> obj) => _pool.Return(obj);
 }
 
 public interface IObjectPool<T>
 {
     public PoolData<T> Get();
-    void Return(PoolData<IEnemy> enemy);
+    void Return(PoolData<T> obj);
 }

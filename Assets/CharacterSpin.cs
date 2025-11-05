@@ -6,16 +6,17 @@ using UnityEngine;
 
 public class CharacterSpin : MonoBehaviour, ICharacterSpin
 {
+    [SerializeField] private float maxSpeedSpin;
+
     private bool _spin = false;
-    private float spinAmount = 0;
     private float _startingRotation = 0;
 
     private bool _returning = false;
     private const float ReturnSpeed = 360f;
 
     private float _lastMaxSpeed;
-    private float _dir;
-    
+    private Vector3 _dir;
+
     private Rigidbody _rb;
 
     private void Awake()
@@ -30,12 +31,12 @@ public class CharacterSpin : MonoBehaviour, ICharacterSpin
 
     public void SetSpin(Vector3 dir)
     {
-        _dir = Mathf.Sign(dir.x);
+        _dir = dir;
         _spin = true;
     }
-    
+
     private void StopSpin() => _spin = false;
-    
+
     private void Update()
     {
         if (Time.timeScale == 0)
@@ -43,18 +44,18 @@ public class CharacterSpin : MonoBehaviour, ICharacterSpin
 
         if (_spin)
         {
-            _lastMaxSpeed = Mathf.Max(_lastMaxSpeed, Mathf.Abs(_rb.linearVelocity.y));
-            
-            spinAmount += _lastMaxSpeed * _dir;
+            float newSpeed = Mathf.Max(_lastMaxSpeed, Mathf.Abs(_rb.linearVelocity.y));
 
-            transform.localRotation =
-                Quaternion.Euler(transform.localRotation.x, transform.localRotation.y,
-                    spinAmount);
+            _lastMaxSpeed = newSpeed > maxSpeedSpin ? maxSpeedSpin : newSpeed;
+
+            Vector3 currentRot = transform.localEulerAngles;
+            currentRot.z += _lastMaxSpeed * Mathf.Sign(_dir.x);
+            transform.localEulerAngles = currentRot;
 
             if (_rb.linearVelocity.y >= 0)
                 return;
-
-            if (Physics.BoxCast(transform.position, new Vector3(0.5f, 0.5f, 0.5f), Vector3.down,
+            
+            if (Physics.BoxCast(transform.position, new Vector3(0.2f, 0.5f, 0.5f), Vector3.down,
                     Quaternion.identity, 1.0f, LayerMask.GetMask(Layers.Environment)))
             {
                 transform.localRotation = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y,
@@ -69,12 +70,12 @@ public class CharacterSpin : MonoBehaviour, ICharacterSpin
                 transform.localRotation.eulerAngles.x,
                 transform.localRotation.eulerAngles.y,
                 _startingRotation);
-            
+
             transform.localRotation = Quaternion.RotateTowards(
                 transform.localRotation,
                 targetRot,
                 ReturnSpeed * transform.localRotation.eulerAngles.y);
-            
+
             if (Quaternion.Angle(transform.localRotation, targetRot) < 0.5f)
             {
                 transform.localRotation = targetRot;

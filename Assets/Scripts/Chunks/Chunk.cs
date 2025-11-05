@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Characters.EnemySRC;
 using Systems;
@@ -33,13 +32,6 @@ namespace Chunks
 
         public void SetUp()
         {
-            StartCoroutine(SetUpWait());
-        }
-
-        private IEnumerator SetUpWait()
-        {
-            yield return new WaitForEndOfFrame();
-            
             foreach (GameObject spawnPoint in spawnPoints)
             {
                 if (!spawnPoint)
@@ -54,7 +46,7 @@ namespace Chunks
                 _spawnedEnemies.Add(enemy);
             }
         }
-        
+
         private void OnDisable()
         {
             foreach (PoolData<IEnemy> enemy in _spawnedEnemies)

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Systems.Pool;
 using UnityEngine;
@@ -23,36 +24,30 @@ namespace Chunks
 
         private void Init()
         {
+            StartCoroutine(InitChunksDelayed());
+        }
+
+        private IEnumerator InitChunksDelayed()
+        {
+            yield return null;
+
             PoolData<Chunk> go = new(Instantiate(chunkPrefabs[0], transform));
-
             go.Obj.transform.position = Vector3.zero;
-
             go.Component.SetUp();
-
             _activeChunks[0] = go;
 
-
-            //------------------------------------------------------------------------
+            yield return null;
 
             go = _pool.Get();
-
             go.Component.LimitPass += DestroyBase;
             go.Component.LimitPass += SpawnNewChunk;
-
             _activeChunks[1] = go;
-
             AnchorObjects(_activeChunks[0], go);
-
             go.Component.SetUp();
 
-            //--------------------------------------------------------------------------
-
             go = _pool.Get();
-
             _activeChunks[2] = go;
-
             AnchorObjects(_activeChunks[1], go);
-            
             go.Component.SetUp();
         }
 
@@ -88,7 +83,7 @@ namespace Chunks
 
         private void DestroyBase()
         {
-            Destroy(_activeChunks[0].Obj.gameObject);
+            Destroy(_activeChunks[0].Obj);
             _activeChunks[0] = null;
         }
     }

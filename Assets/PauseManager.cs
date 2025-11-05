@@ -1,8 +1,6 @@
 using Systems;
 using Systems.CentralizeEventSystem;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 
 public class PauseManager : MonoBehaviour
 {
@@ -25,17 +23,26 @@ public class PauseManager : MonoBehaviour
 
         _eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
 
+        if (_eventSystem == null)
+            return;
+
         _eventSystem.Register(GameManagerKeys.MainMenu, _loadMainMenu);
 
         _eventSystem.Get(PlayerEventKeys.Paused).AddListener(PauseHandler);
     }
-    
+
     private void OnEnable() => Cursor.visible = true;
 
     private void OnDestroy()
     {
+        _eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
+
+        if (_eventSystem == null)
+            return;
+
+        _eventSystem.Register(GameManagerKeys.MainMenu, _loadMainMenu);
         _eventSystem.Get(PlayerEventKeys.Paused).RemoveListener(PauseHandler);
-        _eventSystem.Unregister(GameManagerKeys.MainMenu);
+
         Time.timeScale = 1.0f;
     }
 
@@ -43,7 +50,8 @@ public class PauseManager : MonoBehaviour
     {
         _paused = !_paused;
         panel.gameObject.SetActive(_paused);
-        _inputReader.SwitchPlayerMapState();
+
+        _inputReader?.SwitchPlayerMapState();
         Time.timeScale = _paused ? 0.0f : 1.0f;
 
         if (_menuGo)

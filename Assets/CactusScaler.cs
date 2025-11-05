@@ -41,10 +41,14 @@ public class CactusScaler : MonoBehaviour
             _cactusList.Add(go);
         }
 
-        BoxCollider boxCollider = GetComponent<BoxCollider>();
+        BoxCollider[] colliders = GetComponents<BoxCollider>();
         basePos = cactusBase.transform.localPosition.y + cactusBase.transform.localScale.y / 2 * length + 2;
-        boxCollider.center = new Vector3(0, basePos, 0);
-        boxCollider.size = new Vector3(1, transform.localScale.y * length + 1, 1);
+
+        foreach (BoxCollider boxCollider in colliders)
+        {
+            boxCollider.center = new Vector3(0, basePos, 0);
+            boxCollider.size = new Vector3(boxCollider.size.x, transform.localScale.y * length + 1, boxCollider.size.z);
+        }
     }
 }
 #endif
