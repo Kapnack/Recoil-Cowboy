@@ -149,8 +149,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunkPrefabs:
-  - {fileID: 849852018988907053, guid: e144e6f00b8428e41b6b45c7a823cae3, type: 3}
-  - {fileID: 1202815098041583580, guid: e5a5f78ca8d4b6f41a45f24f0be703df, type: 3}
+  - {fileID: 5992506785617022253, guid: 766a6a88da1cda3488ad9c6d9fb2956e, type: 3}
+  - {fileID: 5715592462880716157, guid: 857ae6c9013f21c4d976cd255889bb6b, type: 3}
+  - {fileID: 4604953289087148541, guid: e06689f232cd4c54cba8390ccf89cb7a, type: 3}
+  - {fileID: 7828983912842252967, guid: a2f0697d482f8064ca5347f9a5c4e4b8, type: 3}
+  - {fileID: 338188670476787432, guid: 1fdc588700a55d54686f392e2191a05d, type: 3}
+  - {fileID: 6777962805600095592, guid: 35a6dc801a2944e4a9dca8fd412a5fdc, type: 3}
+  - {fileID: 3850386371650470537, guid: ec6febad9a2838c4b99fb2223c02dbd8, type: 3}
 --- !u!4 &122665564
 Transform:
   m_ObjectHideFlags: 0

@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 27c841d7cab15a849bf7827b6b67af6b, type: 2}
-  gunPos: {fileID: 0}
+  gunPos: {fileID: 7595807646112348309}
 --- !u!114 &1824895135744991875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,12 +115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbcf093798b66c844a5d23834d8eefc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitColor: {r: 1, g: 0, b: 0, a: 1}
-  healColor: {r: 0, g: 1, b: 0, a: 1}
-  flashDuration: 0.1
-  amountOfFlickers: 3
-  materials:
-  - {fileID: 2100000, guid: d705cc18a07c3e646a12a20bc6401d74, type: 2}
+  material: {fileID: 2100000, guid: e8317365f7b80b4449138de5c72d1702, type: 2}
+  Speed: 13
+  Intencity: 0.4
 --- !u!114 &2298079231388212468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +139,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6461067511597030159}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

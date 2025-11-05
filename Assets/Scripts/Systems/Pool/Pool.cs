@@ -18,6 +18,14 @@ namespace Systems.Pool
             _folder.SetParent(folder);
         }
 
+        public Pool(GameObject prefab, Transform folder)
+        {
+            _prefabs = new List<GameObject> { prefab };
+
+            _folder = new GameObject("Pool Objects").transform;
+            _folder.SetParent(folder);
+        }
+        
         public void InitializeRandom(int amount, int offset = 0)
         {
             for (int i = 0; i < amount; i++)
@@ -66,8 +74,6 @@ namespace Systems.Pool
 
             if (data.Component.Equals(null)|| !data.Obj)
                 return;
-
-            
             
             data.Obj.SetActive(false);
             data.Obj.transform.SetParent(_folder);

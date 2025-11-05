@@ -38,7 +38,7 @@ namespace Characters.EnemySRC
                 _animate.ChangeAnimation(value);
             }
         }
-        
+
         protected override void Awake()
         {
             base.Awake();
@@ -51,7 +51,9 @@ namespace Characters.EnemySRC
         {
             base.SetUp(action);
 
-            if (Physics.BoxCast(transform.position, _collider.size * 0.5f, Vector3.down, out RaycastHit hit,
+            if (Physics.BoxCast(
+                    new Vector3(transform.position.x, transform.position.y + _collider.size.y * 0.5f,
+                        0), _collider.size * 0.5f, Vector3.down, out RaycastHit hit,
                     Quaternion.identity, Mathf.Infinity, LayerMask.GetMask(Layers.Environment)))
             {
                 transform.position = new Vector3(hit.point.x, hit.point.y + _collider.size.y * 0.5f, 0);
@@ -124,7 +126,7 @@ namespace Characters.EnemySRC
 
             return false;
         }
-        
+
         private void Shoot()
         {
             GameObject bulletGO = Instantiate(bulletPrefab, transform.position + transform.right * config.FireOffset,

@@ -41,6 +41,7 @@ namespace Characters.PlayerSRC
         private readonly ComplexGameEvent<int, int, int> _livesChangeEvent = new();
         private readonly DoubleParamEvent<int, int> _pointsChangeEvent = new();
         private readonly ComplexGameEvent<int, int, int> _bulletsChangeEvent = new();
+        private readonly SimpleEvent _noLongerInvincible = new();
         private readonly SimpleEvent _oneLiveRemains = new();
         private readonly SingleParamEvent<int> _dies = new();
 
@@ -138,6 +139,7 @@ namespace Characters.PlayerSRC
             eventSystem.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
             eventSystem.Register(PlayerEventKeys.PointsChange, _pointsChangeEvent);
             eventSystem.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
+            eventSystem.Register(PlayerEventKeys.NoLongerInvincible, _noLongerInvincible);
             eventSystem.Register(PlayerEventKeys.OnOneLive, _oneLiveRemains);
             eventSystem.Register(PlayerEventKeys.Dies, _dies);
 
@@ -188,6 +190,7 @@ namespace Characters.PlayerSRC
             eventSystem.Unregister(PlayerEventKeys.LivesChange);
             eventSystem.Unregister(PlayerEventKeys.PointsChange);
             eventSystem.Unregister(PlayerEventKeys.BulletsChange);
+            eventSystem.Unregister(PlayerEventKeys.NoLongerInvincible);
             eventSystem.Unregister(PlayerEventKeys.OnOneLive);
             eventSystem.Unregister(PlayerEventKeys.Dies);
 
@@ -266,6 +269,7 @@ namespace Characters.PlayerSRC
             yield return new WaitForSeconds(config.InvincibleTime);
 
             Invincible = false;
+            _noLongerInvincible?.Invoke();
         }
 
         private void OnDead()
