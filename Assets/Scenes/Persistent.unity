@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 156173803}
   - component: {fileID: 156173808}
   - component: {fileID: 156173807}
-  - component: {fileID: 156173809}
+  - component: {fileID: 156173810}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -347,7 +347,7 @@ MonoBehaviour:
   scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
---- !u!114 &156173809
+--- !u!114 &156173810
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -356,12 +356,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 156173802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 784422aaa735ffd4a876f216a8134382, type: 3}
+  m_Script: {fileID: 11500000, guid: c10faf72b0ac86c478ae770646b8e51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offsetY: 8
+  offsetY: 10
   offsetZ: -20
-  lookDownDistance: -11
+  lookDownDistance: -10
 --- !u!1 &384259005
 GameObject:
   m_ObjectHideFlags: 0
