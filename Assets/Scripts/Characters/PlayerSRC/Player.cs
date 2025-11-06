@@ -28,11 +28,8 @@ namespace Characters.PlayerSRC
         private int _distancePoints;
 
         private bool _isDead;
-        private bool _canDied;
 
         private int _currentBullets;
-
-        private Camera _camera;
 
         private Coroutine _reloadingCoroutine;
 
@@ -97,8 +94,6 @@ namespace Characters.PlayerSRC
         {
             base.Awake();
 
-            _camera = Camera.main;
-
             _spin = GetComponentInChildren<ICharacterSpin>();
 
             _particlePool = GetComponentInChildren<ParticlePool>();
@@ -107,20 +102,10 @@ namespace Characters.PlayerSRC
             CurrentBullets = config.MaxBullets;
 
             StartCoroutine(SetUpEvents());
-            StartCoroutine(SetUpCanDied());
-        }
-
-
-        private IEnumerator SetUpCanDied()
-        {
-            yield return new WaitForSeconds(0.5f);
-            _canDied = true;
         }
 
         private IEnumerator Start()
         {
-            _initialPos = transform.position;
-
             ServiceProvider.GetService<IFollowTarget>().SetTarget(transform);
 
             while (!ServiceProvider.TryGetService(out _mouseTracker))
@@ -170,21 +155,6 @@ namespace Characters.PlayerSRC
                 new Vector3(0, transform.position.y, 0) * (config.PointsPerKill * 0.5f)));
 
             _pointsChangeEvent?.Invoke(0, KillPoints + _distancePoints);
-
-            if (_isDead || !_canDied)
-                return;
-
-            Vector3 viewportPos = _camera.WorldToViewportPoint(transform.position);
-
-            bool isVisible =
-                viewportPos.x is >= 0f and <= 1f &&
-                viewportPos.y is >= 0f and <= 1f &&
-                viewportPos.z > 0f;
-
-            if (isVisible)
-                return;
-
-            OnDead();
         }
 
         private void OnDisable() => UnRegisterEvents();
