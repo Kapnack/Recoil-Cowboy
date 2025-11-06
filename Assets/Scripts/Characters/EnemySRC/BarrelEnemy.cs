@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using ScriptableObjects;
 using Systems.LayerClassGenerator;
 using Systems.TagClassGenerator;
@@ -51,15 +52,31 @@ namespace Characters.EnemySRC
         {
             base.SetUp(action);
 
+            StartCoroutine(AdjustPosition());
+        }
+
+        private IEnumerator AdjustPosition()
+        {
+            yield return new WaitForFixedUpdate();
+
             Vector3 worldSize = Vector3.Scale(_collider.size, transform.lossyScale);
             Vector3 origin = transform.position;
-            ;
+
+            float duration = 360;
             
+#if UNITY_EDITOR
+            Debug.DrawRay(new Vector3(origin.x + worldSize.x * 0.5f, origin.y, origin.z - worldSize.z * 0.5f), Vector3.down * 100, Color.magenta, duration);
+            Debug.DrawRay(new Vector3(origin.x  - worldSize.x * 0.5f, origin.y, origin.z + worldSize.z * 0.5f), Vector3.down * 100, Color.magenta, duration);
+            Debug.DrawRay(origin, Vector3.down * 100, Color.magenta, duration);
+            Debug.DrawRay(new Vector3(origin.x  + worldSize.x * 0.5f, origin.y, origin.z + worldSize.z * 0.5f), Vector3.down * 100, Color.magenta, duration);
+            Debug.DrawRay(new Vector3(origin.x - worldSize.z * 0.5f, origin.y, origin.z - worldSize.z * 0.5f), Vector3.down * 100, Color.magenta, duration);
+#endif
             if (Physics.BoxCast(origin, worldSize * 0.5f, Vector3.down, out RaycastHit hit,
                     transform.rotation, Mathf.Infinity, LayerMask.GetMask(Layers.Environment), QueryTriggerInteraction.Ignore))
             {
-                Debug.Log($"Raycast hit {hit.collider.name} at {hit.point.y}");
-                transform.position = new Vector3(transform.position.x, hit.point.y + worldSize.y * 0.5f, transform.position.z);
+                Debug.Log($"Raycast hit  {hit.collider.name} at {hit.point.y}", hit.collider.gameObject);
+                transform.position = new Vector3(transform.position.x, hit.point.y + worldSize.y * 0.5f,
+                    transform.position.z);
             }
             else
             {

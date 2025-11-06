@@ -175,7 +175,7 @@ namespace Characters.PlayerSRC
             eventSystem.Get(PlayerEventKeys.ReloadOvertime).RemoveListener(AddBulletsOverTime);
         }
 
-        private void OnAttack()
+        private async void OnAttack()
         {
             AkUnitySoundEngine.SetRTPCValue("BulletCount", CurrentBullets);
             AkUnitySoundEngine.PostEvent("sfx_Gunshot", gameObject);
@@ -198,7 +198,7 @@ namespace Characters.PlayerSRC
             if (Physics.Raycast(transform.position, dir, out RaycastHit hit, Mathf.Infinity, Physics.AllLayers,
                     QueryTriggerInteraction.Ignore))
             {
-                PoolData<ParticleController> particle = _particlePool.Get();
+                PoolData<ParticleController> particle = await _particlePool.Get();
 
                 particle.Obj.transform.position = hit.point;
                 particle.Obj.transform.rotation = Quaternion.LookRotation(transform.position - hit.point);

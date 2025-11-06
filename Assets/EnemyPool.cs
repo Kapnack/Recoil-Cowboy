@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Characters.EnemySRC;
 using Systems;
 using Systems.Pool;
@@ -17,13 +18,13 @@ public class EnemyPool : MonoBehaviour, IObjectPool<IEnemy>
         ServiceProvider.SetService<IObjectPool<IEnemy>>(this, true);
     }
 
-    public PoolData<IEnemy> Get() => _pool.Get();
+    public Task<PoolData<IEnemy>> Get() => _pool.Get();
 
     public void Return(PoolData<IEnemy> obj) => _pool.Return(obj);
 }
 
 public interface IObjectPool<T>
 {
-    public PoolData<T> Get();
+    public Task<PoolData<T>> Get();
     void Return(PoolData<T> obj);
 }

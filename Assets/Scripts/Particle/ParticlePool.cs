@@ -1,4 +1,5 @@
-﻿using Systems.Pool;
+﻿using System.Threading.Tasks;
+using Systems.Pool;
 using UnityEngine;
 
 namespace Particle
@@ -10,12 +11,12 @@ namespace Particle
 
         private void Awake()
         {
-            _pool = new Pool<ParticleController>(particlePrefab, transform);
+            _pool = new Pool<ParticleController>(particlePrefab, transform, false);
 
             _pool.InitializeAll(3);
         }
 
-        public PoolData<ParticleController> Get()
+        public Task<PoolData<ParticleController>> Get()
         {
             return _pool.Get();
         }

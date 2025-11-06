@@ -22,40 +22,31 @@ namespace Chunks
             Init();
         }
 
-        private void Init()
+        private async void Init()
         {
-            StartCoroutine(InitChunksDelayed());
-        }
-
-        private IEnumerator InitChunksDelayed()
-        {
-            yield return null;
-
             PoolData<Chunk> go = new(Instantiate(chunkPrefabs[0], transform));
             go.Obj.transform.position = Vector3.zero;
             go.Component.SetUp();
             _activeChunks[0] = go;
 
-            yield return null;
-
-            go = _pool.Get();
+            go = await _pool.Get();
             go.Component.LimitPass += DestroyBase;
             go.Component.LimitPass += SpawnNewChunk;
             _activeChunks[1] = go;
             AnchorObjects(_activeChunks[0], go);
             go.Component.SetUp();
 
-            go = _pool.Get();
+            go = await _pool.Get();
             _activeChunks[2] = go;
             AnchorObjects(_activeChunks[1], go);
             go.Component.SetUp();
         }
 
-        private void SpawnNewChunk()
+        private async void SpawnNewChunk()
         {
             _pool.Return(_activeChunks[0]);
 
-            PoolData<Chunk> newChunk = _pool.Get(1);
+            PoolData<Chunk> newChunk = await _pool.Get(1);
 
             AnchorObjects(_activeChunks[2], newChunk);
 

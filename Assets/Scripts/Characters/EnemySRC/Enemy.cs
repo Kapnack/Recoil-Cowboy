@@ -9,10 +9,7 @@ namespace Characters.EnemySRC
 
         public virtual void SetUp(Action action = null)
         {
-            _killed = null;
-
-            if (action != null)
-                _killed = action;
+            _killed = action;
         }
 
         public virtual void ReceiveDamage(Action action = null)
