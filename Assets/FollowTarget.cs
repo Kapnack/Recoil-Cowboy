@@ -1,6 +1,5 @@
 using Systems;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class FollowTarget : MonoBehaviour, IFollowTarget
 {
