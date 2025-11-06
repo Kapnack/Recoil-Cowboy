@@ -7,7 +7,6 @@ public class FollowTargetImproved : MonoBehaviour, IFollowTarget
 
     [SerializeField] private float offsetY = 10f;
     [SerializeField] private float offsetZ = -20f;
-    [SerializeField] private float lookDownDistance = -10f;
 
     private Transform Target
     {
