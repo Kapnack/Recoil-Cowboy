@@ -54,6 +54,9 @@ namespace Characters.PlayerSRC
 
             set
             {
+                if (config.InfinitLives)
+                    return;
+
                 int newValue = Mathf.Clamp(value, 0, config.MaxLives);
 
                 _livesChangeEvent?.Invoke(_currentLives, newValue, config.MaxLives);
@@ -83,6 +86,9 @@ namespace Characters.PlayerSRC
             get => _currentBullets;
             set
             {
+                if (value < _currentBullets && config.InfinitAmmo)
+                    return;
+
                 int newValue = Mathf.Clamp(value, 0, config.MaxBullets);
 
                 _bulletsChangeEvent?.Invoke(_currentBullets, newValue, config.MaxBullets);
@@ -124,9 +130,9 @@ namespace Characters.PlayerSRC
         {
             ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
 
-            if (eventSystem == null) 
+            if (eventSystem == null)
                 yield break;
-            
+
             eventSystem.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
             eventSystem.Register(PlayerEventKeys.PointsChange, _pointsChangeEvent);
             eventSystem.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
