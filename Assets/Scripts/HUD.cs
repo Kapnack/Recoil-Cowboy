@@ -12,11 +12,11 @@ public class HUD : MonoBehaviour
     [SerializeField] private Image livesFill;
     [SerializeField] private TMP_Text pointsText;
 
-    [Header("Ammo Settings")] [SerializeField]
-    private RectTransform ammoStarPoint;
-
-    [SerializeField] private Image ammoFill;
-    [SerializeField] private Image ammoBase;
+    [Header("Ammo Settings")] 
+    [SerializeField] private Image ammoPrefab;
+    [SerializeField] private RectTransform ammoStarPoint;
+    [SerializeField] private Sprite ammoFill;
+    [SerializeField] private Sprite ammoBase;
     private Image[] _ammoImages;
 
     private string _pointsTextFormat;
@@ -75,34 +75,45 @@ public class HUD : MonoBehaviour
         {
             _ammoImages = new Image[max];
 
+            float scale = 0.1f;
+            float padding = 0f;
+
+            Vector2 startPos = Vector2.zero;
+
             for (int i = 0; i < max; ++i)
             {
-                _ammoImages[i] = Instantiate(ammoFill, ammoStarPoint.gameObject.transform, false);
-
+                _ammoImages[i] = Instantiate(ammoPrefab, ammoStarPoint, false);
+                
+                _ammoImages[i].sprite = ammoFill;
+                
+                _ammoImages[i].SetNativeSize();
+                _ammoImages[i].rectTransform.localScale = new Vector3(scale, scale, 1f);
+                
                 if (i == 0)
-                    _ammoImages[i].rectTransform.position = ammoStarPoint.position;
+                {
+                    _ammoImages[i].rectTransform.anchoredPosition = startPos;
+                }
                 else
                 {
                     RectTransform prevRect = _ammoImages[i - 1].rectTransform;
-                    RectTransform currentRect = _ammoImages[i].rectTransform;
 
-                    Vector2 newPos = prevRect.anchoredPosition + new Vector2(prevRect.rect.width, 0);
+                    float prevWidth = prevRect.rect.width * prevRect.localScale.x;
+                    Vector2 newPos = prevRect.anchoredPosition + new Vector2(prevWidth + padding, 0);
 
-                    currentRect.anchoredPosition = newPos;
+                    _ammoImages[i].rectTransform.anchoredPosition = newPos;
                 }
             }
+
             _firstReload = false;
-            
-            return;
         }
 
         if (previous > current)
         {
-            _ammoImages[previous - 1].sprite = ammoBase.sprite;
+            _ammoImages[previous - 1].sprite = ammoBase;
         }
         else if (previous < current)
         {
-            _ammoImages[current - 1].sprite = ammoFill.sprite;
+            _ammoImages[current - 1].sprite = ammoFill;
         }
     }
 }
