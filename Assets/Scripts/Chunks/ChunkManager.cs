@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Systems.Pool;
 using UnityEngine;
@@ -7,6 +6,7 @@ namespace Chunks
 {
     public class ChunkManager : MonoBehaviour
     {
+        [SerializeField] private GameObject baseChunkPrefab;
         [SerializeField] private List<GameObject> chunkPrefabs;
 
         private Pool<Chunk> _pool;
@@ -24,7 +24,7 @@ namespace Chunks
 
         private async void Init()
         {
-            PoolData<Chunk> go = new(Instantiate(chunkPrefabs[0], transform));
+            PoolData<Chunk> go = new(Instantiate(baseChunkPrefab, transform));
             go.Obj.transform.position = Vector3.zero;
             go.Component.SetUp();
             _activeChunks[0] = go;

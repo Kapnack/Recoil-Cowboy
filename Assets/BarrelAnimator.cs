@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyAnimator : MonoBehaviour, IAnimate
+public class BarrelAnimator : MonoBehaviour, IAnimate
 {
     private Animator _animator;
     private static readonly int Hide = Animator.StringToHash("Hide");
