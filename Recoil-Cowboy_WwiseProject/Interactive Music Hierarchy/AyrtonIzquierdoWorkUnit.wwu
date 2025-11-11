@@ -64,6 +64,76 @@
 												</DestinationFadeIn>
 											</TransitionInfo>
 										</MusicTransition>
+										<MusicTransition Name="Transition" ID="{3EF7FE0C-7033-42A2-806F-94D5E93EDE50}">
+											<PropertyList>
+												<Property Name="DestinationContextType" Type="int16" Value="2"/>
+												<Property Name="EnableDestinationFadeIn" Type="bool" Value="True"/>
+												<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+												<Property Name="ExitSourceAt" Type="int16" Value="0"/>
+												<Property Name="SourceContextType" Type="int16" Value="2"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="DestinationContextObject">
+													<ObjectRef Name="MenuMusic" ID="{05A63DFC-F8C0-48A8-9BEB-BC11F9D5CCD9}" WorkUnitID="{ACA90B2C-2519-4DB8-8D75-45EB13463C6E}"/>
+												</Reference>
+												<Reference Name="SourceContextObject">
+													<ObjectRef Name="LevelMusic" ID="{997E9C7A-8013-4C99-BDC2-D8387C7A1E85}" WorkUnitID="{ACA90B2C-2519-4DB8-8D75-45EB13463C6E}"/>
+												</Reference>
+											</ReferenceList>
+											<TransitionInfo>
+												<SourceFadeOut>
+													<MusicFade Name="Source Fade-out" ID="{D345F054-5A67-4222-AC95-1B527DE526CB}">
+														<PropertyList>
+															<Property Name="FadeOffset" Type="Real64" Value="2"/>
+															<Property Name="FadeTime" Type="Real64" Value="2"/>
+															<Property Name="FadeType" Type="int16" Value="1"/>
+														</PropertyList>
+													</MusicFade>
+												</SourceFadeOut>
+												<DestinationFadeIn>
+													<MusicFade Name="Destination Fade-in" ID="{354C22DB-5AA5-4803-AFD7-3443EE9C817E}">
+														<PropertyList>
+															<Property Name="FadeTime" Type="Real64" Value="2"/>
+														</PropertyList>
+													</MusicFade>
+												</DestinationFadeIn>
+											</TransitionInfo>
+										</MusicTransition>
+										<MusicTransition Name="Transition" ID="{423EB3DC-211D-41B4-B6A1-BC7A97111941}">
+											<PropertyList>
+												<Property Name="DestinationContextType" Type="int16" Value="2"/>
+												<Property Name="EnableDestinationFadeIn" Type="bool" Value="True"/>
+												<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+												<Property Name="ExitSourceAt" Type="int16" Value="0"/>
+												<Property Name="SourceContextType" Type="int16" Value="2"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="DestinationContextObject">
+													<ObjectRef Name="LevelMusic" ID="{997E9C7A-8013-4C99-BDC2-D8387C7A1E85}" WorkUnitID="{ACA90B2C-2519-4DB8-8D75-45EB13463C6E}"/>
+												</Reference>
+												<Reference Name="SourceContextObject">
+													<ObjectRef Name="MenuMusic" ID="{05A63DFC-F8C0-48A8-9BEB-BC11F9D5CCD9}" WorkUnitID="{ACA90B2C-2519-4DB8-8D75-45EB13463C6E}"/>
+												</Reference>
+											</ReferenceList>
+											<TransitionInfo>
+												<SourceFadeOut>
+													<MusicFade Name="Source Fade-out" ID="{13D4557A-E65F-40B8-B50E-DB40198AB18A}">
+														<PropertyList>
+															<Property Name="FadeOffset" Type="Real64" Value="2"/>
+															<Property Name="FadeTime" Type="Real64" Value="2"/>
+															<Property Name="FadeType" Type="int16" Value="1"/>
+														</PropertyList>
+													</MusicFade>
+												</SourceFadeOut>
+												<DestinationFadeIn>
+													<MusicFade Name="Destination Fade-in" ID="{7875F423-6CE8-4A30-A771-547825409425}">
+														<PropertyList>
+															<Property Name="FadeTime" Type="Real64" Value="2"/>
+														</PropertyList>
+													</MusicFade>
+												</DestinationFadeIn>
+											</TransitionInfo>
+										</MusicTransition>
 									</ChildrenList>
 									<TransitionInfo/>
 								</MusicTransition>
@@ -889,7 +959,23 @@
 								</Reference>
 								<Reference Name="PlaylistRoot">
 									<Custom>
-										<MusicPlaylistItem Name="" ID="{F44262A5-F889-4DDC-B911-34E2951A2F16}" ShortID="561171409"/>
+										<MusicPlaylistItem Name="" ID="{F44262A5-F889-4DDC-B911-34E2951A2F16}" ShortID="561171409">
+											<PropertyList>
+												<Property Name="LoopCount" Type="int16" Value="0"/>
+											</PropertyList>
+											<ChildrenList>
+												<MusicPlaylistItem Name="" ID="{F9976A32-EC23-4122-81EC-489DB45B1830}" ShortID="823135022">
+													<PropertyList>
+														<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Segment">
+															<ObjectRef Name="Stage_Music" ID="{43FF8948-5310-4E64-BE5C-AD7261244644}" WorkUnitID="{ACA90B2C-2519-4DB8-8D75-45EB13463C6E}"/>
+														</Reference>
+													</ReferenceList>
+												</MusicPlaylistItem>
+											</ChildrenList>
+										</MusicPlaylistItem>
 									</Custom>
 								</Reference>
 								<Reference Name="TransitionRoot">
@@ -908,6 +994,656 @@
 									</Custom>
 								</Reference>
 							</ReferenceList>
+							<ChildrenList>
+								<MusicSegment Name="Stage_Music" ID="{43FF8948-5310-4E64-BE5C-AD7261244644}" ShortID="863950183">
+									<PropertyList>
+										<Property Name="EndPosition" Type="Real64" Value="50875.7902436314"/>
+										<Property Name="Tempo" Type="Real64" Value="150"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9BCBDDF6-6CF1-48D2-9C07-EF75B3E7072B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{88916E4C-6FF4-41C5-BD2A-97D71CE0FCAC}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<MusicTrack Name="mx_01_drumbeat_bpm135" ID="{B821C2FF-DDA3-43F2-936D-7EAB98E25051}" ShortID="4784388">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{88916E4C-6FF4-41C5-BD2A-97D71CE0FCAC}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{7C4D1008-2BE6-4C6C-84C3-715303F928DE}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="mx_01_drumbeat_bpm135" ID="{A0A0BABF-3FDF-47E7-BF8E-F1F0C5C8222F}">
+													<Language>SFX</Language>
+													<AudioFile>mx_01_drumbeat_bpm135.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="673072959"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{02B2F93C-2EDA-41C9-9561-9E9C4ACD73E6}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="mx_01_drumbeat_bpm135" ID="{8E5209FC-14E2-4A26-8202-CA01921380D5}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="25600"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="mx_01_drumbeat_bpm135" ID="{A0A0BABF-3FDF-47E7-BF8E-F1F0C5C8222F}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+										<MusicTrack Name="mx_02_uprightbass_bpm135" ID="{A968C690-1AF2-4D95-B5EA-630A394F49A2}" ShortID="115788010">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{88916E4C-6FF4-41C5-BD2A-97D71CE0FCAC}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{4E591067-690F-4827-B0E9-52EE201C3C13}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="mx_02_uprightbass_bpm135" ID="{80CE8F0D-5AB1-4FA3-BC83-512D3FE20C6A}">
+													<Language>SFX</Language>
+													<AudioFile>mx_02_uprightbass_bpm135.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="560656912"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{CAA531D1-EBF2-4894-8CE6-8356E57E1B43}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="mx_02_uprightbass_bpm135" ID="{71339088-0935-485F-A3A2-E663D132F414}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="25600"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="mx_02_uprightbass_bpm135" ID="{80CE8F0D-5AB1-4FA3-BC83-512D3FE20C6A}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+										<MusicTrack Name="mx_03_banjo_bpm135" ID="{4E2876A3-7B91-4220-A9CA-3E807ED812FB}" ShortID="723797634">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{88916E4C-6FF4-41C5-BD2A-97D71CE0FCAC}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{F1CC9923-E11A-42EB-8D8F-10C2A994402A}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="mx_03_banjo_bpm135" ID="{053BED16-ADAE-4F27-9B9C-7AF11416DDD2}">
+													<Language>SFX</Language>
+													<AudioFile>mx_03_banjo_bpm135.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="549503105"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{8A43E1EA-B88A-48F6-BCDC-083A040E7910}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="mx_03_banjo_bpm135" ID="{541A6DC0-BC2F-491A-8F09-71CB0A716A5A}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="25600"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="mx_03_banjo_bpm135" ID="{053BED16-ADAE-4F27-9B9C-7AF11416DDD2}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+										<MusicTrack Name="mx_04_EG_rtm_win_bpm135" ID="{7F6C33FB-5EFC-4870-B8E6-DED1C33B5E7E}" ShortID="1000804469">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{88916E4C-6FF4-41C5-BD2A-97D71CE0FCAC}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{64658D79-C9C0-4E04-BE54-261E1082E7B0}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="mx_04_EG_rtm_win_bpm135" ID="{44CE71C8-3374-4C6D-B643-5FDFA5F01238}">
+													<Language>SFX</Language>
+													<AudioFile>mx_04_EG_rtm_win_bpm135.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="155671999"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{41F99DF4-663A-4F6F-88CC-03AF69A51A1C}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="mx_04_EG_rtm_win_bpm135" ID="{BFA156E6-4E6A-4204-8AC1-787CC6BA8677}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="7201.5625"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="mx_04_EG_rtm_win_bpm135" ID="{44CE71C8-3374-4C6D-B643-5FDFA5F01238}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+										<MusicTrack Name="mx_04_EG_vuelta1_bpm135" ID="{389840D9-7582-4244-BBB0-2AFDC6894F9F}" ShortID="598024433">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{88916E4C-6FF4-41C5-BD2A-97D71CE0FCAC}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{F68854D1-32C2-4656-A6B4-C62E08EAE3E0}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="mx_04_EG_vuelta1_bpm135" ID="{3DAA291C-E922-47DA-BFD8-2EC0FFB2A604}">
+													<Language>SFX</Language>
+													<AudioFile>mx_04_EG_vuelta1_bpm135.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="320205852"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{52B697BD-87CC-4081-8904-34F79757CA85}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="mx_04_EG_vuelta1_bpm135" ID="{6071D672-26B3-4F78-8E19-6484B9B14723}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="27763.6458333333"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="mx_04_EG_vuelta1_bpm135" ID="{3DAA291C-E922-47DA-BFD8-2EC0FFB2A604}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+										<MusicTrack Name="mx_04_EG_vuelta2_bpm135" ID="{DEBBEC23-6902-4BB2-BF01-6D12D00DBE29}" ShortID="675879132">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{88916E4C-6FF4-41C5-BD2A-97D71CE0FCAC}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{8B59C036-4288-41AF-99FF-6E8780738428}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="mx_04_EG_vuelta2_bpm135" ID="{FDA9BFF6-3D80-451A-AF08-0E690AFDD2C8}">
+													<Language>SFX</Language>
+													<AudioFile>mx_04_EG_vuelta2_bpm135.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="229921551"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{9098035E-229A-4EB1-A906-C655876C6BA8}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="mx_04_EG_vuelta2_bpm135" ID="{43E6CBDE-9EF2-44D3-98A9-97E9E5A0FE16}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="27763.6458333333"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="mx_04_EG_vuelta2_bpm135" ID="{FDA9BFF6-3D80-451A-AF08-0E690AFDD2C8}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+										<MusicTrack Name="mx_04_EG_vuelta3_bpm135" ID="{C71A190E-A086-49A6-8145-8FD4425B4F81}" ShortID="1021722589">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{88916E4C-6FF4-41C5-BD2A-97D71CE0FCAC}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{9B8A88A7-EF3E-4279-87EF-7FD87FBEF609}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="mx_04_EG_vuelta3_bpm135" ID="{ECAEF46A-5253-4729-8835-0863E476CC47}">
+													<Language>SFX</Language>
+													<AudioFile>mx_04_EG_vuelta3_bpm135.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="751350678"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{BF19B8F2-D959-4DDA-8EAF-359A4E7505CE}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="mx_04_EG_vuelta3_bpm135" ID="{DD7C1B6E-9320-4EE7-AAAF-C349E6BCAA80}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="27763.6458333333"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="mx_04_EG_vuelta3_bpm135" ID="{ECAEF46A-5253-4729-8835-0863E476CC47}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+										<MusicTrack Name="mx_05_Silbido_bpm135_bpm135" ID="{CD1F6E6D-A79E-458B-842B-1BF303A59448}" ShortID="286940433">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{88916E4C-6FF4-41C5-BD2A-97D71CE0FCAC}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{5C3CF73D-D06A-42D8-9F6A-A88A1098A4C4}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="mx_05_Silbido_bpm135_bpm135" ID="{8664C71F-1E92-4AB2-8FC4-D365D0B975BD}">
+													<Language>SFX</Language>
+													<AudioFile>mx_05_Silbido_bpm135_bpm135.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="767054923"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{921A9D8F-BD33-483A-8F3C-1915E3555C82}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="mx_05_Silbido_bpm135_bpm135" ID="{A3FA6539-95FB-45D7-9473-08465960B535}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="26562.4943310658"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="mx_05_Silbido_bpm135_bpm135" ID="{8664C71F-1E92-4AB2-8FC4-D365D0B975BD}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+										<MusicTrack Name="mx_06_violin_bpm135" ID="{75EE68C4-6BB0-4DCF-A81D-C7AF4FF2FDF6}" ShortID="976818826">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{88916E4C-6FF4-41C5-BD2A-97D71CE0FCAC}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{F83FF451-C2DD-4816-8950-605704C53925}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="mx_06_violin_bpm135" ID="{57D73F34-6164-41E0-8CD9-5E3D603FC4D2}">
+													<Language>SFX</Language>
+													<AudioFile>mx_06_violin_bpm135.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="654058248"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{695ECC52-E99F-47F0-A9DE-C1B1B0EB998D}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="mx_06_violin_bpm135" ID="{304E97D8-4F25-476A-9CA6-75F665DE95E9}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="26277.5625"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="mx_06_violin_bpm135" ID="{57D73F34-6164-41E0-8CD9-5E3D603FC4D2}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+										<MusicTrack Name="mx_07_adLibs&amp;FX_01_bpm135" ID="{D609CD6F-C308-46B6-995E-B74150156B7D}" ShortID="437356134">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{88916E4C-6FF4-41C5-BD2A-97D71CE0FCAC}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{6F12B8AB-4C82-4445-BE5B-B073DCB84C2C}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="mx_07_adLibs01_bpm135" ID="{CD6A0405-F706-4B2F-A5F5-A61D0A93E958}">
+													<Language>SFX</Language>
+													<AudioFile>mx_07_adLibs01_bpm135.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="271617362"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{3839EDCF-FB9B-4494-9ACD-458BFDCBFE10}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="mx_07_adLibs01_bpm135" ID="{F4641F65-D583-41B4-9009-3F14032BC9CB}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="27763.6458333333"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="mx_07_adLibs01_bpm135" ID="{CD6A0405-F706-4B2F-A5F5-A61D0A93E958}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+										<MusicTrack Name="mx_07_adLibs&amp;FX_02_bpm135" ID="{887AA09F-D1E4-4BFF-B733-A88B9EDAA948}" ShortID="283017366">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{88916E4C-6FF4-41C5-BD2A-97D71CE0FCAC}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{294DE078-DAF0-4575-9B50-E77C363032DE}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="mx_07_adLibs02_bpm135" ID="{690FCE74-7077-4C76-9B87-BF14F9354742}">
+													<Language>SFX</Language>
+													<AudioFile>mx_07_adLibs02_bpm135.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="901162814"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{C83A5535-FDC5-4EC3-B0EB-4DFF5BA8BAFA}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="mx_07_adLibs02_bpm135" ID="{03C0D434-B9DF-495A-B974-C0B1D1462A53}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="27763.6458333333"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="mx_07_adLibs02_bpm135" ID="{690FCE74-7077-4C76-9B87-BF14F9354742}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Cues">
+											<Reference>
+												<Local>
+													<MusicCue Name="Entry Cue" ID="{1A50F81E-7D09-4656-A0D4-32C578BA37C4}"/>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<MusicCue Name="Exit Cue" ID="{34F92270-3D01-4355-AD57-EBE01AEC8781}">
+														<PropertyList>
+															<Property Name="CueType" Type="int16" Value="1"/>
+															<Property Name="TimeMs" Type="Real64" Value="25600"/>
+														</PropertyList>
+													</MusicCue>
+												</Local>
+											</Reference>
+										</ObjectList>
+									</ObjectLists>
+								</MusicSegment>
+							</ChildrenList>
 						</MusicPlaylistContainer>
 						<MusicPlaylistContainer Name="Victory theme" ID="{1ACA65C1-CC00-4E8F-BF3A-5FB951C5F676}" ShortID="450600078">
 							<ReferenceList>
@@ -1387,7 +2123,7 @@
 										<ObjectLists>
 											<ObjectList Name="EntryPath">
 												<Reference>
-													<ObjectRef Name="Win" ID="{63CA4145-C3EC-4ABC-82A7-5D2369EC3061}" WorkUnitID="{E5E81EBD-75E6-4D42-B8CE-AE455B36B7F6}"/>
+													<ObjectRef Name="End" ID="{63CA4145-C3EC-4ABC-82A7-5D2369EC3061}" WorkUnitID="{E5E81EBD-75E6-4D42-B8CE-AE455B36B7F6}"/>
 												</Reference>
 											</ObjectList>
 										</ObjectLists>
