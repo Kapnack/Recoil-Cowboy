@@ -15,21 +15,9 @@
 				</Folder>
 				<Folder Name="Sliders" ID="{C9931507-0D19-4591-9FB4-2C2F5ED836B8}" ShortID="23103394">
 					<ChildrenList>
-						<GameParameter Name="MusicVol" ID="{9A219836-6445-4CE1-8B87-494A16D83627}">
-							<PropertyList>
-								<Property Name="InitialValue" Type="Real64" Value="100"/>
-							</PropertyList>
-						</GameParameter>
-						<GameParameter Name="SFXVol" ID="{1206234A-9541-4A03-A164-4D9BFACADB55}">
-							<PropertyList>
-								<Property Name="InitialValue" Type="Real64" Value="100"/>
-							</PropertyList>
-						</GameParameter>
-						<GameParameter Name="MasterVol" ID="{C4876781-ACC2-4D0F-ABCD-1D4BF9FE29D5}">
-							<PropertyList>
-								<Property Name="InitialValue" Type="Real64" Value="100"/>
-							</PropertyList>
-						</GameParameter>
+						<GameParameter Name="MusicVol" ID="{9A219836-6445-4CE1-8B87-494A16D83627}"/>
+						<GameParameter Name="SFXVol" ID="{1206234A-9541-4A03-A164-4D9BFACADB55}"/>
+						<GameParameter Name="MasterVol" ID="{C4876781-ACC2-4D0F-ABCD-1D4BF9FE29D5}"/>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>
