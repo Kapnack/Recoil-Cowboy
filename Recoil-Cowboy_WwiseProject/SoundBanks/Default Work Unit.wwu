@@ -3,9 +3,16 @@
 	<SoundBanks>
 		<WorkUnit Name="Default Work Unit" ID="{4C8FDA1E-FB5B-4686-91FB-63E1B6C50C48}" PersistMode="Standalone">
 			<ChildrenList>
+				<SoundBank Name="SBMenu" ID="{87138453-6BC8-401E-9663-309F9E6AB8FD}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Ingame_Game_Menu" ID="{98ABD6DA-B706-4F00-A11C-6C65DF673691}" WorkUnitID="{692BFA2D-F024-43EF-8E6D-D89B446EDBF9}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
 				<SoundBank Name="SBGame" ID="{3CB07391-9EC2-4CE9-8B7F-C33B5DE62E10}">
 					<ObjectInclusionList>
-						<ObjectRef Name="Music Ingame" ID="{5175D348-9712-4ACE-AEE2-F413DD5E5DF2}" WorkUnitID="{692BFA2D-F024-43EF-8E6D-D89B446EDBF9}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Ingame_Game_Play" ID="{5B9EA179-D335-4403-B29A-5E743D7AA9E2}" WorkUnitID="{692BFA2D-F024-43EF-8E6D-D89B446EDBF9}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="SFX Ingame" ID="{B222D7C3-3112-4B8C-8FAB-C77C9CFE8FB9}" WorkUnitID="{692BFA2D-F024-43EF-8E6D-D89B446EDBF9}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
