@@ -1,3 +1,4 @@
+using ScriptableObjects;
 using Systems;
 using TMPro;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace Shaders
 {
     public class ShaderSettings : MonoBehaviour
     {
+        [SerializeField] private VolumeSettings volumeSettings;
+
         private IShaderSettings _settings;
 
         private Toggle _toggle;
@@ -22,7 +25,7 @@ namespace Shaders
         [SerializeField] private TMP_Text musicText;
 
         private const string PercentageFormat = "{0}%";
-        
+
         private void Awake()
         {
             _settings = ServiceProvider.GetService<IShaderSettings>();
@@ -35,9 +38,10 @@ namespace Shaders
 
         private void Start()
         {
-            SetUpSlider(masterVolumeSlider, OnSetMasterVolume, "MasterVol");
-            SetUpSlider(sfxVolumeSlider, OnSetSFXVolume, "SFXVol");
-            SetUpSlider(musicVolumeSlider, OnSetMusicVolume, "MusicVol");
+            SetUpSlider(masterVolumeSlider, OnSetMasterVolume, volumeSettings.MasterVol,
+                nameof(volumeSettings.MasterVol));
+            SetUpSlider(sfxVolumeSlider, OnSetSFXVolume, volumeSettings.SFXVol, nameof(volumeSettings.SFXVol));
+            SetUpSlider(musicVolumeSlider, OnSetMusicVolume, volumeSettings.MusicVol, nameof(volumeSettings.MusicVol));
 
             SetUpText(masterVolumeSlider.value, masterText);
             SetUpText(sfxVolumeSlider.value, sfxText);
@@ -48,59 +52,47 @@ namespace Shaders
 
         private void OnSetMasterVolume(float value)
         {
-            AkUnitySoundEngine.SetRTPCValue("MasterVol", value);
+            AkUnitySoundEngine.SetRTPCValue(nameof(volumeSettings.MasterVol), value);
+            volumeSettings.MasterVol = (int)value;
+
             UpdateText(value, masterText);
         }
 
         private void OnSetSFXVolume(float value)
         {
-            AkUnitySoundEngine.SetRTPCValue("SFXVol", value);
+            AkUnitySoundEngine.SetRTPCValue(nameof(volumeSettings.SFXVol), value);
+            volumeSettings.SFXVol = (int)value;
+
             UpdateText(value, sfxText);
         }
 
         private void OnSetMusicVolume(float value)
         {
-            AkUnitySoundEngine.SetRTPCValue("MusicVol", value);
+            AkUnitySoundEngine.SetRTPCValue(nameof(volumeSettings.MusicVol), value);
+            volumeSettings.MusicVol = (int)value;
+
             UpdateText(value, musicText);
         }
 
-        private void SetUpSlider(Slider slider, UnityAction<float> function, string valueName)
+        private static void SetUpSlider(Slider slider, UnityAction<float> function, int value, string valueName)
         {
             if (!slider || function == null || valueName == null)
                 return;
-            
+
             slider.onValueChanged.AddListener(function);
             slider.wholeNumbers = true;
             slider.minValue = 0;
             slider.maxValue = 100;
 
-            SetSliderValue(slider, valueName);
+            SetSliderValue(slider, value, valueName);
         }
 
-        private void SetSliderValue(Slider slider, string valueName)
+        private static void SetSliderValue(Slider slider, int value, string valueName)
         {
             if (!slider || valueName == null)
                 return;
 
-            int valueType = 0;
-
-            AKRESULT result = AkUnitySoundEngine.GetRTPCValue
-            (
-                valueName,
-                null,
-                0,
-                out float value,
-                ref valueType
-            );
-
-            if (result == AKRESULT.AK_Success)
-            {
-                slider.value = value;
-            }
-            else
-            {
-                Debug.LogWarning($"The Wwise Value {value} is not a valid value.");
-            }
+            slider.value = value;
         }
 
         private static void SetUpText(float value, TMP_Text actualText)

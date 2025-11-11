@@ -366,6 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3729cd8f5a4466a49bcc03bdab10ca4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeSettings: {fileID: 11400000, guid: 37e71fe7624b2de4bb8a275ee1b4f8c9, type: 2}
   masterVolumeSlider: {fileID: 2233632053026549415}
   masterText: {fileID: 7982177019047807406}
   sfxVolumeSlider: {fileID: 5442460911321244308}
