@@ -1,5 +1,3 @@
-using System;
-using JetBrains.Annotations;
 using Systems;
 using TMPro;
 using UnityEngine;
@@ -23,7 +21,7 @@ namespace Shaders
         [SerializeField] private Slider musicVolumeSlider;
         [SerializeField] private TMP_Text musicText;
 
-        private const string Format = "{0}%";
+        private const string PercentageFormat = "{0}%";
         
         private void Awake()
         {
@@ -33,7 +31,10 @@ namespace Shaders
 
             _toggle.isOn = _settings.GetFlickerValue() != 0;
             _toggle.onValueChanged.AddListener(ActiveShaderFlicker);
+        }
 
+        private void Start()
+        {
             SetUpSlider(masterVolumeSlider, OnSetMasterVolume, "MasterVol");
             SetUpSlider(sfxVolumeSlider, OnSetSFXVolume, "SFXVol");
             SetUpSlider(musicVolumeSlider, OnSetMusicVolume, "MusicVol");
@@ -63,11 +64,11 @@ namespace Shaders
             UpdateText(value, musicText);
         }
 
-        private static void SetUpSlider(Slider slider, UnityAction<float> function, string valueName)
+        private void SetUpSlider(Slider slider, UnityAction<float> function, string valueName)
         {
             if (!slider || function == null || valueName == null)
                 return;
-
+            
             slider.onValueChanged.AddListener(function);
             slider.wholeNumbers = true;
             slider.minValue = 0;
@@ -76,15 +77,16 @@ namespace Shaders
             SetSliderValue(slider, valueName);
         }
 
-        private static void SetSliderValue(Slider slider, string valueName)
+        private void SetSliderValue(Slider slider, string valueName)
         {
             if (!slider || valueName == null)
                 return;
 
             int valueType = 0;
 
-            AKRESULT result = AkUnitySoundEngine.GetRTPCValue(
-                "MasterVol",
+            AKRESULT result = AkUnitySoundEngine.GetRTPCValue
+            (
+                valueName,
                 null,
                 0,
                 out float value,
@@ -107,7 +109,7 @@ namespace Shaders
         }
 
         private static void UpdateText(float value, TMP_Text actualText) =>
-            actualText.text = string.Format(Format, value);
+            actualText.text = string.Format(PercentageFormat, value);
 
         public void GoBack()
         {

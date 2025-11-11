@@ -273,8 +273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ec26f73e79fa4349af9fd68d9875a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseChunkPrefab: {fileID: 5992506785617022253, guid: 766a6a88da1cda3488ad9c6d9fb2956e, type: 3}
   chunkPrefabs:
-  - {fileID: 5992506785617022253, guid: 766a6a88da1cda3488ad9c6d9fb2956e, type: 3}
   - {fileID: 5715592462880716157, guid: 857ae6c9013f21c4d976cd255889bb6b, type: 3}
   - {fileID: 4604953289087148541, guid: e06689f232cd4c54cba8390ccf89cb7a, type: 3}
   - {fileID: 7828983912842252967, guid: a2f0697d482f8064ca5347f9a5c4e4b8, type: 3}
