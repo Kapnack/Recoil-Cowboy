@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using Characters.EnemySRC;
 using MouseTracker;
+using Particle;
 using ScriptableObjects;
 using Systems;
 using Systems.CentralizeEventSystem;
+using Systems.Pool;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -19,25 +21,28 @@ namespace Characters.PlayerSRC
         [ContextMenuItem("Instant Kill", nameof(InstantDead))]
         private int _currentLives;
 
+        [SerializeField] private Transform gunPos;
         private Vector3 _initialPos;
 
         private int _killKillPoints;
         private int _distancePoints;
 
         private bool _isDead;
-        private bool _canDied;
 
         private int _currentBullets;
-
-        private Camera _camera;
 
         private Coroutine _reloadingCoroutine;
 
         private IMousePositionTracker _mouseTracker;
 
+        private ICharacterSpin _spin;
+
+        private ParticlePool _particlePool;
+
         private readonly ComplexGameEvent<int, int, int> _livesChangeEvent = new();
         private readonly DoubleParamEvent<int, int> _pointsChangeEvent = new();
         private readonly ComplexGameEvent<int, int, int> _bulletsChangeEvent = new();
+        private readonly SimpleEvent _noLongerInvincible = new();
         private readonly SimpleEvent _oneLiveRemains = new();
         private readonly SingleParamEvent<int> _dies = new();
 
@@ -49,6 +54,9 @@ namespace Characters.PlayerSRC
 
             set
             {
+                if (config.InfinitLives)
+                    return;
+
                 int newValue = Mathf.Clamp(value, 0, config.MaxLives);
 
                 _livesChangeEvent?.Invoke(_currentLives, newValue, config.MaxLives);
@@ -70,10 +78,7 @@ namespace Characters.PlayerSRC
         private int KillPoints
         {
             get => _killKillPoints;
-            set
-            {
-                _killKillPoints = value;
-            }
+            set { _killKillPoints = value; }
         }
 
         private int CurrentBullets
@@ -81,6 +86,9 @@ namespace Characters.PlayerSRC
             get => _currentBullets;
             set
             {
+                if (value < _currentBullets && config.InfinitAmmo)
+                    return;
+
                 int newValue = Mathf.Clamp(value, 0, config.MaxBullets);
 
                 _bulletsChangeEvent?.Invoke(_currentBullets, newValue, config.MaxBullets);
@@ -92,26 +100,18 @@ namespace Characters.PlayerSRC
         {
             base.Awake();
 
-            _camera = Camera.main;
+            _spin = GetComponentInChildren<ICharacterSpin>();
+
+            _particlePool = GetComponentInChildren<ParticlePool>();
 
             CurrentLives = config.MaxLives;
             CurrentBullets = config.MaxBullets;
 
             StartCoroutine(SetUpEvents());
-            StartCoroutine(SetUpCanDied());
-        }
-
-
-        private IEnumerator SetUpCanDied()
-        {
-            yield return new WaitForSeconds(0.5f);
-            _canDied = true;
         }
 
         private IEnumerator Start()
         {
-            _initialPos = transform.position;
-
             ServiceProvider.GetService<IFollowTarget>().SetTarget(transform);
 
             while (!ServiceProvider.TryGetService(out _mouseTracker))
@@ -130,9 +130,13 @@ namespace Characters.PlayerSRC
         {
             ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
 
+            if (eventSystem == null)
+                yield break;
+
             eventSystem.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
             eventSystem.Register(PlayerEventKeys.PointsChange, _pointsChangeEvent);
             eventSystem.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
+            eventSystem.Register(PlayerEventKeys.NoLongerInvincible, _noLongerInvincible);
             eventSystem.Register(PlayerEventKeys.OnOneLive, _oneLiveRemains);
             eventSystem.Register(PlayerEventKeys.Dies, _dies);
 
@@ -155,27 +159,12 @@ namespace Characters.PlayerSRC
         {
             _distancePoints = (int)Mathf.Abs(Vector3.Distance(new Vector3(0, _initialPos.y, 0),
                 new Vector3(0, transform.position.y, 0) * (config.PointsPerKill * 0.5f)));
-            
+
             _pointsChangeEvent?.Invoke(0, KillPoints + _distancePoints);
-
-            if (_isDead || !_canDied)
-                return;
-
-            Vector3 viewportPos = _camera.WorldToViewportPoint(transform.position);
-
-            bool isVisible =
-                viewportPos.x is >= 0f and <= 1f &&
-                viewportPos.y is >= 0f and <= 1f &&
-                viewportPos.z > 0f;
-
-            if (isVisible)
-                return;
-
-            OnDead();
         }
 
         private void OnDisable() => UnRegisterEvents();
-        
+
         private void UnRegisterEvents()
         {
             ICentralizeEventSystem eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
@@ -183,6 +172,7 @@ namespace Characters.PlayerSRC
             eventSystem.Unregister(PlayerEventKeys.LivesChange);
             eventSystem.Unregister(PlayerEventKeys.PointsChange);
             eventSystem.Unregister(PlayerEventKeys.BulletsChange);
+            eventSystem.Unregister(PlayerEventKeys.NoLongerInvincible);
             eventSystem.Unregister(PlayerEventKeys.OnOneLive);
             eventSystem.Unregister(PlayerEventKeys.Dies);
 
@@ -191,7 +181,7 @@ namespace Characters.PlayerSRC
             eventSystem.Get(PlayerEventKeys.ReloadOvertime).RemoveListener(AddBulletsOverTime);
         }
 
-        private void OnAttack()
+        private async void OnAttack()
         {
             AkUnitySoundEngine.SetRTPCValue("BulletCount", CurrentBullets);
             AkUnitySoundEngine.PostEvent("sfx_Gunshot", gameObject);
@@ -202,6 +192,8 @@ namespace Characters.PlayerSRC
             Vector3 dir = _mouseTracker.GetMouseDir(transform);
             Vector3 mousePos = _mouseTracker.GetMouseWorldPos();
 
+            _spin.SetSpin(dir);
+
             if (dir.sqrMagnitude < Mathf.Epsilon * Mathf.Epsilon)
                 return;
 
@@ -209,8 +201,15 @@ namespace Characters.PlayerSRC
 
             --CurrentBullets;
 
-            if (Physics.Raycast(transform.position, dir, out RaycastHit hit))
+            if (Physics.Raycast(transform.position, dir, out RaycastHit hit, Mathf.Infinity, Physics.AllLayers,
+                    QueryTriggerInteraction.Ignore))
             {
+                PoolData<ParticleController> particle = await _particlePool.Get();
+
+                particle.Obj.transform.position = hit.point;
+                particle.Obj.transform.rotation = Quaternion.LookRotation(transform.position - hit.point);
+                particle.Component.SetUp(() => _particlePool.Return(particle));
+
                 if (hit.transform.gameObject.TryGetComponent(out IEnemyHealthSystem healthSystem))
                 {
                     healthSystem.ReceiveDamage(OnConfirmKill);
@@ -259,6 +258,7 @@ namespace Characters.PlayerSRC
             yield return new WaitForSeconds(config.InvincibleTime);
 
             Invincible = false;
+            _noLongerInvincible?.Invoke();
         }
 
         private void OnDead()
@@ -266,7 +266,7 @@ namespace Characters.PlayerSRC
             _dies.Invoke(KillPoints + _distancePoints);
             _isDead = true;
         }
-        
+
         public void InstantDead() => CurrentLives = 0;
 
         private void AddBullet() => ++CurrentBullets;
@@ -294,10 +294,12 @@ namespace Characters.PlayerSRC
             _reloadingCoroutine = null;
         }
 
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, config.AreaOfSight);
         }
+#endif
     }
 }

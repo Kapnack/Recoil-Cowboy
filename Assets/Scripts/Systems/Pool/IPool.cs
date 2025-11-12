@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Systems.Pool
 {
     public interface IPool<T>
     {
         public void InitializeRandom(int amount, int offset = 0);
-        public void InitializeAll(int offset = 0);
-        public T Get(int offset = 0);
+        public void InitializeAll(int repeat = 0, int offset = 0);
+        public Task<T> Get(int offset = 0);
         public void Return(T data);
         public void Clear();
     }

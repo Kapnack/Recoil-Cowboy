@@ -5,14 +5,13 @@ using Shaders;
 using Systems;
 using Systems.CentralizeEventSystem;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class GameplayManager : MonoBehaviour
 {
     private IShaderManager _shaderManager;
 
     private List<Enemy> _enemies;
-    
+
     private readonly SingleParamEvent<int> _loseCondition = new();
 
     private void Awake()
@@ -20,33 +19,31 @@ public class GameplayManager : MonoBehaviour
         SetUpEvents();
 
         _shaderManager = ServiceProvider.GetService<IShaderManager>();
-        
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
     }
-    
+
     private void SetUpEvents()
     {
-        if (ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem))
-        {
-            eventSystem.Register(GameplayManagerKeys.LoseCondition, _loseCondition);
-        }
+        ICentralizeEventSystem eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
+
+        eventSystem.Register(GameplayManagerKeys.LoseCondition, _loseCondition);
     }
 
     private void OnDisable()
     {
         _shaderManager?.StartOffTransition();
-        
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
     private void OnDestroy()
     {
-        if (ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem))
-        {
-            eventSystem.Unregister(GameplayManagerKeys.LoseCondition);
-        }
+        ICentralizeEventSystem eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
+
+        eventSystem.Unregister(GameplayManagerKeys.LoseCondition);
     }
 
     private IEnumerator Start()
@@ -61,7 +58,7 @@ public class GameplayManager : MonoBehaviour
         simpleEvent.AddListener(OnPlayerOneLive);
 
         SingleParamEvent<int> singleParamEvent;
-        while (!eventSystem.TryGet<int>(PlayerEventKeys.Dies, out  singleParamEvent))
+        while (!eventSystem.TryGet<int>(PlayerEventKeys.Dies, out singleParamEvent))
             yield return null;
 
         singleParamEvent.AddListener(OnLoseConditionMeet);

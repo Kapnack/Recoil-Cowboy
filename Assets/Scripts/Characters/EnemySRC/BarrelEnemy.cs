@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using ScriptableObjects;
+using Systems.LayerClassGenerator;
 using Systems.TagClassGenerator;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,29 +13,74 @@ namespace Characters.EnemySRC
         [SerializeField] private BarrelEnemyConfig config;
 
         [SerializeField] private GameObject bulletPrefab;
-        
+
         private BoxCollider _collider;
-        
+
+        private IAnimate _animate;
+
         private Vector3 _targetDir;
 
-        private bool Hidden { get; set; }
+        private bool _hidden;
+
+        private bool _canShoot;
 
         private float _coldDownTimer;
+
+        private bool Hidden
+        {
+            get => _hidden;
+            set
+            {
+                if (_hidden == value)
+                    return;
+
+                _hidden = value;
+
+                _animate.ChangeAnimation(value);
+            }
+        }
 
         protected override void Awake()
         {
             base.Awake();
+            _animate = GetComponentInChildren<IAnimate>();
             Rb.isKinematic = true;
-            _collider =  GetComponent<BoxCollider>();
+            _collider = GetComponent<BoxCollider>();
         }
 
         public override void SetUp(Action action = null)
         {
             base.SetUp(action);
+
+            StartCoroutine(AdjustPosition());
+        }
+
+        private IEnumerator AdjustPosition()
+        {
+            yield return new WaitForFixedUpdate();
+
+            Vector3 worldSize = Vector3.Scale(_collider.size, transform.lossyScale);
+            Vector3 origin = transform.position;
+
+            float duration = 360;
             
-            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity, LayerMask))
+#if UNITY_EDITOR
+            Debug.DrawRay(new Vector3(origin.x + worldSize.x * 0.5f, origin.y, origin.z - worldSize.z * 0.5f), Vector3.down * 100, Color.magenta, duration);
+            Debug.DrawRay(new Vector3(origin.x  - worldSize.x * 0.5f, origin.y, origin.z + worldSize.z * 0.5f), Vector3.down * 100, Color.magenta, duration);
+            Debug.DrawRay(origin, Vector3.down * 100, Color.magenta, duration);
+            Debug.DrawRay(new Vector3(origin.x  + worldSize.x * 0.5f, origin.y, origin.z + worldSize.z * 0.5f), Vector3.down * 100, Color.magenta, duration);
+            Debug.DrawRay(new Vector3(origin.x - worldSize.z * 0.5f, origin.y, origin.z - worldSize.z * 0.5f), Vector3.down * 100, Color.magenta, duration);
+#endif
+            if (Physics.BoxCast(origin, worldSize * 0.5f, Vector3.down, out RaycastHit hit,
+                    transform.rotation, Mathf.Infinity, LayerMask.GetMask(Layers.Environment), QueryTriggerInteraction.Ignore))
             {
-                transform.position = new Vector3(transform.position.x, hit.point.y + _collider.size.y * 0.5f, 0);
+                Debug.Log($"Raycast hit  {hit.collider.name} at {hit.point.y}", hit.collider.gameObject);
+                transform.position = new Vector3(transform.position.x, hit.point.y + worldSize.y * 0.5f,
+                    transform.position.z);
+            }
+            else
+            {
+                Debug.Log($"{nameof(gameObject)} did not detect any platform");
             }
         }
 
@@ -110,7 +157,7 @@ namespace Characters.EnemySRC
                 gameObject.transform.rotation);
 
             SceneManager.MoveGameObjectToScene(bulletGO, gameObject.scene);
-            
+
             if (bulletGO.TryGetComponent(out Bullet bullet))
                 bullet.Launch(this, transform.position + transform.right * config.FireOffset,
                     _targetDir, config.FireForce);

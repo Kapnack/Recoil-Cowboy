@@ -1,13 +1,12 @@
 using Systems;
 using Systems.CentralizeEventSystem;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 
 public class PauseManager : MonoBehaviour
 {
     private ICentralizeEventSystem _eventSystem;
     private readonly SimpleEvent _loadMainMenu = new();
+    private readonly SimpleEvent _reloadGameplay = new();
 
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject settingsMenu;
@@ -25,17 +24,28 @@ public class PauseManager : MonoBehaviour
 
         _eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
 
-        _eventSystem.Register(GameManagerKeys.MainMenu, _loadMainMenu);
+        if (_eventSystem == null)
+            return;
 
+        _eventSystem.Register(GameManagerKeys.MainMenu, _loadMainMenu);
+        _eventSystem.Register(GameManagerKeys.ChangeToLevel, _reloadGameplay);
+        
         _eventSystem.Get(PlayerEventKeys.Paused).AddListener(PauseHandler);
     }
-    
+
     private void OnEnable() => Cursor.visible = true;
 
     private void OnDestroy()
     {
-        _eventSystem.Get(PlayerEventKeys.Paused).RemoveListener(PauseHandler);
+        _eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
+
+        if (_eventSystem == null)
+            return;
+
         _eventSystem.Unregister(GameManagerKeys.MainMenu);
+        _eventSystem.Unregister(GameManagerKeys.ChangeToLevel);
+        _eventSystem.Get(PlayerEventKeys.Paused).RemoveListener(PauseHandler);
+
         Time.timeScale = 1.0f;
     }
 
@@ -43,7 +53,8 @@ public class PauseManager : MonoBehaviour
     {
         _paused = !_paused;
         panel.gameObject.SetActive(_paused);
-        _inputReader.SwitchPlayerMapState();
+
+        _inputReader?.SwitchPlayerMapState();
         Time.timeScale = _paused ? 0.0f : 1.0f;
 
         if (_menuGo)
@@ -64,12 +75,5 @@ public class PauseManager : MonoBehaviour
 
     public void GoToMainMenu() => _loadMainMenu?.Invoke();
 
-    public void ExitGame()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
-    }
+    public void ReloadGameplay() => _reloadGameplay?.Invoke();
 }

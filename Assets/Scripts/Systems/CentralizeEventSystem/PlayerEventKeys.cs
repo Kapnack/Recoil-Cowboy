@@ -11,5 +11,6 @@
         public const string Reload = "RELOAD";
         public const string ReloadOvertime = "RELOAD_OVERTIME";
         public const string OnOneLive = "ON_ONE_LIVE";
+        public const string NoLongerInvincible = "NO_LONGER_INVENCIBIBLE";
     }
 }

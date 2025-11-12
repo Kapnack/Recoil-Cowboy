@@ -1,15 +1,21 @@
+using System;
 using UnityEngine;
 
 namespace Characters.EnemySRC
 {
-    public class Cactus : MonoBehaviour
+    public class Cactus : MonoBehaviour, IEnemy
     {
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider collision)
         {
-            if (collision.transform.TryGetComponent<IHealthSystem>(out var healthSystem))
+            if (collision.TryGetComponent<IHealthSystem>(out var healthSystem))
                 healthSystem.ReceiveDamage();
         }
 
-        private void OnCollisionStay(Collision collision) => OnCollisionEnter(collision);
+        private void OnTriggerStay(Collider collision) => OnTriggerEnter(collision);
+        
+        public void SetUp(Action action = null)
+        {
+            
+        }
     }
 }

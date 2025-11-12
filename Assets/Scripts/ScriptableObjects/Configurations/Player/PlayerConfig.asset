@@ -18,3 +18,5 @@ MonoBehaviour:
   <MaxBullets>k__BackingField: 3
   <KnockBack>k__BackingField: 25
   <PointsPerKill>k__BackingField: 100
+  <InfinityLives>k__BackingField: 0
+  <InfinityAmmo>k__BackingField: 0

@@ -12,5 +12,7 @@ namespace ScriptableObjects
         [field: SerializeField] public int MaxBullets { get; set; }
         [field: SerializeField] public float KnockBack { get; set; }
         [field: SerializeField] public int PointsPerKill { get; set; }
+        [field: SerializeField] public bool InfinitLives { get; set; }
+        [field: SerializeField] public bool InfinitAmmo { get; set; }
     }
 }

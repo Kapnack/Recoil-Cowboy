@@ -149,6 +149,8 @@ public class GameManager : MonoBehaviour, IStatsManager
 
         eventSystem.Get<int>(GameplayManagerKeys.LoseCondition).AddListener(LoadGameOverMenu);
 
+        eventSystem.Get(GameManagerKeys.ChangeToLevel).AddListener(LoadGameplay);
+        
         eventSystem.Get(GameManagerKeys.MainMenu).AddListener(LoadMainMenu);
     }
 

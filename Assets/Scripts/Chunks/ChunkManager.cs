@@ -6,6 +6,7 @@ namespace Chunks
 {
     public class ChunkManager : MonoBehaviour
     {
+        [SerializeField] private GameObject baseChunkPrefab;
         [SerializeField] private List<GameObject> chunkPrefabs;
 
         private Pool<Chunk> _pool;
@@ -21,46 +22,31 @@ namespace Chunks
             Init();
         }
 
-        private void Init()
+        private async void Init()
         {
-            PoolData<Chunk> go = new(Instantiate(chunkPrefabs[0], transform));
-
+            PoolData<Chunk> go = new(Instantiate(baseChunkPrefab, transform));
             go.Obj.transform.position = Vector3.zero;
-
             go.Component.SetUp();
-
             _activeChunks[0] = go;
 
-
-            //------------------------------------------------------------------------
-
-            go = _pool.Get();
-
+            go = await _pool.Get();
             go.Component.LimitPass += DestroyBase;
             go.Component.LimitPass += SpawnNewChunk;
-
             _activeChunks[1] = go;
-
             AnchorObjects(_activeChunks[0], go);
-
             go.Component.SetUp();
 
-            //--------------------------------------------------------------------------
-
-            go = _pool.Get();
-
+            go = await _pool.Get();
             _activeChunks[2] = go;
-
             AnchorObjects(_activeChunks[1], go);
-            
             go.Component.SetUp();
         }
 
-        private void SpawnNewChunk()
+        private async void SpawnNewChunk()
         {
             _pool.Return(_activeChunks[0]);
 
-            PoolData<Chunk> newChunk = _pool.Get(1);
+            PoolData<Chunk> newChunk = await _pool.Get(1);
 
             AnchorObjects(_activeChunks[2], newChunk);
 
@@ -88,7 +74,7 @@ namespace Chunks
 
         private void DestroyBase()
         {
-            Destroy(_activeChunks[0].Obj.gameObject);
+            Destroy(_activeChunks[0].Obj);
             _activeChunks[0] = null;
         }
     }

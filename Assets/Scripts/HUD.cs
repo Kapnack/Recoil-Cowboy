@@ -11,13 +11,16 @@ public class HUD : MonoBehaviour
 {
     [SerializeField] private Image livesFill;
     [SerializeField] private TMP_Text pointsText;
-    [SerializeField] private Image ammoFill;
-    [SerializeField] private Image ammoBase;
+
+    [Header("Ammo Settings")] 
+    [SerializeField] private Image ammoPrefab;
+    [SerializeField] private RectTransform ammoStarPoint;
+    [SerializeField] private Sprite ammoFill;
+    [SerializeField] private Sprite ammoBase;
+    private Image[] _ammoImages;
 
     private string _pointsTextFormat;
     private string _distanceTextFormat;
-
-    private float _ammoImageWidth;
 
     private bool _firstReload = true;
 
@@ -25,7 +28,6 @@ public class HUD : MonoBehaviour
     {
         _pointsTextFormat = pointsText.text;
 
-        _ammoImageWidth = ammoBase.rectTransform.sizeDelta.x;
         StartCoroutine(SetUpEvents());
     }
 
@@ -49,8 +51,8 @@ public class HUD : MonoBehaviour
 
         doubleParamEvent.AddListener(OnPointsChange);
 
-        OnPointsChange(0,0);
-        
+        OnPointsChange(0, 0);
+
         while (!eventSystem.TryGet(PlayerEventKeys.BulletsChange, out complexGameEvent))
             yield return null;
 
@@ -71,19 +73,47 @@ public class HUD : MonoBehaviour
     {
         if (_firstReload)
         {
-            ammoBase.rectTransform.sizeDelta = new Vector2
-            (
-                _ammoImageWidth * current,
-                ammoFill.rectTransform.sizeDelta.y
-            );
+            _ammoImages = new Image[max];
+
+            float scale = 0.1f;
+            float padding = 0f;
+
+            Vector2 startPos = Vector2.zero;
+
+            for (int i = 0; i < max; ++i)
+            {
+                _ammoImages[i] = Instantiate(ammoPrefab, ammoStarPoint, false);
+                
+                _ammoImages[i].sprite = ammoFill;
+                
+                _ammoImages[i].SetNativeSize();
+                _ammoImages[i].rectTransform.localScale = new Vector3(scale, scale, 1f);
+                
+                if (i == 0)
+                {
+                    _ammoImages[i].rectTransform.anchoredPosition = startPos;
+                }
+                else
+                {
+                    RectTransform prevRect = _ammoImages[i - 1].rectTransform;
+
+                    float prevWidth = prevRect.rect.width * prevRect.localScale.x;
+                    Vector2 newPos = prevRect.anchoredPosition + new Vector2(prevWidth + padding, 0);
+
+                    _ammoImages[i].rectTransform.anchoredPosition = newPos;
+                }
+            }
 
             _firstReload = false;
         }
 
-        ammoFill.rectTransform.sizeDelta = new Vector2
-        (
-            _ammoImageWidth * current,
-            ammoFill.rectTransform.sizeDelta.y
-        );
+        if (previous > current)
+        {
+            _ammoImages[previous - 1].sprite = ammoBase;
+        }
+        else if (previous < current)
+        {
+            _ammoImages[current - 1].sprite = ammoFill;
+        }
     }
 }

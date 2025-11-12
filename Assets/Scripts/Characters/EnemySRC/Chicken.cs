@@ -3,7 +3,6 @@ using Characters.PlayerSRC;
 using ScriptableObjects;
 using Systems.TagClassGenerator;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Characters.EnemySRC
@@ -19,6 +18,8 @@ namespace Characters.EnemySRC
 
         private RaycastHit _hit;
 
+        private IAnimate _animator;
+        
         private void OnEnable() => SetUp();
 
         public override void SetUp(Action action = null)
@@ -26,6 +27,7 @@ namespace Characters.EnemySRC
             base.SetUp(action);
             SetJumpTimer();
             Rb.linearVelocity = Vector3.zero;
+            _animator = GetComponent<IAnimate>();
         }
         
         private void FixedUpdate()
@@ -45,7 +47,10 @@ namespace Characters.EnemySRC
                     return;
 
                 if (!_alreadyRotated)
+                {
                     Rotate();
+                    _animator.ChangeAnimation(false);
+                }
             }
             else if (Physics.Raycast(_raycastOrigin, transform.right, out _hit, config.RaycastDistance))
             {
@@ -66,6 +71,7 @@ namespace Characters.EnemySRC
 
             if (_jumpTimer < Time.time)
             {
+                _animator.ChangeAnimation(true);
                 Rb.AddForce(Vector3.up * config.JumpForce, ForceMode.Impulse);
                 SetJumpTimer();
             }
@@ -113,7 +119,13 @@ namespace Characters.EnemySRC
                 }
             }
         }
-
+        public override void ReceiveDamage(Action action = null)
+        {
+            AkUnitySoundEngine.PostEvent("sfx_ChickenExp", gameObject);
+            base.ReceiveDamage(action);
+        }
+        
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             if (!config)
@@ -127,12 +139,7 @@ namespace Characters.EnemySRC
             Gizmos.DrawRay(_raycastOrigin, transform.right * config.RaycastDistance);
         }
 
-        public override void ReceiveDamage(Action action = null)
-        {
-            base.ReceiveDamage(action);
-            AkUnitySoundEngine.PostEvent("sfx_ChickenExp", gameObject);
-        }
-#if UNITY_EDITOR
+        
         private void OnValidate()
         {
             if (config == null)

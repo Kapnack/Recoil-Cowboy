@@ -1,10 +1,13 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Characters.EnemySRC;
 using Systems;
 using Systems.Pool;
 using Systems.TagClassGenerator;
 using UnityEngine;
+using System.Threading.Tasks;
+using Unity.VisualScripting;
 
 namespace Chunks
 {
@@ -15,7 +18,7 @@ namespace Chunks
         [SerializeField] private List<GameObject> spawnPoints;
         private readonly List<PoolData<IEnemy>> _spawnedEnemies = new();
 
-        private IEnemyPool<IEnemy> _enemyPool;
+        private IObjectPool<IEnemy> _objectPool;
 
         public Transform ChunkLimitTop => chunkLimitTop;
 
@@ -23,24 +26,25 @@ namespace Chunks
 
         private void Awake()
         {
-            _enemyPool = ServiceProvider.GetService<IEnemyPool<IEnemy>>();
+            _objectPool = ServiceProvider.GetService<IObjectPool<IEnemy>>();
 
             BoxCollider boxCollider = GetComponent<BoxCollider>();
 
             boxCollider.isTrigger = true;
         }
 
-        public void SetUp()
+        public async void SetUp()
         {
             foreach (GameObject spawnPoint in spawnPoints)
             {
                 if (!spawnPoint)
                     continue;
 
-                PoolData<IEnemy> enemy = _enemyPool.Get();
-
+                PoolData<IEnemy> enemy = await _objectPool.Get();
+            
                 enemy.Obj.transform.position = spawnPoint.transform.position;
                 enemy.Obj.transform.rotation = spawnPoint.transform.rotation;
+            
                 enemy.Component.SetUp(() => ReturnEnemy(enemy));
 
                 _spawnedEnemies.Add(enemy);
@@ -50,14 +54,14 @@ namespace Chunks
         private void OnDisable()
         {
             foreach (PoolData<IEnemy> enemy in _spawnedEnemies)
-                _enemyPool.Return(enemy);
+                _objectPool.Return(enemy);
 
             _spawnedEnemies.Clear();
         }
 
         private void ReturnEnemy(PoolData<IEnemy> enemy)
         {
-            _enemyPool.Return(enemy);
+            _objectPool.Return(enemy);
             _spawnedEnemies.Remove(enemy);
         }
 

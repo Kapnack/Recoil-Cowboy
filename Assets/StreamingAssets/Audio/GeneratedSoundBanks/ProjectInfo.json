@@ -3,7 +3,7 @@
   "Project": {
    "Name": "Recoil-Cowboy_WwiseProject",
    "GUID": "{5C89CDAE-114A-48CA-B1BF-9DEF17B892C5}",
-   "Generator": "2024.1.7.8863"
+   "Generator": "2024.1.9.8920"
   },
   "CacheRoot": "../../../../Recoil-Cowboy_WwiseProject/.cache",
   "Platforms": [
@@ -31,6 +31,6 @@
     "UseAsStandIn": "true"
    }
   ],
-  "FileHash": "{BDC350CB-18A5-81FE-A9A8-2A6647BBE5D7}"
+  "FileHash": "{9585B9E6-F54D-E2F8-3D7C-5609FC8259D7}"
  }
 }
