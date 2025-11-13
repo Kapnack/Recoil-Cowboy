@@ -934,6 +934,7 @@ MonoBehaviour:
     sceneAsset: {fileID: 102900000, guid: 48b1f20207d71ab4d9f1c21b35119a78, type: 3}
     <Index>k__BackingField: 4
     <Name>k__BackingField: GameOverMenu
+  stats: {fileID: 11400000, guid: 9ce0f10ad86a99144a8bf0ffb9b4ebca, type: 2}
 --- !u!114 &1094096141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1203,6 +1204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc45f5065e3ceb4cb3ba403c424eefc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _loadingWait: 1
   canvas: {fileID: 501580323}
   slider: {fileID: 1649686766}
 --- !u!4 &1827428426

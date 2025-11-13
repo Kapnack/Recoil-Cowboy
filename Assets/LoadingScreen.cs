@@ -12,7 +12,11 @@ public class LoadingScreen : MonoBehaviour
 
     private bool _isLoading;
 
-    [FormerlySerializedAs("_canvas")] [Header("Canvas")] [SerializeField]
+    [SerializeField] private int _loadingWait = 2;
+
+    [FormerlySerializedAs("_canvas")]
+    [Header("Canvas")]
+    [SerializeField]
     private Canvas canvas;
 
     [SerializeField] private Slider slider;
@@ -54,18 +58,30 @@ public class LoadingScreen : MonoBehaviour
 
     private IEnumerator UpdateLoading()
     {
+        float currentProgress = 0;
+        float taskProgress = 0;
+
         while (_isLoading)
         {
-            var progress = _data.GetCurrentLoadingProgress() != 0 ? _data.GetCurrentLoadingProgress() * 100.0f : 0;
+            taskProgress = _data.GetCurrentLoadingProgress() != 0 ? _data.GetCurrentLoadingProgress() * 100.0f : 0;
+            currentProgress = taskProgress < currentProgress ? currentProgress : taskProgress;
 
-            slider.value = progress;
+            slider.value = currentProgress;
 
-            yield return null;
+            if (!Mathf.Approximately(currentProgress, 100.0f))
+                yield return null;
         }
     }
 
     private void EndLoadingScreen()
     {
+        StartCoroutine(CloseLoadingScreen());
+    }
+
+    private IEnumerator CloseLoadingScreen()
+    {
+        yield return new WaitForSeconds(_loadingWait);
+
         _isLoading = false;
         canvas?.gameObject.SetActive(false);
     }

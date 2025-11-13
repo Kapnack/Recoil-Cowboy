@@ -24,7 +24,7 @@ namespace Characters.PlayerSRC
         [SerializeField] private Transform gunPos;
         private Vector3 _initialPos;
 
-        private int _killKillPoints;
+        private int _killPoints;
         private int _distancePoints;
 
         private bool _isDead;
@@ -40,11 +40,12 @@ namespace Characters.PlayerSRC
         private ParticlePool _particlePool;
 
         private readonly ComplexGameEvent<int, int, int> _livesChangeEvent = new();
-        private readonly DoubleParamEvent<int, int> _pointsChangeEvent = new();
+        private readonly DoubleParamEvent<int, int> _distanceChange = new();
+        private readonly DoubleParamEvent<int, int> _killPointsChange = new();
         private readonly ComplexGameEvent<int, int, int> _bulletsChangeEvent = new();
         private readonly SimpleEvent _noLongerInvincible = new();
         private readonly SimpleEvent _oneLiveRemains = new();
-        private readonly SingleParamEvent<int> _dies = new();
+        private readonly DoubleParamEvent<int, int> _dies = new();
 
         public bool Invincible { get; private set; }
 
@@ -77,8 +78,12 @@ namespace Characters.PlayerSRC
 
         private int KillPoints
         {
-            get => _killKillPoints;
-            set { _killKillPoints = value; }
+            get => _killPoints;
+            set 
+            { 
+                _killPointsChange?.Invoke(_killPoints, value);
+                _killPoints = value;
+            }
         }
 
         private int CurrentBullets
@@ -134,7 +139,8 @@ namespace Characters.PlayerSRC
                 yield break;
 
             eventSystem.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
-            eventSystem.Register(PlayerEventKeys.PointsChange, _pointsChangeEvent);
+            eventSystem.Register(PlayerEventKeys.DistanceChange, _distanceChange);
+            eventSystem.Register(PlayerEventKeys.OnKill, _killPointsChange);
             eventSystem.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
             eventSystem.Register(PlayerEventKeys.NoLongerInvincible, _noLongerInvincible);
             eventSystem.Register(PlayerEventKeys.OnOneLive, _oneLiveRemains);
@@ -158,9 +164,9 @@ namespace Characters.PlayerSRC
         private void Update()
         {
             _distancePoints = (int)Mathf.Abs(Vector3.Distance(new Vector3(0, _initialPos.y, 0),
-                new Vector3(0, transform.position.y, 0) * (config.PointsPerKill * 0.5f)));
+                new Vector3(0, transform.position.y, 0)));
 
-            _pointsChangeEvent?.Invoke(0, KillPoints + _distancePoints);
+            _distanceChange?.Invoke(0, _distancePoints);
         }
 
         private void OnDisable() => UnRegisterEvents();
@@ -170,7 +176,8 @@ namespace Characters.PlayerSRC
             ICentralizeEventSystem eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
 
             eventSystem.Unregister(PlayerEventKeys.LivesChange);
-            eventSystem.Unregister(PlayerEventKeys.PointsChange);
+            eventSystem.Unregister(PlayerEventKeys.DistanceChange);
+            eventSystem.Unregister(PlayerEventKeys.OnKill);
             eventSystem.Unregister(PlayerEventKeys.BulletsChange);
             eventSystem.Unregister(PlayerEventKeys.NoLongerInvincible);
             eventSystem.Unregister(PlayerEventKeys.OnOneLive);
@@ -220,10 +227,10 @@ namespace Characters.PlayerSRC
         private void OnConfirmKill()
         {
             AddBullet();
-            AddPoints();
+            AddKillPoints();
         }
 
-        private void AddPoints() => KillPoints += config.PointsPerKill;
+        private void AddKillPoints() => KillPoints += config.PointsPerKill;
 
         private void ApplyKnockBack(Vector3 dir, Vector3 mousePos)
         {
@@ -263,7 +270,7 @@ namespace Characters.PlayerSRC
 
         private void OnDead()
         {
-            _dies.Invoke(KillPoints + _distancePoints);
+            _dies.Invoke(_distancePoints, _killPoints);
             _isDead = true;
         }
 

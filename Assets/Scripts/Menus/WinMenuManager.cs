@@ -10,11 +10,14 @@ namespace Menus
         private readonly SimpleEvent _loadNextLevelEvent = new();
         private readonly SimpleEvent _loadMainMenu = new();
         
-        private IStatsManager _statsManager;
+        private PointsStats _stats;
         
+        [SerializeField] private TMP_Text disntanceText;
+        private string _distanceTextFormat;
+
         [SerializeField] private TMP_Text pointsText;
         private string _pointsTextFormat;
-        
+
         private void Awake()
         {
             if (!ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem)) 
@@ -23,10 +26,9 @@ namespace Menus
             eventSystem.Register(GameManagerKeys.ChangeToLevel, _loadNextLevelEvent);
             eventSystem.Register(GameManagerKeys.MainMenu, _loadMainMenu);
             
-            _statsManager = ServiceProvider.GetService<IStatsManager>();
-            
             _pointsTextFormat =  pointsText.text;
-            pointsText.text = string.Format(_pointsTextFormat, _statsManager.LastMatchPoints, _statsManager.RecordPoints);
+            pointsText.text = string.Format(_pointsTextFormat, _stats.CurrentKillPoints, _stats.RecordKillPoints);
+            disntanceText.text = string.Format(_pointsTextFormat, _stats.CurrentDistance, _stats.RecordKillPoints);
         }
 
         private void OnDestroy()
