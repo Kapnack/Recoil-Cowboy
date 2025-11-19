@@ -3,7 +3,7 @@
 namespace Characters.EnemySRC
 {
     [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(SphereCollider))]
+    [RequireComponent(typeof(Collider))]
     public class Bullet : MonoBehaviour
     {
         private Character _owner;
