@@ -32,7 +32,7 @@ public class GunRotation : MonoBehaviour, IGunRotation
 
         Vector3 dirToCenter = (owner.position - transform.position).normalized;
         
-        Quaternion rot = Quaternion.FromToRotation(Vector3.right, -dirToCenter);
+        Quaternion rot = Quaternion.FromToRotation(Vector3.forward, -dirToCenter);
         transform.rotation = rot;
     }
 }

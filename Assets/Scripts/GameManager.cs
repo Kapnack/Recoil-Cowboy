@@ -9,12 +9,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(SceneLoader))]
-public class GameManager : MonoBehaviour, IStatsManager
+public class GameManager : MonoBehaviour
 {
     [SerializeField] private SceneRef mainMenuScene;
     [SerializeField] private SceneRef gameplay;
     [SerializeField] private SceneRef winScene;
     [SerializeField] private SceneRef gameOverScene;
+
+    [SerializeField] private PointsStats stats;
 
     private Camera _mainCamera;
 
@@ -27,17 +29,11 @@ public class GameManager : MonoBehaviour, IStatsManager
     private readonly SimpleEvent _loadingStarted = new();
     private readonly SimpleEvent _loadingEnded = new();
 
-    public int LastMatchPoints { get; private set; }
-    public int RecordPoints { get; private set; }
-    public bool NewRecord { get; private set; }
-
     private void Awake()
     {
         _mainCamera = Camera.main;
         _sceneLoader = GetComponent<ISceneLoader>();
 
-        ServiceProvider.SetService<IStatsManager>(this);
-        
         StartCoroutine(SetUpEvents());
     }
 
@@ -93,12 +89,10 @@ public class GameManager : MonoBehaviour, IStatsManager
         }
     }
 
-    private async void LoadGameOverMenu(int points)
+    private async void LoadGameOverMenu()
     {
         try
         {
-            SetNewStats(points);
-            
             _inputReader.DeactivatePlayerMap();
 
             _scenesToLoad[0] = gameOverScene;
@@ -112,15 +106,21 @@ public class GameManager : MonoBehaviour, IStatsManager
         }
     }
 
-    private void SetNewStats(int points)
+    private void SetNewStats(int killPoints, int distance)
     {
-        LastMatchPoints = points;
+        stats.CurrentDistance = distance;
+        if (distance > stats.RecordDistance)
+        {
+            stats.RecordDistance = distance;
+            stats.NewDistanceRecord = true;
+        }
 
-        if (RecordPoints > points)
-            return;
-        
-        NewRecord = true;
-        RecordPoints = points;
+        stats.CurrentKillPoints = killPoints;
+        if (killPoints > stats.RecordKillPoints)
+        {
+            stats.RecordKillPoints = killPoints;
+            stats.NewKillPointsRecord = true;
+        }
     }
 
     private async Task TryLoadScenes(SceneRef[] sceneRefs)
@@ -145,22 +145,48 @@ public class GameManager : MonoBehaviour, IStatsManager
 
     private void FindGameplayEvents()
     {
+        StartCoroutine(FindGameplayEvent());
+    }
+
+    private IEnumerator FindGameplayEvent()
+    {
         ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
 
-        eventSystem.Get<int>(GameplayManagerKeys.LoseCondition).AddListener(LoadGameOverMenu);
+        DoubleParamEvent<int, int> @event;
+        while (!eventSystem.TryGet(GameplayManagerKeys.LoseCondition, out @event))
+            yield return null;
+
+        @event.AddListener((n1, n2) => LoadGameOverMenu());
+        @event.AddListener(SetNewStats);
 
         eventSystem.Get(GameManagerKeys.ChangeToLevel).AddListener(LoadGameplay);
-        
+
         eventSystem.Get(GameManagerKeys.MainMenu).AddListener(LoadMainMenu);
     }
 
     private void FindAfterMatchMenuEvents()
     {
-        ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
+        StartCoroutine(FindAfterMatchMenuEvent());
+    }
 
-        eventSystem.Get(GameManagerKeys.ChangeToLevel).AddListener(LoadGameplay);
+    private IEnumerator FindAfterMatchMenuEvent()
+    {
+        ICentralizeEventSystem eventSystem;
 
-        eventSystem.Get(GameManagerKeys.MainMenu).AddListener(LoadMainMenu);
+        while (!ServiceProvider.TryGetService(out eventSystem))
+            yield return null;
+
+        SimpleEvent @event;
+
+        while (!eventSystem.TryGet(GameManagerKeys.ChangeToLevel, out @event))
+            yield return null;
+
+        @event.AddListener(LoadGameplay);
+
+        while (!eventSystem.TryGet(GameManagerKeys.MainMenu, out @event))
+            yield return null;
+
+        @event.AddListener(LoadMainMenu);
     }
 }
 

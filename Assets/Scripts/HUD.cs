@@ -10,7 +10,8 @@ using UnityEngine.UI;
 public class HUD : MonoBehaviour
 {
     [SerializeField] private Image livesFill;
-    [SerializeField] private TMP_Text pointsText;
+    [SerializeField] private TMP_Text killPointsText;
+    [SerializeField] private TMP_Text disntanceText;
 
     [Header("Ammo Settings")] 
     [SerializeField] private Image ammoPrefab;
@@ -26,7 +27,9 @@ public class HUD : MonoBehaviour
 
     private void Awake()
     {
-        _pointsTextFormat = pointsText.text;
+        _pointsTextFormat = killPointsText.text;
+
+        _distanceTextFormat = disntanceText.text; 
 
         StartCoroutine(SetUpEvents());
     }
@@ -46,12 +49,17 @@ public class HUD : MonoBehaviour
         complexGameEvent.AddListener(OnLivesChange);
 
         DoubleParamEvent<int, int> doubleParamEvent;
-        while (!eventSystem.TryGet(PlayerEventKeys.PointsChange, out doubleParamEvent))
+        while (!eventSystem.TryGet(PlayerEventKeys.DistanceChange, out doubleParamEvent))
             yield return null;
 
-        doubleParamEvent.AddListener(OnPointsChange);
+        doubleParamEvent.AddListener(OnDistanceChange);
+        OnDistanceChange(0, 0);
 
-        OnPointsChange(0, 0);
+        while (!eventSystem.TryGet(PlayerEventKeys.OnKill, out doubleParamEvent))
+            yield return null;
+
+        doubleParamEvent.AddListener(OnKillPointsChange);
+        OnKillPointsChange(0, 0);
 
         while (!eventSystem.TryGet(PlayerEventKeys.BulletsChange, out complexGameEvent))
             yield return null;
@@ -64,9 +72,14 @@ public class HUD : MonoBehaviour
         livesFill.fillAmount = (float)current / max;
     }
 
-    public void OnPointsChange(int previous, int current)
+    private void OnKillPointsChange(int previous, int current)
     {
-        pointsText.text = string.Format(_pointsTextFormat, current);
+        killPointsText.text = string.Format(_pointsTextFormat, current);
+    }
+
+    private void OnDistanceChange(int previous, int current)
+    {
+        disntanceText.text = string.Format(_distanceTextFormat, current);
     }
 
     private void OnAmmoChange(int previous, int current, int max)

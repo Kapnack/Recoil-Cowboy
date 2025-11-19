@@ -2,6 +2,7 @@ using Systems;
 using Systems.CentralizeEventSystem;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Menus
 {
@@ -10,23 +11,32 @@ namespace Menus
         private readonly SimpleEvent _loadNextLevelEvent = new();
         private readonly SimpleEvent _loadMainMenu = new();
         
-        private IStatsManager _statsManager;
+        [SerializeField] private PointsStats stats;
         
+        [SerializeField] private TMP_Text disntanceText;
+        private string _distanceTextFormat;
+
         [SerializeField] private TMP_Text pointsText;
         private string _pointsTextFormat;
         
+        [SerializeField] private Button nextLevelButton;
+        [SerializeField] private Button mainMenuButton;
+
         private void Awake()
         {
+            nextLevelButton.onClick.AddListener(OnNextLevel);
+            mainMenuButton.onClick.AddListener(OnMainMenu);
+            
             if (!ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem)) 
                 return;
             
             eventSystem.Register(GameManagerKeys.ChangeToLevel, _loadNextLevelEvent);
             eventSystem.Register(GameManagerKeys.MainMenu, _loadMainMenu);
             
-            _statsManager = ServiceProvider.GetService<IStatsManager>();
-            
             _pointsTextFormat =  pointsText.text;
-            pointsText.text = string.Format(_pointsTextFormat, _statsManager.LastMatchPoints, _statsManager.RecordPoints);
+            _distanceTextFormat =  disntanceText.text;
+            pointsText.text = string.Format(_pointsTextFormat, stats.CurrentKillPoints, stats.RecordKillPoints);
+            disntanceText.text = string.Format(_distanceTextFormat, stats.CurrentDistance, stats.RecordDistance);
         }
 
         private void OnDestroy()
@@ -38,8 +48,8 @@ namespace Menus
             eventSystem.Unregister(GameManagerKeys.MainMenu);
         }
 
-        public void OnNextLevel() => _loadNextLevelEvent?.Invoke();
+        private void OnNextLevel() => _loadNextLevelEvent?.Invoke();
 
-        public void OnMainMenu() => _loadMainMenu?.Invoke();
+        private void OnMainMenu() => _loadMainMenu?.Invoke();
     }
 }
