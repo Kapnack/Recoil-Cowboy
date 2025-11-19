@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0664f9e6114e9f744bad3ef4ca35e332, type: 3}
   m_Name: PointsStats
   m_EditorClassIdentifier: 
-  <CurrentPoints>k__BackingField: 0
-  <RecordPoints>k__BackingField: 0
+  <CurrentKillPoints>k__BackingField: 0
+  <RecordKillPoints>k__BackingField: 0
   <CurrentDistance>k__BackingField: 0
   <RecordDistance>k__BackingField: 0
+  NewDistanceRecord: 0
+  NewKillPointsRecord: 0

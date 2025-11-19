@@ -270,7 +270,7 @@ namespace Characters.PlayerSRC
 
         private void OnDead()
         {
-            _dies.Invoke(_distancePoints, _killPoints);
+            _dies.Invoke(_killPoints, _distancePoints);
             _isDead = true;
         }
 

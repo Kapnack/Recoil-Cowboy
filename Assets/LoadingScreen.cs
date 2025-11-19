@@ -12,8 +12,6 @@ public class LoadingScreen : MonoBehaviour
 
     private bool _isLoading;
 
-    [SerializeField] private int _loadingWait = 2;
-
     [FormerlySerializedAs("_canvas")]
     [Header("Canvas")]
     [SerializeField]
@@ -75,13 +73,6 @@ public class LoadingScreen : MonoBehaviour
 
     private void EndLoadingScreen()
     {
-        StartCoroutine(CloseLoadingScreen());
-    }
-
-    private IEnumerator CloseLoadingScreen()
-    {
-        yield return new WaitForSeconds(_loadingWait);
-
         _isLoading = false;
         canvas?.gameObject.SetActive(false);
     }

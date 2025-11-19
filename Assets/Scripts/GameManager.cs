@@ -145,10 +145,19 @@ public class GameManager : MonoBehaviour
 
     private void FindGameplayEvents()
     {
+        StartCoroutine(FindGameplayEvent());
+    }
+
+    private IEnumerator FindGameplayEvent()
+    {
         ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
 
-        eventSystem.Get<int, int>(GameplayManagerKeys.LoseCondition).AddListener((n1,n2) => LoadGameOverMenu());
-        eventSystem.Get<int, int>(GameplayManagerKeys.LoseCondition).AddListener(SetNewStats);
+        DoubleParamEvent<int, int> @event;
+        while (!eventSystem.TryGet(GameplayManagerKeys.LoseCondition, out @event))
+            yield return null;
+
+        @event.AddListener((n1, n2) => LoadGameOverMenu());
+        @event.AddListener(SetNewStats);
 
         eventSystem.Get(GameManagerKeys.ChangeToLevel).AddListener(LoadGameplay);
 
@@ -157,11 +166,27 @@ public class GameManager : MonoBehaviour
 
     private void FindAfterMatchMenuEvents()
     {
-        ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
+        StartCoroutine(FindAfterMatchMenuEvent());
+    }
 
-        eventSystem.Get(GameManagerKeys.ChangeToLevel).AddListener(LoadGameplay);
+    private IEnumerator FindAfterMatchMenuEvent()
+    {
+        ICentralizeEventSystem eventSystem;
 
-        eventSystem.Get(GameManagerKeys.MainMenu).AddListener(LoadMainMenu);
+        while (!ServiceProvider.TryGetService(out eventSystem))
+            yield return null;
+
+        SimpleEvent @event;
+
+        while (!eventSystem.TryGet(GameManagerKeys.ChangeToLevel, out @event))
+            yield return null;
+
+        @event.AddListener(LoadGameplay);
+
+        while (!eventSystem.TryGet(GameManagerKeys.MainMenu, out @event))
+            yield return null;
+
+        @event.AddListener(LoadMainMenu);
     }
 }
 
