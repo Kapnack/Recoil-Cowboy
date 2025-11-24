@@ -25,6 +25,17 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="sfx_crow_hit" ID="{EE1C9D5B-D4F2-4305-ACA3-1FD1C53F1EB2}">
+					<ChildrenList>
+						<Action Name="" ID="{CDF751D5-1B59-41F2-9B52-839068C74430}" ShortID="662668607">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="sfx_crow_hit_audios" ID="{AD2C3699-459A-4A53-9772-6DF06B2E756A}" WorkUnitID="{57894BDC-7469-46E1-A470-D5175E26FD5F}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

@@ -6,6 +6,7 @@
 				<SoundBank Name="LucaFalchiniSoundBank" ID="{2F650AA1-071B-43C7-A370-6D3C8ED070DC}">
 					<ObjectInclusionList>
 						<ObjectRef Name="sfx_crow_flight" ID="{85648FB8-9B79-419D-915B-1188815AEC97}" WorkUnitID="{692BFA2D-F024-43EF-8E6D-D89B446EDBF9}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="sfx_crow_hit" ID="{EE1C9D5B-D4F2-4305-ACA3-1FD1C53F1EB2}" WorkUnitID="{692BFA2D-F024-43EF-8E6D-D89B446EDBF9}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="sfx_crow_death" ID="{25AD0673-EA0E-49D1-9664-75E1FB9C8411}" WorkUnitID="{692BFA2D-F024-43EF-8E6D-D89B446EDBF9}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>

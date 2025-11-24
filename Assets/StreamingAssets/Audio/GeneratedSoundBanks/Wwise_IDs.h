@@ -15,6 +15,7 @@ namespace AK
     {
         static const AkUniqueID SFX_CROW_DEATH = 1670669159U;
         static const AkUniqueID SFX_CROW_FLIGHT = 2003757705U;
+        static const AkUniqueID SFX_CROW_HIT = 2927700646U;
     } // namespace EVENTS
 
     namespace BANKS
