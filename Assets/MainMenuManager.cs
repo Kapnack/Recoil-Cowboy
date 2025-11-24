@@ -4,30 +4,17 @@ using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
 {
-    private readonly SimpleEvent _loadNextLevelEvent = new();
-    private readonly SimpleEvent _loadMainMenu = new();
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private GameObject creditsMenu;
 
+    private CentralizeEventSystem _eventSystem;
+    
     private void Awake()
     {
-        if (ServiceProvider.TryGetService<ICentralizeEventSystem>(out var eventSystem))
-        {
-            eventSystem.Register(GameManagerKeys.ChangeToLevel, _loadNextLevelEvent);
-            eventSystem.Register(GameManagerKeys.MainMenu, _loadMainMenu);
-        }
+        _eventSystem = ServiceProvider.GetService<CentralizeEventSystem>();
     }
 
-    private void OnDestroy()
-    {
-        if (ServiceProvider.TryGetService<ICentralizeEventSystem>(out var eventSystem))
-        {
-            eventSystem.Unregister(GameManagerKeys.ChangeToLevel);
-            eventSystem.Unregister(GameManagerKeys.MainMenu);
-        }
-    }
-
-    public void OnNextLevel() => _loadNextLevelEvent?.Invoke();
+    public void OnNextLevel() => _eventSystem.Get<LoadGameplay>()?.Invoke();
 
     public void OnSettings() => Instantiate(settingsMenu);
     

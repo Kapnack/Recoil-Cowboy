@@ -5,33 +5,28 @@ using UnityEngine.InputSystem;
 
 namespace Systems
 {
+    public delegate void AttackInput();
+    public delegate void ReloadInput();
+    public delegate void InstantReloadInput();
+    public delegate void PausedInput();
+
     public class InputReader : MonoBehaviour, IInputReader
     {
-        private ICentralizeEventSystem _eventSystem;
+        private CentralizeEventSystem.CentralizeEventSystem _eventSystem;
 
         private CustomInputSytem _inputSystem;
-
-        private readonly SimpleEvent _attackEvent = new();
-        private readonly SimpleEvent _reloadEvent = new();
-        private readonly SimpleEvent _instantReloadEvent = new();
-        private readonly SimpleEvent _paused = new();
 
         private void Awake()
         {
             _inputSystem = new CustomInputSytem();
-            
+
             ServiceProvider.SetService<IInputReader>(this);
         }
 
         private void Start()
         {
             _inputSystem.UI.Enable();
-            
-            _eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
-
-            _eventSystem.Register(PlayerEventKeys.Attack, _attackEvent);
-            _eventSystem.Register(PlayerEventKeys.ReloadOvertime, _reloadEvent);
-            _eventSystem.Register(PlayerEventKeys.Paused, _paused);
+            _eventSystem = ServiceProvider.GetService<CentralizeEventSystem.CentralizeEventSystem>();
         }
 
         private void OnEnable()
@@ -51,15 +46,16 @@ namespace Systems
             _inputSystem.UI.Pause.started -= HandlePause;
         }
 
-        private void HandlePause(InputAction.CallbackContext _) => _paused?.Invoke();
+        private void HandlePause(InputAction.CallbackContext _) => _eventSystem.Get<PausedInput>()?.Invoke();
 
         #region PlayerActionsEvents
 
-        private void HandleAttack(InputAction.CallbackContext _) => _attackEvent?.Invoke();
+        private void HandleAttack(InputAction.CallbackContext _) => _eventSystem.Get<AttackInput>()?.Invoke();
 
-        private void HandleReload(InputAction.CallbackContext _) => _reloadEvent?.Invoke();
+        private void HandleReload(InputAction.CallbackContext _) => _eventSystem.Get<ReloadInput>()?.Invoke();
 
-        private void HandleInstantReload(InputAction.CallbackContext _) => _instantReloadEvent?.Invoke();
+        private void HandleInstantReload(InputAction.CallbackContext _) =>
+            _eventSystem.Get<InstantReloadInput>()?.Invoke();
 
         #endregion
 

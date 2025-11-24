@@ -12,6 +12,8 @@ using UnityEngine.Serialization;
 
 namespace Characters.PlayerSRC
 {
+    public delegate void Reload360();
+    public delegate void InvincibilityOff();
     [RequireComponent(typeof(Rigidbody))]
     public class Player : Character, IPlayerHealthSystem
     {
@@ -39,14 +41,8 @@ namespace Characters.PlayerSRC
 
         private ParticlePool _particlePool;
 
-        private readonly ComplexGameEvent<int, int, int> _livesChangeEvent = new();
-        private readonly DoubleParamEvent<int, int> _distanceChange = new();
-        private readonly DoubleParamEvent<int, int> _killPointsChange = new();
-        private readonly ComplexGameEvent<int, int, int> _bulletsChangeEvent = new();
-        private readonly SimpleEvent _noLongerInvincible = new();
-        private readonly SimpleEvent _oneLiveRemains = new();
-        private readonly DoubleParamEvent<int, int> _dies = new();
-
+        private CentralizeEventSystem _eventSystem;
+        
         public bool Invincible { get; private set; }
 
         private int CurrentLives
@@ -60,13 +56,13 @@ namespace Characters.PlayerSRC
 
                 int newValue = Mathf.Clamp(value, 0, config.MaxLives);
 
-                _livesChangeEvent?.Invoke(_currentLives, newValue, config.MaxLives);
+                _eventSystem.Get<LivesChange>()?.Invoke(_currentLives, newValue, config.MaxLives);
                 _currentLives = newValue;
 
                 switch (newValue)
                 {
                     case 1:
-                        _oneLiveRemains?.Invoke();
+                        _eventSystem.Get<AlmostDead>()?.Invoke();
                         break;
 
                     case 0 when !_isDead:
@@ -81,7 +77,7 @@ namespace Characters.PlayerSRC
             get => _killPoints;
             set 
             { 
-                _killPointsChange?.Invoke(_killPoints, value);
+                _eventSystem.Get<KillsChange>()?.Invoke(_killPoints, value);
                 _killPoints = value;
             }
         }
@@ -96,7 +92,7 @@ namespace Characters.PlayerSRC
 
                 int newValue = Mathf.Clamp(value, 0, config.MaxBullets);
 
-                _bulletsChangeEvent?.Invoke(_currentBullets, newValue, config.MaxBullets);
+                _eventSystem.Get<AmmoChange>()?.Invoke(_currentBullets, newValue, config.MaxBullets);
                 _currentBullets = newValue;
             }
         }
@@ -105,6 +101,8 @@ namespace Characters.PlayerSRC
         {
             base.Awake();
 
+            _eventSystem = ServiceProvider.GetService<CentralizeEventSystem>();
+            
             _spin = GetComponentInChildren<ICharacterSpin>();
 
             _particlePool = GetComponentInChildren<ParticlePool>();
@@ -112,7 +110,7 @@ namespace Characters.PlayerSRC
             CurrentLives = config.MaxLives;
             CurrentBullets = config.MaxBullets;
 
-            StartCoroutine(SetUpEvents());
+            SetUpEvents();
         }
 
         private IEnumerator Start()
@@ -121,44 +119,18 @@ namespace Characters.PlayerSRC
 
             while (!ServiceProvider.TryGetService(out _mouseTracker))
                 yield return null;
-
-            while (!_bulletsChangeEvent.HasInvocations())
-                yield return null;
-            _bulletsChangeEvent.Invoke(CurrentBullets, CurrentBullets, config.MaxBullets);
-
-            while (!_livesChangeEvent.HasInvocations())
-                yield return null;
-            _livesChangeEvent.Invoke(CurrentLives, CurrentLives, config.MaxLives);
+            
+            _eventSystem.Get<AmmoChange>()?.Invoke(CurrentBullets, CurrentBullets, config.MaxBullets);
+            
+            _eventSystem.Get<LivesChange>()?.Invoke(CurrentLives, CurrentLives, config.MaxLives);
         }
 
-        private IEnumerator SetUpEvents()
+        private void SetUpEvents()
         {
-            ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
-
-            if (eventSystem == null)
-                yield break;
-
-            eventSystem.Register(PlayerEventKeys.LivesChange, _livesChangeEvent);
-            eventSystem.Register(PlayerEventKeys.DistanceChange, _distanceChange);
-            eventSystem.Register(PlayerEventKeys.OnKill, _killPointsChange);
-            eventSystem.Register(PlayerEventKeys.BulletsChange, _bulletsChangeEvent);
-            eventSystem.Register(PlayerEventKeys.NoLongerInvincible, _noLongerInvincible);
-            eventSystem.Register(PlayerEventKeys.OnOneLive, _oneLiveRemains);
-            eventSystem.Register(PlayerEventKeys.Dies, _dies);
-
-            eventSystem.TryGet(PlayerEventKeys.Attack, out SimpleEvent simpleEvent);
-
-            simpleEvent.AddListener(OnAttack);
-            simpleEvent.AddListener(CancelReloadOverTime);
-
-            eventSystem.TryGet(PlayerEventKeys.ReloadOvertime, out simpleEvent);
-
-            simpleEvent.AddListener(AddBulletsOverTime);
-
-            while (!eventSystem.TryGet(PlayerEventKeys.Reload, out simpleEvent))
-                yield return null;
-
-            simpleEvent.AddListener(AddBullet);
+            _eventSystem.AddListener<AttackInput>(OnAttack);
+            _eventSystem.AddListener<AttackInput>(CancelReloadOverTime);
+            _eventSystem.AddListener<ReloadInput>(AddBulletsOverTime);
+            _eventSystem.AddListener<Reload360>(AddBullet);
         }
 
         private void Update()
@@ -166,26 +138,17 @@ namespace Characters.PlayerSRC
             _distancePoints = (int)Mathf.Abs(Vector3.Distance(new Vector3(0, _initialPos.y, 0),
                 new Vector3(0, transform.position.y, 0)));
 
-            _distanceChange?.Invoke(0, _distancePoints);
+            _eventSystem.Get<DistanceChange>()?.Invoke(0, _distancePoints);
         }
 
         private void OnDisable() => UnRegisterEvents();
 
         private void UnRegisterEvents()
         {
-            ICentralizeEventSystem eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
-
-            eventSystem.Unregister(PlayerEventKeys.LivesChange);
-            eventSystem.Unregister(PlayerEventKeys.DistanceChange);
-            eventSystem.Unregister(PlayerEventKeys.OnKill);
-            eventSystem.Unregister(PlayerEventKeys.BulletsChange);
-            eventSystem.Unregister(PlayerEventKeys.NoLongerInvincible);
-            eventSystem.Unregister(PlayerEventKeys.OnOneLive);
-            eventSystem.Unregister(PlayerEventKeys.Dies);
-
-            eventSystem.Get(PlayerEventKeys.Attack).RemoveListener(OnAttack);
-
-            eventSystem.Get(PlayerEventKeys.ReloadOvertime).RemoveListener(AddBulletsOverTime);
+            _eventSystem.RemoveListener<AttackInput>(OnAttack);
+            _eventSystem.RemoveListener<AttackInput>(CancelReloadOverTime);
+            _eventSystem.RemoveListener<ReloadInput>(AddBulletsOverTime);
+            _eventSystem.RemoveListener<Reload360>(AddBullet);
         }
 
         private async void OnAttack()
@@ -265,12 +228,12 @@ namespace Characters.PlayerSRC
             yield return new WaitForSeconds(config.InvincibleTime);
 
             Invincible = false;
-            _noLongerInvincible?.Invoke();
+            _eventSystem.Get<InvincibilityOff>()?.Invoke();
         }
 
         private void OnDead()
         {
-            _dies.Invoke(_killPoints, _distancePoints);
+            _eventSystem.Get<PlayerDied>()?.Invoke(_killPoints, _distancePoints);
             _isDead = true;
         }
 

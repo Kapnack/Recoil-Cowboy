@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
-    private ICentralizeEventSystem _eventSystem;
-    private readonly SimpleEvent _loadMainMenu = new();
-    private readonly SimpleEvent _reloadGameplay = new();
-
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject settingsMenu;
     private bool _paused;
@@ -16,35 +12,24 @@ public class PauseManager : MonoBehaviour
 
     private GameObject _menuGo;
 
+    private CentralizeEventSystem _eventSystem;
+    
     private void Awake()
     {
         _inputReader = ServiceProvider.GetService<IInputReader>();
 
         panel.gameObject.SetActive(_paused);
 
-        _eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
+        _eventSystem = ServiceProvider.GetService<CentralizeEventSystem>();
 
-        if (_eventSystem == null)
-            return;
-
-        _eventSystem.Register(GameManagerKeys.MainMenu, _loadMainMenu);
-        _eventSystem.Register(GameManagerKeys.ChangeToLevel, _reloadGameplay);
-        
-        _eventSystem.Get(PlayerEventKeys.Paused).AddListener(PauseHandler);
+        _eventSystem?.AddListener<PausedInput>(PauseHandler);
     }
 
     private void OnEnable() => Cursor.visible = true;
 
     private void OnDestroy()
     {
-        _eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
-
-        if (_eventSystem == null)
-            return;
-
-        _eventSystem.Unregister(GameManagerKeys.MainMenu);
-        _eventSystem.Unregister(GameManagerKeys.ChangeToLevel);
-        _eventSystem.Get(PlayerEventKeys.Paused).RemoveListener(PauseHandler);
+        _eventSystem.RemoveListener<PausedInput>(PauseHandler);
 
         Time.timeScale = 1.0f;
     }
@@ -73,7 +58,7 @@ public class PauseManager : MonoBehaviour
         Cursor.visible = true;
     }
 
-    public void GoToMainMenu() => _loadMainMenu?.Invoke();
+    public void GoToMainMenu() => _eventSystem.Get<LoadMainMenu>()?.Invoke();
 
-    public void ReloadGameplay() => _reloadGameplay?.Invoke();
+    public void ReloadGameplay() => _eventSystem.Get<LoadGameplay>()?.Invoke();
 }

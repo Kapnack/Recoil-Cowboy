@@ -8,6 +8,13 @@ using Systems.SceneLoader;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public delegate void LoadingStarted();
+public delegate void LoadingEnded();
+public delegate void LoadGameplay();
+public delegate void LoadMainMenu();
+public delegate void LoadGameOver();
+public delegate void UpdateStats(int killPoints, int distance);
+
 [RequireComponent(typeof(SceneLoader))]
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +25,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private PointsStats stats;
 
+    private readonly CentralizeEventSystem _eventSystem = new();
+
     private Camera _mainCamera;
 
     private readonly SceneRef[] _scenesToLoad = new SceneRef[1];
@@ -26,34 +35,22 @@ public class GameManager : MonoBehaviour
 
     private IInputReader _inputReader;
 
-    private readonly SimpleEvent _loadingStarted = new();
-    private readonly SimpleEvent _loadingEnded = new();
-
     private void Awake()
     {
         _mainCamera = Camera.main;
         _sceneLoader = GetComponent<ISceneLoader>();
-
-        StartCoroutine(SetUpEvents());
+        
+        _inputReader = GetComponent<IInputReader>();
+        
+        ServiceProvider.SetService(_eventSystem);
+        
+        _eventSystem.AddListener<LoadGameplay>(LoadGameplay);
+        _eventSystem.AddListener<LoadMainMenu>(LoadMainMenu);
+        _eventSystem.AddListener<LoadGameOver>(LoadGameOverMenu);
+        _eventSystem.AddListener<UpdateStats>(SetNewStats);
     }
 
-    private IEnumerator SetUpEvents()
-    {
-        ICentralizeEventSystem eventSystem;
-        while (!ServiceProvider.TryGetService(out eventSystem))
-            yield return null;
-
-        eventSystem.Register(GameManagerKeys.LoadingStarted, _loadingStarted);
-        eventSystem.Register(GameManagerKeys.LoadingEnded, _loadingEnded);
-
-        while (!ServiceProvider.TryGetService(out _inputReader))
-            yield return null;
-
-        while (!_loadingStarted.HasInvocations())
-            yield return null;
-
-        LoadMainMenu();
-    }
+    private void Start() => LoadMainMenu();
 
     private async void LoadMainMenu()
     {
@@ -63,8 +60,6 @@ public class GameManager : MonoBehaviour
 
             _scenesToLoad[0] = mainMenuScene;
             await TryLoadScenes(_scenesToLoad);
-
-            FindAfterMatchMenuEvents();
         }
         catch (Exception e)
         {
@@ -80,8 +75,6 @@ public class GameManager : MonoBehaviour
 
             _scenesToLoad[0] = gameplay;
             await TryLoadScenes(_scenesToLoad);
-
-            FindGameplayEvents();
         }
         catch (Exception e)
         {
@@ -97,8 +90,6 @@ public class GameManager : MonoBehaviour
 
             _scenesToLoad[0] = gameOverScene;
             await TryLoadScenes(_scenesToLoad);
-
-            FindAfterMatchMenuEvents();
         }
         catch (Exception e)
         {
@@ -125,7 +116,7 @@ public class GameManager : MonoBehaviour
 
     private async Task TryLoadScenes(SceneRef[] sceneRefs)
     {
-        _loadingStarted.Invoke();
+        _eventSystem.Get<LoadingStarted>()?.Invoke();
 
         try
         {
@@ -140,53 +131,7 @@ public class GameManager : MonoBehaviour
             Debug.LogException(e);
         }
 
-        _loadingEnded.Invoke();
-    }
-
-    private void FindGameplayEvents()
-    {
-        StartCoroutine(FindGameplayEvent());
-    }
-
-    private IEnumerator FindGameplayEvent()
-    {
-        ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
-
-        DoubleParamEvent<int, int> @event;
-        while (!eventSystem.TryGet(GameplayManagerKeys.LoseCondition, out @event))
-            yield return null;
-
-        @event.AddListener((n1, n2) => LoadGameOverMenu());
-        @event.AddListener(SetNewStats);
-
-        eventSystem.Get(GameManagerKeys.ChangeToLevel).AddListener(LoadGameplay);
-
-        eventSystem.Get(GameManagerKeys.MainMenu).AddListener(LoadMainMenu);
-    }
-
-    private void FindAfterMatchMenuEvents()
-    {
-        StartCoroutine(FindAfterMatchMenuEvent());
-    }
-
-    private IEnumerator FindAfterMatchMenuEvent()
-    {
-        ICentralizeEventSystem eventSystem;
-
-        while (!ServiceProvider.TryGetService(out eventSystem))
-            yield return null;
-
-        SimpleEvent @event;
-
-        while (!eventSystem.TryGet(GameManagerKeys.ChangeToLevel, out @event))
-            yield return null;
-
-        @event.AddListener(LoadGameplay);
-
-        while (!eventSystem.TryGet(GameManagerKeys.MainMenu, out @event))
-            yield return null;
-
-        @event.AddListener(LoadMainMenu);
+        _eventSystem.Get<LoadingEnded>()?.Invoke();
     }
 }
 

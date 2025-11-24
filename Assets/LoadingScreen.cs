@@ -10,6 +10,8 @@ public class LoadingScreen : MonoBehaviour
 {
     private ILoadingData _data;
 
+    private CentralizeEventSystem _eventSystem;
+    
     private bool _isLoading;
 
     [FormerlySerializedAs("_canvas")]
@@ -21,6 +23,8 @@ public class LoadingScreen : MonoBehaviour
 
     private void Awake()
     {
+        _eventSystem = ServiceProvider.GetService<CentralizeEventSystem>();
+        
         slider.minValue = 0;
         slider.maxValue = 100;
 
@@ -31,19 +35,9 @@ public class LoadingScreen : MonoBehaviour
     {
         while (!ServiceProvider.TryGetService(out _data))
             yield return null;
-
-        ICentralizeEventSystem eventSystem;
-        while (!ServiceProvider.TryGetService(out eventSystem))
-            yield return null;
-
-        SimpleEvent simpleEvent;
-        while (!eventSystem.TryGet(GameManagerKeys.LoadingStarted, out simpleEvent))
-            yield return null;
-        simpleEvent.AddListener(StartLoadingScreen);
-
-        while (!eventSystem.TryGet(GameManagerKeys.LoadingEnded, out simpleEvent))
-            yield return null;
-        simpleEvent.AddListener(EndLoadingScreen);
+        
+        _eventSystem.AddListener<LoadingStarted>(StartLoadingScreen);
+        _eventSystem.AddListener<LoadingEnded>(EndLoadingScreen);
     }
 
     private void StartLoadingScreen()
