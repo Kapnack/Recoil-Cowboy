@@ -5,22 +5,28 @@ using Shaders;
 using Systems;
 using Systems.CentralizeEventSystem;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public delegate void AlmostDead();
+
 public delegate void PlayerDied(int killPoints, int distance);
+
 public class GameplayManager : MonoBehaviour
 {
+    [SerializeField] private GameObject pauseHUD;
+
     private IShaderManager _shaderManager;
 
     private List<Enemy> _enemies;
 
     private CentralizeEventSystem _eventSystem;
-    
+
+
     private void Awake()
     {
         _shaderManager = ServiceProvider.GetService<IShaderManager>();
-        _eventSystem =  ServiceProvider.GetService<CentralizeEventSystem>();
-        
+        _eventSystem = ServiceProvider.GetService<CentralizeEventSystem>();
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
     }
@@ -29,8 +35,17 @@ public class GameplayManager : MonoBehaviour
     {
         _eventSystem.AddListener<AlmostDead>(OnPlayerOneLive);
         _eventSystem.AddListener<PlayerDied>(OnLoseConditionMeet);
+
+        GameObject pauseHUDGo = Instantiate(pauseHUD, transform);
+        PauseManager pauseManager = pauseHUDGo.GetComponent<PauseManager>();
+
+        if (ServiceProvider.GetService<IGameStats>().TimesPlayed == 1)
+        {
+            pauseManager.PauseHandler();
+            pauseManager.OnTutorial();
+        }
     }
-    
+
     private void OnDisable()
     {
         _shaderManager?.StartOffTransition();

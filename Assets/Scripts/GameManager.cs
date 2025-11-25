@@ -16,7 +16,7 @@ public delegate void LoadGameOver();
 public delegate void UpdateStats(int killPoints, int distance);
 
 [RequireComponent(typeof(SceneLoader))]
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IGameStats
 {
     [SerializeField] private SceneRef mainMenuScene;
     [SerializeField] private SceneRef gameplay;
@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     private IInputReader _inputReader;
 
+    public int TimesPlayed { get; private set; }
+    
     private void Awake()
     {
         _mainCamera = Camera.main;
@@ -43,6 +45,7 @@ public class GameManager : MonoBehaviour
         _inputReader = GetComponent<IInputReader>();
         
         ServiceProvider.SetService(_eventSystem);
+        ServiceProvider.SetService<IGameStats>(this);
         
         _eventSystem.AddListener<LoadGameplay>(LoadGameplay);
         _eventSystem.AddListener<LoadMainMenu>(LoadMainMenu);
@@ -72,7 +75,7 @@ public class GameManager : MonoBehaviour
         try
         {
             _inputReader.ActivePlayerMap();
-
+            ++TimesPlayed;
             _scenesToLoad[0] = gameplay;
             await TryLoadScenes(_scenesToLoad);
         }
@@ -135,9 +138,7 @@ public class GameManager : MonoBehaviour
     }
 }
 
-public interface IStatsManager
+public interface IGameStats
 {
-    public int LastMatchPoints { get; }
-    public int RecordPoints { get; }
-    public bool NewRecord { get; }
+    public int TimesPlayed { get; }
 }
