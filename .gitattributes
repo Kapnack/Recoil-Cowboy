@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+# Evitar conflictos en archivos generados por Wwise
+Assets/StreamingAssets/Audio/**/Wwise_IDs.h merge=ours
+*.wwu merge=ours
+*.bnk merge=ours
