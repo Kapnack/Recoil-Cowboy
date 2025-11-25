@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace Systems.Pool
     public class Pool<T> : IPool<PoolData<T>>
     {
         private readonly List<GameObject> _prefabs;
-        private readonly Queue<PoolData<T>> _enqueuedObjects = new();
+        private readonly List<PoolData<T>> _enqueuedObjects = new();
 
         private readonly Transform _idleObjFolder;
         private readonly Transform _activeObjFolder;
@@ -19,9 +20,9 @@ namespace Systems.Pool
             _idleObjFolder = new GameObject("Pooled Objects").transform;
             _idleObjFolder.SetParent(folder);
 
-            if(!madeActiveFolder)
+            if (!madeActiveFolder)
                 return;
-            
+
             _activeObjFolder = new GameObject("Active Objects").transform;
             _activeObjFolder.SetParent(folder);
         }
@@ -33,9 +34,9 @@ namespace Systems.Pool
             _idleObjFolder = new GameObject("Pool Objects").transform;
             _idleObjFolder.SetParent(folder);
 
-            if(!madeActiveFolder)
+            if (!madeActiveFolder)
                 return;
-            
+
             _activeObjFolder = new GameObject("Active Pool Objects").transform;
             _activeObjFolder.SetParent(folder);
         }
@@ -46,7 +47,7 @@ namespace Systems.Pool
             {
                 int index = Random.Range(offset, _prefabs.Count);
 
-                _enqueuedObjects.Enqueue(await AddedGameObject(_prefabs[index]));
+                _enqueuedObjects.Add(await AddedGameObject(_prefabs[index]));
             }
         }
 
@@ -54,28 +55,26 @@ namespace Systems.Pool
         {
             for (int i = offset; i < _prefabs.Count; i++)
             {
-               _enqueuedObjects.Enqueue(await AddedGameObject(_prefabs[i]));
+                _enqueuedObjects.Add(await AddedGameObject(_prefabs[i]));
             }
         }
 
         public async Task<PoolData<T>> Get(int offset = 0)
         {
             if (_enqueuedObjects.Count == 0)
-                 return Release(await AddedGameObject(_prefabs[Random.Range(offset, _prefabs.Count)]));
+                return Release(await AddedGameObject(_prefabs[Random.Range(offset, _prefabs.Count)]));
 
             return Release();
         }
 
         private PoolData<T> Release(PoolData<T> data = null)
         {
-            if(!data) 
-                data = _enqueuedObjects.Dequeue();
+            data ??= _enqueuedObjects[0];
 
-            if (data)
-            {
-                data.Obj.SetActive(true);
-                data.Obj.transform.SetParent(_activeObjFolder ? _activeObjFolder : null);
-            }
+            _enqueuedObjects.Remove(data);
+
+            data.Obj.SetActive(true);
+            data.Obj.transform.SetParent(_activeObjFolder ? _activeObjFolder : null);
 
             return data;
         }
@@ -91,7 +90,7 @@ namespace Systems.Pool
             data.Obj.SetActive(false);
             data.Obj.transform.SetParent(_idleObjFolder);
 
-            _enqueuedObjects.Enqueue(data);
+            _enqueuedObjects.Add(data);
         }
 
         public void Clear()
@@ -105,18 +104,14 @@ namespace Systems.Pool
         private async Task<PoolData<T>> AddedGameObject(GameObject prefab)
         {
             AsyncInstantiateOperation<GameObject> operation = Object.InstantiateAsync(prefab, _idleObjFolder);
-            
+
             await operation;
-            
+
             GameObject obj = operation.Result[0];
-            
+
             obj.SetActive(false);
 
             return new PoolData<T>(obj);
-        }
-
-        private void SetComponent()
-        {
         }
     }
 }

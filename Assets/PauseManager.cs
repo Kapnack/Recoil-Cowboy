@@ -22,7 +22,7 @@ public class PauseManager : MonoBehaviour
 
         _eventSystem = ServiceProvider.GetService<CentralizeEventSystem>();
 
-        _eventSystem?.AddListener<PausedInput>(PauseHandler);
+        _eventSystem.AddListener<PausedInput>(PauseHandler);
     }
 
     private void OnEnable() => Cursor.visible = true;

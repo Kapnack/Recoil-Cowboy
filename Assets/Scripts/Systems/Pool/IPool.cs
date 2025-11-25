@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Systems.Pool
@@ -20,12 +21,38 @@ namespace Systems.Pool
             Component = obj ? obj.gameObject.GetComponent<T>() : default;
         }
 
-        public GameObject Obj;
-        public T Component;
+        public readonly GameObject Obj;
+        public readonly T Component;
         
         public static implicit operator bool(PoolData<T> data)
         {
             return data != null;
+        }
+        
+        public static bool operator ==(PoolData<T> a, PoolData<T> b)
+        {
+            if (a is null && b is null) return true;
+            if (a is null || b is null) return false;
+
+            return EqualityComparer<T>.Default.Equals(a.Component, b.Component);
+        }
+
+        public static bool operator !=(PoolData<T> a, PoolData<T> b)
+        {
+            return !(a == b);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is PoolData<T> other)
+                return EqualityComparer<T>.Default.Equals(Component, other.Component);
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Component == null ? 0 : Component.GetHashCode();
         }
     }
 }
