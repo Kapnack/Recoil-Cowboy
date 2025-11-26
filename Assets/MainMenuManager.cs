@@ -1,40 +1,48 @@
+using System.Collections;
 using Systems;
 using Systems.CentralizeEventSystem;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
-    private readonly SimpleEvent _loadNextLevelEvent = new();
-    private readonly SimpleEvent _loadMainMenu = new();
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private GameObject creditsMenu;
 
+    [Header("Buttons")] [SerializeField] private Button playButton;
+    [SerializeField] private Button settingsButton;
+    [SerializeField] private Button creditsButton;
+    [SerializeField] private Button exitButton;
+
+    private CentralizeEventSystem _eventSystem;
+
     private void Awake()
     {
-        if (ServiceProvider.TryGetService<ICentralizeEventSystem>(out var eventSystem))
-        {
-            eventSystem.Register(GameManagerKeys.ChangeToLevel, _loadNextLevelEvent);
-            eventSystem.Register(GameManagerKeys.MainMenu, _loadMainMenu);
-        }
+        _eventSystem = ServiceProvider.GetService<CentralizeEventSystem>();
+
+        playButton.onClick.AddListener(OnGame);
+        settingsButton.onClick.AddListener(OnSettings);
+        creditsButton.onClick.AddListener(OnCredits);
+        exitButton.onClick.AddListener(OnExitGame);
     }
 
-    private void OnDestroy()
+    private void OnGame() => _eventSystem.Get<LoadGameplay>()?.Invoke();
+
+    private void OnSettings() => Instantiate(settingsMenu);
+
+    private void OnCredits() => Instantiate(creditsMenu);
+
+    private void OnExitGame()
     {
-        if (ServiceProvider.TryGetService<ICentralizeEventSystem>(out var eventSystem))
-        {
-            eventSystem.Unregister(GameManagerKeys.ChangeToLevel);
-            eventSystem.Unregister(GameManagerKeys.MainMenu);
-        }
+        StartCoroutine(ExitGame());
     }
 
-    public void OnNextLevel() => _loadNextLevelEvent?.Invoke();
-
-    public void OnSettings() => Instantiate(settingsMenu);
-    
-    public void OnCredits() => Instantiate(creditsMenu);
-
-    public void OnExitGame()
+    private IEnumerator ExitGame()
     {
+        AkUnitySoundEngine.PostEvent("sfx_ChickenExp", gameObject);
+
+        yield return new WaitForSeconds(0.5f);
+
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else

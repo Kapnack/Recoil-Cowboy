@@ -21,12 +21,20 @@ namespace Characters.EnemySRC
         private RaycastHit _hit;
         private bool _wentToStartingPos;
 
+      [SerializeField] private GameObject vultureBody;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            vultureBody.transform.forward = transform.right;
+        }
+
         public override void SetUp(Action action = null)
         {
             base.SetUp(action);
             _spawnPosition = transform.position;
         }
-        
+
         private void FixedUpdate()
         {
             _target = FindNearestTarget();
@@ -43,6 +51,7 @@ namespace Characters.EnemySRC
 
                 Vector3 direction = (_target.transform.position - transform.position).normalized;
 
+                vultureBody.transform.forward = direction;
                 Rb.AddForce(direction * (config.MoveSpeed * Time.fixedDeltaTime), ForceMode.VelocityChange);
             }
             else
@@ -80,6 +89,7 @@ namespace Characters.EnemySRC
 
             Vector3 currentRotation = transform.eulerAngles;
             currentRotation.y += 180.0f;
+            vultureBody.transform.forward = currentRotation;
             transform.rotation = Quaternion.Euler(currentRotation);
         }
 
@@ -129,14 +139,6 @@ namespace Characters.EnemySRC
             return null;
         }
 
-        private void OnDrawGizmos()
-        {
-            if (!config)
-                return;
-
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, config.AreaOfSight);
-        }
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -145,5 +147,16 @@ namespace Characters.EnemySRC
         }
 
         private void OnCollisionStay(Collision collision) => OnCollisionEnter(collision);
+        
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            if (!config)
+                return;
+
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, config.AreaOfSight);
+        }
+#endif
     }
 }

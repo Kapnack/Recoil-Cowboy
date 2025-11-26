@@ -39,7 +39,6 @@ public class TheVoid : MonoBehaviour
                 _relativeY = transform.position.y + movementSpeed * Time.deltaTime;
         }
 
-
         transform.position = new Vector3(0, _relativeY, 0);
     }
 
@@ -48,16 +47,13 @@ public class TheVoid : MonoBehaviour
         return other.position.y - transform.localScale.y * _boxCollider.size.y / 2 - distanceFromPlayer;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (!collision.gameObject.TryGetComponent(out IHealthSystem healthSystem))
+        if (!other.gameObject.TryGetComponent(out IHealthSystem healthSystem))
             return;
 
-        if (healthSystem is IPlayerHealthSystem player)
-            player.InstantDead();
-        else
-            healthSystem.ReceiveDamage();
+        healthSystem.InstantDead();
     }
 
-    private void OnCollisionStay(Collision collision) => OnCollisionEnter(collision);
+    private void OnTriggerStay(Collider other) => OnTriggerEnter(other);
 }

@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 060dac4aa97374c4d9c6762eea179a24, type: 2}
+  vultureBody: {fileID: 4580398605050862435}
 --- !u!1001 &398085605237145886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -156,5 +157,10 @@ PrefabInstance:
 --- !u!4 &3808647736714068441 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3557069994362355911, guid: ab09ef0f8c2fcca4381f96372d508cdb, type: 3}
+  m_PrefabInstance: {fileID: 398085605237145886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4580398605050862435 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4185692319277324925, guid: ab09ef0f8c2fcca4381f96372d508cdb, type: 3}
   m_PrefabInstance: {fileID: 398085605237145886}
   m_PrefabAsset: {fileID: 0}

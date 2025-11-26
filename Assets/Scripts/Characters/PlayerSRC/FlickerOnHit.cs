@@ -15,21 +15,27 @@ namespace Characters.PlayerSRC
         private const string IntensityVariable = "_Intensity";
 
         private Coroutine _currentRoutine;
+        private CentralizeEventSystem _eventSystem;
 
         private void Awake()
         {
+            _eventSystem = ServiceProvider.GetService<CentralizeEventSystem>();
             material.SetFloat(SpeedVariable, Speed);
             material.SetFloat(IntensityVariable, 0);
         }
 
         private void Start()
         {
-            ICentralizeEventSystem eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
-
-            eventSystem.Get<int, int, int>(PlayerEventKeys.LivesChange).AddListener(OnLivesChange);
-            eventSystem.Get(PlayerEventKeys.NoLongerInvincible).AddListener(OnNoLongerInvincible);
+            _eventSystem.AddListener<LivesChange>(OnLivesChange);
+            _eventSystem.AddListener<InvincibilityOff>(OnNoLongerInvincible);
         }
 
+        private void OnDestroy()
+        {
+            _eventSystem.RemoveListener<LivesChange>(OnLivesChange);
+            _eventSystem.RemoveListener<InvincibilityOff>(OnNoLongerInvincible);
+        }
+        
         private void OnLivesChange(int previous, int actual, int max)
         {
             if (actual == previous)

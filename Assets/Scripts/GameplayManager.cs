@@ -5,30 +5,45 @@ using Shaders;
 using Systems;
 using Systems.CentralizeEventSystem;
 using UnityEngine;
+using UnityEngine.Serialization;
+
+public delegate void AlmostDead();
+
+public delegate void PlayerDied(int killPoints, int distance);
 
 public class GameplayManager : MonoBehaviour
 {
+    [SerializeField] private GameObject pauseHUD;
+
     private IShaderManager _shaderManager;
 
     private List<Enemy> _enemies;
 
-    private readonly DoubleParamEvent<int, int> _loseCondition = new();
+    private CentralizeEventSystem _eventSystem;
+
 
     private void Awake()
     {
-        SetUpEvents();
-
         _shaderManager = ServiceProvider.GetService<IShaderManager>();
+        _eventSystem = ServiceProvider.GetService<CentralizeEventSystem>();
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
     }
 
-    private void SetUpEvents()
+    private void Start()
     {
-        ICentralizeEventSystem eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
+        _eventSystem.AddListener<AlmostDead>(OnPlayerOneLive);
+        _eventSystem.AddListener<PlayerDied>(OnLoseConditionMeet);
 
-        eventSystem.Register(GameplayManagerKeys.LoseCondition, _loseCondition);
+        GameObject pauseHUDGo = Instantiate(pauseHUD, transform);
+        PauseManager pauseManager = pauseHUDGo.GetComponent<PauseManager>();
+
+        if (ServiceProvider.GetService<IGameStats>().TimesPlayed == 1)
+        {
+            pauseManager.PauseHandler();
+            pauseManager.OnTutorial();
+        }
     }
 
     private void OnDisable()
@@ -41,32 +56,14 @@ public class GameplayManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        ICentralizeEventSystem eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
-
-        eventSystem.Unregister(GameplayManagerKeys.LoseCondition);
-    }
-
-    private IEnumerator Start()
-    {
-        ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
-
-        SimpleEvent simpleEvent;
-
-        while (!eventSystem.TryGet(PlayerEventKeys.OnOneLive, out simpleEvent))
-            yield return null;
-
-        simpleEvent.AddListener(OnPlayerOneLive);
-
-        DoubleParamEvent<int, int> singleParamEvent;
-        while (!eventSystem.TryGet(PlayerEventKeys.Dies, out singleParamEvent))
-            yield return null;
-
-        singleParamEvent.AddListener(OnLoseConditionMeet);
+        _eventSystem.RemoveListener<AlmostDead>(OnPlayerOneLive);
+        _eventSystem.RemoveListener<PlayerDied>(OnLoseConditionMeet);
     }
 
     private void OnLoseConditionMeet(int killPoints, int distance)
     {
-        _loseCondition?.Invoke(killPoints, distance);
+        _eventSystem.Get<UpdateStats>()?.Invoke(killPoints, distance);
+        _eventSystem.Get<LoadGameOver>()?.Invoke();
     }
 
     private void OnPlayerOneLive()

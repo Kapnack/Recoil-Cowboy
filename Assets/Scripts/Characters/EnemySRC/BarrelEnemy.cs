@@ -26,6 +26,8 @@ namespace Characters.EnemySRC
 
         private float _coldDownTimer;
 
+        private Coroutine _corrutine;
+
         private bool Hidden
         {
             get => _hidden;
@@ -52,27 +54,32 @@ namespace Characters.EnemySRC
         {
             base.SetUp(action);
 
-            StartCoroutine(AdjustPosition());
+            _corrutine = StartCoroutine(AdjustPosition());
         }
 
         private IEnumerator AdjustPosition()
         {
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForSeconds(0.1f);
 
             Vector3 worldSize = Vector3.Scale(_collider.size, transform.lossyScale);
             Vector3 origin = transform.position;
 
             float duration = 360;
-            
+
 #if UNITY_EDITOR
-            Debug.DrawRay(new Vector3(origin.x + worldSize.x * 0.5f, origin.y, origin.z - worldSize.z * 0.5f), Vector3.down * 100, Color.magenta, duration);
-            Debug.DrawRay(new Vector3(origin.x  - worldSize.x * 0.5f, origin.y, origin.z + worldSize.z * 0.5f), Vector3.down * 100, Color.magenta, duration);
+            Debug.DrawRay(new Vector3(origin.x + worldSize.x * 0.5f, origin.y, origin.z - worldSize.z * 0.5f),
+                Vector3.down * 100, Color.magenta, duration);
+            Debug.DrawRay(new Vector3(origin.x - worldSize.x * 0.5f, origin.y, origin.z + worldSize.z * 0.5f),
+                Vector3.down * 100, Color.magenta, duration);
             Debug.DrawRay(origin, Vector3.down * 100, Color.magenta, duration);
-            Debug.DrawRay(new Vector3(origin.x  + worldSize.x * 0.5f, origin.y, origin.z + worldSize.z * 0.5f), Vector3.down * 100, Color.magenta, duration);
-            Debug.DrawRay(new Vector3(origin.x - worldSize.z * 0.5f, origin.y, origin.z - worldSize.z * 0.5f), Vector3.down * 100, Color.magenta, duration);
+            Debug.DrawRay(new Vector3(origin.x + worldSize.x * 0.5f, origin.y, origin.z + worldSize.z * 0.5f),
+                Vector3.down * 100, Color.magenta, duration);
+            Debug.DrawRay(new Vector3(origin.x - worldSize.z * 0.5f, origin.y, origin.z - worldSize.z * 0.5f),
+                Vector3.down * 100, Color.magenta, duration);
 #endif
             if (Physics.BoxCast(origin, worldSize * 0.5f, Vector3.down, out RaycastHit hit,
-                    transform.rotation, Mathf.Infinity, LayerMask.GetMask(Layers.Environment), QueryTriggerInteraction.Ignore))
+                    transform.rotation, Mathf.Infinity, LayerMask.GetMask(Layers.Environment),
+                    QueryTriggerInteraction.Ignore))
             {
                 Debug.Log($"Raycast hit  {hit.collider.name} at {hit.point.y}", hit.collider.gameObject);
                 transform.position = new Vector3(transform.position.x, hit.point.y + worldSize.y * 0.5f,
@@ -82,6 +89,8 @@ namespace Characters.EnemySRC
             {
                 Debug.Log($"{nameof(gameObject)} did not detect any platform");
             }
+
+            _corrutine = null;
         }
 
         private void FixedUpdate()
@@ -129,7 +138,6 @@ namespace Characters.EnemySRC
             return false;
         }
 
-
         private bool ShouldHide()
         {
             Collider[] colliderHits = Physics.OverlapSphere(transform.position, config.AreaOfSight);
@@ -158,6 +166,8 @@ namespace Characters.EnemySRC
 
             SceneManager.MoveGameObjectToScene(bulletGO, gameObject.scene);
 
+            bulletGO.transform.up = _targetDir;
+
             if (bulletGO.TryGetComponent(out Bullet bullet))
                 bullet.Launch(this, transform.position + transform.right * config.FireOffset,
                     _targetDir, config.FireForce);
@@ -167,8 +177,15 @@ namespace Characters.EnemySRC
 
         public override void ReceiveDamage(Action action = null)
         {
-            if (!Hidden)
-                base.ReceiveDamage(action);
+            if (Hidden) 
+                return;
+            
+            if (_corrutine != null)
+                StopCoroutine(_corrutine);
+
+            AkUnitySoundEngine.PostEvent("sfx_WoodRattle", gameObject);
+            
+            base.ReceiveDamage(action);
         }
 
         private void OnDrawGizmos()

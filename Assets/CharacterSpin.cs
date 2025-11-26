@@ -46,7 +46,7 @@ public class CharacterSpin : MonoBehaviour, ICharacterSpin
             if (absVelY > 0.01f)
             {
                 Vector3 currentRot = transform.localEulerAngles;
-                currentRot.z += _lastMaxSpeed * Mathf.Sign(_dir.x) * Time.deltaTime * 100f;
+                currentRot.z += _lastMaxSpeed * Mathf.Sign(_dir.x * -1.0f) * Time.deltaTime * 100f;
                 transform.localEulerAngles = currentRot;
             }
 
