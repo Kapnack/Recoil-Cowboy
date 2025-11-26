@@ -149,7 +149,7 @@ namespace Characters.EnemySRC
             particle.Obj.transform.position = transform.position;
             particle.Component.SetUp(() => _particlePool.Return(particle));
         }
-        
+
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {

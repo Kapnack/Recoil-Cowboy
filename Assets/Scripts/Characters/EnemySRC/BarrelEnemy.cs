@@ -128,8 +128,7 @@ namespace Characters.EnemySRC
 
             return false;
         }
-
-
+        
         private bool ShouldHide()
         {
             Collider[] colliderHits = Physics.OverlapSphere(transform.position, config.AreaOfSight);
@@ -158,6 +157,8 @@ namespace Characters.EnemySRC
 
             SceneManager.MoveGameObjectToScene(bulletGO, gameObject.scene);
 
+            bulletGO.transform.up = _targetDir;
+            
             if (bulletGO.TryGetComponent(out Bullet bullet))
                 bullet.Launch(this, transform.position + transform.right * config.FireOffset,
                     _targetDir, config.FireForce);
