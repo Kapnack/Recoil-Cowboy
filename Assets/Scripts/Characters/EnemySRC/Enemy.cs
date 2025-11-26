@@ -9,9 +9,20 @@ namespace Characters.EnemySRC
 
         public virtual void SetUp(Action action = null)
         {
-            _killed = action;
+            ResetState();
+            _killed += action;
         }
 
+        private void ResetState()
+        {
+            Rb.linearVelocity = Vector3.zero;
+            Rb.angularVelocity = Vector3.zero;
+            
+            StopAllCoroutines();
+            
+            _killed = ResetState;
+        }
+        
         public virtual void ReceiveDamage(Action action = null)
         {
             action?.Invoke();
