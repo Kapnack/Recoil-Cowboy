@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Shaders
 {
-    public class ShaderSettings : MonoBehaviour
+    public class Settings : MonoBehaviour
     {
         [SerializeField] private VolumeSettings volumeSettings;
 
@@ -93,6 +93,7 @@ namespace Shaders
                 return;
 
             slider.value = value;
+            AkUnitySoundEngine.SetRTPCValue(valueName, value);
         }
 
         private static void SetUpText(float value, TMP_Text actualText)

@@ -214,7 +214,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Film Shader Flicker
+  m_Text: Shader Flickering
 --- !u!1 &258476285804897020
 GameObject:
   m_ObjectHideFlags: 0
