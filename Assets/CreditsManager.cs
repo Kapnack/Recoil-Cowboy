@@ -14,9 +14,7 @@ public class CreditsManager : MonoBehaviour
 
     [Header("Panel")]
     [SerializeField] private Image creditsPanel;
-    
-    private const int TotalPages = 4;
-    
+
     private int _currentPageIndex;
     private int CurrentPageIndex
     {
