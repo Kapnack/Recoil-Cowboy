@@ -743,7 +743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81060aed40cac4b439ff50de1e832f67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chunkLimitTop: {fileID: 3401931310380692062}
+  chunkLimitTop: {fileID: 7359367207328055047}
   spawnPoints:
   - {fileID: 408573937906015518}
   - {fileID: 5728043838249790447}
@@ -6461,7 +6461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3123022343170044834, guid: e100aa84395148d45bcb45f1b9b25fa1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.1900005
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3123022343170044834, guid: e100aa84395148d45bcb45f1b9b25fa1, type: 3}
       propertyPath: m_LocalPosition.z
