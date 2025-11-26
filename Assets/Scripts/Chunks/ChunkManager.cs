@@ -24,7 +24,7 @@ namespace Chunks
 
         private async void Init()
         {
-            PoolData<Chunk> go = new(Instantiate(baseChunkPrefab, transform));
+            PoolData<Chunk> go = new(Instantiate(baseChunkPrefab, transform), baseChunkPrefab);
             go.Obj.transform.position = Vector3.zero;
             go.Component.SetUp();
             _activeChunks[0] = go;

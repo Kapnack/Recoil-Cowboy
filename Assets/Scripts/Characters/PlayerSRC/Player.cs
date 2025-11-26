@@ -26,6 +26,9 @@ namespace Characters.PlayerSRC
         [SerializeField] private Transform gunPos;
         private Vector3 _initialPos;
 
+        [SerializeField] private GameObject bulletParticlePrefab;
+        private IObjectPool<ParticleController> _particlePool;
+        
         private int _killPoints;
         private int _distancePoints;
 
@@ -38,8 +41,6 @@ namespace Characters.PlayerSRC
         private IMousePositionTracker _mouseTracker;
 
         private ICharacterSpin _spin;
-
-        private ParticlePool _particlePool;
 
         private CentralizeEventSystem _eventSystem;
         
@@ -105,8 +106,6 @@ namespace Characters.PlayerSRC
             
             _spin = GetComponentInChildren<ICharacterSpin>();
 
-            _particlePool = GetComponentInChildren<ParticlePool>();
-
             CurrentLives = config.MaxLives;
             CurrentBullets = config.MaxBullets;
 
@@ -117,6 +116,8 @@ namespace Characters.PlayerSRC
         {
             ServiceProvider.GetService<IFollowTarget>().SetTarget(transform);
 
+            _particlePool = ServiceProvider.GetService<IObjectPool<ParticleController>>();
+            
             while (!ServiceProvider.TryGetService(out _mouseTracker))
                 yield return null;
             
@@ -174,7 +175,7 @@ namespace Characters.PlayerSRC
             if (Physics.Raycast(transform.position, dir, out RaycastHit hit, Mathf.Infinity, Physics.AllLayers,
                     QueryTriggerInteraction.Ignore))
             {
-                PoolData<ParticleController> particle = await _particlePool.Get();
+                PoolData<ParticleController> particle = await _particlePool.Get(bulletParticlePrefab);
 
                 particle.Obj.transform.position = hit.point;
                 particle.Obj.transform.rotation = Quaternion.LookRotation(transform.position - hit.point);

@@ -97,6 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 1571ffb863433ae4598f03a9e4879339, type: 2}
+  explosionParticle: {fileID: 1975591258024312815, guid: d4e82d690b9f5f8448b70ad3b45ce20e, type: 3}
+  deadParticle: {fileID: 6401068024339888560, guid: bc7e6bb23a813e34c9fefb0bb4af903c, type: 3}
 --- !u!114 &4619361201224035064
 MonoBehaviour:
   m_ObjectHideFlags: 0

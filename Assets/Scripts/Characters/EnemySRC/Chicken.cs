@@ -1,6 +1,9 @@
 using System;
 using Characters.PlayerSRC;
+using Particle;
 using ScriptableObjects;
+using Systems;
+using Systems.Pool;
 using Systems.TagClassGenerator;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -19,7 +22,16 @@ namespace Characters.EnemySRC
         private RaycastHit _hit;
 
         private IAnimate _animator;
-        
+
+        [SerializeField] private GameObject explosionParticle;
+        [SerializeField] private GameObject deadParticle;
+        private IObjectPool<ParticleController> _particlePool;
+
+        private void Start()
+        {
+            _particlePool = ServiceProvider.GetService<IObjectPool<ParticleController>>();
+        }
+
         private void OnEnable() => SetUp();
 
         public override void SetUp(Action action = null)
@@ -29,7 +41,7 @@ namespace Characters.EnemySRC
             Rb.linearVelocity = Vector3.zero;
             _animator = GetComponent<IAnimate>();
         }
-        
+
         private void FixedUpdate()
         {
             Movement();
@@ -114,15 +126,28 @@ namespace Characters.EnemySRC
                                 return;
 
                         healthSystem.ReceiveDamage();
+                        SpawnParticle(explosionParticle);
                         ReceiveDamage();
                     }
                 }
             }
         }
+
         public override void ReceiveDamage(Action action = null)
         {
             AkUnitySoundEngine.PostEvent("sfx_ChickenExp", gameObject);
+
+            SpawnParticle(deadParticle);
+
             base.ReceiveDamage(action);
+        }
+
+        private async void SpawnParticle(GameObject prefab)
+        {
+            PoolData<ParticleController> particle = await _particlePool.Get(prefab);
+
+            particle.Obj.transform.position = transform.position;
+            particle.Component.SetUp(() => _particlePool.Return(particle));
         }
         
 #if UNITY_EDITOR
@@ -139,7 +164,7 @@ namespace Characters.EnemySRC
             Gizmos.DrawRay(_raycastOrigin, transform.right * config.RaycastDistance);
         }
 
-        
+
         private void OnValidate()
         {
             if (config == null)

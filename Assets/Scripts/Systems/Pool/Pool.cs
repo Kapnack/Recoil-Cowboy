@@ -51,11 +51,14 @@ namespace Systems.Pool
             }
         }
 
-        public async void InitializeAll(int repeat = 0, int offset = 0)
+        public async void InitializeAll(int repeat = 1, int offset = 0)
         {
-            for (int i = offset; i < _prefabs.Count; i++)
+            for (int i = 0; i < repeat; i++)
             {
-                _enqueuedObjects.Add(await AddedGameObject(_prefabs[i]));
+                for (int j = offset; j < _prefabs.Count; j++)
+                {
+                    _enqueuedObjects.Add(await AddedGameObject(_prefabs[i]));
+                }
             }
         }
 
@@ -67,11 +70,32 @@ namespace Systems.Pool
             return Release();
         }
 
+        public async Task<PoolData<T>> Get(GameObject prefab)
+        {
+            if (_enqueuedObjects.Count == 0)
+                return Release(await AddedGameObject(prefab));
+
+            return await Release(prefab);
+        }
+
         private PoolData<T> Release(PoolData<T> data = null)
         {
             data ??= _enqueuedObjects[0];
 
             _enqueuedObjects.Remove(data);
+
+            data.Obj.SetActive(true);
+            data.Obj.transform.SetParent(_activeObjFolder ? _activeObjFolder : null);
+
+            return data;
+        }
+
+        private async Task<PoolData<T>> Release(GameObject prefab)
+        {
+            PoolData<T> data = _enqueuedObjects.FirstOrDefault(x => !x.Obj.activeSelf && x.PrefabSource == prefab);
+
+            if (data == null)
+                data = await AddedGameObject(prefab);
 
             data.Obj.SetActive(true);
             data.Obj.transform.SetParent(_activeObjFolder ? _activeObjFolder : null);
@@ -111,7 +135,7 @@ namespace Systems.Pool
 
             obj.SetActive(false);
 
-            return new PoolData<T>(obj);
+            return new PoolData<T>(obj, prefab);
         }
     }
 }
