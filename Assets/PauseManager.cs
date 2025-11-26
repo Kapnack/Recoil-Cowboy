@@ -65,6 +65,8 @@ public class PauseManager : MonoBehaviour
         _inputReader?.SwitchPlayerMapState();
         Time.timeScale = _paused ? 0.0f : 1.0f;
 
+        Cursor.visible = _paused;
+
         if (_menuGo)
             Destroy(_menuGo);
     }
@@ -77,13 +79,13 @@ public class PauseManager : MonoBehaviour
 
     public void OnTutorial()
     {
-        if (_tutorialGo) 
+        if (_tutorialGo)
             return;
-        
+
         _tutorialGo = Instantiate(tutorial);
         _tutorialGo.GetComponent<VideoPlayerManager>().CloseCallback = OnReturnFromTutorial;
         _eventSystem.RemoveListener<PausedInput>(PauseHandler);
-        
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
     }
