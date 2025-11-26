@@ -526,7 +526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particlePrefab:
-  - {fileID: 79414957296187965}
+  - {fileID: 1046078679914427698, guid: 397fa5e6175aa5b4db189f12a85c2bfe, type: 3}
   - {fileID: 6401068024339888560, guid: bc7e6bb23a813e34c9fefb0bb4af903c, type: 3}
   - {fileID: 1975591258024312815, guid: d4e82d690b9f5f8448b70ad3b45ce20e, type: 3}
   - {fileID: 6401068024339888560, guid: f3d4228e81ee0314bac7eaf27fc5f093, type: 3}
@@ -831,11 +831,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96360ea91f9550445b773e7e91fd637b, type: 3}
---- !u!1 &79414957296187965 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2072917376581538403, guid: 96360ea91f9550445b773e7e91fd637b, type: 3}
-  m_PrefabInstance: {fileID: 79414957296187964}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3018071152568571421
 PrefabInstance:
   m_ObjectHideFlags: 0

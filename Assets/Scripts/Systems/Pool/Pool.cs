@@ -57,7 +57,7 @@ namespace Systems.Pool
             {
                 for (int j = offset; j < _prefabs.Count; j++)
                 {
-                    _enqueuedObjects.Add(await AddedGameObject(_prefabs[i]));
+                    _enqueuedObjects.Add(await AddedGameObject(_prefabs[j]));
                 }
             }
         }
@@ -127,6 +127,11 @@ namespace Systems.Pool
 
         private async Task<PoolData<T>> AddedGameObject(GameObject prefab)
         {
+            if (!prefab)
+            {
+                return null;
+            }
+            
             AsyncInstantiateOperation<GameObject> operation = Object.InstantiateAsync(prefab, _idleObjFolder);
 
             await operation;
