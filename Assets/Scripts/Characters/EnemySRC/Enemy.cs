@@ -28,5 +28,10 @@ namespace Characters.EnemySRC
             action?.Invoke();
             _killed?.Invoke();
         }
+
+        public void InstantDead()
+        {
+            _killed?.Invoke();
+        }
     }
 }

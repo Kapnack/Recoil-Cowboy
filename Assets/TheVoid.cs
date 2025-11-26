@@ -47,15 +47,12 @@ public class TheVoid : MonoBehaviour
         return other.position.y - transform.localScale.y * _boxCollider.size.y / 2 - distanceFromPlayer;
     }
 
-   private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.TryGetComponent(out IHealthSystem healthSystem))
             return;
 
-        if (healthSystem is IPlayerHealthSystem player)
-            player.InstantDead();
-        else
-            healthSystem.ReceiveDamage();
+        healthSystem.InstantDead();
     }
 
     private void OnTriggerStay(Collider other) => OnTriggerEnter(other);
