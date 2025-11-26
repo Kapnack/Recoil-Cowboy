@@ -522,7 +522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6611f5bb43990d44ba79f83c165ff9fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeedSpin: 50
+  maxSpeedSpin: 25
 --- !u!4 &917573926556788979 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8723480156881072170, guid: e1765aa04ba685d43ae4364355156812, type: 3}
