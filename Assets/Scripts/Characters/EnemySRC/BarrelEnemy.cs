@@ -183,6 +183,8 @@ namespace Characters.EnemySRC
             if (_corrutine != null)
                 StopCoroutine(_corrutine);
 
+            AkUnitySoundEngine.PostEvent("sfx_WoodRattle", gameObject);
+            
             base.ReceiveDamage(action);
         }
 
