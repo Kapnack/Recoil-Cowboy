@@ -15,14 +15,17 @@ namespace Systems.Pool
 
     public class PoolData<T>
     {
-        public PoolData(GameObject obj)
-        {
-            Obj = obj;
-            Component = obj ? obj.gameObject.GetComponent<T>() : default;
-        }
 
         public readonly GameObject Obj;
         public readonly T Component;
+        public readonly GameObject PrefabSource;
+        
+        public PoolData(GameObject obj, GameObject prefabSource)
+        {
+            Obj = obj;
+            Component = obj ? obj.gameObject.GetComponent<T>() : default;
+            PrefabSource = prefabSource;
+        }
         
         public static implicit operator bool(PoolData<T> data)
         {
