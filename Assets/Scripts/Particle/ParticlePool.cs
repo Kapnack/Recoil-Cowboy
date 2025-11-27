@@ -15,7 +15,7 @@ namespace Particle
         {
             ServiceProvider.SetService<IObjectPool<ParticleController>>(this, true);
             
-            _pool = new Pool<ParticleController>(particlePrefab, transform, false);
+            _pool = new Pool<ParticleController>(particlePrefab, transform, true);
 
             _pool.InitializeAll();
         }

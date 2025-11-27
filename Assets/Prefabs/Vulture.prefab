@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 060dac4aa97374c4d9c6762eea179a24, type: 2}
   vultureBody: {fileID: 4580398605050862435}
+  deadParticle: {fileID: 6401068024339888560, guid: f3d4228e81ee0314bac7eaf27fc5f093, type: 3}
 --- !u!1001 &398085605237145886
 PrefabInstance:
   m_ObjectHideFlags: 0

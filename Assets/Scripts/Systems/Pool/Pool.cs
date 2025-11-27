@@ -85,7 +85,7 @@ namespace Systems.Pool
             _enqueuedObjects.Remove(data);
 
             data.Obj.SetActive(true);
-            data.Obj.transform.SetParent(_activeObjFolder ? _activeObjFolder : null);
+            data.Obj.transform.SetParent(_activeObjFolder);
 
             return data;
         }
@@ -98,7 +98,7 @@ namespace Systems.Pool
                 data = await AddedGameObject(prefab);
 
             data.Obj.SetActive(true);
-            data.Obj.transform.SetParent(_activeObjFolder ? _activeObjFolder : null);
+            data.Obj.transform.SetParent(_activeObjFolder);
 
             return data;
         }
@@ -131,7 +131,7 @@ namespace Systems.Pool
             {
                 return null;
             }
-            
+
             AsyncInstantiateOperation<GameObject> operation = Object.InstantiateAsync(prefab, _idleObjFolder);
 
             await operation;

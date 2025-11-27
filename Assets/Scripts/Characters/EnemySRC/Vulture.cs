@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections;
 using Characters.PlayerSRC;
+using Particle;
 using ScriptableObjects;
+using Systems;
+using Systems.Pool;
 using Systems.TagClassGenerator;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,12 +24,20 @@ namespace Characters.EnemySRC
         private RaycastHit _hit;
         private bool _wentToStartingPos;
 
-      [SerializeField] private GameObject vultureBody;
+        [SerializeField] private GameObject vultureBody;
+
+        [SerializeField] private GameObject deadParticle;
+        private IObjectPool<ParticleController> _particlePool;
 
         protected override void Awake()
         {
             base.Awake();
             vultureBody.transform.forward = transform.right;
+        }
+
+        private void Start()
+        {
+            _particlePool = ServiceProvider.GetService<IObjectPool<ParticleController>>();
         }
 
         public override void SetUp(Action action = null)
@@ -139,6 +150,15 @@ namespace Characters.EnemySRC
             return null;
         }
 
+        public override async void ReceiveDamage(Action action = null)
+        {
+            PoolData<ParticleController> particleGo = await _particlePool.Get(deadParticle);
+
+            particleGo.Obj.transform.position = transform.position;
+            particleGo.Component.SetUp(() => _particlePool.Return(particleGo));
+
+            base.ReceiveDamage(action);
+        }
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -147,7 +167,7 @@ namespace Characters.EnemySRC
         }
 
         private void OnCollisionStay(Collision collision) => OnCollisionEnter(collision);
-        
+
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {

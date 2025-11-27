@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5068110057325162865}
   - component: {fileID: 2160987660274059542}
   m_Layer: 0
-  m_Name: Vuture Explotion
+  m_Name: Vulture Explotion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
