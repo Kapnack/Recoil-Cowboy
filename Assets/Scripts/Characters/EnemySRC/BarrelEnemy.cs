@@ -13,6 +13,7 @@ namespace Characters.EnemySRC
         [SerializeField] private BarrelEnemyConfig config;
 
         [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private GameObject warningSign;
 
         private BoxCollider _collider;
 
@@ -21,8 +22,6 @@ namespace Characters.EnemySRC
         private Vector3 _targetDir;
 
         private bool _hidden;
-
-        private bool _canShoot;
 
         private float _coldDownTimer;
 
@@ -45,9 +44,9 @@ namespace Characters.EnemySRC
         protected override void Awake()
         {
             base.Awake();
+            _collider = GetComponent<BoxCollider>();
             _animate = GetComponentInChildren<IAnimate>();
             Rb.isKinematic = true;
-            _collider = GetComponent<BoxCollider>();
         }
 
         public override void SetUp(Action action = null)
@@ -103,8 +102,12 @@ namespace Characters.EnemySRC
             if (_coldDownTimer > Time.time)
                 return;
 
-            if (TargetInSight())
+            bool targerInSight = TargetInSight();
+
+            if (targerInSight)
                 Shoot();
+
+            warningSign.SetActive(targerInSight);
         }
 
         private bool TargetInSight()
@@ -177,14 +180,14 @@ namespace Characters.EnemySRC
 
         public override void ReceiveDamage(Action action = null)
         {
-            if (Hidden) 
+            if (Hidden)
                 return;
-            
+
             if (_corrutine != null)
                 StopCoroutine(_corrutine);
 
             AkUnitySoundEngine.PostEvent("sfx_WoodRattle", gameObject);
-            
+
             base.ReceiveDamage(action);
         }
 
