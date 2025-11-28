@@ -766,6 +766,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d2c1d06b1390cb4daa2e666b5de226b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonHoverColor: {r: 0.65, g: 0.65, b: 0.65, a: 1}
+  textHoverColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
 --- !u!1 &2460584353782858896
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,6 +902,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d2c1d06b1390cb4daa2e666b5de226b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonHoverColor: {r: 0.65, g: 0.65, b: 0.65, a: 1}
+  textHoverColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
 --- !u!1 &2534200493590864489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,6 +1114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d2c1d06b1390cb4daa2e666b5de226b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonHoverColor: {r: 0.65, g: 0.65, b: 0.65, a: 1}
+  textHoverColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
 --- !u!1 &4076983806559608681
 GameObject:
   m_ObjectHideFlags: 0
@@ -1311,6 +1317,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d2c1d06b1390cb4daa2e666b5de226b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonHoverColor: {r: 0.65, g: 0.65, b: 0.65, a: 1}
+  textHoverColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
 --- !u!1 &4225076881143941050
 GameObject:
   m_ObjectHideFlags: 0
@@ -1581,6 +1589,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d2c1d06b1390cb4daa2e666b5de226b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonHoverColor: {r: 0.65, g: 0.65, b: 0.65, a: 1}
+  textHoverColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
 --- !u!1 &6699659861384242255
 GameObject:
   m_ObjectHideFlags: 0
@@ -2107,7 +2117,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &2873880026040834559
 MonoBehaviour:
