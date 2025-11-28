@@ -22,12 +22,16 @@ public class ButtonHoverDetector : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerEnter(PointerEventData eventData)
     {
         _creditsButton.image.color = buttonHoverColor;
-        _text.color = textHoverColor;
+
+        if (_text)
+            _text.color = textHoverColor;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         _creditsButton.image.color = Color.white;
-        _text.color = originalTextColor;
+
+        if (_text)
+            _text.color = originalTextColor;
     }
 }
