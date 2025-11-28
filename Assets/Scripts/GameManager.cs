@@ -108,13 +108,15 @@ public class GameManager : MonoBehaviour, IGameStats
             stats.RecordDistance = distance;
             stats.NewDistanceRecord = true;
         }
+        else stats.NewDistanceRecord = false;
 
-        stats.CurrentKillPoints = killPoints;
+            stats.CurrentKillPoints = killPoints;
         if (killPoints > stats.RecordKillPoints)
         {
             stats.RecordKillPoints = killPoints;
             stats.NewKillPointsRecord = true;
         }
+        else stats.NewKillPointsRecord = false;
     }
 
     private async Task TryLoadScenes(SceneRef[] sceneRefs)

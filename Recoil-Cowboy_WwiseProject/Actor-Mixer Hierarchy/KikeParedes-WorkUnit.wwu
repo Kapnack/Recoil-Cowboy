@@ -480,7 +480,6 @@
 						</BlendContainer>
 					</ChildrenList>
 				</Folder>
-				<Folder Name="SFX Gun No Bullet" ID="{0265312B-3373-43D9-8355-33924DB03DF1}" ShortID="642056470"/>
 				<Folder Name="SFX Player Jump" ID="{8300BE55-E203-498A-B299-919620A4BF50}" ShortID="786988500">
 					<ChildrenList>
 						<RandomSequenceContainer Name="sfx_Jump" ID="{BB3B7D51-9643-47E0-A1E0-3F2E77B42898}" ShortID="321664352">

@@ -15,6 +15,10 @@ namespace AK
     {
         static const AkUniqueID INGAME_GAME = 3313516107U;
         static const AkUniqueID SFX_CHICKENEXP = 912458799U;
+        static const AkUniqueID SFX_CROW_DEATH = 1670669159U;
+        static const AkUniqueID SFX_CROW_FLIGHT = 2003757705U;
+        static const AkUniqueID SFX_CROW_FLIGHT_STOP = 3564035388U;
+        static const AkUniqueID SFX_CROW_HIT = 2927700646U;
         static const AkUniqueID SFX_GUNSHOT = 1669100521U;
         static const AkUniqueID SFX_JUMP = 3695098761U;
         static const AkUniqueID SFX_WOODRATTLE = 1747625388U;
@@ -32,6 +36,7 @@ namespace AK
                 static const AkUniqueID GAME = 702482391U;
                 static const AkUniqueID MENU = 2607556080U;
                 static const AkUniqueID NONE = 748895195U;
+                static const AkUniqueID RECORD = 3918064370U;
             } // namespace STATE
         } // namespace GAMESTATE
 
@@ -49,7 +54,6 @@ namespace AK
     {
         static const AkUniqueID INIT = 1355168291U;
         static const AkUniqueID SBGAME = 993800960U;
-        static const AkUniqueID SBGAME_01 = 2402789814U;
     } // namespace BANKS
 
     namespace BUSSES
