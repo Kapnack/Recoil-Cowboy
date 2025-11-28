@@ -33,7 +33,14 @@ namespace Menus
             pointsText.text = string.Format(_pointsTextFormat, stats.CurrentKillPoints, stats.RecordKillPoints);
             disntanceText.text = string.Format(_distanceTextFormat, stats.CurrentDistance, stats.RecordDistance);
         }
-
+        private void Start()
+        {
+            if (stats.NewDistanceRecord || stats.NewKillPointsRecord)
+            {
+                AkUnitySoundEngine.SetState("GameState","Record");
+            }
+            else AkUnitySoundEngine.SetState("GameState","End");
+        }
         private void OnNextLevel()
         {
             _eventSystem.Get<LoadGameplay>()?.Invoke();

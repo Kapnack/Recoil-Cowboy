@@ -40,6 +40,14 @@ namespace Characters.EnemySRC
             _particlePool = ServiceProvider.GetService<IObjectPool<ParticleController>>();
         }
 
+        private void OnEnable()
+        {
+            AkUnitySoundEngine.PostEvent("sfx_Crow_flight",gameObject);
+        }
+        private void OnDisable()
+        {
+            AkUnitySoundEngine.PostEvent("sfx_Crow_flight_stop", gameObject);
+        }
         public override void SetUp(Action action = null)
         {
             base.SetUp(action);
@@ -156,14 +164,17 @@ namespace Characters.EnemySRC
 
             particleGo.Obj.transform.position = transform.position;
             particleGo.Component.SetUp(() => _particlePool.Return(particleGo));
-
+            AkUnitySoundEngine.PostEvent("sfx_crow_death", gameObject);
             base.ReceiveDamage(action);
         }
 
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.transform.TryGetComponent(out IHealthSystem healthSystem))
+            {
+                AkUnitySoundEngine.PostEvent("sfx_crow_hit", gameObject);
                 healthSystem.ReceiveDamage();
+            }
         }
 
         private void OnCollisionStay(Collision collision) => OnCollisionEnter(collision);

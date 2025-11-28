@@ -9,6 +9,7 @@
 						<State Name="Game" ID="{0D596533-D1E2-4724-A6FB-83CA6CA9E4E3}"/>
 						<State Name="Menu" ID="{4B7B5FA7-766D-41C3-BF9E-4268DF181DF1}"/>
 						<State Name="End" ID="{63CA4145-C3EC-4ABC-82A7-5D2369EC3061}"/>
+						<State Name="Record" ID="{81ECB4A3-8284-4F04-9A31-E3AAD6BFAC76}"/>
 					</ChildrenList>
 				</StateGroup>
 			</ChildrenList>
