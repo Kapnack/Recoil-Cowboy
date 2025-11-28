@@ -15,7 +15,7 @@ namespace Systems
 
         public static T GetService<T>() where T : class
         {
-            if(Services.TryGetValue(typeof(T), out var serviceObject))
+            if(Services.TryGetValue(typeof(T), out object serviceObject))
                return serviceObject as T;
                
             throw new Exception($"Service of type {typeof(T)} could not be found.");
@@ -23,7 +23,7 @@ namespace Systems
         
         public static bool TryGetService<T>(out T service) where T : class
         {
-            if (Services.TryGetValue(typeof(T), out var serviceObject) && serviceObject is T tService)
+            if (Services.TryGetValue(typeof(T), out object serviceObject) && serviceObject is T tService)
             {
                 service = tService;
                 return true;

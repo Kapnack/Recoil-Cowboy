@@ -8,78 +8,61 @@ using Systems.SceneLoader;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public delegate void LoadingStarted();
+public delegate void LoadingEnded();
+public delegate void LoadGameplay();
+public delegate void LoadMainMenu();
+public delegate void LoadGameOver();
+public delegate void UpdateStats(int killPoints, int distance);
+
 [RequireComponent(typeof(SceneLoader))]
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IGameStats
 {
     [SerializeField] private SceneRef mainMenuScene;
-    [SerializeField] private List<SceneRef> levels = new();
+    [SerializeField] private SceneRef gameplay;
     [SerializeField] private SceneRef winScene;
     [SerializeField] private SceneRef gameOverScene;
 
+    [SerializeField] private PointsStats stats;
+
+    private readonly CentralizeEventSystem _eventSystem = new();
+
     private Camera _mainCamera;
-    
-    private readonly SceneRef[] _scenesToLoad = new SceneRef[2];
+
+    private readonly SceneRef[] _scenesToLoad = new SceneRef[1];
 
     private ISceneLoader _sceneLoader;
 
     private IInputReader _inputReader;
+
+    public int TimesPlayed { get; private set; }
     
-    private readonly SimpleEvent _loadingStarted = new();
-    private readonly SimpleEvent _loadingEnded = new();
-
-    private int _currentLevel;
-
-    private int CurrentLevel
-    {
-        get => _currentLevel;
-        set
-        {
-            var newValue = value;
-
-            if (newValue > levels.Count - 1)
-                newValue = 0;
-
-            _currentLevel = newValue;
-        }
-    }
-
-
     private void Awake()
     {
         _mainCamera = Camera.main;
         _sceneLoader = GetComponent<ISceneLoader>();
-
-        StartCoroutine(SetUpEvents());
+        
+        _inputReader = GetComponent<IInputReader>();
+        
+        ServiceProvider.SetService(_eventSystem);
+        ServiceProvider.SetService<IGameStats>(this);
+        
+        _eventSystem.AddListener<LoadGameplay>(LoadGameplay);
+        _eventSystem.AddListener<LoadMainMenu>(LoadMainMenu);
+        _eventSystem.AddListener<LoadGameOver>(LoadGameOverMenu);
+        _eventSystem.AddListener<UpdateStats>(SetNewStats);
     }
 
-    private IEnumerator SetUpEvents()
-    {
-        ICentralizeEventSystem eventSystem;
-        while (!ServiceProvider.TryGetService(out eventSystem))
-            yield return null;
-
-        eventSystem.Register(GameManagerKeys.LoadingStarted, _loadingStarted);
-        eventSystem.Register(GameManagerKeys.LoadingEnded, _loadingEnded);
-
-        while (!ServiceProvider.TryGetService(out _inputReader))
-            yield return null;
-        
-        while (!_loadingStarted.HasInvocations())
-            yield return null;
-        
-        LoadMainMenu();
-    }
+    private void Start() => LoadMainMenu();
 
     private async void LoadMainMenu()
     {
         try
         {
             _inputReader.DeactivatePlayerMap();
-        
+
             _scenesToLoad[0] = mainMenuScene;
             await TryLoadScenes(_scenesToLoad);
-        
-            FindAfterMatchMenuEvents();
         }
         catch (Exception e)
         {
@@ -87,33 +70,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private async void LoadCurrentLevel()
+    private async void LoadGameplay()
     {
         try
         {
             _inputReader.ActivePlayerMap();
-            
-            _scenesToLoad[0] = levels[CurrentLevel];
+            ++TimesPlayed;
+            _scenesToLoad[0] = gameplay;
             await TryLoadScenes(_scenesToLoad);
-
-            FindGameplayEvents();
-        }
-        catch (Exception e)
-        {
-            Debug.LogException(e);
-        }
-    }
-
-    private async void LoadWinScene()
-    {
-        try
-        {
-            _inputReader.DeactivatePlayerMap();
-            
-            _scenesToLoad[0] = winScene;
-            await TryLoadScenes(_scenesToLoad);
-        
-            FindAfterMatchMenuEvents();
         }
         catch (Exception e)
         {
@@ -126,11 +90,9 @@ public class GameManager : MonoBehaviour
         try
         {
             _inputReader.DeactivatePlayerMap();
-            
+
             _scenesToLoad[0] = gameOverScene;
             await TryLoadScenes(_scenesToLoad);
-        
-            FindAfterMatchMenuEvents();
         }
         catch (Exception e)
         {
@@ -138,10 +100,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void SetNewStats(int killPoints, int distance)
+    {
+        stats.CurrentDistance = distance;
+        if (distance > stats.RecordDistance)
+        {
+            stats.RecordDistance = distance;
+            stats.NewDistanceRecord = true;
+        }
+
+        stats.CurrentKillPoints = killPoints;
+        if (killPoints > stats.RecordKillPoints)
+        {
+            stats.RecordKillPoints = killPoints;
+            stats.NewKillPointsRecord = true;
+        }
+    }
+
     private async Task TryLoadScenes(SceneRef[] sceneRefs)
     {
-        _loadingStarted.Invoke();
-        
+        _eventSystem.Get<LoadingStarted>()?.Invoke();
+
         try
         {
             _mainCamera.transform.SetParent(null);
@@ -154,32 +133,12 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogException(e);
         }
-        
-        _loadingEnded.Invoke();
+
+        _eventSystem.Get<LoadingEnded>()?.Invoke();
     }
+}
 
-    private void LevelCleared() => ++CurrentLevel;
-
-    private void FindGameplayEvents()
-    {
-        ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
-
-        eventSystem.TryGet(GameplayManagerKeys.WinCondition, out var simpleEvent);
-
-        simpleEvent.AddListener(LevelCleared);
-        simpleEvent.AddListener(LoadWinScene);
-
-        eventSystem.Get(GameplayManagerKeys.LoseCondition).AddListener(LoadGameOverMenu);
-        
-        eventSystem.Get(GameManagerKeys.MainMenu).AddListener(LoadMainMenu);
-    }
-
-    private void FindAfterMatchMenuEvents()
-    {
-        ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
-
-        eventSystem.Get(GameManagerKeys.ChangeToLevel).AddListener(LoadCurrentLevel);
-
-        eventSystem.Get(GameManagerKeys.MainMenu).AddListener(LoadMainMenu);
-    }
+public interface IGameStats
+{
+    public int TimesPlayed { get; }
 }

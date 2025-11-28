@@ -1,87 +1,73 @@
-﻿using System.Collections;
+﻿using InputSystem;
 using Systems.CentralizeEventSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace Systems
 {
+    public delegate void AttackInput();
+    public delegate void ReloadInput();
+    public delegate void InstantReloadInput();
+    public delegate void PausedInput();
+
     public class InputReader : MonoBehaviour, IInputReader
     {
-        private ICentralizeEventSystem _eventSystem;
+        private CentralizeEventSystem.CentralizeEventSystem _eventSystem;
 
-        [SerializeField] private InputActionAsset gameplayActionMap;
-
-        private InputActionMap _gameplayActionMap;
-
-        private InputAction _attack;
-        private InputAction _reload;
-        private InputAction _activeInstantReload;
-        [SerializeField] private InputActionReference paused;
-
-        private readonly SimpleEvent _attackEvent = new();
-        private readonly SimpleEvent _reloadEvent = new();
-        private readonly SimpleEvent _instantReloadEvent = new();
-        private readonly SimpleEvent _paused = new();
+        private CustomInputSytem _inputSystem;
 
         private void Awake()
         {
+            _inputSystem = new CustomInputSytem();
+
             ServiceProvider.SetService<IInputReader>(this);
-            
-            _gameplayActionMap = gameplayActionMap.FindActionMap("Player");
-            _attack = _gameplayActionMap.FindAction("Attack");
-            _reload = _gameplayActionMap.FindAction("Reload");
-            _activeInstantReload = _gameplayActionMap.FindAction("ChangeInstantReload");
         }
 
         private void Start()
         {
-            _eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
-
-            _eventSystem.Register(PlayerEventKeys.Attack, _attackEvent);
-            _eventSystem.Register(PlayerEventKeys.ReloadOvertime, _reloadEvent);
-            _eventSystem.Register(PlayerEventKeys.InstantReload, _instantReloadEvent);
-            _eventSystem.Register(PlayerEventKeys.Paused, _paused);
+            _inputSystem.UI.Enable();
+            _eventSystem = ServiceProvider.GetService<CentralizeEventSystem.CentralizeEventSystem>();
         }
 
         private void OnEnable()
         {
-            _attack.started += HandleAttack;
-            _reload.started += HandleReload;
-            _activeInstantReload.started += HandleInstantReload;
-            paused.action.started += HandlePause;
+            _inputSystem.Player.Attack.started += HandleAttack;
+            _inputSystem.Player.Reload.started += HandleReload;
+            _inputSystem.Player.ChangeInstantReload.started += HandleInstantReload;
+            _inputSystem.UI.Pause.started += HandlePause;
         }
 
 
         private void OnDisable()
         {
-            _attack.started -= HandleAttack;
-            _reload.started -= HandleReload;
-            _activeInstantReload.started -= HandleInstantReload;
-            paused.action.started -= HandlePause;
+            _inputSystem.Player.Attack.started -= HandleAttack;
+            _inputSystem.Player.Reload.started -= HandleReload;
+            _inputSystem.Player.ChangeInstantReload.started -= HandleInstantReload;
+            _inputSystem.UI.Pause.started -= HandlePause;
         }
 
-        public void HandlePause(InputAction.CallbackContext _) => _paused?.Invoke();
+        private void HandlePause(InputAction.CallbackContext _) => _eventSystem.Get<PausedInput>()?.Invoke();
 
         #region PlayerActionsEvents
 
-        private void HandleAttack(InputAction.CallbackContext _) => _attackEvent?.Invoke();
+        private void HandleAttack(InputAction.CallbackContext _) => _eventSystem.Get<AttackInput>()?.Invoke();
 
-        private void HandleReload(InputAction.CallbackContext _) => _reloadEvent?.Invoke();
+        private void HandleReload(InputAction.CallbackContext _) => _eventSystem.Get<ReloadInput>()?.Invoke();
 
-        private void HandleInstantReload(InputAction.CallbackContext _) => _instantReloadEvent?.Invoke();
+        private void HandleInstantReload(InputAction.CallbackContext _) =>
+            _eventSystem.Get<InstantReloadInput>()?.Invoke();
 
         #endregion
 
-        public void ActivePlayerMap() => _gameplayActionMap.Enable();
-        public void DeactivatePlayerMap() => _gameplayActionMap.Disable();
+        public void ActivePlayerMap() => _inputSystem.Player.Enable();
+        public void DeactivatePlayerMap() => _inputSystem.Player.Disable();
 
         public void SwitchPlayerMapState()
         {
-            if (_gameplayActionMap.enabled)
-                _gameplayActionMap.Disable();
+            if (_inputSystem.Player.enabled)
+                _inputSystem.Player.Disable();
             else
-                _gameplayActionMap.Enable();
+                _inputSystem.Player.Enable();
         }
     }
 }

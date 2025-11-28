@@ -1,14 +1,37 @@
-using ScriptableObjects;
+using System;
 using UnityEngine;
 
 namespace Characters.EnemySRC
 {
-    public abstract class Enemy : Character, IHealthSystem
+    public abstract class Enemy : Character, IEnemyHealthSystem, IEnemy
     {
-        public virtual void ReceiveDamage()
+        protected event Action _killed;
+
+        public virtual void SetUp(Action action = null)
         {
-            //TODO: Deactivate the Enemy to be reused by the Pool.
-            Destroy(gameObject);
+            ResetState();
+            _killed += action;
+        }
+
+        private void ResetState()
+        {
+            Rb.linearVelocity = Vector3.zero;
+            Rb.angularVelocity = Vector3.zero;
+            
+            StopAllCoroutines();
+            
+            _killed = ResetState;
+        }
+        
+        public virtual void ReceiveDamage(Action action = null)
+        {
+            action?.Invoke();
+            _killed?.Invoke();
+        }
+
+        public void InstantDead()
+        {
+            _killed?.Invoke();
         }
     }
 }

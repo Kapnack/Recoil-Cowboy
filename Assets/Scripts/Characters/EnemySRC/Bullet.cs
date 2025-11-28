@@ -3,13 +3,13 @@
 namespace Characters.EnemySRC
 {
     [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(SphereCollider))]
+    [RequireComponent(typeof(Collider))]
     public class Bullet : MonoBehaviour
     {
         private Character _owner;
         private Rigidbody _rb;
         [SerializeField] private float secondsToExist = 5.0f;
-        private float _timeToDestroy = 0.0f;
+        private float _timeToDestroy;
 
         private void Awake()
         {
@@ -22,22 +22,22 @@ namespace Characters.EnemySRC
                 Destroy(gameObject);
         }
 
-        public void Launch(Character owner, Vector3 spawnPosition, float speed)
+        public void Launch(Character owner, Vector3 spawnPosition, Vector3 dir, float speed)
         {
             _owner = owner;
             transform.position = spawnPosition;
 
-            _rb.AddForce(transform.right * speed, ForceMode.Impulse);
-
+            _rb.AddForce(dir * speed, ForceMode.Impulse);
+            
             _timeToDestroy = Time.time + secondsToExist;
         }
 
-        private void OnCollisionEnter(Collision other)
+        private void OnCollisionEnter(Collision collision)
         {
-            if (_owner && other.gameObject == _owner.gameObject)
+            if (_owner && collision.gameObject == _owner.gameObject)
                 return;
 
-            if (other.transform.TryGetComponent<IHealthSystem>(out var healthSystem))
+            if (collision.transform.TryGetComponent(out IHealthSystem healthSystem))
             {
                 healthSystem.ReceiveDamage();
             }

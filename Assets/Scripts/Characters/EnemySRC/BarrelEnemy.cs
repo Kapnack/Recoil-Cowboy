@@ -1,18 +1,96 @@
+using System;
+using System.Collections;
 using ScriptableObjects;
+using Systems.LayerClassGenerator;
 using Systems.TagClassGenerator;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Characters.EnemySRC
 {
     public class BarrelEnemy : Enemy
     {
-        [SerializeField] private BarrelEnemyConfig barrelConfig;
+        [SerializeField] private BarrelEnemyConfig config;
 
         [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private GameObject warningSign;
 
-        private bool Hidden { get; set; }
-        
+        private BoxCollider _collider;
+
+        private IAnimate _animate;
+
+        private Vector3 _targetDir;
+
+        private bool _hidden;
+
         private float _coldDownTimer;
+
+        private Coroutine _corrutine;
+
+        private bool Hidden
+        {
+            get => _hidden;
+            set
+            {
+                if (_hidden == value)
+                    return;
+
+                _hidden = value;
+
+                _animate.ChangeAnimation(value);
+            }
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            _collider = GetComponent<BoxCollider>();
+            _animate = GetComponentInChildren<IAnimate>();
+            Rb.isKinematic = true;
+        }
+
+        public override void SetUp(Action action = null)
+        {
+            base.SetUp(action);
+
+            _corrutine = StartCoroutine(AdjustPosition());
+        }
+
+        private IEnumerator AdjustPosition()
+        {
+            yield return new WaitForSeconds(0.1f);
+
+            Vector3 worldSize = Vector3.Scale(_collider.size, transform.lossyScale);
+            Vector3 origin = transform.position;
+
+            float duration = 360;
+
+#if UNITY_EDITOR
+            Debug.DrawRay(new Vector3(origin.x + worldSize.x * 0.5f, origin.y, origin.z - worldSize.z * 0.5f),
+                Vector3.down * 100, Color.magenta, duration);
+            Debug.DrawRay(new Vector3(origin.x - worldSize.x * 0.5f, origin.y, origin.z + worldSize.z * 0.5f),
+                Vector3.down * 100, Color.magenta, duration);
+            Debug.DrawRay(origin, Vector3.down * 100, Color.magenta, duration);
+            Debug.DrawRay(new Vector3(origin.x + worldSize.x * 0.5f, origin.y, origin.z + worldSize.z * 0.5f),
+                Vector3.down * 100, Color.magenta, duration);
+            Debug.DrawRay(new Vector3(origin.x - worldSize.z * 0.5f, origin.y, origin.z - worldSize.z * 0.5f),
+                Vector3.down * 100, Color.magenta, duration);
+#endif
+            if (Physics.BoxCast(origin, worldSize * 0.5f, Vector3.down, out RaycastHit hit,
+                    transform.rotation, Mathf.Infinity, LayerMask.GetMask(Layers.Environment),
+                    QueryTriggerInteraction.Ignore))
+            {
+                Debug.Log($"Raycast hit  {hit.collider.name} at {hit.point.y}", hit.collider.gameObject);
+                transform.position = new Vector3(transform.position.x, hit.point.y + worldSize.y * 0.5f,
+                    transform.position.z);
+            }
+            else
+            {
+                Debug.Log($"{nameof(gameObject)} did not detect any platform");
+            }
+
+            _corrutine = null;
+        }
 
         private void FixedUpdate()
         {
@@ -24,27 +102,39 @@ namespace Characters.EnemySRC
             if (_coldDownTimer > Time.time)
                 return;
 
-            if (TargetInSight())
+            bool targerInSight = TargetInSight();
+
+            if (targerInSight)
                 Shoot();
+
+            warningSign.SetActive(targerInSight);
         }
 
         private bool TargetInSight()
         {
-            var raycastHits = Physics.SphereCastAll(transform.position + transform.right * barrelConfig.FireOffset,
-                barrelConfig.AttackRadius,
-                transform.right, barrelConfig.RaycastDistance);
+            Vector3 origin = transform.position + transform.right * config.RaycastOffSet;
 
-            foreach (var obj in raycastHits)
+            Collider[] raycastHits = Physics.OverlapSphere(origin, config.AttackDistance);
+
+            foreach (Collider t in raycastHits)
             {
-                if (!obj.collider.CompareTag(Tags.Player))
+                if (!t.CompareTag(Tags.Player))
                     continue;
 
-                var dir = (obj.transform.position - transform.position).normalized;
+                Transform target = t.transform;
+                _targetDir = (target.position - origin).normalized;
 
-                if (Physics.Raycast(transform.position + transform.right * barrelConfig.FireOffset, dir,
-                        barrelConfig.RaycastDistance))
+                float angle = Vector3.Angle(transform.right, _targetDir);
+
+                if (angle > -config.AttackRadius && angle < config.AttackRadius)
                 {
-                    return true;
+                    float targetDistance = Vector3.Distance(origin, target.position);
+
+                    if (!Physics.Raycast(origin, _targetDir, out RaycastHit hit, targetDistance))
+                        return false;
+
+                    if (hit.collider.CompareTag(Tags.Player))
+                        return true;
                 }
             }
 
@@ -53,18 +143,19 @@ namespace Characters.EnemySRC
 
         private bool ShouldHide()
         {
-            var colliderHits = Physics.OverlapSphere(transform.position, barrelConfig.AreaOfSight);
+            Collider[] colliderHits = Physics.OverlapSphere(transform.position, config.AreaOfSight);
 
-            Hidden = false;
-
-            foreach (var hit in colliderHits)
+            foreach (Collider hit in colliderHits)
             {
-                if (hit.gameObject == this.gameObject)
+                if (hit.gameObject == gameObject || !hit.CompareTag(Tags.Player))
                     continue;
 
-                if (hit.TryGetComponent<IHealthSystem>(out var healthSystem))
+                Vector3 dir = (hit.transform.position - transform.position).normalized;
+
+                if (Physics.Raycast(transform.position, dir, out RaycastHit hitInfo, config.AreaOfSight))
                 {
-                    return true;
+                    if (hitInfo.collider.CompareTag(Tags.Player))
+                        return true;
                 }
             }
 
@@ -73,47 +164,40 @@ namespace Characters.EnemySRC
 
         private void Shoot()
         {
-            var bulletGO = Instantiate(bulletPrefab, transform.position + transform.right * barrelConfig.FireOffset,
+            GameObject bulletGO = Instantiate(bulletPrefab, transform.position + transform.right * config.FireOffset,
                 gameObject.transform.rotation);
 
-            if (bulletGO.TryGetComponent<Bullet>(out var bullet))
-                bullet.Launch(this, transform.position + transform.right * barrelConfig.FireOffset,
-                    barrelConfig.FireForce);
+            SceneManager.MoveGameObjectToScene(bulletGO, gameObject.scene);
 
-            _coldDownTimer = barrelConfig.ColdDown + Time.time;
+            bulletGO.transform.up = _targetDir;
+
+            if (bulletGO.TryGetComponent(out Bullet bullet))
+                bullet.Launch(this, transform.position + transform.right * config.FireOffset,
+                    _targetDir, config.FireForce);
+
+            _coldDownTimer = config.ColdDown + Time.time;
         }
 
-        public override void ReceiveDamage()
+        public override void ReceiveDamage(Action action = null)
         {
-            if (!Hidden)
-                base.ReceiveDamage();
-        }
-        
-        private void OnDrawGizmos()
-        {
-            if (!barrelConfig)
-                return;
-
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, barrelConfig.AreaOfSight);
-
             if (Hidden)
                 return;
 
-            Gizmos.color = Color.cyan;
+            if (_corrutine != null)
+                StopCoroutine(_corrutine);
 
-            var origin = transform.position + transform.right * barrelConfig.FireOffset;
-            var direction = transform.right.normalized;
+            AkUnitySoundEngine.PostEvent("sfx_WoodRattle", gameObject);
 
-            // Start sphere
-            Gizmos.DrawWireSphere(origin, barrelConfig.AttackRadius);
+            base.ReceiveDamage(action);
+        }
 
-            // End sphere
-            var end = origin + direction * barrelConfig.RaycastDistance;
-            Gizmos.DrawWireSphere(end, barrelConfig.AttackRadius);
+        private void OnDrawGizmos()
+        {
+            if (!config)
+                return;
 
-            // Direction line
-            Gizmos.DrawLine(origin, end);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, config.AreaOfSight);
         }
     }
 }

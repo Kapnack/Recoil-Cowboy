@@ -5,13 +5,13 @@ namespace Characters
     [RequireComponent(typeof(Rigidbody))]
     public abstract class Character : MonoBehaviour
     {
-        protected Rigidbody _rb;
+        protected Rigidbody Rb;
 
         protected virtual void Awake()
         {
-            _rb = GetComponent<Rigidbody>();
+            Rb = GetComponent<Rigidbody>();
             
-            _rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+            Rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
         }
     }
 }

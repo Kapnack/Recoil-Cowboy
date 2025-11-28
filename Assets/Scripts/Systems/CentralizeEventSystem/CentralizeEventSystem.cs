@@ -1,77 +1,83 @@
+
+#nullable enable
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Systems.CentralizeEventSystem
 {
-    public class CentralizeEventSystem : MonoBehaviour, ICentralizeEventSystem
+    public class CentralizeEventSystem
     {
-        private readonly Dictionary<string, IGameEvent> events = new();
+        private readonly Dictionary<Type, Delegate?> _events = new();
 
-        private void Awake()
+        public void Register<TDelegate>(TDelegate del) where TDelegate : Delegate
         {
-            ServiceProvider.SetService<ICentralizeEventSystem>(this);
+            Type type = typeof(TDelegate);
+
+            if (!_events.TryAdd(type, del))
+                _events[type] = Delegate.Combine(_events[type], del);
         }
 
-        public void Register(string key, IGameEvent gameEvent)
+        public void Unregister<TDelegate>() where TDelegate : Delegate
         {
-            if (!events.TryAdd(key, gameEvent))
-                Debug.LogWarning($"{key} Event with key '{key}' already registered.");
+            Type type = typeof(TDelegate);
+            _events.Remove(type);
+        }
+        
+        public TDelegate? Get<TDelegate>() where TDelegate : Delegate
+        {
+            Type type = typeof(TDelegate);
+
+            if (_events.TryGetValue(type, out Delegate? del))
+                return del as TDelegate;
+
+            _events[type] = null;
+            return null;
         }
 
-        public SimpleEvent Get(string key)
+        public void AddListener<TDelegate>(TDelegate listener) where TDelegate : Delegate
         {
-            return events.TryGetValue(key, out var e) ? e as SimpleEvent : null;
-        }
+            Type type = typeof(TDelegate);
 
-        public bool TryGet(string key, out SimpleEvent gameEvent)
+            if (_events.TryGetValue(type, out Delegate? del))
+                _events[type] = Delegate.Combine(del, listener);
+            else
+                _events[type] = listener;
+        }
+        
+        public void RemoveListener<TDelegate>(TDelegate listener) where TDelegate : Delegate
         {
-            if (!events.TryGetValue(key, out var e))
+            Type type = typeof(TDelegate);
+
+            if (_events.TryGetValue(type, out Delegate? existing))
             {
-                gameEvent = null;
-                return false;
+                Delegate? newDelegate = Delegate.Remove(existing, listener);
+
+                // If no more listeners remain, remove the key to clean up
+                if (newDelegate == null)
+                    _events.Remove(type);
+                else
+                    _events[type] = newDelegate;
             }
-
-            gameEvent = e as SimpleEvent;
-
-            return gameEvent != null;
         }
+    }
 
-        public SingleParamEvent<T> Get<T>(string key)
+    public class Event<T> where T : Delegate
+    {
+        private T? _eventDelegate;
+
+        public void AddListener(T listener)
         {
-            return events.TryGetValue(key, out var e) ? e as SingleParamEvent<T> : null;
+            _eventDelegate = (T)Delegate.Combine(_eventDelegate, listener);
         }
-
-        public bool TryGet<T>(string key, out SingleParamEvent<T> gameEvent)
+    
+        public void RemoveListener(T listener)
         {
-            if (!events.TryGetValue(key, out var e))
-            {
-                gameEvent = null;
-                return false;
-            }
-
-            gameEvent = e as SingleParamEvent<T>;
-
-            return gameEvent != null;
+            _eventDelegate = (T?)Delegate.Remove(_eventDelegate, listener);
         }
-
-        public ComplexGameEvent<T1, T2, T3> Get<T1, T2, T3>(string key)
+    
+        public void Invoke(params object[] args)
         {
-            return events.TryGetValue(key, out var e) ? e as ComplexGameEvent<T1, T2, T3> : null;
+            _eventDelegate?.DynamicInvoke();
         }
-
-        public bool TryGet<T1, T2, T3>(string key, out ComplexGameEvent<T1, T2, T3> gameEvent)
-        {
-            if (!events.TryGetValue(key, out var e))
-            {
-                gameEvent = null;
-                return false;
-            }
-
-            gameEvent = e as ComplexGameEvent<T1, T2, T3>;
-
-            return gameEvent != null;
-        }
-
-        public void Unregister(string key) => events.Remove(key);
     }
 }

@@ -1,54 +1,107 @@
+using System;
 using Systems;
 using Systems.CentralizeEventSystem;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
+[Serializable]
 public class PauseManager : MonoBehaviour
 {
-    private ICentralizeEventSystem _eventSystem;
-    private SimpleEvent _loadMainMenu = new();
+    [Header("Panels")] [SerializeField] private GameObject panel;
+    [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject tutorial;
 
-    [SerializeField] private GameObject panel;
-    private bool _paused = false;
+    [Header("Buttons")] [SerializeField] private Button continueButton;
+    [SerializeField] private Button settingsButton;
+    [SerializeField] private Button tutorialButton;
+    [SerializeField] private Button mainMenuButton;
+    [SerializeField] private Button resetButton;
+
+    private bool _paused;
 
     private IInputReader _inputReader;
+
+    private GameObject _menuGo;
+    private GameObject _tutorialGo;
+
+    private CentralizeEventSystem _eventSystem;
 
     private void Awake()
     {
         _inputReader = ServiceProvider.GetService<IInputReader>();
-        
+
         panel.gameObject.SetActive(_paused);
 
-        _eventSystem = ServiceProvider.GetService<ICentralizeEventSystem>();
+        _eventSystem = ServiceProvider.GetService<CentralizeEventSystem>();
 
-        _eventSystem.Register(GameManagerKeys.MainMenu, _loadMainMenu);
+        _eventSystem.AddListener<PausedInput>(PauseHandler);
 
-        _eventSystem.Get(PlayerEventKeys.Paused).AddListener(PauseHandler);
+        SetUpButtons();
     }
+
+    private void SetUpButtons()
+    {
+        continueButton.onClick.AddListener(Continue);
+        settingsButton.onClick.AddListener(Settings);
+        tutorialButton.onClick.AddListener(OnTutorial);
+        mainMenuButton.onClick.AddListener(GoToMainMenu);
+        resetButton.onClick.AddListener(ReloadGameplay);
+    }
+
+    private void OnEnable() => Cursor.visible = true;
 
     private void OnDestroy()
     {
-        _eventSystem.Get(PlayerEventKeys.Paused).RemoveListener(PauseHandler);
-        _eventSystem.Unregister(GameManagerKeys.MainMenu);
+        _eventSystem.RemoveListener<PausedInput>(PauseHandler);
+
         Time.timeScale = 1.0f;
     }
 
-    private void PauseHandler()
+    public void PauseHandler()
     {
         _paused = !_paused;
         panel.gameObject.SetActive(_paused);
-        _inputReader.SwitchPlayerMapState();
+
+        _inputReader?.SwitchPlayerMapState();
         Time.timeScale = _paused ? 0.0f : 1.0f;
+
+        Cursor.visible = _paused;
+
+        if (_menuGo)
+            Destroy(_menuGo);
     }
 
-    public void GoToMainMenu() => _loadMainMenu?.Invoke();
-
-    public void ExitGame()
+    private void Continue()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        Cursor.visible = false;
+        PauseHandler();
     }
+
+    public void OnTutorial()
+    {
+        if (_tutorialGo)
+            return;
+
+        _tutorialGo = Instantiate(tutorial);
+        _tutorialGo.GetComponent<VideoPlayerManager>().CloseCallback = OnReturnFromTutorial;
+        _eventSystem.RemoveListener<PausedInput>(PauseHandler);
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    private void OnReturnFromTutorial()
+    {
+        _eventSystem.AddListener<PausedInput>(PauseHandler);
+    }
+
+    private void Settings()
+    {
+        _menuGo = Instantiate(settingsMenu);
+        Cursor.visible = true;
+    }
+
+    private void GoToMainMenu() => _eventSystem.Get<LoadMainMenu>()?.Invoke();
+
+    private void ReloadGameplay() => _eventSystem.Get<LoadGameplay>()?.Invoke();
 }

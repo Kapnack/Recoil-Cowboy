@@ -25,22 +25,15 @@ namespace Characters.PlayerSRC
 
         private IMousePositionTracker _mouseTracker;
 
-        private readonly SimpleEvent _reloadEvent = new();
+        private CentralizeEventSystem _eventSystem;
 
         private void Awake()
         {
             _target = gameObject.transform;
 
-            ServiceProvider.TryGetService(out ICentralizeEventSystem eventSystem);
-
-            eventSystem.Register(PlayerEventKeys.Reload, _reloadEvent);
+            _eventSystem = ServiceProvider.GetService<CentralizeEventSystem>();
 
             ServiceProvider.TryGetService(out _mouseTracker);
-        }
-
-        private void OnDestroy()
-        {
-            ServiceProvider.GetService<ICentralizeEventSystem>().Unregister(PlayerEventKeys.Reload);
         }
 
         private void Update()
@@ -57,7 +50,7 @@ namespace Characters.PlayerSRC
             }
 
 
-            var delta = Mathf.DeltaAngle(_prevAngle, _angle);
+            float delta = Mathf.DeltaAngle(_prevAngle, _angle);
             _prevAngle = _angle;
 
             _accumulatedDeg += delta;
@@ -65,7 +58,7 @@ namespace Characters.PlayerSRC
 
             if (Mathf.Abs(_accumulatedDeg) >= 360f && _timer <= spinTime)
             {
-                _reloadEvent?.Invoke();
+                _eventSystem.Get<Reload360>()?.Invoke();
 
                 _accumulatedDeg = 0f;
                 _timer = 0f;

@@ -53,20 +53,9 @@
 				</Folder>
 				<Folder Name="Music Ingame" ID="{5175D348-9712-4ACE-AEE2-F413DD5E5DF2}" ShortID="263339747">
 					<ChildrenList>
-						<Event Name="Ingame_Game_Play" ID="{5B9EA179-D335-4403-B29A-5E743D7AA9E2}">
+						<Event Name="Ingame_Game" ID="{5B9EA179-D335-4403-B29A-5E743D7AA9E2}">
 							<ChildrenList>
 								<Action Name="" ID="{27101114-C7F6-4C6C-9207-130751FE549C}" ShortID="43996845">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="GameMusic" ID="{38A37634-6859-47FB-8736-1166AF8E4699}" WorkUnitID="{ACA90B2C-2519-4DB8-8D75-45EB13463C6E}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Ingame_Game_Menu" ID="{98ABD6DA-B706-4F00-A11C-6C65DF673691}">
-							<ChildrenList>
-								<Action Name="" ID="{A90B58E7-BD8D-4AD7-9B87-DC5209D4D9A0}" ShortID="704731452">
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="GameMusic" ID="{38A37634-6859-47FB-8736-1166AF8E4699}" WorkUnitID="{ACA90B2C-2519-4DB8-8D75-45EB13463C6E}"/>

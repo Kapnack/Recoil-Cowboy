@@ -3,7 +3,12 @@ guid: 1310ef41168dd5b4c915f7d9f78c4804
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Circle_001
+    second: {fileID: 2100000, guid: d705cc18a07c3e646a12a20bc6401d74, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

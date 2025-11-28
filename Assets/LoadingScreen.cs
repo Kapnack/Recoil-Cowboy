@@ -10,15 +10,21 @@ public class LoadingScreen : MonoBehaviour
 {
     private ILoadingData _data;
 
+    private CentralizeEventSystem _eventSystem;
+    
     private bool _isLoading;
 
-    [FormerlySerializedAs("_canvas")] [Header("Canvas")] [SerializeField]
+    [FormerlySerializedAs("_canvas")]
+    [Header("Canvas")]
+    [SerializeField]
     private Canvas canvas;
 
     [SerializeField] private Slider slider;
 
     private void Awake()
     {
+        _eventSystem = ServiceProvider.GetService<CentralizeEventSystem>();
+        
         slider.minValue = 0;
         slider.maxValue = 100;
 
@@ -29,19 +35,9 @@ public class LoadingScreen : MonoBehaviour
     {
         while (!ServiceProvider.TryGetService(out _data))
             yield return null;
-
-        ICentralizeEventSystem eventSystem;
-        while (!ServiceProvider.TryGetService(out eventSystem))
-            yield return null;
-
-        SimpleEvent simpleEvent;
-        while (!eventSystem.TryGet(GameManagerKeys.LoadingStarted, out simpleEvent))
-            yield return null;
-        simpleEvent.AddListener(StartLoadingScreen);
-
-        while (!eventSystem.TryGet(GameManagerKeys.LoadingEnded, out simpleEvent))
-            yield return null;
-        simpleEvent.AddListener(EndLoadingScreen);
+        
+        _eventSystem.AddListener<LoadingStarted>(StartLoadingScreen);
+        _eventSystem.AddListener<LoadingEnded>(EndLoadingScreen);
     }
 
     private void StartLoadingScreen()
@@ -54,13 +50,18 @@ public class LoadingScreen : MonoBehaviour
 
     private IEnumerator UpdateLoading()
     {
+        float currentProgress = 0;
+        float taskProgress = 0;
+
         while (_isLoading)
         {
-            var progress = _data.GetCurrentLoadingProgress() != 0 ? _data.GetCurrentLoadingProgress() * 100.0f : 0;
+            taskProgress = _data.GetCurrentLoadingProgress() != 0 ? _data.GetCurrentLoadingProgress() * 100.0f : 0;
+            currentProgress = taskProgress < currentProgress ? currentProgress : taskProgress;
 
-            slider.value = progress;
+            slider.value = currentProgress;
 
-            yield return null;
+            if (!Mathf.Approximately(currentProgress, 100.0f))
+                yield return null;
         }
     }
 

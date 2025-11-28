@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fec14fc63447694e8ee5ba097918c04, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
+  <AreaOfSight>k__BackingField: 10
   <MaxLives>k__BackingField: 3
   <InvincibleTime>k__BackingField: 1
-  <MaxBullets>k__BackingField: 100
-  <MaxDistance>k__BackingField: 10
+  <MaxBullets>k__BackingField: 3
   <KnockBack>k__BackingField: 25
+  <PointsPerKill>k__BackingField: 100
+  <InfinityLives>k__BackingField: 0
+  <InfinityAmmo>k__BackingField: 0

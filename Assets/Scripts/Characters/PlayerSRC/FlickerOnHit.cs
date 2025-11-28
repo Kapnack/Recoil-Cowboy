@@ -1,48 +1,52 @@
-using System.Collections;
 using Systems;
 using Systems.CentralizeEventSystem;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Characters.PlayerSRC
 {
     public class FlickerOnHit : MonoBehaviour
     {
-        [SerializeField] private Color hitColor = Color.red;
-        [SerializeField] private Color healColor = Color.green;
-        [SerializeField] private float flashDuration = 0.1f;
-        [SerializeField] private int amountOfFlickers = 3;
+        [SerializeField] private Material material;
 
-        private Material _mat;
-        private Color _originalColor;
+        [SerializeField] private float Speed;
+        [SerializeField] private float Intencity;
+
+        private const string SpeedVariable = "_Speed";
+        private const string IntensityVariable = "_Intensity";
+
+        private Coroutine _currentRoutine;
+        private CentralizeEventSystem _eventSystem;
+
+        private void Awake()
+        {
+            _eventSystem = ServiceProvider.GetService<CentralizeEventSystem>();
+            material.SetFloat(SpeedVariable, Speed);
+            material.SetFloat(IntensityVariable, 0);
+        }
 
         private void Start()
         {
-            _mat = GetComponentInChildren<Renderer>().material;
-            _originalColor = _mat.color;
-
-            ServiceProvider.TryGetService<ICentralizeEventSystem>(out var eventSystem);
-
-            eventSystem.Get<int, int, int>(PlayerEventKeys.LivesChange).AddListener(Flash);
+            _eventSystem.AddListener<LivesChange>(OnLivesChange);
+            _eventSystem.AddListener<InvincibilityOff>(OnNoLongerInvincible);
         }
 
-        private void Flash(int previous, int current, int max)
+        private void OnDestroy()
         {
-            if (current == previous)
+            _eventSystem.RemoveListener<LivesChange>(OnLivesChange);
+            _eventSystem.RemoveListener<InvincibilityOff>(OnNoLongerInvincible);
+        }
+        
+        private void OnLivesChange(int previous, int actual, int max)
+        {
+            if (actual == previous)
                 return;
 
-            StartCoroutine(FlashRoutine(current < previous ? hitColor : healColor));
+            material.SetFloat(IntensityVariable, 1);
         }
 
-        private IEnumerator FlashRoutine(Color color)
+        private void OnNoLongerInvincible()
         {
-            for (var i = 0; i < amountOfFlickers; i++)
-            {
-                _mat.color = color;
-                yield return new WaitForSeconds(flashDuration);
-                _mat.color = _originalColor;
-                yield return new WaitForSeconds(flashDuration);
-            }
+            material.SetFloat(IntensityVariable, 0);
         }
     }
 }
