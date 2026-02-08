@@ -12,5 +12,6 @@ namespace Systems.LayerClassGenerator
     public const string Water = "Water";
     public const string UI = "UI";
     public const string Environment = "Environment";
+    public const string WorldCanvas = "WorldCanvas";
   }
 }
