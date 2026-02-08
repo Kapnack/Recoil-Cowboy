@@ -1,3 +1,4 @@
+using System;
 using Systems;
 using Systems.CentralizeEventSystem;
 using UnityEngine;
@@ -35,7 +36,7 @@ namespace Characters.PlayerSRC
             _eventSystem.RemoveListener<LivesChange>(OnLivesChange);
             _eventSystem.RemoveListener<InvincibilityOff>(OnNoLongerInvincible);
         }
-        
+
         private void OnLivesChange(int previous, int actual, int max)
         {
             if (actual == previous)
@@ -48,5 +49,13 @@ namespace Characters.PlayerSRC
         {
             material.SetFloat(IntensityVariable, 0);
         }
+
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            material.SetFloat(SpeedVariable, Speed);
+            material.SetFloat(IntensityVariable, 0);
+        }
+#endif
     }
 }
