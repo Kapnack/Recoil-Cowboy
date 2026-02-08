@@ -15,14 +15,17 @@ namespace Characters.EnemySRC
 
         private void ResetState()
         {
-            Rb.linearVelocity = Vector3.zero;
-            Rb.angularVelocity = Vector3.zero;
-            
+            if (!Rb.isKinematic)
+            {
+                Rb.linearVelocity = Vector3.zero;
+                Rb.angularVelocity = Vector3.zero;
+            }
+
             StopAllCoroutines();
-            
+
             _killed = ResetState;
         }
-        
+
         public virtual void ReceiveDamage(Action action = null)
         {
             action?.Invoke();
