@@ -19,12 +19,10 @@ public class HUD : MonoBehaviour
     [SerializeField] private TMP_Text disntanceText;
 
     [Header("Ammo Settings")] [SerializeField]
-    private Image ammoPrefab;
+    private GameObject ammoPrefab;
 
     [SerializeField] private RectTransform ammoStarPoint;
-    [SerializeField] private Sprite ammoFill;
-    [SerializeField] private Sprite ammoBase;
-    private Image[] _ammoImages;
+    private Animator[] _bulletsAnimator;
 
     private string _pointsTextFormat;
     private string _distanceTextFormat;
@@ -87,35 +85,25 @@ public class HUD : MonoBehaviour
     {
         if (_firstReload)
         {
-            _ammoImages = new Image[max];
+            _bulletsAnimator = new Animator[max];
 
             float scale = 0.1f;
             float padding = 0f;
 
-            Vector2 startPos = Vector2.zero;
+            Vector2 currentPos = ammoStarPoint.GetComponent<RectTransform>().anchoredPosition;
 
             for (int i = 0; i < max; ++i)
             {
-                _ammoImages[i] = Instantiate(ammoPrefab, ammoStarPoint, false);
+                GameObject gameObject = Instantiate(ammoPrefab, ammoStarPoint.transform.parent, false);
+                RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
+                _bulletsAnimator[i] = gameObject.GetComponent<Animator>();
 
-                _ammoImages[i].sprite = ammoFill;
+                _bulletsAnimator[i].SetBool("loaded", true);
 
-                _ammoImages[i].SetNativeSize();
-                _ammoImages[i].rectTransform.localScale = new Vector3(scale, scale, 1f);
+                rectTransform.anchoredPosition = currentPos;
 
-                if (i == 0)
-                {
-                    _ammoImages[i].rectTransform.anchoredPosition = startPos;
-                }
-                else
-                {
-                    RectTransform prevRect = _ammoImages[i - 1].rectTransform;
-
-                    float prevWidth = prevRect.rect.width * prevRect.localScale.x;
-                    Vector2 newPos = prevRect.anchoredPosition + new Vector2(prevWidth + padding, 0);
-
-                    _ammoImages[i].rectTransform.anchoredPosition = newPos;
-                }
+                float width = rectTransform.rect.width * rectTransform.localScale.x;
+                currentPos += new Vector2(width + padding, 0);
             }
 
             _firstReload = false;
@@ -123,11 +111,11 @@ public class HUD : MonoBehaviour
 
         if (previous > current)
         {
-            _ammoImages[previous - 1].sprite = ammoBase;
+            _bulletsAnimator[previous - 1].SetBool("loaded", false);
         }
         else if (previous < current)
         {
-            _ammoImages[current - 1].sprite = ammoFill;
+            _bulletsAnimator[current - 1].SetBool("loaded", true);
         }
     }
 }
