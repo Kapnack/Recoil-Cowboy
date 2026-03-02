@@ -14,7 +14,7 @@ public delegate void KillsChange(int previous, int current);
 [Serializable]
 public class HUD : MonoBehaviour
 {
-    [SerializeField] private Image livesFill;
+    [SerializeField] private Animator livesFill;
     [SerializeField] private TMP_Text killPointsText;
     [SerializeField] private TMP_Text disntanceText;
 
@@ -70,7 +70,7 @@ public class HUD : MonoBehaviour
     
     private void OnLivesChange(int previous, int current, int max)
     {
-        livesFill.fillAmount = (float)current / max;
+        livesFill.SetInteger("hitsRecived", -(current - max) );
     }
 
     private void OnKillPointsChange(int previous, int current)

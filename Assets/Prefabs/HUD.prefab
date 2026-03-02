@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3983270383040642878}
   - component: {fileID: 5104550721947967597}
   - component: {fileID: 3151722339018269122}
+  - component: {fileID: 3739266822283099877}
   m_Layer: 5
   m_Name: Star
   m_TagString: Untagged
@@ -29,8 +30,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4992562540621078057}
+  m_Children: []
   m_Father: {fileID: 800543364677318197}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -247949334, guid: 04041a52db030c045af16d9f0cb9a0de, type: 3}
+  m_Sprite: {fileID: 1961404729, guid: ee52657a06f1b2841a36b537b5ae590e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -76,6 +76,28 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &3739266822283099877
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656921593267659602}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: effdabb361e4bc94bbaf032d2cbad5b6, type: 3}
+  m_Controller: {fileID: 9100000, guid: 48640390633c7234aa6e7286b0ebb5d2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1568249030669424119
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,81 +202,6 @@ MonoBehaviour:
   source: {fileID: 0}
   playerConfig: {fileID: 11400000, guid: 27c841d7cab15a849bf7827b6b67af6b, type: 2}
   secondaryColor: {r: 0.09411765, g: 0.41568628, b: 1, a: 1}
---- !u!1 &1611514945229696368
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4992562540621078057}
-  - component: {fileID: 3172631288210200069}
-  - component: {fileID: 7305725094390020503}
-  m_Layer: 5
-  m_Name: Fill Star
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &4992562540621078057
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1611514945229696368}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3983270383040642878}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &3172631288210200069
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1611514945229696368}
-  m_CullTransparentMesh: 1
---- !u!114 &7305725094390020503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1611514945229696368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: -1742833556, guid: b5b4be893e5165c4d951091fd22c359a, type: 3}
-  m_Type: 3
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 0
-  m_FillOrigin: 2
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &4265136511756673408
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,7 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7ed3521fe36d854b82f6c6ee5dee8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  livesFill: {fileID: 7305725094390020503}
+  livesFill: {fileID: 3739266822283099877}
   killPointsText: {fileID: 2184085895946417616}
   disntanceText: {fileID: 8160857742930130564}
   ammoPrefab: {fileID: 196806974030434032, guid: 1eb73afc96dde67458025d5b370e9b63, type: 3}
