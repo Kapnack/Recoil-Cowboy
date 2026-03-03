@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseHUD: {fileID: 8540453060404077576, guid: 7c4b5382145c74c46b9d0ada0d483427, type: 3}
+  tutorial: {fileID: 1364914477811351749, guid: dccf32b40e3dbea42a6807c7a6f58ce0, type: 3}
 --- !u!4 &479556819
 Transform:
   m_ObjectHideFlags: 0
