@@ -312,7 +312,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &5276761857717385262
 MonoBehaviour:
@@ -2386,6 +2386,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d2c1d06b1390cb4daa2e666b5de226b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonHoverColor: {r: 0.65, g: 0.65, b: 0.65, a: 1}
+  textHoverColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
 --- !u!1 &6990821495827785610
 GameObject:
   m_ObjectHideFlags: 0
